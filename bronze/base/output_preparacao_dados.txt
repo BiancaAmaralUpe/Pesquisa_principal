@@ -1,0 +1,97 @@
+================================================================================
+INÍCIO DA PREPARAÇÃO DOS DADOS
+================================================================================
+
+================================================================================
+VALIDAÇÃO DA BASE PRÉ-MODELAGEM
+================================================================================
+Linhas: 334794
+Colunas: 24
+Total de valores nulos: 2454869
+
+Tipos de dados:
+tipo_violacao              string[python]
+grupo_vulneravel           string[python]
+especie_violacao           string[python]
+cenario_violacao           string[python]
+motivacao                  string[python]
+denuncia_emergencial       string[python]
+agravantes                 string[python]
+agravantes_policiais       string[python]
+denunciante                string[python]
+sexo_vitima                string[python]
+faixa_etaria_vitima        string[python]
+grau_instrucao_vitima      string[python]
+faixa_renda_vitima         string[python]
+pais_origem_vitima         string[python]
+nacionalidade_vitima       string[python]
+deficiencia_vitima         string[python]
+sexo_suspeito              string[python]
+faixa_etaria_suspeito      string[python]
+grau_instrucao_suspeito    string[python]
+faixa_renda_suspeito       string[python]
+pais_origem_suspeito       string[python]
+nacionalidade_suspeito     string[python]
+deficiencia_suspeito       string[python]
+relacao_vitima_suspeito    string[python]
+dtype: object
+
+================================================================================
+PREENCHIMENTO DE NULOS COM MARCADORES
+================================================================================
+- motivacao: 139802 nulos preenchidos com 'motivacao_nao_informada'
+- agravantes: 101191 nulos preenchidos com 'agravantes_nao_informado'
+- agravantes_policiais: 333117 nulos preenchidos com 'agravantes_policiais_nao_informado'
+- grau_instrucao_vitima: 213559 nulos preenchidos com 'instrucao_vitima_nao_informada'
+- faixa_renda_vitima: 263216 nulos preenchidos com 'renda_vitima_nao_informada'
+- pais_origem_vitima: 4655 nulos preenchidos com 'pais_origem_vitima_nao_informado'
+- nacionalidade_vitima: 176557 nulos preenchidos com 'nacionalidade_vitima_nao_informada'
+- deficiencia_vitima: 173701 nulos preenchidos com 'deficiencia_vitima_nao_informada'
+- grau_instrucao_suspeito: 260125 nulos preenchidos com 'instrucao_suspeito_nao_informada'
+- faixa_renda_suspeito: 282465 nulos preenchidos com 'renda_suspeito_nao_informada'
+- pais_origem_suspeito: 138993 nulos preenchidos com 'pais_origem_suspeito_nao_informado'
+- nacionalidade_suspeito: 186991 nulos preenchidos com 'nacionalidade_suspeito_nao_informada'
+- deficiencia_suspeito: 180497 nulos preenchidos com 'deficiencia_suspeito_nao_informada'
+
+Total de nulos após preenchimento: 0
+
+================================================================================
+COLUNAS CATEGÓRICAS IDENTIFICADAS
+================================================================================
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- cenario_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes
+- agravantes_policiais
+- denunciante
+- sexo_vitima
+- faixa_etaria_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- faixa_etaria_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+
+================================================================================
+SEPARAÇÃO DA VARIÁVEL ALVO
+================================================================================
+Coluna alvo: tipo_violacao
+Formato de X: (334794, 23)
+Formato de y: (334794,)
+
+================================================================================
+FIM DA PREPARAÇÃO DOS DADOS
+================================================================================
+
+Output da preparação salvo em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\base\output_preparacao_dados.txt

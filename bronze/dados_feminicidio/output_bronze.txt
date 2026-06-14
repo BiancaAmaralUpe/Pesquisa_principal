@@ -1,0 +1,325 @@
+================================================================================
+INÍCIO DA PIPELINE BRONZE - TRATAMENTO DOS DADOS
+================================================================================
+CSV já existe. Carregando arquivo: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\dados_feminicidio\2020_primeiro_semestre.csv
+CSV carregado com sucesso. Linhas e colunas: (372895, 32)
+================================================================================
+PIPELINE BRONZE - DIAGNÓSTICO INICIAL DA BASE
+================================================================================
+
+--------------------------------------------------------------------------------
+[1] DIMENSÕES DA BASE
+--------------------------------------------------------------------------------
+Quantidade de linhas: 372895
+Quantidade de colunas: 32
+
+--------------------------------------------------------------------------------
+[2] COLUNAS DA BASE
+--------------------------------------------------------------------------------
+01. Data da denúncia - Ano
+02. Data da denúncia - Mês
+03. Data da denúncia - Dia
+04. Tipo de violação
+05. Grupo vulnerável
+06. Espécie de violação
+07. Canal de atendimento
+08. Cenário da violação
+09. Motivação
+10. Denúncia Emergencial
+11. Agravantes
+12. agravantes_policiais
+13. UF
+14. Município
+15. Denunciante
+16. Sexo da vítima
+17. Faixa Etária Vítima
+18. Grau instrução da vítima
+19. Raça\cor da vítima
+20. Faixa de renda da vítima
+21. País de orígem da vítima
+22. Nacionalidade da vítima
+23. deficiencia_vitima
+24. Sexo do suspeito
+25. Faixa Etária Suspeito
+26. Grau instrução do suspeito
+27. Raça\cor do suspeito
+28. Faixa de renda do suspeito
+29. País de orígem do suspeito
+30. Nacionalidade do suspeito
+31. deficiencia_suspeito
+32. Relação Vítima x Suspeito
+
+--------------------------------------------------------------------------------
+[3] TIPOS DE DADOS
+--------------------------------------------------------------------------------
+Data da denúncia - Ano         int64
+Data da denúncia - Mês        object
+Data da denúncia - Dia         int64
+Tipo de violação              object
+Grupo vulnerável              object
+Espécie de violação           object
+Canal de atendimento          object
+Cenário da violação           object
+Motivação                     object
+Denúncia Emergencial          object
+Agravantes                    object
+agravantes_policiais          object
+UF                            object
+Município                     object
+Denunciante                   object
+Sexo da vítima                object
+Faixa Etária Vítima           object
+Grau instrução da vítima      object
+Raça\cor da vítima            object
+Faixa de renda da vítima      object
+País de orígem da vítima      object
+Nacionalidade da vítima       object
+deficiencia_vitima            object
+Sexo do suspeito              object
+Faixa Etária Suspeito         object
+Grau instrução do suspeito    object
+Raça\cor do suspeito          object
+Faixa de renda do suspeito    object
+País de orígem do suspeito    object
+Nacionalidade do suspeito     object
+deficiencia_suspeito          object
+Relação Vítima x Suspeito     object
+dtype: object
+
+--------------------------------------------------------------------------------
+[4] VALORES AUSENTES POR COLUNA
+--------------------------------------------------------------------------------
+Data da denúncia - Ano             0
+Data da denúncia - Mês             0
+Data da denúncia - Dia             0
+Tipo de violação                   0
+Grupo vulnerável                   0
+Espécie de violação                0
+Canal de atendimento               0
+Cenário da violação                0
+Motivação                          0
+Denúncia Emergencial               0
+Agravantes                         0
+agravantes_policiais               0
+UF                                 0
+Município                          3
+Denunciante                        0
+Sexo da vítima                     0
+Faixa Etária Vítima              690
+Grau instrução da vítima           0
+Raça\cor da vítima                 0
+Faixa de renda da vítima           0
+País de orígem da vítima           0
+Nacionalidade da vítima            0
+deficiencia_vitima                 0
+Sexo do suspeito                   0
+Faixa Etária Suspeito         190806
+Grau instrução do suspeito         0
+Raça\cor do suspeito               0
+Faixa de renda do suspeito         0
+País de orígem do suspeito         0
+Nacionalidade do suspeito          0
+deficiencia_suspeito               0
+Relação Vítima x Suspeito          0
+dtype: int64
+
+--------------------------------------------------------------------------------
+[5] RESUMO DE VALORES AUSENTES
+--------------------------------------------------------------------------------
+Total de valores nulos: 191499
+Quantidade de colunas com nulos: 3
+
+Colunas com valores nulos:
+- Município: 3 nulos (0.00%)
+- Faixa Etária Vítima: 690 nulos (0.19%)
+- Faixa Etária Suspeito: 190806 nulos (51.17%)
+
+--------------------------------------------------------------------------------
+[6] VALORES TEXTUAIS PROBLEMÁTICOS
+--------------------------------------------------------------------------------
+Strings vazias: 0
+Strings com 'nan' ou 'none' como texto: 0
+
+--------------------------------------------------------------------------------
+[7] PRÉVIA DOS DADOS
+--------------------------------------------------------------------------------
+   Data da denúncia - Ano Data da denúncia - Mês  Data da denúncia - Dia                 Tipo de violação                                  Grupo vulnerável        Espécie de violação               Canal de atendimento Cenário da violação                   Motivação                        Denúncia Emergencial                                                        Agravantes agravantes_policiais  UF           Município       Denunciante Sexo da vítima Faixa Etária Vítima Grau instrução da vítima Raça\cor da vítima Faixa de renda da vítima País de orígem da vítima Nacionalidade da vítima deficiencia_vitima Sexo do suspeito Faixa Etária Suspeito Grau instrução do suspeito Raça\cor do suspeito Faixa de renda do suspeito País de orígem do suspeito Nacionalidade do suspeito deficiencia_suspeito Relação Vítima x Suspeito
+0                    2020                janeiro                       1              1. VIOLÊNCIA FÍSICA                       1-Violência Contra a Mulher      AGRESSÃO/VIAS DE FATO  DENÚNCIA - ATENDIMENTO TELEFÔNICO         CASA VÍTIMA                         N/D  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE                  N/D  SP             Guarujá  A PRÓPRIA VÍTIMA       FEMININO        30 a 34 anos                      N/D                N/D                      N/D                   BRASIL                     N/D                N/D        MASCULINO                   NaN                        N/D                  N/D                        N/D                     BRASIL                       N/D                  N/D                 EX-ESPOSA
+1                    2020                janeiro                       1              1. VIOLÊNCIA FÍSICA                       1-Violência Contra a Mulher             LESÃO CORPORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO         CASA VÍTIMA                         N/D  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA                                                               N/D                  N/D  SP             Guarujá  A PRÓPRIA VÍTIMA       FEMININO        30 a 34 anos                      N/D                N/D                      N/D                   BRASIL                     N/D                N/D        MASCULINO                   NaN                        N/D                  N/D                        N/D                     BRASIL                       N/D                  N/D                 EX-ESPOSA
+2                    2020                janeiro                       1         2. VIOLÊNCIA PSICOLÓGICA  2-Violência Doméstica e Familiar Contra a Mulher              ASSÉDIO MORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO    CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                  N/D  RJ  São João de Meriti          TERCEIRO       FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO              PARDA   1 A 3 SALÁRIOS MÍNIMOS                   BRASIL           BRASILEIRO(A)                NÃO        MASCULINO                   NaN      ENSINO MÉDIO COMPLETO                PARDA     1 A 3 SALÁRIOS MÍNIMOS                        N/D             BRASILEIRO(A)                  NÃO                 EX-MARIDO
+3                    2020                janeiro                       1  4. AGRESSÕES QUE VIOLAM A HONRA  2-Violência Doméstica e Familiar Contra a Mulher  CALÚNIA/INJÚRIA/DIFAMAÇÃO  DENÚNCIA - ATENDIMENTO TELEFÔNICO    CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                  N/D  RJ  São João de Meriti          TERCEIRO       FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO              PARDA   1 A 3 SALÁRIOS MÍNIMOS                   BRASIL           BRASILEIRO(A)                NÃO        MASCULINO                   NaN      ENSINO MÉDIO COMPLETO                PARDA     1 A 3 SALÁRIOS MÍNIMOS                        N/D             BRASILEIRO(A)                  NÃO                 EX-MARIDO
+4                    2020                janeiro                       1              1. VIOLÊNCIA FÍSICA  2-Violência Doméstica e Familiar Contra a Mulher             LESÃO CORPORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO    CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                  N/D  RJ  São João de Meriti          TERCEIRO       FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO              PARDA   1 A 3 SALÁRIOS MÍNIMOS                   BRASIL           BRASILEIRO(A)                NÃO        MASCULINO                   NaN      ENSINO MÉDIO COMPLETO                PARDA     1 A 3 SALÁRIOS MÍNIMOS                        N/D             BRASILEIRO(A)                  NÃO                 EX-MARIDO
+
+--------------------------------------------------------------------------------
+[8] RESUMO FINAL DO DIAGNÓSTICO
+--------------------------------------------------------------------------------
+Diagnóstico inicial concluído.
+A base foi carregada e inspecionada com sucesso.
+Observação: existem valores ausentes que deverão ser tratados na próxima camada.
+
+================================================================================
+INÍCIO DA LIMPEZA DOS DADOS - CAMADA BRONZE
+================================================================================
+Cabeçalho validado com sucesso.
+Linhas totalmente vazias removidas: 0
+Nomes das colunas tratados com sucesso.
+
+Mapeamento das colunas:
+- Data da denúncia - Ano -> data_denuncia_ano
+- Data da denúncia - Mês -> data_denuncia_mes
+- Data da denúncia - Dia -> data_denuncia_dia
+- Tipo de violação -> tipo_violacao
+- Grupo vulnerável -> grupo_vulneravel
+- Espécie de violação -> especie_violacao
+- Canal de atendimento -> canal_atendimento
+- Cenário da violação -> cenario_violacao
+- Motivação -> motivacao
+- Denúncia Emergencial -> denuncia_emergencial
+- Agravantes -> agravantes
+- agravantes_policiais -> agravantes_policiais
+- UF -> uf
+- Município -> municipio
+- Denunciante -> denunciante
+- Sexo da vítima -> sexo_vitima
+- Faixa Etária Vítima -> faixa_etaria_vitima
+- Grau instrução da vítima -> grau_instrucao_vitima
+- Raça\cor da vítima -> raca_cor_vitima
+- Faixa de renda da vítima -> faixa_renda_vitima
+- País de orígem da vítima -> pais_origem_vitima
+- Nacionalidade da vítima -> nacionalidade_vitima
+- deficiencia_vitima -> deficiencia_vitima
+- Sexo do suspeito -> sexo_suspeito
+- Faixa Etária Suspeito -> faixa_etaria_suspeito
+- Grau instrução do suspeito -> grau_instrucao_suspeito
+- Raça\cor do suspeito -> raca_cor_suspeito
+- Faixa de renda do suspeito -> faixa_renda_suspeito
+- País de orígem do suspeito -> pais_origem_suspeito
+- Nacionalidade do suspeito -> nacionalidade_suspeito
+- deficiencia_suspeito -> deficiencia_suspeito
+- Relação Vítima x Suspeito -> relacao_vitima_suspeito
+Colunas textuais padronizadas: 30
+Coluna 'cenario_violacao': 2310 valores textuais nulos convertidos para pd.NA.
+Coluna 'motivacao': 156646 valores textuais nulos convertidos para pd.NA.
+Coluna 'agravantes': 115056 valores textuais nulos convertidos para pd.NA.
+Coluna 'agravantes_policiais': 370937 valores textuais nulos convertidos para pd.NA.
+Coluna 'uf': 640 valores textuais nulos convertidos para pd.NA.
+Coluna 'municipio': 1021 valores textuais nulos convertidos para pd.NA.
+Coluna 'sexo_vitima': 7614 valores textuais nulos convertidos para pd.NA.
+Coluna 'faixa_etaria_vitima': 16088 valores textuais nulos convertidos para pd.NA.
+Coluna 'grau_instrucao_vitima': 241328 valores textuais nulos convertidos para pd.NA.
+Coluna 'raca_cor_vitima': 193927 valores textuais nulos convertidos para pd.NA.
+Coluna 'faixa_renda_vitima': 295484 valores textuais nulos convertidos para pd.NA.
+Coluna 'pais_origem_vitima': 5600 valores textuais nulos convertidos para pd.NA.
+Coluna 'nacionalidade_vitima': 199676 valores textuais nulos convertidos para pd.NA.
+Coluna 'deficiencia_vitima': 197075 valores textuais nulos convertidos para pd.NA.
+Coluna 'sexo_suspeito': 13857 valores textuais nulos convertidos para pd.NA.
+Coluna 'faixa_etaria_suspeito': 42386 valores textuais nulos convertidos para pd.NA.
+Coluna 'grau_instrucao_suspeito': 293988 valores textuais nulos convertidos para pd.NA.
+Coluna 'raca_cor_suspeito': 203429 valores textuais nulos convertidos para pd.NA.
+Coluna 'faixa_renda_suspeito': 317760 valores textuais nulos convertidos para pd.NA.
+Coluna 'pais_origem_suspeito': 154132 valores textuais nulos convertidos para pd.NA.
+Coluna 'nacionalidade_suspeito': 213482 valores textuais nulos convertidos para pd.NA.
+Coluna 'deficiencia_suspeito': 206250 valores textuais nulos convertidos para pd.NA.
+Coluna 'relacao_vitima_suspeito': 23870 valores textuais nulos convertidos para pd.NA.
+Total de valores NULL/NAN/N/D/vazios convertidos para pd.NA: 3272556
+Coluna 'faixa_etaria_suspeito': 233192 valores nulos preenchidos com 'info_suspeito_nao_informada'.
+Coluna 'faixa_etaria_vitima': 16778 valores nulos preenchidos com 'info_vitima_nao_informada'.
+Coluna 'municipio': 1024 valores nulos preenchidos com 'municipio_nao_informado'.
+
+================================================================================
+RELATÓRIO APÓS LIMPEZA
+================================================================================
+
+Quantidade de linhas e colunas:
+(372895, 32)
+
+Colunas da base após limpeza:
+01. data_denuncia_ano
+02. data_denuncia_mes
+03. data_denuncia_dia
+04. tipo_violacao
+05. grupo_vulneravel
+06. especie_violacao
+07. canal_atendimento
+08. cenario_violacao
+09. motivacao
+10. denuncia_emergencial
+11. agravantes
+12. agravantes_policiais
+13. uf
+14. municipio
+15. denunciante
+16. sexo_vitima
+17. faixa_etaria_vitima
+18. grau_instrucao_vitima
+19. raca_cor_vitima
+20. faixa_renda_vitima
+21. pais_origem_vitima
+22. nacionalidade_vitima
+23. deficiencia_vitima
+24. sexo_suspeito
+25. faixa_etaria_suspeito
+26. grau_instrucao_suspeito
+27. raca_cor_suspeito
+28. faixa_renda_suspeito
+29. pais_origem_suspeito
+30. nacionalidade_suspeito
+31. deficiencia_suspeito
+32. relacao_vitima_suspeito
+
+Total de valores nulos:
+3213061
+
+Valores nulos por coluna:
+data_denuncia_ano               0
+data_denuncia_mes               0
+data_denuncia_dia               0
+tipo_violacao                   0
+grupo_vulneravel                0
+especie_violacao                0
+canal_atendimento               0
+cenario_violacao             2310
+motivacao                  156646
+denuncia_emergencial            0
+agravantes                 115056
+agravantes_policiais       370937
+uf                            640
+municipio                       0
+denunciante                     0
+sexo_vitima                  7614
+faixa_etaria_vitima             0
+grau_instrucao_vitima      241328
+raca_cor_vitima            193927
+faixa_renda_vitima         295484
+pais_origem_vitima           5600
+nacionalidade_vitima       199676
+deficiencia_vitima         197075
+sexo_suspeito               13857
+faixa_etaria_suspeito           0
+grau_instrucao_suspeito    293988
+raca_cor_suspeito          203429
+faixa_renda_suspeito       317760
+pais_origem_suspeito       154132
+nacionalidade_suspeito     213482
+deficiencia_suspeito       206250
+relacao_vitima_suspeito     23870
+dtype: int64
+
+Prévia dos dados limpos:
+   data_denuncia_ano data_denuncia_mes  data_denuncia_dia                    tipo_violacao                                  grupo_vulneravel           especie_violacao                  canal_atendimento  cenario_violacao                   motivacao                        denuncia_emergencial                                                        agravantes agravantes_policiais  uf           municipio       denunciante sexo_vitima faixa_etaria_vitima    grau_instrucao_vitima raca_cor_vitima      faixa_renda_vitima pais_origem_vitima nacionalidade_vitima deficiencia_vitima sexo_suspeito        faixa_etaria_suspeito grau_instrucao_suspeito raca_cor_suspeito    faixa_renda_suspeito pais_origem_suspeito nacionalidade_suspeito deficiencia_suspeito relacao_vitima_suspeito
+0               2020           janeiro                  1              1. VIOLÊNCIA FÍSICA                       1-Violência Contra a Mulher      AGRESSÃO/VIAS DE FATO  DENÚNCIA - ATENDIMENTO TELEFÔNICO       CASA VÍTIMA                        <NA>  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE                 <NA>  SP             Guarujá  A PRÓPRIA VÍTIMA    FEMININO        30 a 34 anos                     <NA>            <NA>                    <NA>             BRASIL                 <NA>               <NA>     MASCULINO  info_suspeito_nao_informada                    <NA>              <NA>                    <NA>               BRASIL                   <NA>                 <NA>               EX-ESPOSA
+1               2020           janeiro                  1              1. VIOLÊNCIA FÍSICA                       1-Violência Contra a Mulher             LESÃO CORPORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO       CASA VÍTIMA                        <NA>  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA                                                              <NA>                 <NA>  SP             Guarujá  A PRÓPRIA VÍTIMA    FEMININO        30 a 34 anos                     <NA>            <NA>                    <NA>             BRASIL                 <NA>               <NA>     MASCULINO  info_suspeito_nao_informada                    <NA>              <NA>                    <NA>               BRASIL                   <NA>                 <NA>               EX-ESPOSA
+2               2020           janeiro                  1         2. VIOLÊNCIA PSICOLÓGICA  2-Violência Doméstica e Familiar Contra a Mulher              ASSÉDIO MORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO  CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                 <NA>  RJ  São João de Meriti          TERCEIRO    FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO           PARDA  1 A 3 SALÁRIOS MÍNIMOS             BRASIL        BRASILEIRO(A)                NÃO     MASCULINO  info_suspeito_nao_informada   ENSINO MÉDIO COMPLETO             PARDA  1 A 3 SALÁRIOS MÍNIMOS                 <NA>          BRASILEIRO(A)                  NÃO               EX-MARIDO
+3               2020           janeiro                  1  4. AGRESSÕES QUE VIOLAM A HONRA  2-Violência Doméstica e Familiar Contra a Mulher  CALÚNIA/INJÚRIA/DIFAMAÇÃO  DENÚNCIA - ATENDIMENTO TELEFÔNICO  CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                 <NA>  RJ  São João de Meriti          TERCEIRO    FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO           PARDA  1 A 3 SALÁRIOS MÍNIMOS             BRASIL        BRASILEIRO(A)                NÃO     MASCULINO  info_suspeito_nao_informada   ENSINO MÉDIO COMPLETO             PARDA  1 A 3 SALÁRIOS MÍNIMOS                 <NA>          BRASILEIRO(A)                  NÃO               EX-MARIDO
+4               2020           janeiro                  1              1. VIOLÊNCIA FÍSICA  2-Violência Doméstica e Familiar Contra a Mulher             LESÃO CORPORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO  CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                 <NA>  RJ  São João de Meriti          TERCEIRO    FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO           PARDA  1 A 3 SALÁRIOS MÍNIMOS             BRASIL        BRASILEIRO(A)                NÃO     MASCULINO  info_suspeito_nao_informada   ENSINO MÉDIO COMPLETO             PARDA  1 A 3 SALÁRIOS MÍNIMOS                 <NA>          BRASILEIRO(A)                  NÃO               EX-MARIDO
+
+================================================================================
+FIM DA LIMPEZA DOS DADOS - CAMADA BRONZE
+================================================================================
+DataFrame limpo salvo com sucesso em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\dados_feminicidio\2020_primeiro_semestre_limpo.csv
+
+================================================================================
+FIM DA PIPELINE BRONZE - TRATAMENTO DOS DADOS
+================================================================================
+
+Output bronze salvo em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\dados_feminicidio\output_bronze.txt

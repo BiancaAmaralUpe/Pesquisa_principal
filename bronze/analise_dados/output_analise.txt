@@ -1,0 +1,762 @@
+================================================================================
+INÍCIO DA ANÁLISE DOS DADOS
+================================================================================
+
+================================================================================
+REMOÇÃO DE VARIÁVEIS GEOGRÁFICAS
+================================================================================
+Colunas removidas:
+- uf
+- municipio
+- data_denuncia_ano
+- data_denuncia_mes
+- data_denuncia_dia
+- canal_atendimento
+Quantidade de colunas após remoção: 26
+
+================================================================================
+REMOÇÃO DE VARIÁVEIS COM POTENCIAL DE ENVIESAMENTO
+================================================================================
+Colunas removidas:
+- raca_cor_suspeito
+- raca_cor_vitima
+Quantidade de colunas após remoção: 24
+
+================================================================================
+REMOÇÃO DE REGISTROS COM RUÍDO
+================================================================================
+- cenario_violacao: 2310 registros removidos por <NA>
+- sexo_vitima: 7502 registros removidos por <NA>
+- sexo_suspeito: 10818 registros removidos por <NA>
+- relacao_vitima_suspeito: 17471 registros removidos por <NA>
+
+Registros antes: 372895
+Registros depois: 334794
+Registros removidos: 38101
+DataFrame limpo salvo com sucesso em: Pesquisa_principal\bronze\output\2020_primeiro_semestre_analitico.csv
+
+================================================================================
+PREPARAÇÃO ANALÍTICA DA BASE
+================================================================================
+
+COLUNAS REMOVIDAS:
+
+- Coluna: uf
+  Tipo de decisão: geográfica
+  Motivo: Risco de overfitting e enviesamento regional.
+
+- Coluna: municipio
+  Tipo de decisão: geográfica
+  Motivo: Alta cardinalidade e enviesamento regional.
+
+- Coluna: data_denuncia_ano
+  Tipo de decisão: temporal
+  Motivo: Variável temporal removida para evitar dependência temporal.
+
+- Coluna: data_denuncia_mes
+  Tipo de decisão: temporal
+  Motivo: Variável temporal removida para evitar sazonalidade artificial.
+
+- Coluna: data_denuncia_dia
+  Tipo de decisão: temporal
+  Motivo: Variável temporal removida.
+
+- Coluna: canal_atendimento
+  Tipo de decisão: ruído
+  Motivo: Baixo potencial analítico para modelagem.
+
+- Coluna: denuncia_emergencial
+  Tipo de decisão: ruído
+  Motivo: Variável operacional.
+
+--------------------------------------------------------------------------------
+VALIDAÇÃO FINAL DA BASE
+--------------------------------------------------------------------------------
+Linhas finais: 334794
+Colunas finais: 24
+
+Colunas restantes:
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- cenario_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes
+- agravantes_policiais
+- denunciante
+- sexo_vitima
+- faixa_etaria_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- faixa_etaria_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+
+Nulos restantes por coluna:
+motivacao                  139802
+agravantes                 101191
+agravantes_policiais       333117
+grau_instrucao_vitima      213559
+faixa_renda_vitima         263216
+pais_origem_vitima           4655
+nacionalidade_vitima       176557
+deficiencia_vitima         173701
+grau_instrucao_suspeito    260125
+faixa_renda_suspeito       282465
+pais_origem_suspeito       138993
+nacionalidade_suspeito     186991
+deficiencia_suspeito       180497
+dtype: int64
+
+Base pronta para análise/modelagem.
+
+================================================================================
+ESTATÍSTICAS DESCRITIVAS
+================================================================================
+
+================================================================================
+ESTATÍSTICAS DESCRITIVAS - BASE FEMINICÍDIO
+================================================================================
+
+--------------------------------------------------------------------------------
+[1] DIMENSÕES DA BASE LIMPA
+--------------------------------------------------------------------------------
+Quantidade de linhas: 334794
+Quantidade de colunas: 24
+
+--------------------------------------------------------------------------------
+[2] TIPOS DE DADOS
+--------------------------------------------------------------------------------
+tipo_violacao              string[python]
+grupo_vulneravel           string[python]
+especie_violacao           string[python]
+cenario_violacao           string[python]
+motivacao                  string[python]
+denuncia_emergencial       string[python]
+agravantes                 string[python]
+agravantes_policiais       string[python]
+denunciante                string[python]
+sexo_vitima                string[python]
+faixa_etaria_vitima        string[python]
+grau_instrucao_vitima      string[python]
+faixa_renda_vitima         string[python]
+pais_origem_vitima         string[python]
+nacionalidade_vitima       string[python]
+deficiencia_vitima         string[python]
+sexo_suspeito              string[python]
+faixa_etaria_suspeito      string[python]
+grau_instrucao_suspeito    string[python]
+faixa_renda_suspeito       string[python]
+pais_origem_suspeito       string[python]
+nacionalidade_suspeito     string[python]
+deficiencia_suspeito       string[python]
+relacao_vitima_suspeito    string[python]
+dtype: object
+
+--------------------------------------------------------------------------------
+[3] VALORES NULOS POR COLUNA
+--------------------------------------------------------------------------------
+                         qtd_nulos  percentual_nulos
+agravantes_policiais        333117         99.499095
+faixa_renda_suspeito        282465         84.369792
+faixa_renda_vitima          263216         78.620286
+grau_instrucao_suspeito     260125         77.697032
+grau_instrucao_vitima       213559         63.788180
+nacionalidade_suspeito      186991         55.852554
+deficiencia_suspeito        180497         53.912854
+nacionalidade_vitima        176557         52.736011
+deficiencia_vitima          173701         51.882949
+motivacao                   139802         41.757618
+pais_origem_suspeito        138993         41.515977
+agravantes                  101191         30.224855
+pais_origem_vitima            4655          1.390407
+tipo_violacao                    0          0.000000
+especie_violacao                 0          0.000000
+cenario_violacao                 0          0.000000
+denuncia_emergencial             0          0.000000
+grupo_vulneravel                 0          0.000000
+faixa_etaria_vitima              0          0.000000
+denunciante                      0          0.000000
+sexo_vitima                      0          0.000000
+faixa_etaria_suspeito            0          0.000000
+sexo_suspeito                    0          0.000000
+relacao_vitima_suspeito          0          0.000000
+
+--------------------------------------------------------------------------------
+[4] COLUNAS COM ALTO PERCENTUAL DE NULOS
+--------------------------------------------------------------------------------
+Colunas com 30.0% ou mais de nulos:
+
+- agravantes_policiais: 333117 nulos (99.50%)
+- faixa_renda_suspeito: 282465 nulos (84.37%)
+- faixa_renda_vitima: 263216 nulos (78.62%)
+- grau_instrucao_suspeito: 260125 nulos (77.70%)
+- grau_instrucao_vitima: 213559 nulos (63.79%)
+- nacionalidade_suspeito: 186991 nulos (55.85%)
+- deficiencia_suspeito: 180497 nulos (53.91%)
+- nacionalidade_vitima: 176557 nulos (52.74%)
+- deficiencia_vitima: 173701 nulos (51.88%)
+- motivacao: 139802 nulos (41.76%)
+- pais_origem_suspeito: 138993 nulos (41.52%)
+- agravantes: 101191 nulos (30.22%)
+
+--------------------------------------------------------------------------------
+[5] QUANTIDADE DE VALORES ÚNICOS POR COLUNA
+--------------------------------------------------------------------------------
+especie_violacao           62
+nacionalidade_suspeito     56
+pais_origem_suspeito       42
+nacionalidade_vitima       41
+relacao_vitima_suspeito    37
+cenario_violacao           31
+agravantes                 31
+faixa_etaria_suspeito      17
+pais_origem_vitima         15
+motivacao                  12
+grau_instrucao_vitima      12
+grau_instrucao_suspeito    11
+faixa_etaria_vitima        10
+tipo_violacao               7
+agravantes_policiais        5
+faixa_renda_suspeito        5
+faixa_renda_vitima          5
+denuncia_emergencial        4
+denunciante                 4
+sexo_suspeito               3
+grupo_vulneravel            2
+sexo_vitima                 2
+deficiencia_vitima          2
+deficiencia_suspeito        2
+dtype: int64
+
+--------------------------------------------------------------------------------
+[6] FREQUÊNCIAS DAS PRINCIPAIS VARIÁVEIS CATEGÓRICAS
+--------------------------------------------------------------------------------
+
+Top 10 valores da coluna 'tipo_violacao':
+tipo_violacao
+2. VIOLÊNCIA PSICOLÓGICA                                136726
+1. VIOLÊNCIA FÍSICA                                      77148
+4. AGRESSÕES QUE VIOLAM A HONRA                          59627
+7. VIOLAÇÕES GERAIS                                      37684
+5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE            12417
+3. CRIMES CONTRA A VIDA                                   8040
+6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA      3152
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'grupo_vulneravel':
+grupo_vulneravel
+2-Violência Doméstica e Familiar Contra a Mulher    248089
+1-Violência Contra a Mulher                          86705
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'especie_violacao':
+especie_violacao
+CALÚNIA/INJÚRIA/DIFAMAÇÃO             59627
+AMEAÇA/COAÇÃO                         38669
+CONSTRANGIMENTO                       33530
+AGRESSÃO/VIAS DE FATO                 28496
+TORTURA PSÍQUICA                      22427
+EXPOSIÇÃO                             21804
+LESÃO CORPORAL                        20242
+MAUS TRATOS                           13256
+ASSÉDIO MORAL                         12081
+CRIMES CONTRA A SEGURANÇA PSÍQUICA    10715
+Name: count, dtype: Int64
+[AVISO] Coluna 'canal_atendimento' não encontrada.
+
+Top 10 valores da coluna 'cenario_violacao':
+cenario_violacao
+CASA ONDE RESIDE A VÍTIMA E O SUSPEITO                 165607
+CASA VÍTIMA                                            103677
+CASA DO SUSPEITO                                        19242
+AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)     14150
+VIA PÚBLICA                                             11860
+CASA DE FAMILIAR                                         4675
+LOCAL DE TRABALHO DA VÍTIMA                              3248
+OUTROS                                                   2978
+CASA DE TERCEIRO                                         2407
+BAR, LANCHONETE, RESTAURANTE                             1177
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'denuncia_emergencial':
+denuncia_emergencial
+NÃO                                           176391
+SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA    142141
+RISCO IMINENTE DE MORTE DA VÍTIMA              14860
+VÍTIMA EM SANGRAMENTO                           1402
+Name: count, dtype: Int64
+[AVISO] Coluna 'uf' não encontrada.
+[AVISO] Coluna 'municipio' não encontrada.
+
+Top 10 valores da coluna 'sexo_vitima':
+sexo_vitima
+FEMININO    333754
+LGBT          1040
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'faixa_etaria_vitima':
+faixa_etaria_vitima
+35 a 39 anos                 50529
+40 a 44 anos                 48667
+30 a 34 anos                 47159
+25 a 29 anos                 42951
+20 a 24 anos                 40326
+45 a 49 anos                 34644
+50 a 54 anos                 26351
+55 a 59 anos                 21466
+18 a 19 anos                 13271
+info_vitima_nao_informada     9430
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'sexo_suspeito':
+sexo_suspeito
+MASCULINO    301260
+FEMININO      32575
+LGBT            959
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'faixa_etaria_suspeito':
+faixa_etaria_suspeito
+info_suspeito_nao_informada    204608
+35 a 39 anos                    20308
+30 a 34 anos                    19298
+40 a 44 anos                    19173
+25 a 29 anos                    16891
+45 a 49 anos                    13778
+50 a 54 anos                    10963
+20 a 24 anos                    10887
+55 a 59 anos                     6672
+60 a 64 anos                     4670
+Name: count, dtype: Int64
+
+Top 10 valores da coluna 'relacao_vitima_suspeito':
+relacao_vitima_suspeito
+MARIDO/ ESPOSA       75137
+COMPANHEIRO(A)       69573
+EX-COMPANHEIRO(A)    34735
+EX-MARIDO            33171
+VIZINHO(A)           17539
+SEM RELAÇÃO          16453
+EX- NAMORADO(A)      15713
+FILHO(A)             14223
+IRMÃO(Ã)             14179
+PAI/ MÃE             11095
+Name: count, dtype: Int64
+
+--------------------------------------------------------------------------------
+[7] INVESTIGAÇÃO DE INFORMAÇÕES NÃO INFORMADAS
+--------------------------------------------------------------------------------
+- faixa_etaria_suspeito: 204608 registros (61.11%) com 'info_suspeito_nao_informada'
+- faixa_etaria_vitima: 9430 registros (2.82%) com 'info_vitima_nao_informada'
+
+================================================================================
+FIM DAS ESTATÍSTICAS DESCRITIVAS
+================================================================================
+
+================================================================================
+ANÁLISE EXPLORATÓRIA
+================================================================================
+
+================================================================================
+INÍCIO DA ANÁLISE EXPLORATÓRIA
+================================================================================
+
+--------------------------------------------------------------------------------
+Cruzamento: tipo_violacao x denuncia_emergencial
+--------------------------------------------------------------------------------
+denuncia_emergencial                                    NÃO  RISCO IMINENTE DE MORTE DA VÍTIMA  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  VÍTIMA EM SANGRAMENTO
+tipo_violacao                                                                                                                                                    
+1. VIOLÊNCIA FÍSICA                                   53.83                               4.78                                       40.79                   0.60
+2. VIOLÊNCIA PSICOLÓGICA                              53.18                               3.91                                       42.56                   0.35
+3. CRIMES CONTRA A VIDA                               49.91                               8.26                                       40.77                   1.06
+4. AGRESSÕES QUE VIOLAM A HONRA                       51.92                               4.92                                       42.79                   0.37
+5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE         52.69                               5.30                                       41.68                   0.33
+6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  41.59                               4.12                                       54.03                   0.25
+7. VIOLAÇÕES GERAIS                                   51.28                               3.81                                       44.62                   0.29
+
+--------------------------------------------------------------------------------
+Cruzamento: tipo_violacao x relacao_vitima_suspeito
+--------------------------------------------------------------------------------
+relacao_vitima_suspeito                               AGENTE PENITENCIÁRIO  AVÔ(Ó)  BISAVÔ(Ó)  COMPANHEIRO(A)  CUIDADOR(A)  CUNHADO(A)  DESCONHECIDO(A)  DIREITOR(A) DA UNIDADE PRISIONAL  DIRETOR(A)  ENTEADO(A)  EX- NAMORADO(A)  EX-COMPANHEIRO(A)  EX-ESPOSA  EX-MARIDO  FILHO(A)  FUNCIONÁRIO(A)  HIERARQUICAMENTE INFERIOR  HIERARQUICAMENTE SUPERIOR  INTERNO(A)  IRMÃO(Ã)  LÍDER RELIGIOSO  MARIDO/ ESPOSA  MEMBRO  MESMO NÍVEL HIERÁRQUICO  NAMORADO(A)  NETO(A)  PADRASTO/ MADRASTA  PADRINHO/ MADRINHA  PAI/ MÃE  PRIMO(A)  PROFESSOR(A)  SEM RELAÇÃO  SOBRINHO(A)  SOGRO(A)  TIO(A)  TRISAVÔ(Ó)  VIZINHO(A)
+tipo_violacao                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+1. VIOLÊNCIA FÍSICA                                                      8     101         19           19889           80         740              482                                 5          53         127             2978               7657         71       6251      3728              56                          6                        281           8      3236               24           19402     303                       27         1985      114                 540                  30      2697       272            18         2320          382       358     601           0        2299
+2. VIOLÊNCIA PSICOLÓGICA                                                31     179         35           26625          103        1753             1594                                11          92         302             6764              14362        145      13927      5937             198                         44                        862          19      5764              120           29333     585                      122         2621      182                1043                  47      4625       744            80         7460          713       914    1347           3        8040
+3. CRIMES CONTRA A VIDA                                                  0       6          0            2141            4          46               45                                 0           6          11              363               1044          8        865       196               3                          0                         21           0       288                4            2014      19                        3          191        3                  33                   2       192        31             2          194           27        21      36           0         221
+4. AGRESSÕES QUE VIOLAM A HONRA                                         11      74         11           11119           43         954              620                                 2          44         130             3199               6777         71       6604      2079              67                         21                        357          12      2615               40           12275     252                       65         1046       62                 394                  17      1724       341            27         3292          315       460     497           1        4009
+5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE                            3      17          4            2839           21         110              148                                 0          13          13              536               1093         22       1154       509              20                          1                        107           5       422                8            3162      62                        6          245       13                  88                   3       490        47             3          534           46        74     138           0         461
+6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA                     1       2          1             501            3          30               18                                 0           4           2              106                275          8        517       193               3                          2                         14           4       140                3             780      19                        0           33        3                  24                   1        82        17             0          108           14        22      22           0         200
+7. VIOLAÇÕES GERAIS                                                     12      71         10            6459           38         465              543                                 1          37          66             1767               3527         33       3853      1581              44                         19                        310          13      1714               39            8171     165                       55          700       46                 498                  16      1285       219            39         2545          222       245     567           0        2309
+
+--------------------------------------------------------------------------------
+Cruzamento: tipo_violacao x cenario_violacao
+--------------------------------------------------------------------------------
+cenario_violacao                                      AMBIENTE DE LAZER  AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)  BAR, LANCHONETE, RESTAURANTE  CASA DE FAMILIAR  CASA DE TERCEIRO  CASA DO SUSPEITO  CASA NOTURNA  CASA ONDE RESIDE A VÍTIMA E O SUSPEITO  CASA VÍTIMA  CENTRO DE REFERÊNCIA  DELEGACIA DE POLÍCIA  DELEGACIA DE POLÍCIA COMO UNIDADE PRISIONAL  ESTABELECIMENTO DE ENSINO  ESTABELECIMENTO DE SAÚDE  EVENTO PÚBLICO  LOCAL DE TRABALHO DA VÍTIMA  LOCAL DE TRABALHO DO AGRESSOR  LOJA  MANICÔMIO/HOSPITAL PSIQUIÁTRICO/CASA DE SAÚDE MENTAL  METRÔ OU TREM  OUTROS  SERVIÇO DE ABRIGAMENTO  SHOPPING  TAXI  TRANSPORTE AÉREO  TRANSPORTE MARÍTIMO  TRANSPORTE MONITORADO POR APLICATIVO  UNIDADE PRISIONAL  VIA PÚBLICA  ÓRGÃO PÚBLICO  ÔNIBUS
+tipo_violacao                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+1. VIOLÊNCIA FÍSICA                                                 178                                                 1354                           297              1055               566              4727           105                                   43872        20412                     5                    33                                            0                         49                       220              38                          453                            156    72                                                    71             10     584                      50         5     3                 0                    1                                     5                 14         2690             99      24
+2. VIOLÊNCIA PSICOLÓGICA                                            272                                                 6950                           455              1827               949              7426           132                                   64993        44034                    12                    75                                            8                        167                       376              56                         1492                            455   214                                                    93             22    1233                      89        19    10                 1                    1                                    17                 54         4902            283     109
+3. CRIMES CONTRA A VIDA                                              11                                                  181                            21               142                53               511            26                                    4058         2501                     0                     0                                            0                          4                        16               2                           44                             14    10                                                     6              1      96                       3         0     0                 0                    0                                     1                  1          326             10       2
+4. AGRESSÕES QUE VIOLAM A HONRA                                     107                                                 3616                           219               857               425              3519            64                                   27164        19535                     8                    28                                            8                         41                       111              28                          674                            200   102                                                    20              7     492                      34         7     1                 0                    1                                     9                 17         2168            130      35
+5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE                        26                                                  379                            42               156                61               645            52                                    7002         3430                     1                     1                                            4                          6                        31               0                          114                             38     9                                                    27              3     102                      10         0     1                 0                    0                                     2                  1          252             17       5
+6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA                 12                                                   64                             8                45                20               164             2                                    1328         1366                     1                     0                                            0                          5                         7               0                           19                              5     3                                                     4              0      29                       1         0     0                 0                    0                                     0                  0           61              7       1
+7. VIOLAÇÕES GERAIS                                                  64                                                 1606                           135               593               333              2250            74                                   17190        12399                     3                    14                                            5                         58                       127              16                          452                            164    46                                                    35              9     442                      18         9     4                 1                    1                                    10                 11         1461            115      39
+
+--------------------------------------------------------------------------------
+Cruzamento: faixa_etaria_vitima x denuncia_emergencial
+--------------------------------------------------------------------------------
+denuncia_emergencial         NÃO  RISCO IMINENTE DE MORTE DA VÍTIMA  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  VÍTIMA EM SANGRAMENTO
+faixa_etaria_vitima                                                                                                                   
+18 a 19 anos               56.17                               3.57                                       39.76                   0.50
+20 a 24 anos               52.73                               4.16                                       42.71                   0.40
+25 a 29 anos               51.78                               4.61                                       43.11                   0.51
+30 a 34 anos               51.75                               4.25                                       43.44                   0.56
+35 a 39 anos               53.13                               4.70                                       41.73                   0.44
+40 a 44 anos               52.91                               4.57                                       42.14                   0.39
+45 a 49 anos               53.56                               4.09                                       41.91                   0.44
+50 a 54 anos               52.31                               4.68                                       42.70                   0.31
+55 a 59 anos               53.53                               4.62                                       41.79                   0.07
+info_vitima_nao_informada  48.87                               5.13                                       45.65                   0.35
+
+--------------------------------------------------------------------------------
+Cruzamento: faixa_etaria_suspeito x tipo_violacao
+--------------------------------------------------------------------------------
+tipo_violacao                1. VIOLÊNCIA FÍSICA  2. VIOLÊNCIA PSICOLÓGICA  3. CRIMES CONTRA A VIDA  4. AGRESSÕES QUE VIOLAM A HONRA  5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE  6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  7. VIOLAÇÕES GERAIS
+faixa_etaria_suspeito                                                                                                                                                                                                                                         
+12 a 14 anos                               30.58                     41.74                     0.00                            15.29                                           2.89                                                  0.83                 8.68
+15 a 17 anos                               23.70                     43.60                     1.07                            15.88                                           3.55                                                  0.59                11.61
+18 a 19 anos                               27.41                     40.48                     2.57                            16.46                                           3.03                                                  0.35                 9.69
+20 a 24 anos                               26.11                     41.46                     2.30                            16.19                                           3.10                                                  0.76                10.08
+25 a 29 anos                               24.95                     41.47                     2.36                            16.29                                           3.61                                                  0.68                10.63
+30 a 34 anos                               24.20                     42.15                     2.12                            17.04                                           3.44                                                  0.73                10.32
+35 a 39 anos                               22.93                     42.35                     2.12                            17.24                                           3.38                                                  0.94                11.04
+40 a 44 anos                               21.83                     42.87                     2.12                            17.71                                           3.15                                                  0.77                11.55
+45 a 49 anos                               21.01                     42.92                     2.10                            18.55                                           3.49                                                  0.80                11.12
+50 a 54 anos                               20.91                     42.91                     1.84                            17.99                                           3.49                                                  0.80                12.06
+55 a 59 anos                               19.44                     43.63                     1.89                            19.65                                           3.24                                                  1.03                11.12
+60 a 64 anos                               19.21                     44.00                     1.63                            19.40                                           3.55                                                  0.84                11.37
+65 a 69 anos                               18.56                     45.60                     1.82                            18.06                                           3.60                                                  0.64                11.72
+70 a 74 anos                               17.68                     45.25                     1.56                            19.16                                           3.27                                                  0.70                12.38
+75 a 79 anos                               18.05                     40.49                     0.65                            20.98                                           4.39                                                  0.98                14.47
+80 anos ou mais                            19.12                     42.12                     2.07                            18.09                                           4.39                                                  1.03                13.18
+info_suspeito_nao_informada                23.25                     39.79                     2.60                            18.01                                           3.91                                                  1.04                11.41
+
+================================================================================
+ANÁLISE DA INFORMAÇÃO DO SUSPEITO NÃO INFORMADA
+================================================================================
+Total de registros com info_suspeito_nao_informada: 204608 (61.11%)
+
+Distribuição por tipo de violação:
+tipo_violacao
+2. VIOLÊNCIA PSICOLÓGICA                                81404
+1. VIOLÊNCIA FÍSICA                                     47562
+4. AGRESSÕES QUE VIOLAM A HONRA                         36845
+7. VIOLAÇÕES GERAIS                                     23348
+5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE            8008
+3. CRIMES CONTRA A VIDA                                  5318
+6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA     2123
+Name: count, dtype: Int64
+
+Distribuição por relação vítima-suspeito:
+relacao_vitima_suspeito
+MARIDO/ ESPOSA       45819
+COMPANHEIRO(A)       41203
+EX-MARIDO            20788
+EX-COMPANHEIRO(A)    20047
+SEM RELAÇÃO          11035
+VIZINHO(A)           11025
+EX- NAMORADO(A)       9605
+IRMÃO(Ã)              8623
+FILHO(A)              8577
+PAI/ MÃE              6885
+Name: count, dtype: Int64
+
+================================================================================
+FIM DA ANÁLISE EXPLORATÓRIA
+================================================================================
+
+================================================================================
+ANÁLISE DE FREQUÊNCIAS
+================================================================================
+
+================================================================================
+FREQUÊNCIA - TIPO_VIOLACAO
+================================================================================
+                                                      quantidade  percentual (%)
+tipo_violacao                                                                   
+2. VIOLÊNCIA PSICOLÓGICA                                  136726           40.84
+1. VIOLÊNCIA FÍSICA                                        77148           23.04
+4. AGRESSÕES QUE VIOLAM A HONRA                            59627           17.81
+7. VIOLAÇÕES GERAIS                                        37684           11.26
+5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE              12417            3.71
+3. CRIMES CONTRA A VIDA                                     8040             2.4
+6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA        3152            0.94
+
+================================================================================
+FREQUÊNCIA - GRUPO_VULNERAVEL
+================================================================================
+                                                  quantidade  percentual (%)
+grupo_vulneravel                                                            
+2-Violência Doméstica e Familiar Contra a Mulher      248089            74.1
+1-Violência Contra a Mulher                            86705            25.9
+
+================================================================================
+FREQUÊNCIA - ESPECIE_VIOLACAO
+================================================================================
+                                    quantidade  percentual (%)
+especie_violacao                                              
+CALÚNIA/INJÚRIA/DIFAMAÇÃO                59627           17.81
+AMEAÇA/COAÇÃO                            38669           11.55
+CONSTRANGIMENTO                          33530           10.02
+AGRESSÃO/VIAS DE FATO                    28496            8.51
+TORTURA PSÍQUICA                         22427             6.7
+EXPOSIÇÃO                                21804            6.51
+LESÃO CORPORAL                           20242            6.05
+MAUS TRATOS                              13256            3.96
+ASSÉDIO MORAL                            12081            3.61
+CRIMES CONTRA A SEGURANÇA PSÍQUICA       10715             3.2
+
+================================================================================
+FREQUÊNCIA - CENARIO_VIOLACAO
+================================================================================
+                                                     quantidade  percentual (%)
+cenario_violacao                                                               
+CASA ONDE RESIDE A VÍTIMA E O SUSPEITO                   165607           49.47
+CASA VÍTIMA                                              103677           30.97
+CASA DO SUSPEITO                                          19242            5.75
+AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)       14150            4.23
+VIA PÚBLICA                                               11860            3.54
+CASA DE FAMILIAR                                           4675             1.4
+LOCAL DE TRABALHO DA VÍTIMA                                3248            0.97
+OUTROS                                                     2978            0.89
+CASA DE TERCEIRO                                           2407            0.72
+BAR, LANCHONETE, RESTAURANTE                               1177            0.35
+
+================================================================================
+FREQUÊNCIA - DENUNCIA_EMERGENCIAL
+================================================================================
+                                            quantidade  percentual (%)
+denuncia_emergencial                                                  
+NÃO                                             176391           52.69
+SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA      142141           42.46
+RISCO IMINENTE DE MORTE DA VÍTIMA                14860            4.44
+VÍTIMA EM SANGRAMENTO                             1402            0.42
+
+================================================================================
+FREQUÊNCIA - SEXO_VITIMA
+================================================================================
+             quantidade  percentual (%)
+sexo_vitima                            
+FEMININO         333754           99.69
+LGBT               1040            0.31
+
+================================================================================
+FREQUÊNCIA - FAIXA_ETARIA_VITIMA
+================================================================================
+                           quantidade  percentual (%)
+faixa_etaria_vitima                                  
+35 a 39 anos                    50529           15.09
+40 a 44 anos                    48667           14.54
+30 a 34 anos                    47159           14.09
+25 a 29 anos                    42951           12.83
+20 a 24 anos                    40326           12.05
+45 a 49 anos                    34644           10.35
+50 a 54 anos                    26351            7.87
+55 a 59 anos                    21466            6.41
+18 a 19 anos                    13271            3.96
+info_vitima_nao_informada        9430            2.82
+
+================================================================================
+FREQUÊNCIA - SEXO_SUSPEITO
+================================================================================
+               quantidade  percentual (%)
+sexo_suspeito                            
+MASCULINO          301260           89.98
+FEMININO            32575            9.73
+LGBT                  959            0.29
+
+================================================================================
+FREQUÊNCIA - FAIXA_ETARIA_SUSPEITO
+================================================================================
+                             quantidade  percentual (%)
+faixa_etaria_suspeito                                  
+info_suspeito_nao_informada      204608           61.11
+35 a 39 anos                      20308            6.07
+30 a 34 anos                      19298            5.76
+40 a 44 anos                      19173            5.73
+25 a 29 anos                      16891            5.05
+45 a 49 anos                      13778            4.12
+50 a 54 anos                      10963            3.27
+20 a 24 anos                      10887            3.25
+55 a 59 anos                       6672            1.99
+60 a 64 anos                       4670            1.39
+
+================================================================================
+FREQUÊNCIA - RELACAO_VITIMA_SUSPEITO
+================================================================================
+                         quantidade  percentual (%)
+relacao_vitima_suspeito                            
+MARIDO/ ESPOSA                75137           22.44
+COMPANHEIRO(A)                69573           20.78
+EX-COMPANHEIRO(A)             34735           10.38
+EX-MARIDO                     33171            9.91
+VIZINHO(A)                    17539            5.24
+SEM RELAÇÃO                   16453            4.91
+EX- NAMORADO(A)               15713            4.69
+FILHO(A)                      14223            4.25
+IRMÃO(Ã)                      14179            4.24
+PAI/ MÃE                      11095            3.31
+
+================================================================================
+DEFINIÇÃO METODOLÓGICA
+================================================================================
+
+================================================================================
+CLASSIFICAÇÃO METODOLÓGICA DAS VARIÁVEIS
+================================================================================
+
+Variáveis com baixa ausência (< 5%):
+- tipo_violacao: 0.00%
+- grupo_vulneravel: 0.00%
+- especie_violacao: 0.00%
+- cenario_violacao: 0.00%
+- denuncia_emergencial: 0.00%
+- denunciante: 0.00%
+- sexo_vitima: 0.00%
+- faixa_etaria_vitima: 0.00%
+- sexo_suspeito: 0.00%
+- faixa_etaria_suspeito: 0.00%
+- relacao_vitima_suspeito: 0.00%
+- pais_origem_vitima: 1.39%
+
+Variáveis que exigem atenção (5% a 30%):
+- Nenhuma variável nessa faixa.
+
+Variáveis críticas (>= 30%):
+- agravantes_policiais: 99.50%
+- faixa_renda_suspeito: 84.37%
+- faixa_renda_vitima: 78.62%
+- grau_instrucao_suspeito: 77.70%
+- grau_instrucao_vitima: 63.79%
+- nacionalidade_suspeito: 55.85%
+- deficiencia_suspeito: 53.91%
+- nacionalidade_vitima: 52.74%
+- deficiencia_vitima: 51.88%
+- motivacao: 41.76%
+- pais_origem_suspeito: 41.52%
+- agravantes: 30.22%
+
+================================================================================
+OBSERVAÇÕES METODOLÓGICAS PRELIMINARES
+================================================================================
+- Valores como 'N/D', 'NULL', 'NAN', 'None' e campos vazios foram tratados como ausência de informação para padronizar a representação de dados não disponíveis na base.
+- A categoria 'info_suspeito_nao_informada' foi mantida como marcador operacional para registros em que a faixa etária do suspeito não estava disponível.
+- A categoria 'info_suspeito_nao_informada' não deve ser interpretada como característica social, demográfica ou comportamental do suspeito.
+- A categoria 'info_vitima_nao_informada' foi mantida como marcador operacional para registros sem faixa etária informada da vítima.
+- As variáveis geográficas 'uf' e 'municipio' foram removidas da base analítica, pois o objetivo do estudo não envolve análise espacial.
+- A remoção das variáveis geográficas busca reduzir risco de overfitting, alta cardinalidade e enviesamento regional na etapa de modelagem.
+- As variáveis temporais 'data_denuncia_ano', 'data_denuncia_mes' e 'data_denuncia_dia' foram removidas da base analítica por não fazerem parte do recorte metodológico atual.
+- A variável 'canal_atendimento' foi removida por representar o meio de entrada da denúncia, e não uma característica diretamente associada ao fenômeno analisado.
+- Registros com ausência em 'cenario_violacao', 'sexo_vitima', 'sexo_suspeito' e 'relacao_vitima_suspeito' foram tratados como ruído analítico e removidos da base de análise.
+- Variáveis com alto percentual de ausência foram marcadas para avaliação antes de qualquer uso em score, análise inferencial ou modelagem preditiva.
+- A coluna 'agravantes_policiais' apresentou percentual muito elevado de ausência, mas foi mantida para análise específica por possuir significado analítico relevante nos registros preenchidos.
+- Variáveis sociodemográficas com alta ausência, como renda, escolaridade, raça/cor, nacionalidade e deficiência, devem ser analisadas com cautela para evitar interpretações frágeis ou enviesadas.
+
+================================================================================
+VARIÁVEIS DEFINIDAS PARA EXCLUSÃO
+================================================================================
+
+As variáveis abaixo foram classificadas para exclusão:
+
+- uf
+  Motivo: variável geográfica removida para reduzir risco de overfitting e enviesamento regional.
+
+- municipio
+  Motivo: variável geográfica com alta cardinalidade e sem aderência ao objetivo atual do estudo.
+
+- data_denuncia_ano
+  Motivo: variável temporal fora do recorte metodológico atual.
+
+- data_denuncia_mes
+  Motivo: variável temporal fora do recorte metodológico atual.
+
+- data_denuncia_dia
+  Motivo: variável temporal fora do recorte metodológico atual.
+
+- canal_atendimento
+  Motivo: variável relacionada ao meio de entrada da denúncia, sem uso previsto na modelagem.
+
+- nacionalidade_suspeito
+  Motivo: variável sensível com baixo potencial analítico e risco de interpretação enviesada.
+
+- pais_origem_suspeito
+  Motivo: variável sensível e sujeita a vieses interpretativos.
+
+- raca_cor_suspeito
+  Motivo: atributo sensível que pode introduzir vieses na construção de indicadores e modelos.
+
+- raca_cor_vitima
+  Motivo: atributo sensível que pode introduzir vieses na construção de indicadores e modelos.
+
+Observação: a exclusão é aplicada na base analítica, preservando a camada bronze como registro rastreável dos dados tratados.
+
+================================================================================
+ANÁLISE DE COMPLETUDE
+================================================================================
+
+================================================================================
+AGRAVANTES
+================================================================================
+Registros com informação: 233603 (69.78%)
+
+Distribuição:
+agravantes
+AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE    105657
+AGRESSOR CONHECIDO                                                   54746
+VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE           20468
+RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO               17413
+VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL         7896
+EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES                   7116
+MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO       6467
+RISCO DE MORTE                                                        3995
+AGRESSOR DESCONHECIDO                                                 3415
+DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET                                      1217
+RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR                       1041
+AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE                         1017
+AGRESSOR POLICIAL/MILITAR                                              943
+AGRESSOR POSSUI INFLUÊNCIA JUNTO ÀS AUTORIDADES LOCAIS                 802
+VÍTIMA EM SANGRAMENTO                                                  267
+CONVIVENTE                                                             213
+ASCENDENTE                                                             207
+AGRESSOR CÔNJUGE                                                       206
+DESCENDENTE OU PARENTE                                                 205
+VÍTIMA EM SITUAÇÃO DE RUA                                              108
+Name: count, dtype: Int64
+
+================================================================================
+AGRAVANTES POLICIAIS
+================================================================================
+Registros com informação: 1677 (0.50%)
+
+Distribuição:
+agravantes_policiais
+POLICIAL MILITAR               1163
+POLICIAL CIVIL                  278
+FORÇAS ARMADAS                  189
+POLICIAL FEDERAL                 40
+POLICIAL RODOVIÁRIO FEDERAL       7
+Name: count, dtype: Int64
+
+================================================================================
+FIM DA ANÁLISE DOS DADOS
+================================================================================
+
+Output da análise salvo em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\analise_dados\output_analise.txt
