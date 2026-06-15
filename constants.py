@@ -7,7 +7,6 @@
 
 from pathlib import Path
 
-
 # ======================================================================================
 # Diretórios principais
 # ======================================================================================
@@ -17,8 +16,6 @@ ROOT_DIR = Path(__file__).resolve().parent
 BRONZE_DIR = ROOT_DIR / "bronze"
 SILVER_DIR = ROOT_DIR / "silver"
 GOLD_DIR = ROOT_DIR / "gold"
-
-
 # ======================================================================================
 # Diretórios da camada bronze
 # ======================================================================================
@@ -37,16 +34,12 @@ BRONZE_ANALISE_DADOS_DIR = BRONZE_DIR / "analise_dados"
 BRONZE_INGESTAO_DADOS_DIR = BRONZE_DIR / "ingestao_dados"
 BRONZE_TRATAMENTO_DADOS_DIR = BRONZE_BASE_DIR / "tratamento_dados"
 BRONZE_RELATORIOS_DADOS_DIR = BRONZE_DIR / "relatorios_dados"
-
-
 # ======================================================================================
 # Diretórios das camadas silver e gold
 # ======================================================================================
 
 SILVER_OUTPUTS_DIR = SILVER_DIR / "outputs"
 GOLD_OUTPUTS_DIR = GOLD_DIR / "outputs"
-
-
 # ======================================================================================
 # Arquivos de entrada - camada bronze
 # ======================================================================================
@@ -58,8 +51,6 @@ ARQUIVO_XLSX_FEMINICIDIO = (
 ARQUIVO_CSV_FEMINICIDIO = (
     BRONZE_RAW_DIR / "2020_primeiro_semestre.csv"
 )
-
-
 # ======================================================================================
 # Arquivos processados - camada bronze
 # ======================================================================================
@@ -75,8 +66,6 @@ ARQUIVO_CSV_FEMINICIDIO_ANALITICO = (
 ARQUIVO_CSV_FEMINICIDIO_NORMALIZADO = (
     BRONZE_NORMALIZACAO_DIR / "2020_primeiro_semestre_normalizado.csv"
 )
-
-
 # ======================================================================================
 # Outputs textuais - camada bronze
 # ======================================================================================
@@ -92,8 +81,6 @@ ARQUIVO_OUTPUT_ANALISE_DADOS = (
 ARQUIVO_OUTPUT_PREPARACAO_DADOS = (
     BRONZE_OUTPUTS_DIR / "output_preparacao_dados.txt"
 )
-
-
 # ======================================================================================
 # Parâmetros de qualidade/completude dos dados
 # ======================================================================================
@@ -102,8 +89,6 @@ LIMITE_BAIXA_AUSENCIA = 5.0
 LIMITE_VARIAVEL_CRITICA = 30.0
 LIMITE_PERCENTUAL_NULOS_CRITICO = 30.0
 LIMITE_PERCENTUAL_CATEGORIA_RARA = 1.0
-
-
 # ======================================================================================
 # Valores usados para padronização de nulos
 # ======================================================================================
@@ -144,8 +129,6 @@ VALORES_NULOS_TEXTUAIS = {
     "não informado",
     "nao informado",
 }
-
-
 # ======================================================================================
 # Cabeçalho esperado na base original
 # ======================================================================================
@@ -155,8 +138,6 @@ COLUNA_CABECALHO_ESPERADA = "Data da denúncia - Ano"
 TEXTO_CABECALHO_INVALIDO_EXCEL = (
     "Violência Doméstica e Familiar Contra a Mulher ouViolência Contra a Mulher"
 )
-
-
 # ======================================================================================
 # Colunas principais da pesquisa
 # ======================================================================================
@@ -171,8 +152,6 @@ COLUNA_FAIXA_ETARIA_SUSPEITO = "faixa_etaria_suspeito"
 COLUNA_SUSPEITO_FAIXA_ETARIA_INFORMADA = "suspeito_faixa_etaria_informada"
 
 VALOR_INFO_SUSPEITO_NAO_INFORMADA = "info_suspeito_nao_informada"
-
-
 # ======================================================================================
 # Colunas categóricas para estatísticas/frequência da base analítica
 # ======================================================================================
@@ -212,8 +191,6 @@ COLUNAS_FREQUENCIA = [
     "indicador_letalidade",
     "subtipo_letalidade",
 ]
-
-
 # ======================================================================================
 # Marcadores operacionais de informação não informada
 # ======================================================================================
@@ -228,8 +205,6 @@ MARCADORES_NULOS_CRITICOS_BRONZE = {
     "faixa_etaria_vitima": "info_vitima_nao_informada",
     "municipio": "municipio_nao_informado",
 }
-
-
 # ======================================================================================
 # Regras da base analítica
 # ======================================================================================
@@ -257,28 +232,38 @@ COLUNAS_ENVIESAMENTO_REMOVER = [
     "raca_cor_suspeito",
     "raca_cor_vitima",
 ]
-
-
 # ======================================================================================
 # Base de treino/modelagem
 # ======================================================================================
 
 COLUNA_ALVO_MODELAGEM = "tipo_violencia_normalizado"
-
 COLUNAS_REMOVER_BASE_TREINO = [
+    # Colunas originais ou diretamente derivadas do alvo
     "tipo_violacao",
     "especie_violacao",
+
+    # Colunas substituídas por agravantes_unificados
     "agravantes",
     "agravantes_policiais",
+
+    # Colunas derivadas da espécie da violação
     "indicador_letalidade",
     "subtipo_letalidade",
-]
 
+    # Indicadores de risco usados para análise, mas removidos do treino
+    "risco_ameaca_morte",
+    "risco_violencia_fisica_grave",
+    "risco_escalada_agressoes",
+    "risco_controle_extremo",
+    "risco_separacao_termino",
+    "risco_violencia_sexual_associada",
+    "qtd_sinais_risco_feminicidio",
+    "classificacao_sinais_risco_feminicidio",
+]
 
 # ======================================================================================
 # Marcadores para preenchimento de nulos na preparação de modelagem
 # ======================================================================================
-
 MARCADORES_NULOS_MODELAGEM = {
     "motivacao": "motivacao_nao_informada",
     "grau_instrucao_vitima": "instrucao_vitima_nao_informada",
@@ -293,11 +278,9 @@ MARCADORES_NULOS_MODELAGEM = {
     "deficiencia_suspeito": "deficiencia_suspeito_nao_informada",
 }
 
-
 # ======================================================================================
 # Variáveis definidas para exclusão da base analítica/modelagem
 # ======================================================================================
-
 VARIAVEIS_EXCLUSAO_BASE_ANALITICA = {
     "uf": (
         "Variável geográfica removida para reduzir risco de overfitting, "
@@ -336,11 +319,9 @@ VARIAVEIS_EXCLUSAO_BASE_ANALITICA = {
     ),
 }
 
-
 # ======================================================================================
 # Decisões metodológicas da preparação analítica
 # ======================================================================================
-
 DECISOES_PREPARACAO_ANALITICA = {
     "uf": {
         "tipo_decisao": "geográfica",
@@ -413,11 +394,9 @@ DECISOES_PREPARACAO_ANALITICA = {
     },
 }
 
-
 # ======================================================================================
 # Mapeamento do tipo de violência normalizado
 # ======================================================================================
-
 MAPEAMENTO_TIPO_VIOLENCIA_NORMALIZADO = {
     # Violência moral
     "CALÚNIA/INJÚRIA/DIFAMAÇÃO": "violencia_moral",
@@ -464,13 +443,22 @@ MAPEAMENTO_TIPO_VIOLENCIA_NORMALIZADO = {
     "PROPRIEDADE - PATRIMÔNIO MATERIAL": "violencia_patrimonial",
     "CRIMES CONTRA A SEGURANÇA ECONÔMICA": "violencia_patrimonial",
     "INSUBSISTÊNCIA MATERIAL": "violencia_patrimonial",
-}
 
+    # Reclassificações após análise de outras_violencias
+    "CÁRCERE PRIVADO": "violencia_psicologica",
+    "SEQUESTRO": "violencia_psicologica",
+    "INSUBSISTÊNCIA INTELECTUAL": "violencia_psicologica",
+
+    "TRÁFICO NACIONAL DE PESSOAS": "violencia_sexual",
+    "TRÁFICO INTERNACIONAL DE PESSOAS": "violencia_sexual",
+
+    "SITUAÇÃO DE RUA/ ABANDONO MATERIAL": "violencia_patrimonial",
+
+}
 
 # ======================================================================================
 # Mapeamento de letalidade
 # ======================================================================================
-
 MAPEAMENTO_INDICADOR_LETALIDADE = {
     "TENTATIVA DE FEMINICÍDIO": "tentativa_letal",
     "TENTATIVA DE HOMICÍDIO": "tentativa_letal",
@@ -484,3 +472,13 @@ MAPEAMENTO_SUBTIPO_LETALIDADE = {
     "FEMINICÍDIO": "feminicidio",
     "HOMICÍDIO": "homicidio",
 }
+
+ESPECIES_MANTIDAS_COMO_OUTRAS_VIOLENCIAS = [
+    "AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL",
+    "AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL",
+    "VIOLÊNCIA CONTRA A LIBERDADE DE EXPRESSÃO",
+    "FALTA DE ACESSIBILIDADE",
+    "CIDADANIA",
+    "RACISMO",
+    "OUTROS",
+]
