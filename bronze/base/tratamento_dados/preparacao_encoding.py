@@ -8,7 +8,6 @@
 
 import pandas as pd
 
-
 def aplicar_encoding_simples(
     X: pd.DataFrame,
 ) -> pd.DataFrame:
@@ -37,7 +36,6 @@ def aplicar_encoding_simples(
     print(X_encoded.shape)
 
     return X_encoded
-
 
 def codificar_variavel_alvo(
     y: pd.Series,
@@ -68,7 +66,6 @@ def codificar_variavel_alvo(
     print(y_encoded.shape)
 
     return y_encoded
-
 
 def executar_normalizacao_dados(
     X: pd.DataFrame,
