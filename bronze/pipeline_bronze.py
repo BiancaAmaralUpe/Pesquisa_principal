@@ -11,7 +11,6 @@
 # - Preparar dados para etapas futuras de modelagem
 # ======================================================================================
 from Pesquisa_principal.constants import ARQUIVO_OUTPUT_BRONZE, ARQUIVO_OUTPUT_ANALISE_DADOS, ARQUIVO_CSV_FEMINICIDIO_LIMPO, ARQUIVO_CSV_FEMINICIDIO_ANALITICO, ARQUIVO_OUTPUT_PREPARACAO_DADOS
-
 # pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
 
@@ -56,7 +55,10 @@ from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias imp
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicadores_risco_feminicidio
 
 from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
-
+# ============================================================
+# para executar a bronze, rode o comando:
+# python -m Pesquisa_principal.bronze
+# ============================================================
 def pipeline_bronze() -> None:
     """
     Executa a camada bronze.

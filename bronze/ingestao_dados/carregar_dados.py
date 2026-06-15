@@ -6,13 +6,9 @@
 # - Validar existência do arquivo
 # - Retornar DataFrame para a pipeline
 # ======================================================================================
-
 from pathlib import Path
-
 import pandas as pd
-
 from Pesquisa_principal.constants import VALORES_NULOS_PADRAO
-
 
 def carregar_csv(
     caminho_csv: str | Path,

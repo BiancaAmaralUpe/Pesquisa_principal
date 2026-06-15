@@ -6,11 +6,8 @@
 # - Converter para CSV
 # - Salvar o CSV em uma pasta de saída
 # ======================================================================================
-
 from pathlib import Path
-
 import pandas as pd
-
 # pyrefly: ignore [missing-import]
 from Pesquisa_principal.constants import ARQUIVO_XLSX_FEMINICIDIO, ARQUIVO_CSV_FEMINICIDIO, COLUNA_CABECALHO_ESPERADA, TEXTO_CABECALHO_INVALIDO_EXCEL
 
@@ -31,7 +28,6 @@ def encontrar_linha_cabecalho(dataframe: pd.DataFrame) -> int:
     raise ValueError(
         "Não foi possível encontrar a linha de cabeçalho com 'Data da denúncia - Ano'."
     )
-
 
 def ajustar_cabecalho_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
@@ -232,4 +228,3 @@ def transformar_base_feminicidio(forcar_reprocessamento: bool = False) -> pd.Dat
         )
 
     return carregar_csv_existente(ARQUIVO_CSV_FEMINICIDIO)
-    

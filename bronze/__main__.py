@@ -10,10 +10,8 @@
 # pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.pipeline_bronze import pipeline_bronze
 
-
 def main() -> None:
     pipeline_bronze()
-
 
 if __name__ == "__main__":
     main()
