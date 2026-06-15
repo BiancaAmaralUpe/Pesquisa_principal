@@ -7,7 +7,6 @@
 # - Remover registros com ruídos analíticos
 # - Remover variáveis com potencial de enviesamento para modelagem
 # ======================================================================================
-
 import pandas as pd
 
 from Pesquisa_principal.constants import (

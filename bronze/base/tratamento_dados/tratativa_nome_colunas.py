@@ -12,7 +12,6 @@ import unicodedata
 
 import pandas as pd
 
-
 CONECTIVOS_REMOVER = {
     "de",
     "da",
@@ -20,7 +19,6 @@ CONECTIVOS_REMOVER = {
     "das",
     "dos",
 }
-
 
 def remover_acentos(texto: str) -> str:
     """
@@ -31,7 +29,6 @@ def remover_acentos(texto: str) -> str:
     texto = texto.encode("ascii", "ignore").decode("utf-8")
 
     return texto
-
 
 def tratar_nome_coluna(nome_coluna: str) -> str:
     """
@@ -75,7 +72,6 @@ def tratar_nome_coluna(nome_coluna: str) -> str:
     nome_coluna = "_".join(partes)
 
     return nome_coluna
-
 
 def tratar_nomes_colunas(dataframe: pd.DataFrame) -> pd.DataFrame:
     """

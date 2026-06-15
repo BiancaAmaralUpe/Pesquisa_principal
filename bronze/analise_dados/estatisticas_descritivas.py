@@ -8,7 +8,6 @@
 # - Investigar frequência das principais categorias
 # - Apoiar decisões iniciais sobre qualidade dos dados
 # ======================================================================================
-
 import pandas as pd
 from Pesquisa_principal.constants import CATEGORIAS_NAO_INFORMADAS, COLUNAS_CATEGORICAS_INTERESSE, LIMITE_PERCENTUAL_NULOS_CRITICO
 
@@ -21,7 +20,6 @@ def imprimir_titulo(titulo: str) -> None:
     print(titulo)
     print("=" * 80)
 
-
 def imprimir_secao(numero: int, titulo: str) -> None:
     """
     Imprime uma seção numerada do relatório.
@@ -30,7 +28,6 @@ def imprimir_secao(numero: int, titulo: str) -> None:
     print("\n" + "-" * 80)
     print(f"[{numero}] {titulo}")
     print("-" * 80)
-
 
 def validar_dataframe(dataframe: pd.DataFrame) -> bool:
     """
@@ -47,7 +44,6 @@ def validar_dataframe(dataframe: pd.DataFrame) -> bool:
 
     return True
 
-
 def estatistica_dimensoes(dataframe: pd.DataFrame) -> None:
     """
     Exibe quantidade de linhas e colunas da base.
@@ -57,7 +53,6 @@ def estatistica_dimensoes(dataframe: pd.DataFrame) -> None:
 
     print(f"Quantidade de linhas: {dataframe.shape[0]}")
     print(f"Quantidade de colunas: {dataframe.shape[1]}")
-
 
 def estatistica_colunas_duplicadas(dataframe: pd.DataFrame) -> None:
     """
@@ -78,7 +73,6 @@ def estatistica_colunas_duplicadas(dataframe: pd.DataFrame) -> None:
     for coluna in colunas_duplicadas:
         print(f"- {coluna}")
 
-
 def estatistica_tipos_dados(dataframe: pd.DataFrame) -> None:
     """
     Exibe os tipos de dados por coluna.
@@ -87,7 +81,6 @@ def estatistica_tipos_dados(dataframe: pd.DataFrame) -> None:
     imprimir_secao(3, "TIPOS DE DADOS")
 
     print(dataframe.dtypes)
-
 
 def estatistica_valores_nulos(dataframe: pd.DataFrame) -> None:
     """
@@ -109,7 +102,6 @@ def estatistica_valores_nulos(dataframe: pd.DataFrame) -> None:
     )
 
     print(resumo_nulos.round(2).to_string())
-
 
 def estatistica_colunas_criticas_nulos(
     dataframe: pd.DataFrame,
@@ -139,7 +131,6 @@ def estatistica_colunas_criticas_nulos(
         qtd_nulos = dataframe[coluna].isna().sum()
         print(f"- {coluna}: {qtd_nulos} nulos ({percentual:.2f}%)")
 
-
 def estatistica_valores_unicos(dataframe: pd.DataFrame) -> None:
     """
     Exibe a quantidade de valores únicos por coluna.
@@ -150,7 +141,6 @@ def estatistica_valores_unicos(dataframe: pd.DataFrame) -> None:
     valores_unicos = dataframe.nunique(dropna=True).sort_values(ascending=False)
 
     print(valores_unicos.to_string())
-
 
 def estatistica_descritiva_numerica(dataframe: pd.DataFrame) -> None:
     """
@@ -172,7 +162,6 @@ def estatistica_descritiva_numerica(dataframe: pd.DataFrame) -> None:
         .round(2)
         .to_string()
     )
-
 
 def estatistica_frequencia_coluna(
     dataframe: pd.DataFrame,
@@ -202,7 +191,6 @@ def estatistica_frequencia_coluna(
 
     print(f"\nValores da coluna '{coluna}':")
     print(resultado.to_string())
-
 
 def estatistica_frequencias_principais(dataframe: pd.DataFrame) -> None:
     """
@@ -243,7 +231,6 @@ def estatistica_info_nao_informada(dataframe: pd.DataFrame) -> None:
             f"- {coluna}: {qtd} registros "
             f"({percentual:.2f}%) com '{categoria}'"
         )
-
 
 def gerar_estatisticas_descritivas(dataframe: pd.DataFrame) -> None:
     """

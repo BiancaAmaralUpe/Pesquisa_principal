@@ -73,7 +73,6 @@ def remover_linhas_totalmente_vazias(dataframe: pd.DataFrame) -> pd.DataFrame:
 
     return dataframe
 
-
 def padronizar_textos(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
     Padroniza colunas de texto:
@@ -96,7 +95,6 @@ def padronizar_textos(dataframe: pd.DataFrame) -> pd.DataFrame:
     print(f"Colunas textuais padronizadas: {len(colunas_texto)}")
 
     return dataframe
-
 
 def converter_textos_nulos_para_na(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
@@ -181,7 +179,6 @@ def relatorio_limpeza(dataframe: pd.DataFrame) -> None:
     print("\nPrévia dos dados limpos:")
     print(dataframe.head())
 
-
 def limpar_dados_bronze(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
     Executa a limpeza inicial da camada bronze.
@@ -195,7 +192,6 @@ def limpar_dados_bronze(dataframe: pd.DataFrame) -> pd.DataFrame:
     6. Trata nulos críticos com categorias explícitas
     7. Exibe relatório da limpeza
     """
-
     print("\n" + "=" * 80)
     print("INÍCIO DA LIMPEZA DOS DADOS - CAMADA BRONZE")
     print("=" * 80)

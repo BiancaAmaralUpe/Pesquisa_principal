@@ -38,7 +38,6 @@ def validar_caminho_arquivo(caminho_csv: str | Path) -> Path:
 
     return caminho_csv
 
-
 def ler_csv_com_fallback_encoding(
     caminho_csv: Path,
     separador: str = ",",
@@ -82,7 +81,6 @@ def ler_csv_com_fallback_encoding(
         f"Último erro: {ultimo_erro}",
     )
 
-
 def validar_dataframe_carregado(dataframe: pd.DataFrame) -> None:
     """
     Valida se o DataFrame carregado possui dados.
@@ -97,7 +95,6 @@ def validar_dataframe_carregado(dataframe: pd.DataFrame) -> None:
         raise ValueError(
             "A base limpa foi carregada, mas não possui colunas."
         )
-
 
 def exibir_resumo_carga(
     dataframe: pd.DataFrame,
@@ -124,7 +121,6 @@ def exibir_resumo_carga(
             print(f"- {coluna}")
     else:
         print("Nenhuma coluna duplicada encontrada.")
-
 
 def carregar_dados_limpos(
     caminho_csv: str | Path,

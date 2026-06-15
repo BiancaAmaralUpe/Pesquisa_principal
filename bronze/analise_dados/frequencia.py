@@ -7,7 +7,6 @@
 # - Identificar categorias raras
 # - Apoiar decisões sobre agrupamento, normalização e modelagem
 # ======================================================================================
-
 import pandas as pd
 from Pesquisa_principal.constants import COLUNAS_FREQUENCIA, LIMITE_PERCENTUAL_CATEGORIA_RARA
 
@@ -19,7 +18,6 @@ def imprimir_secao(titulo: str) -> None:
     print("\n" + "=" * 80)
     print(titulo)
     print("=" * 80)
-
 
 def validar_dataframe(dataframe: pd.DataFrame) -> bool:
     """
@@ -35,7 +33,6 @@ def validar_dataframe(dataframe: pd.DataFrame) -> bool:
         return False
 
     return True
-
 
 def calcular_tabela_frequencia(
     dataframe: pd.DataFrame,
@@ -60,7 +57,6 @@ def calcular_tabela_frequencia(
     })
 
     return resultado
-
 
 def analisar_frequencia_coluna(
     dataframe: pd.DataFrame,
@@ -124,7 +120,6 @@ def analisar_categorias_raras(
 
     print(categorias_raras.to_string())
 
-
 def analisar_resumo_cardinalidade(
     dataframe: pd.DataFrame,
     coluna: str,
@@ -140,7 +135,6 @@ def analisar_resumo_cardinalidade(
     quantidade_categorias = dataframe[coluna].nunique(dropna=False)
 
     print(f"\nQuantidade de categorias distintas: {quantidade_categorias}")
-
 
 def executar_analise_frequencias(
     dataframe: pd.DataFrame,

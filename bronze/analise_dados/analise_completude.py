@@ -10,7 +10,6 @@
 
 import pandas as pd
 
-
 def imprimir_secao(titulo: str) -> None:
     """
     Imprime uma seção formatada no terminal/output.
@@ -19,7 +18,6 @@ def imprimir_secao(titulo: str) -> None:
     print("\n" + "=" * 80)
     print(titulo)
     print("=" * 80)
-
 
 def analisar_completude_geral(dataframe: pd.DataFrame) -> None:
     """
@@ -46,7 +44,6 @@ def analisar_completude_geral(dataframe: pd.DataFrame) -> None:
     )
 
     print(resumo.round(2).to_string())
-
 
 def classificar_colunas_por_completude(dataframe: pd.DataFrame) -> None:
     """
@@ -90,7 +87,6 @@ def classificar_colunas_por_completude(dataframe: pd.DataFrame) -> None:
         for coluna, percentual in baixa_completude.sort_values().items():
             print(f"- {coluna}: {percentual:.2f}% preenchido")
 
-
 def analisar_valores_nao_informados(dataframe: pd.DataFrame) -> None:
     """
     Analisa categorias usadas para representar informação não informada.
@@ -123,7 +119,6 @@ def analisar_valores_nao_informados(dataframe: pd.DataFrame) -> None:
             percentual = (quantidade / total_linhas) * 100
             print(f"- {coluna}: {quantidade} registros ({percentual:.2f}%)")
 
-
 def analisar_agravantes(dataframe: pd.DataFrame) -> None:
     """
     Analisa apenas registros que possuem agravantes preenchidos.
@@ -153,7 +148,6 @@ def analisar_agravantes(dataframe: pd.DataFrame) -> None:
         .head(20)
     )
 
-
 def analisar_agravantes_policiais(dataframe: pd.DataFrame) -> None:
     """
     Analisa registros que possuem informação de agravantes policiais.
@@ -182,7 +176,6 @@ def analisar_agravantes_policiais(dataframe: pd.DataFrame) -> None:
         .value_counts(dropna=False)
         .head(20)
     )
-
 
 def executar_analise_completude(dataframe: pd.DataFrame) -> None:
     """

@@ -7,7 +7,6 @@
 # - Documentar regras de exclusão da base analítica
 # - Apoiar a próxima etapa de preparação dos dados
 # ======================================================================================
-
 import pandas as pd
 from Pesquisa_principal.constants import LIMITE_BAIXA_AUSENCIA, LIMITE_VARIAVEL_CRITICA, VARIAVEIS_EXCLUSAO_BASE_ANALITICA
 

@@ -23,7 +23,6 @@ from Pesquisa_principal.constants import (
     VALOR_INFO_SUSPEITO_NAO_INFORMADA
 )
 
-
 def imprimir_secao(titulo: str) -> None:
     """
     Imprime uma seção formatada no terminal/output.
@@ -32,7 +31,6 @@ def imprimir_secao(titulo: str) -> None:
     print("\n" + "=" * 80)
     print(titulo)
     print("=" * 80)
-
 
 def unificar_agravantes(dataframe: pd.DataFrame) -> pd.DataFrame:
     """
@@ -87,7 +85,6 @@ def unificar_agravantes(dataframe: pd.DataFrame) -> pd.DataFrame:
     )
 
     return dataframe
-
 
 def classificar_letalidade(dataframe: pd.DataFrame) -> pd.DataFrame:
     """

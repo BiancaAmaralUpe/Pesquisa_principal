@@ -11,7 +11,6 @@
 # ======================================================================================
 
 import pandas as pd
-
 from Pesquisa_principal.bronze.analise_dados.definir_metodologia import validar_dataframe
 from Pesquisa_principal.bronze.analise_dados.analise_completude import imprimir_secao
 from Pesquisa_principal.constants import COLUNAS_REMOVER_BASE_TREINO, MARCADORES_NULOS_MODELAGEM

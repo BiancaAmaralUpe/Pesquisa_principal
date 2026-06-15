@@ -19,7 +19,6 @@ def imprimir_titulo(titulo: str) -> None:
     print(titulo)
     print("=" * 80)
 
-
 def imprimir_secao(numero: int, titulo: str) -> None:
     """
     Imprime uma seção numerada do relatório.
@@ -28,7 +27,6 @@ def imprimir_secao(numero: int, titulo: str) -> None:
     print("\n" + "-" * 80)
     print(f"[{numero}] {titulo}")
     print("-" * 80)
-
 
 def validar_dataframe(dataframe: pd.DataFrame) -> bool:
     """
@@ -45,7 +43,6 @@ def validar_dataframe(dataframe: pd.DataFrame) -> bool:
 
     return True
 
-
 def diagnosticar_dimensoes(dataframe: pd.DataFrame) -> None:
     """
     Exibe quantidade de linhas e colunas da base.
@@ -56,7 +53,6 @@ def diagnosticar_dimensoes(dataframe: pd.DataFrame) -> None:
     print(f"Quantidade de linhas: {dataframe.shape[0]}")
     print(f"Quantidade de colunas: {dataframe.shape[1]}")
 
-
 def diagnosticar_colunas(dataframe: pd.DataFrame) -> None:
     """
     Lista as colunas da base.
@@ -66,7 +62,6 @@ def diagnosticar_colunas(dataframe: pd.DataFrame) -> None:
 
     for indice, coluna in enumerate(dataframe.columns, start=1):
         print(f"{indice:02d}. {coluna}")
-
 
 def diagnosticar_colunas_duplicadas(dataframe: pd.DataFrame) -> None:
     """
@@ -87,7 +82,6 @@ def diagnosticar_colunas_duplicadas(dataframe: pd.DataFrame) -> None:
     for coluna in colunas_duplicadas:
         print(f"- {coluna}")
 
-
 def diagnosticar_tipos_dados(dataframe: pd.DataFrame) -> None:
     """
     Exibe os tipos de dados por coluna.
@@ -96,7 +90,6 @@ def diagnosticar_tipos_dados(dataframe: pd.DataFrame) -> None:
     imprimir_secao(4, "TIPOS DE DADOS")
 
     print(dataframe.dtypes.to_string())
-
 
 def diagnosticar_valores_ausentes(dataframe: pd.DataFrame) -> None:
     """
@@ -118,7 +111,6 @@ def diagnosticar_valores_ausentes(dataframe: pd.DataFrame) -> None:
     )
 
     print(resumo_nulos.round(2).to_string())
-
 
 def diagnosticar_resumo_ausentes(dataframe: pd.DataFrame) -> None:
     """
@@ -144,7 +136,6 @@ def diagnosticar_resumo_ausentes(dataframe: pd.DataFrame) -> None:
     for coluna, quantidade in colunas_com_nulos.sort_values(ascending=False).items():
         percentual = (quantidade / total_linhas) * 100
         print(f"- {coluna}: {quantidade} nulos ({percentual:.2f}%)")
-
 
 def diagnosticar_valores_textuais_problematicos(dataframe: pd.DataFrame) -> None:
     """
@@ -183,7 +174,6 @@ def diagnosticar_valores_textuais_problematicos(dataframe: pd.DataFrame) -> None
     else:
         print(f"\nTotal geral de valores textuais problemáticos: {total_problematicos_geral}")
 
-
 def diagnosticar_uso_memoria(dataframe: pd.DataFrame) -> None:
     """
     Exibe o uso aproximado de memória do DataFrame.
@@ -195,7 +185,6 @@ def diagnosticar_uso_memoria(dataframe: pd.DataFrame) -> None:
 
     print(f"Uso aproximado de memória: {memoria_mb:.2f} MB")
 
-
 def exibir_previa_dados(dataframe: pd.DataFrame, qtd_linhas: int = 5) -> None:
     """
     Exibe uma prévia dos dados.
@@ -204,7 +193,6 @@ def exibir_previa_dados(dataframe: pd.DataFrame, qtd_linhas: int = 5) -> None:
     imprimir_secao(9, "PRÉVIA DOS DADOS")
 
     print(dataframe.head(qtd_linhas).to_string())
-
 
 def exibir_resumo_final(dataframe: pd.DataFrame) -> None:
     """
@@ -234,7 +222,6 @@ def exibir_resumo_final(dataframe: pd.DataFrame) -> None:
             "Observação: existem colunas duplicadas que devem ser tratadas "
             "antes das próximas etapas."
         )
-
 
 def diagnostico_inicial(dataframe: pd.DataFrame) -> None:
     """
