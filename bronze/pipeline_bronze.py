@@ -53,7 +53,6 @@ from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias imp
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicador_faixa_etaria_suspeito_informada
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import classificar_tipo_violencia_normalizado
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicadores_risco_feminicidio
-
 from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
 # ============================================================
 # para executar a bronze, rode o comando:
