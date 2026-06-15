@@ -58,6 +58,7 @@ from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
 # ============================================================
 # para executar a bronze, rode o comando:
 # python -m Pesquisa_principal.bronze
+# a branch é a main mesmo
 # ============================================================
 def pipeline_bronze() -> None:
     """
