@@ -1,8 +1,9 @@
 ================================================================================
-INÍCIO DA PIPELINE BRONZE - TRATAMENTO DOS DADOS
+INÍCIO DA PIPELINE BRONZE - TRATAMENTO INICIAL DOS DADOS
 ================================================================================
-CSV já existe. Carregando arquivo: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\dados_feminicidio\2020_primeiro_semestre.csv
+CSV já existe. Carregando arquivo: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\raw\2020_primeiro_semestre.csv
 CSV carregado com sucesso. Linhas e colunas: (372895, 32)
+
 ================================================================================
 PIPELINE BRONZE - DIAGNÓSTICO INICIAL DA BASE
 ================================================================================
@@ -50,98 +51,130 @@ Quantidade de colunas: 32
 32. Relação Vítima x Suspeito
 
 --------------------------------------------------------------------------------
-[3] TIPOS DE DADOS
+[3] COLUNAS DUPLICADAS
 --------------------------------------------------------------------------------
-Data da denúncia - Ano         int64
-Data da denúncia - Mês        object
-Data da denúncia - Dia         int64
-Tipo de violação              object
-Grupo vulnerável              object
-Espécie de violação           object
-Canal de atendimento          object
-Cenário da violação           object
-Motivação                     object
-Denúncia Emergencial          object
-Agravantes                    object
-agravantes_policiais          object
-UF                            object
-Município                     object
-Denunciante                   object
-Sexo da vítima                object
-Faixa Etária Vítima           object
-Grau instrução da vítima      object
-Raça\cor da vítima            object
-Faixa de renda da vítima      object
-País de orígem da vítima      object
-Nacionalidade da vítima       object
-deficiencia_vitima            object
-Sexo do suspeito              object
-Faixa Etária Suspeito         object
-Grau instrução do suspeito    object
-Raça\cor do suspeito          object
-Faixa de renda do suspeito    object
-País de orígem do suspeito    object
-Nacionalidade do suspeito     object
-deficiencia_suspeito          object
-Relação Vítima x Suspeito     object
-dtype: object
+Nenhuma coluna duplicada encontrada.
 
 --------------------------------------------------------------------------------
-[4] VALORES AUSENTES POR COLUNA
+[4] TIPOS DE DADOS
 --------------------------------------------------------------------------------
-Data da denúncia - Ano             0
-Data da denúncia - Mês             0
-Data da denúncia - Dia             0
-Tipo de violação                   0
-Grupo vulnerável                   0
-Espécie de violação                0
-Canal de atendimento               0
-Cenário da violação                0
-Motivação                          0
-Denúncia Emergencial               0
-Agravantes                         0
-agravantes_policiais               0
-UF                                 0
-Município                          3
-Denunciante                        0
-Sexo da vítima                     0
-Faixa Etária Vítima              690
-Grau instrução da vítima           0
-Raça\cor da vítima                 0
-Faixa de renda da vítima           0
-País de orígem da vítima           0
-Nacionalidade da vítima            0
-deficiencia_vitima                 0
-Sexo do suspeito                   0
-Faixa Etária Suspeito         190806
-Grau instrução do suspeito         0
-Raça\cor do suspeito               0
-Faixa de renda do suspeito         0
-País de orígem do suspeito         0
-Nacionalidade do suspeito          0
-deficiencia_suspeito               0
-Relação Vítima x Suspeito          0
-dtype: int64
+Data da denúncia - Ano        int64
+Data da denúncia - Mês          str
+Data da denúncia - Dia        int64
+Tipo de violação                str
+Grupo vulnerável                str
+Espécie de violação             str
+Canal de atendimento            str
+Cenário da violação             str
+Motivação                       str
+Denúncia Emergencial            str
+Agravantes                      str
+agravantes_policiais            str
+UF                              str
+Município                       str
+Denunciante                     str
+Sexo da vítima                  str
+Faixa Etária Vítima             str
+Grau instrução da vítima        str
+Raça\cor da vítima              str
+Faixa de renda da vítima        str
+País de orígem da vítima        str
+Nacionalidade da vítima         str
+deficiencia_vitima              str
+Sexo do suspeito                str
+Faixa Etária Suspeito           str
+Grau instrução do suspeito      str
+Raça\cor do suspeito            str
+Faixa de renda do suspeito      str
+País de orígem do suspeito      str
+Nacionalidade do suspeito       str
+deficiencia_suspeito            str
+Relação Vítima x Suspeito       str
 
 --------------------------------------------------------------------------------
-[5] RESUMO DE VALORES AUSENTES
+[5] VALORES AUSENTES POR COLUNA
+--------------------------------------------------------------------------------
+                            qtd_nulos  percentual_nulos
+Faixa Etária Suspeito          190806             51.17
+Faixa Etária Vítima               690              0.19
+Município                           3              0.00
+Data da denúncia - Ano              0              0.00
+Grupo vulnerável                    0              0.00
+Espécie de violação                 0              0.00
+Data da denúncia - Dia              0              0.00
+Data da denúncia - Mês              0              0.00
+Cenário da violação                 0              0.00
+Motivação                           0              0.00
+Agravantes                          0              0.00
+Denúncia Emergencial                0              0.00
+agravantes_policiais                0              0.00
+UF                                  0              0.00
+Canal de atendimento                0              0.00
+Tipo de violação                    0              0.00
+Sexo da vítima                      0              0.00
+Denunciante                         0              0.00
+Raça\cor da vítima                  0              0.00
+Grau instrução da vítima            0              0.00
+País de orígem da vítima            0              0.00
+Nacionalidade da vítima             0              0.00
+deficiencia_vitima                  0              0.00
+Faixa de renda da vítima            0              0.00
+Sexo do suspeito                    0              0.00
+Grau instrução do suspeito          0              0.00
+Raça\cor do suspeito                0              0.00
+Faixa de renda do suspeito          0              0.00
+País de orígem do suspeito          0              0.00
+Nacionalidade do suspeito           0              0.00
+deficiencia_suspeito                0              0.00
+Relação Vítima x Suspeito           0              0.00
+
+--------------------------------------------------------------------------------
+[6] RESUMO DE VALORES AUSENTES
 --------------------------------------------------------------------------------
 Total de valores nulos: 191499
 Quantidade de colunas com nulos: 3
 
 Colunas com valores nulos:
-- Município: 3 nulos (0.00%)
-- Faixa Etária Vítima: 690 nulos (0.19%)
 - Faixa Etária Suspeito: 190806 nulos (51.17%)
+- Faixa Etária Vítima: 690 nulos (0.19%)
+- Município: 3 nulos (0.00%)
 
 --------------------------------------------------------------------------------
-[6] VALORES TEXTUAIS PROBLEMÁTICOS
+[7] VALORES TEXTUAIS PROBLEMÁTICOS
 --------------------------------------------------------------------------------
-Strings vazias: 0
-Strings com 'nan' ou 'none' como texto: 0
+- Cenário da violação: 2310 valores problemáticos
+- Motivação: 156646 valores problemáticos
+- Agravantes: 115056 valores problemáticos
+- agravantes_policiais: 370937 valores problemáticos
+- UF: 640 valores problemáticos
+- Município: 1021 valores problemáticos
+- Sexo da vítima: 7614 valores problemáticos
+- Faixa Etária Vítima: 16088 valores problemáticos
+- Grau instrução da vítima: 241328 valores problemáticos
+- Raça\cor da vítima: 193927 valores problemáticos
+- Faixa de renda da vítima: 295484 valores problemáticos
+- País de orígem da vítima: 5600 valores problemáticos
+- Nacionalidade da vítima: 199676 valores problemáticos
+- deficiencia_vitima: 197075 valores problemáticos
+- Sexo do suspeito: 13857 valores problemáticos
+- Faixa Etária Suspeito: 42386 valores problemáticos
+- Grau instrução do suspeito: 293988 valores problemáticos
+- Raça\cor do suspeito: 203429 valores problemáticos
+- Faixa de renda do suspeito: 317760 valores problemáticos
+- País de orígem do suspeito: 154132 valores problemáticos
+- Nacionalidade do suspeito: 213482 valores problemáticos
+- deficiencia_suspeito: 206250 valores problemáticos
+- Relação Vítima x Suspeito: 23870 valores problemáticos
+
+Total geral de valores textuais problemáticos: 3272556
 
 --------------------------------------------------------------------------------
-[7] PRÉVIA DOS DADOS
+[8] USO DE MEMÓRIA
+--------------------------------------------------------------------------------
+Uso aproximado de memória: 711.36 MB
+
+--------------------------------------------------------------------------------
+[9] PRÉVIA DOS DADOS
 --------------------------------------------------------------------------------
    Data da denúncia - Ano Data da denúncia - Mês  Data da denúncia - Dia                 Tipo de violação                                  Grupo vulnerável        Espécie de violação               Canal de atendimento Cenário da violação                   Motivação                        Denúncia Emergencial                                                        Agravantes agravantes_policiais  UF           Município       Denunciante Sexo da vítima Faixa Etária Vítima Grau instrução da vítima Raça\cor da vítima Faixa de renda da vítima País de orígem da vítima Nacionalidade da vítima deficiencia_vitima Sexo do suspeito Faixa Etária Suspeito Grau instrução do suspeito Raça\cor do suspeito Faixa de renda do suspeito País de orígem do suspeito Nacionalidade do suspeito deficiencia_suspeito Relação Vítima x Suspeito
 0                    2020                janeiro                       1              1. VIOLÊNCIA FÍSICA                       1-Violência Contra a Mulher      AGRESSÃO/VIAS DE FATO  DENÚNCIA - ATENDIMENTO TELEFÔNICO         CASA VÍTIMA                         N/D  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE                  N/D  SP             Guarujá  A PRÓPRIA VÍTIMA       FEMININO        30 a 34 anos                      N/D                N/D                      N/D                   BRASIL                     N/D                N/D        MASCULINO                   NaN                        N/D                  N/D                        N/D                     BRASIL                       N/D                  N/D                 EX-ESPOSA
@@ -151,11 +184,11 @@ Strings com 'nan' ou 'none' como texto: 0
 4                    2020                janeiro                       1              1. VIOLÊNCIA FÍSICA  2-Violência Doméstica e Familiar Contra a Mulher             LESÃO CORPORAL  DENÚNCIA - ATENDIMENTO TELEFÔNICO    CASA DO SUSPEITO  EM RAZÃO DO SEXO BIOLÓGICO                                         NÃO                                                AGRESSOR CONHECIDO                  N/D  RJ  São João de Meriti          TERCEIRO       FEMININO        25 a 29 anos  ENSINO MÉDIO INCOMPLETO              PARDA   1 A 3 SALÁRIOS MÍNIMOS                   BRASIL           BRASILEIRO(A)                NÃO        MASCULINO                   NaN      ENSINO MÉDIO COMPLETO                PARDA     1 A 3 SALÁRIOS MÍNIMOS                        N/D             BRASILEIRO(A)                  NÃO                 EX-MARIDO
 
 --------------------------------------------------------------------------------
-[8] RESUMO FINAL DO DIAGNÓSTICO
+[10] RESUMO FINAL DO DIAGNÓSTICO
 --------------------------------------------------------------------------------
 Diagnóstico inicial concluído.
 A base foi carregada e inspecionada com sucesso.
-Observação: existem valores ausentes que deverão ser tratados na próxima camada.
+Observação: existem valores ausentes que deverão ser avaliados nas etapas de limpeza, completude e preparação dos dados.
 
 ================================================================================
 INÍCIO DA LIMPEZA DOS DADOS - CAMADA BRONZE
@@ -221,7 +254,7 @@ Coluna 'pais_origem_suspeito': 154132 valores textuais nulos convertidos para pd
 Coluna 'nacionalidade_suspeito': 213482 valores textuais nulos convertidos para pd.NA.
 Coluna 'deficiencia_suspeito': 206250 valores textuais nulos convertidos para pd.NA.
 Coluna 'relacao_vitima_suspeito': 23870 valores textuais nulos convertidos para pd.NA.
-Total de valores NULL/NAN/N/D/vazios convertidos para pd.NA: 3272556
+Total de valores textuais nulos convertidos para pd.NA: 3272556
 Coluna 'faixa_etaria_suspeito': 233192 valores nulos preenchidos com 'info_suspeito_nao_informada'.
 Coluna 'faixa_etaria_vitima': 16778 valores nulos preenchidos com 'info_vitima_nao_informada'.
 Coluna 'municipio': 1024 valores nulos preenchidos com 'municipio_nao_informado'.
@@ -316,10 +349,10 @@ Prévia dos dados limpos:
 ================================================================================
 FIM DA LIMPEZA DOS DADOS - CAMADA BRONZE
 ================================================================================
-DataFrame limpo salvo com sucesso em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\dados_feminicidio\2020_primeiro_semestre_limpo.csv
+DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\limpeza_dados\2020_primeiro_semestre_limpo.csv
 
 ================================================================================
-FIM DA PIPELINE BRONZE - TRATAMENTO DOS DADOS
+FIM DA PIPELINE BRONZE - TRATAMENTO INICIAL DOS DADOS
 ================================================================================
 
-Output bronze salvo em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\dados_feminicidio\output_bronze.txt
+Output bronze salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\outputs\output_bronze.txt

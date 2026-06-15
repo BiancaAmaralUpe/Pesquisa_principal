@@ -1,47 +1,80 @@
 ================================================================================
-INÍCIO DA PREPARAÇÃO DOS DADOS
+INÍCIO DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
 ================================================================================
+
+================================================================================
+INÍCIO DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
+================================================================================
+
+================================================================================
+VALIDAÇÃO DA COLUNA ALVO
+================================================================================
+Coluna alvo encontrada: tipo_violencia_normalizado
 
 ================================================================================
 VALIDAÇÃO DA BASE PRÉ-MODELAGEM
 ================================================================================
 Linhas: 334794
-Colunas: 24
+Colunas: 37
 Total de valores nulos: 2454869
 
 Tipos de dados:
-tipo_violacao              string[python]
-grupo_vulneravel           string[python]
-especie_violacao           string[python]
-cenario_violacao           string[python]
-motivacao                  string[python]
-denuncia_emergencial       string[python]
-agravantes                 string[python]
-agravantes_policiais       string[python]
-denunciante                string[python]
-sexo_vitima                string[python]
-faixa_etaria_vitima        string[python]
-grau_instrucao_vitima      string[python]
-faixa_renda_vitima         string[python]
-pais_origem_vitima         string[python]
-nacionalidade_vitima       string[python]
-deficiencia_vitima         string[python]
-sexo_suspeito              string[python]
-faixa_etaria_suspeito      string[python]
-grau_instrucao_suspeito    string[python]
-faixa_renda_suspeito       string[python]
-pais_origem_suspeito       string[python]
-nacionalidade_suspeito     string[python]
-deficiencia_suspeito       string[python]
-relacao_vitima_suspeito    string[python]
+tipo_violacao                             string
+grupo_vulneravel                          string
+especie_violacao                          string
+cenario_violacao                          string
+motivacao                                 string
+denuncia_emergencial                      string
+agravantes                                string
+agravantes_policiais                      string
+denunciante                               string
+sexo_vitima                               string
+faixa_etaria_vitima                       string
+grau_instrucao_vitima                     string
+faixa_renda_vitima                        string
+pais_origem_vitima                        string
+nacionalidade_vitima                      string
+deficiencia_vitima                        string
+sexo_suspeito                             string
+faixa_etaria_suspeito                     string
+grau_instrucao_suspeito                   string
+faixa_renda_suspeito                      string
+pais_origem_suspeito                      string
+nacionalidade_suspeito                    string
+deficiencia_suspeito                      string
+relacao_vitima_suspeito                   string
+agravantes_unificados                        str
+indicador_letalidade                         str
+subtipo_letalidade                           str
+suspeito_faixa_etaria_informada              str
+tipo_violencia_normalizado                   str
+risco_ameaca_morte                          bool
+risco_violencia_fisica_grave                bool
+risco_escalada_agressoes                    bool
+risco_controle_extremo                      bool
+risco_separacao_termino                     bool
+risco_violencia_sexual_associada            bool
+qtd_sinais_risco_feminicidio               int64
+classificacao_sinais_risco_feminicidio       str
 dtype: object
+
+================================================================================
+REMOÇÃO DE COLUNAS DA BASE DE TREINO
+================================================================================
+Colunas removidas do X para evitar vazamento ou redundância:
+- tipo_violacao
+- especie_violacao
+- agravantes
+- agravantes_policiais
+- indicador_letalidade
+- subtipo_letalidade
+
+Quantidade de colunas após remoção: 31
 
 ================================================================================
 PREENCHIMENTO DE NULOS COM MARCADORES
 ================================================================================
 - motivacao: 139802 nulos preenchidos com 'motivacao_nao_informada'
-- agravantes: 101191 nulos preenchidos com 'agravantes_nao_informado'
-- agravantes_policiais: 333117 nulos preenchidos com 'agravantes_policiais_nao_informado'
 - grau_instrucao_vitima: 213559 nulos preenchidos com 'instrucao_vitima_nao_informada'
 - faixa_renda_vitima: 263216 nulos preenchidos com 'renda_vitima_nao_informada'
 - pais_origem_vitima: 4655 nulos preenchidos com 'pais_origem_vitima_nao_informado'
@@ -58,14 +91,10 @@ Total de nulos após preenchimento: 0
 ================================================================================
 COLUNAS CATEGÓRICAS IDENTIFICADAS
 ================================================================================
-- tipo_violacao
 - grupo_vulneravel
-- especie_violacao
 - cenario_violacao
 - motivacao
 - denuncia_emergencial
-- agravantes
-- agravantes_policiais
 - denunciante
 - sexo_vitima
 - faixa_etaria_vitima
@@ -82,16 +111,28 @@ COLUNAS CATEGÓRICAS IDENTIFICADAS
 - nacionalidade_suspeito
 - deficiencia_suspeito
 - relacao_vitima_suspeito
+- agravantes_unificados
+- suspeito_faixa_etaria_informada
+- tipo_violencia_normalizado
+- classificacao_sinais_risco_feminicidio
 
 ================================================================================
 SEPARAÇÃO DA VARIÁVEL ALVO
 ================================================================================
-Coluna alvo: tipo_violacao
-Formato de X: (334794, 23)
+Coluna alvo: tipo_violencia_normalizado
+Formato de X: (334794, 30)
 Formato de y: (334794,)
 
 ================================================================================
-FIM DA PREPARAÇÃO DOS DADOS
+FIM DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
 ================================================================================
 
-Output da preparação salvo em: C:\Users\bia_a\mestrado\Pesquisa_principal\bronze\base\output_preparacao_dados.txt
+Formato final dos dados preparados:
+X: (334794, 30)
+y: (334794,)
+
+================================================================================
+FIM DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
+================================================================================
+
+Output da preparação salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\outputs\output_preparacao_dados.txt
