@@ -4,20 +4,43 @@
 # Responsabilidade:
 # - Registrar decisões metodológicas a partir da análise exploratória
 # - Classificar variáveis por qualidade/completude
+# - Documentar regras de exclusão da base analítica
 # - Apoiar a próxima etapa de preparação dos dados
 # ======================================================================================
 
 import pandas as pd
+from Pesquisa_principal.constants import LIMITE_BAIXA_AUSENCIA, LIMITE_VARIAVEL_CRITICA, VARIAVEIS_EXCLUSAO_BASE_ANALITICA
 
+def imprimir_secao(titulo: str) -> None:
+    """
+    Imprime uma seção formatada no terminal/output.
+    """
+
+    print("\n" + "=" * 80)
+    print(titulo)
+    print("=" * 80)
+
+def validar_dataframe(dataframe: pd.DataFrame) -> bool:
+    """
+    Verifica se o DataFrame possui dados para análise metodológica.
+    """
+
+    if dataframe.empty:
+        print("[AVISO] DataFrame vazio. Definição metodológica não executada.")
+        return False
+
+    if dataframe.shape[1] == 0:
+        print("[AVISO] DataFrame sem colunas. Definição metodológica não executada.")
+        return False
+
+    return True
 
 def classificar_colunas_por_completude(dataframe: pd.DataFrame) -> None:
     """
     Classifica as colunas de acordo com o percentual de valores ausentes.
     """
 
-    print("\n" + "=" * 80)
-    print("CLASSIFICAÇÃO METODOLÓGICA DAS VARIÁVEIS")
-    print("=" * 80)
+    imprimir_secao("CLASSIFICAÇÃO METODOLÓGICA DAS VARIÁVEIS POR COMPLETUDE")
 
     total_linhas = len(dataframe)
 
@@ -25,35 +48,42 @@ def classificar_colunas_por_completude(dataframe: pd.DataFrame) -> None:
         dataframe.isna().sum() / total_linhas
     ) * 100
 
-    baixo_risco = percentual_nulos[percentual_nulos < 5]
-
-    atencao = percentual_nulos[
-        (percentual_nulos >= 5) & (percentual_nulos < 30)
+    baixo_risco = percentual_nulos[
+        percentual_nulos < LIMITE_BAIXA_AUSENCIA
     ]
 
-    criticas = percentual_nulos[percentual_nulos >= 30]
+    atencao = percentual_nulos[
+        (percentual_nulos >= LIMITE_BAIXA_AUSENCIA)
+        & (percentual_nulos < LIMITE_VARIAVEL_CRITICA)
+    ]
 
-    print("\nVariáveis com baixa ausência (< 5%):")
+    criticas = percentual_nulos[
+        percentual_nulos >= LIMITE_VARIAVEL_CRITICA
+    ]
+
+    print(f"\nVariáveis com baixa ausência (< {LIMITE_BAIXA_AUSENCIA:.0f}%):")
     if baixo_risco.empty:
         print("- Nenhuma variável nessa faixa.")
     else:
         for coluna, percentual in baixo_risco.sort_values().items():
-            print(f"- {coluna}: {percentual:.2f}%")
+            print(f"- {coluna}: {percentual:.2f}% de ausência")
 
-    print("\nVariáveis que exigem atenção (5% a 30%):")
+    print(
+        f"\nVariáveis que exigem atenção "
+        f"({LIMITE_BAIXA_AUSENCIA:.0f}% a {LIMITE_VARIAVEL_CRITICA:.0f}%):"
+    )
     if atencao.empty:
         print("- Nenhuma variável nessa faixa.")
     else:
         for coluna, percentual in atencao.sort_values(ascending=False).items():
-            print(f"- {coluna}: {percentual:.2f}%")
+            print(f"- {coluna}: {percentual:.2f}% de ausência")
 
-    print("\nVariáveis críticas (>= 30%):")
+    print(f"\nVariáveis críticas (>= {LIMITE_VARIAVEL_CRITICA:.0f}%):")
     if criticas.empty:
         print("- Nenhuma variável crítica.")
     else:
         for coluna, percentual in criticas.sort_values(ascending=False).items():
-            print(f"- {coluna}: {percentual:.2f}%")
-
+            print(f"- {coluna}: {percentual:.2f}% de ausência")
 
 def registrar_observacoes_metodologicas() -> None:
     """
@@ -63,156 +93,129 @@ def registrar_observacoes_metodologicas() -> None:
     da base analítica. Elas não representam conclusões finais sobre o fenômeno.
     """
 
-    print("\n" + "=" * 80)
-    print("OBSERVAÇÕES METODOLÓGICAS PRELIMINARES")
-    print("=" * 80)
+    imprimir_secao("OBSERVAÇÕES METODOLÓGICAS PRELIMINARES")
 
-    print(
-        "- Valores como 'N/D', 'NULL', 'NAN', 'None' e campos vazios foram "
-        "tratados como ausência de informação para padronizar a representação "
-        "de dados não disponíveis na base."
-    )
+    observacoes = [
+        (
+            "Valores como 'N/D', 'NULL', 'NAN', 'None' e campos vazios foram "
+            "tratados como ausência de informação para padronizar a representação "
+            "de dados não disponíveis na base."
+        ),
+        (
+            "A categoria 'info_suspeito_nao_informada' foi mantida como marcador "
+            "operacional para registros em que a faixa etária do suspeito não estava "
+            "disponível."
+        ),
+        (
+            "A categoria 'info_suspeito_nao_informada' não deve ser interpretada "
+            "como característica social, demográfica ou comportamental do suspeito."
+        ),
+        (
+            "A categoria 'info_vitima_nao_informada' foi mantida como marcador "
+            "operacional para registros sem faixa etária informada da vítima."
+        ),
+        (
+            "As variáveis geográficas foram removidas da base analítica porque o "
+            "objetivo atual do estudo não envolve análise espacial."
+        ),
+        (
+            "A remoção das variáveis geográficas busca reduzir risco de overfitting, "
+            "alta cardinalidade e enviesamento regional na etapa de modelagem."
+        ),
+        (
+            "As variáveis temporais derivadas da data da denúncia foram removidas "
+            "por não fazerem parte do recorte metodológico atual."
+        ),
+        (
+            "Registros com ausência em 'cenario_violacao', 'sexo_vitima', "
+            "'sexo_suspeito' e 'relacao_vitima_suspeito' foram tratados como ruído "
+            "analítico e removidos da base de análise."
+        ),
+        (
+            "Variáveis com alto percentual de ausência foram marcadas para avaliação "
+            "antes de qualquer uso em score, análise inferencial ou modelagem preditiva."
+        ),
+        (
+            "A coluna 'agravantes_policiais' apresentou percentual elevado de ausência, "
+            "mas foi mantida para análise específica por possuir significado analítico "
+            "nos registros preenchidos."
+        ),
+        (
+            "Variáveis sociodemográficas sensíveis devem ser analisadas com cautela. "
+            "Elas podem ser relevantes para análise social descritiva, mas podem ser "
+            "removidas da modelagem para reduzir risco de viés."
+        ),
+    ]
 
-    print(
-        "- A categoria 'info_suspeito_nao_informada' foi mantida como marcador "
-        "operacional para registros em que a faixa etária do suspeito não estava "
-        "disponível."
-    )
+    for observacao in observacoes:
+        print(f"- {observacao}")
 
-    print(
-        "- A categoria 'info_suspeito_nao_informada' não deve ser interpretada "
-        "como característica social, demográfica ou comportamental do suspeito."
-    )
-
-    print(
-        "- A categoria 'info_vitima_nao_informada' foi mantida como marcador "
-        "operacional para registros sem faixa etária informada da vítima."
-    )
-
-    print(
-        "- As variáveis geográficas 'uf' e 'municipio' foram removidas da base "
-        "analítica, pois o objetivo do estudo não envolve análise espacial."
-    )
-
-    print(
-        "- A remoção das variáveis geográficas busca reduzir risco de overfitting, "
-        "alta cardinalidade e enviesamento regional na etapa de modelagem."
-    )
-
-    print(
-        "- As variáveis temporais 'data_denuncia_ano', 'data_denuncia_mes' e "
-        "'data_denuncia_dia' foram removidas da base analítica por não fazerem "
-        "parte do recorte metodológico atual."
-    )
-
-    print(
-        "- A variável 'canal_atendimento' foi removida por representar o meio de "
-        "entrada da denúncia, e não uma característica diretamente associada ao "
-        "fenômeno analisado."
-    )
-
-    print(
-        "- Registros com ausência em 'cenario_violacao', 'sexo_vitima', "
-        "'sexo_suspeito' e 'relacao_vitima_suspeito' foram tratados como ruído "
-        "analítico e removidos da base de análise."
-    )
-
-    print(
-        "- Variáveis com alto percentual de ausência foram marcadas para avaliação "
-        "antes de qualquer uso em score, análise inferencial ou modelagem preditiva."
-    )
-
-    print(
-        "- A coluna 'agravantes_policiais' apresentou percentual muito elevado de "
-        "ausência, mas foi mantida para análise específica por possuir significado "
-        "analítico relevante nos registros preenchidos."
-    )
-
-    print(
-        "- Variáveis sociodemográficas com alta ausência, como renda, escolaridade, "
-        "raça/cor, nacionalidade e deficiência, devem ser analisadas com cautela "
-        "para evitar interpretações frágeis ou enviesadas."
-    )
-
-
-def registrar_variaveis_excluidas() -> None:
+def registrar_variaveis_excluidas(dataframe: pd.DataFrame) -> None:
     """
-    Registra variáveis definidas para exclusão nas próximas etapas.
+    Registra variáveis definidas para exclusão da base analítica/modelagem.
+
+    A exclusão não significa remoção da camada bronze original.
     """
 
-    print("\n" + "=" * 80)
-    print("VARIÁVEIS DEFINIDAS PARA EXCLUSÃO")
-    print("=" * 80)
+    imprimir_secao("VARIÁVEIS DEFINIDAS PARA EXCLUSÃO DA BASE ANALÍTICA")
 
     print("\nAs variáveis abaixo foram classificadas para exclusão:")
 
-    print("\n- uf")
-    print(
-        "  Motivo: variável geográfica removida para reduzir risco de "
-        "overfitting e enviesamento regional."
-    )
+    for coluna, motivo in VARIAVEIS_EXCLUSAO_BASE_ANALITICA.items():
+        status = "encontrada na base" if coluna in dataframe.columns else "não encontrada na base atual"
 
-    print("\n- municipio")
-    print(
-        "  Motivo: variável geográfica com alta cardinalidade e sem aderência "
-        "ao objetivo atual do estudo."
-    )
-
-    print("\n- data_denuncia_ano")
-    print(
-        "  Motivo: variável temporal fora do recorte metodológico atual."
-    )
-
-    print("\n- data_denuncia_mes")
-    print(
-        "  Motivo: variável temporal fora do recorte metodológico atual."
-    )
-
-    print("\n- data_denuncia_dia")
-    print(
-        "  Motivo: variável temporal fora do recorte metodológico atual."
-    )
-
-    print("\n- canal_atendimento")
-    print(
-        "  Motivo: variável relacionada ao meio de entrada da denúncia, sem "
-        "uso previsto na modelagem."
-    )
-
-    print("\n- nacionalidade_suspeito")
-    print(
-        "  Motivo: variável sensível com baixo potencial analítico e risco de "
-        "interpretação enviesada."
-    )
-
-    print("\n- pais_origem_suspeito")
-    print(
-        "  Motivo: variável sensível e sujeita a vieses interpretativos."
-    )
-
-    print("\n- raca_cor_suspeito")
-    print(
-        "  Motivo: atributo sensível que pode introduzir vieses na construção "
-        "de indicadores e modelos."
-    )
-
-    print("\n- raca_cor_vitima")
-    print(
-        "  Motivo: atributo sensível que pode introduzir vieses na construção "
-        "de indicadores e modelos."
-    )
+        print(f"\n- {coluna}")
+        print(f"  Status: {status}")
+        print(f"  Motivo: {motivo}")
 
     print(
-        "\nObservação: a exclusão é aplicada na base analítica, preservando a "
-        "camada bronze como registro rastreável dos dados tratados."
+        "\nObservação: a exclusão é aplicada na base analítica/modelagem, "
+        "preservando a camada bronze como registro rastreável dos dados tratados."
     )
 
+def registrar_recomendacoes_para_proxima_etapa() -> None:
+    """
+    Registra recomendações para a próxima etapa da pipeline.
+    """
+
+    imprimir_secao("RECOMENDAÇÕES PARA A PRÓXIMA ETAPA")
+
+    recomendacoes = [
+        (
+            "Preservar a base bronze tratada como camada rastreável, sem aplicar "
+            "balanceamento ou transformações irreversíveis."
+        ),
+        (
+            "Aplicar remoções metodológicas apenas na base analítica usada para "
+            "estatística, score ou modelagem."
+        ),
+        (
+            "Avaliar variáveis críticas de completude antes de incluí-las em modelos "
+            "preditivos."
+        ),
+        (
+            "Documentar separadamente quais variáveis foram removidas por baixa qualidade, "
+            "por alto percentual de nulos, por alta cardinalidade ou por risco de viés."
+        ),
+        (
+            "Manter variáveis sensíveis disponíveis para análise descritiva quando forem "
+            "relevantes para o fenômeno social estudado, mas evitar seu uso direto na "
+            "modelagem preditiva sem justificativa metodológica."
+        ),
+    ]
+
+    for recomendacao in recomendacoes:
+        print(f"- {recomendacao}")
 
 def definir_metodologia_analise(dataframe: pd.DataFrame) -> None:
     """
     Executa a definição metodológica inicial com base na qualidade da base.
     """
 
+    if not validar_dataframe(dataframe):
+        return
+
     classificar_colunas_por_completude(dataframe)
     registrar_observacoes_metodologicas()
-    registrar_variaveis_excluidas()
+    registrar_variaveis_excluidas(dataframe)
+    registrar_recomendacoes_para_proxima_etapa()
