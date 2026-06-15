@@ -57,7 +57,6 @@ def ajustar_cabecalho_dataframe(dataframe: pd.DataFrame) -> pd.DataFrame:
 
     return dataframe
 
-
 def transformar_xlsx_em_csv(
     caminho_xlsx: str | Path,
     caminho_csv: str | Path,
@@ -66,7 +65,6 @@ def transformar_xlsx_em_csv(
     """
     Lê um arquivo Excel, ajusta o cabeçalho real e salva uma versão em CSV.
     """
-
     caminho_xlsx = Path(caminho_xlsx)
     caminho_csv = Path(caminho_csv)
 
@@ -110,7 +108,6 @@ def carregar_csv_existente(caminho_csv: str | Path) -> pd.DataFrame:
     print(f"CSV carregado com sucesso. Linhas e colunas: {dataframe.shape}")
 
     return dataframe
-
 
 def csv_esta_com_cabecalho_invalido(caminho_csv: str | Path) -> bool:
     """
@@ -160,7 +157,6 @@ def csv_esta_com_cabecalho_invalido(caminho_csv: str | Path) -> bool:
 
     return False
 
-
 def csv_esta_desatualizado(caminho_xlsx: str | Path, caminho_csv: str | Path) -> bool:
     """
     Verifica se o XLSX foi modificado depois do CSV.
@@ -181,7 +177,6 @@ def csv_esta_desatualizado(caminho_xlsx: str | Path, caminho_csv: str | Path) ->
     data_modificacao_csv = caminho_csv.stat().st_mtime
 
     return data_modificacao_xlsx > data_modificacao_csv
-
 
 def deve_reprocessar_csv(
     caminho_xlsx: str | Path,
@@ -212,7 +207,6 @@ def deve_reprocessar_csv(
 
     return False
 
-
 def transformar_base_feminicidio(forcar_reprocessamento: bool = False) -> pd.DataFrame:
     """
     Carrega a base de feminicídio.
@@ -238,3 +232,4 @@ def transformar_base_feminicidio(forcar_reprocessamento: bool = False) -> pd.Dat
         )
 
     return carregar_csv_existente(ARQUIVO_CSV_FEMINICIDIO)
+    
