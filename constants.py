@@ -66,6 +66,11 @@ ARQUIVO_CSV_FEMINICIDIO_ANALITICO = (
 ARQUIVO_CSV_FEMINICIDIO_NORMALIZADO = (
     BRONZE_NORMALIZACAO_DIR / "2020_primeiro_semestre_normalizado.csv"
 )
+
+ARQUIVO_CSV_LIMPO_TESTE_TREINO = (
+    BRONZE_INTERMEDIARIOS_DIR / "df_limpo_teste_treino.csv"
+)
+
 # ======================================================================================
 # Outputs textuais - camada bronze
 # ======================================================================================
@@ -161,7 +166,6 @@ COLUNAS_CATEGORICAS_INTERESSE = [
     "tipo_violencia_normalizado",
     "grupo_vulneravel",
     "especie_violacao",
-    "cenario_violacao",
     "denuncia_emergencial",
     "sexo_vitima",
     "faixa_etaria_vitima",
@@ -238,27 +242,14 @@ COLUNAS_ENVIESAMENTO_REMOVER = [
 
 COLUNA_ALVO_MODELAGEM = "tipo_violencia_normalizado"
 COLUNAS_REMOVER_BASE_TREINO = [
-    # Colunas originais ou diretamente derivadas do alvo
-    "tipo_violacao",
-    "especie_violacao",
+    # Colunas de faixa etária removidas por decisão metodológica
+    "suspeito_faixa_etaria_informada",
+    "faixa_etaria_vitima",
+    "faixa_etaria_suspeito",
 
-    # Colunas substituídas por agravantes_unificados
+    # Colunas originais substituídas por agravantes_unificados
     "agravantes",
     "agravantes_policiais",
-
-    # Colunas derivadas da espécie da violação
-    "indicador_letalidade",
-    "subtipo_letalidade",
-
-    # Indicadores de risco usados para análise, mas removidos do treino
-    "risco_ameaca_morte",
-    "risco_violencia_fisica_grave",
-    "risco_escalada_agressoes",
-    "risco_controle_extremo",
-    "risco_separacao_termino",
-    "risco_violencia_sexual_associada",
-    "qtd_sinais_risco_feminicidio",
-    "classificacao_sinais_risco_feminicidio",
 ]
 
 # ======================================================================================
@@ -481,4 +472,55 @@ ESPECIES_MANTIDAS_COMO_OUTRAS_VIOLENCIAS = [
     "CIDADANIA",
     "RACISMO",
     "OUTROS",
+]
+
+COLUNAS_MANTER_BASE_TREINO_TESTE = [
+    "tipo_violacao",
+    "grupo_vulneravel",
+    "especie_violacao",
+    "motivacao",
+    "denuncia_emergencial",
+    "agravantes_unificados",
+    "sexo_vitima",
+    "grau_instrucao_vitima",
+    "faixa_renda_vitima",
+    "pais_origem_vitima",
+    "nacionalidade_vitima",
+    "deficiencia_vitima",
+    "sexo_suspeito",
+    "grau_instrucao_suspeito",
+    "faixa_renda_suspeito",
+    "pais_origem_suspeito",
+    "nacionalidade_suspeito",
+    "deficiencia_suspeito",
+    "relacao_vitima_suspeito",
+    "indicador_letalidade",
+    "subtipo_letalidade",
+    "tipo_violencia_normalizado",
+    "risco_ameaca_morte",
+    "risco_violencia_fisica_grave",
+    "risco_escalada_agressoes",
+    "risco_controle_extremo",
+    "risco_separacao_termino",
+    "risco_violencia_sexual_associada",
+    "qtd_sinais_risco_feminicidio",
+    "classificacao_sinais_risco_feminicidio",
+]
+
+COLUNAS_EXIGIR_PREENCHIMENTO_TREINO = COLUNAS_MANTER_BASE_TREINO_TESTE
+
+MAPEAMENTO_CORRECAO_ESPECIE_VIOLACAO = {
+"TORTURA PSÍ QUICA": "TORTURA PSÍQUICA",
+"CRIMES CONTRA A SEGURANÇA PSÍ QUICA": "CRIMES CONTRA A SEGURANÇA PSÍQUICA",
+"LIBERDADE SEXUAL PSÍ QUICA - ASSÉDIO SEXUAL": "LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL",
+"LIBERDADE SEXUAL PSÍ QUICA - ABUSO SEXUAL PSÍQUICO": "LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO",
+}
+
+ESPECIES_REMOVER_BASE_TREINO_TESTE = [
+"MEMÓRIA E VERDADE",
+"CRIMES CONTRA O MEIO AMBIENTE",
+"NACIONALIDADE",
+"PROPRIEDADE - PATRIMÔNIO GENÉTICO",
+"EXPLORAÇÃO DO TRABALHO IDOSO",
+"EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA",
 ]
