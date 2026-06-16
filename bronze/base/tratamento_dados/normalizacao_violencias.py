@@ -8,6 +8,7 @@
 # - Preservar rastreabilidade das colunas originais
 # ======================================================================================
 
+from Pesquisa_principal.constants import MAPEAMENTO_CORRECAO_ESPECIE_VIOLACAO
 import pandas as pd
 
 from Pesquisa_principal.constants import (
@@ -171,6 +172,33 @@ def criar_indicador_faixa_etaria_suspeito_informada(
         .value_counts(dropna=False)
         .to_string()
     )
+
+    return dataframe
+
+def corrigir_especie_violacao(
+    dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Corrige variações textuais identificadas na coluna especie_violacao.
+    """
+
+    dataframe = dataframe.copy()
+
+    imprimir_secao("CORREÇÃO TEXTUAL DA ESPÉCIE DE VIOLAÇÃO")
+
+    if COLUNA_ESPECIE_VIOLACAO not in dataframe.columns:
+        print(f"[AVISO] Coluna deletada: {COLUNA_ESPECIE_VIOLACAO}")
+        return dataframe
+
+    dataframe[COLUNA_ESPECIE_VIOLACAO] = (
+        dataframe[COLUNA_ESPECIE_VIOLACAO]
+        .replace(MAPEAMENTO_CORRECAO_ESPECIE_VIOLACAO)
+        .astype("string")
+    )
+
+    print("Correções aplicadas em especie_violacao:")
+    for valor_antigo, valor_novo in MAPEAMENTO_CORRECAO_ESPECIE_VIOLACAO.items():
+        print(f"- {valor_antigo} -> {valor_novo}")
 
     return dataframe
 

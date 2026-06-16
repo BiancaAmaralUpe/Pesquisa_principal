@@ -10,6 +10,8 @@
 # - Executar análises da base tratada
 # - Preparar dados para etapas futuras de modelagem
 # ======================================================================================
+from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import corrigir_especie_violacao
+from Pesquisa_principal.constants import ARQUIVO_CSV_LIMPO_TESTE_TREINO
 from Pesquisa_principal.constants import ARQUIVO_OUTPUT_BRONZE, ARQUIVO_OUTPUT_ANALISE_DADOS, ARQUIVO_CSV_FEMINICIDIO_LIMPO, ARQUIVO_CSV_FEMINICIDIO_ANALITICO, ARQUIVO_OUTPUT_PREPARACAO_DADOS
 # pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
@@ -49,7 +51,6 @@ from Pesquisa_principal.bronze.base.tratamento_dados.preparacao_dados import pre
 
 # pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import unificar_agravantes, classificar_letalidade
-from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import classificar_letalidade
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicador_faixa_etaria_suspeito_informada
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import classificar_tipo_violencia_normalizado
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicadores_risco_feminicidio
@@ -112,13 +113,13 @@ def pipeline_bronze() -> None:
 
         dataframe_analise = preparar_base_analitica(dataframe_limpo)
 
+        dataframe_analise = corrigir_especie_violacao(dataframe_analise)
         dataframe_analise = unificar_agravantes(dataframe_analise)
         dataframe_analise = classificar_letalidade(dataframe_analise)
         dataframe_analise = criar_indicador_faixa_etaria_suspeito_informada(dataframe_analise)
         dataframe_analise = classificar_tipo_violencia_normalizado(dataframe_analise)
         dataframe_analise = criar_indicadores_risco_feminicidio(dataframe_analise)
 
-        executar_analise_exploratoria(dataframe_analise)
         salvar_dataframe_limpo(
             dataframe=dataframe_analise,
             caminho_saida=ARQUIVO_CSV_FEMINICIDIO_ANALITICO,
@@ -165,26 +166,32 @@ def pipeline_bronze() -> None:
 
         print(f"\nOutput da análise salvo em: {ARQUIVO_OUTPUT_ANALISE_DADOS}")
 
-    # ==========================================================================
-    # PREPARAÇÃO PARA MODELAGEM
-    # ==========================================================================
+    # ======================================================================================
+    # PREPARAÇÃO DA BASE DE TREINO E TESTE
+    # ======================================================================================
 
     with OutputTerminalEArquivo(ARQUIVO_OUTPUT_PREPARACAO_DADOS):
-        print("=" * 80)
-        print("INÍCIO DA PREPARAÇÃO DOS DADOS PARA MODELAGEM")
-        print("=" * 80)
-
         X, y = preparar_dados_modelagem(
             dataframe=dataframe_analise,
             coluna_alvo=COLUNA_ALVO_MODELAGEM,
         )
 
-        print("\nFormato final dos dados preparados:")
+        dataframe_teste_treino = X.copy()
+        dataframe_teste_treino[COLUNA_ALVO_MODELAGEM] = y
+
+        salvar_dataframe_limpo(
+            dataframe=dataframe_teste_treino,
+            caminho_saida=ARQUIVO_CSV_LIMPO_TESTE_TREINO,
+        )
+
+        print("\nBase preparada para análise/modelagem.")
         print(f"X: {X.shape}")
         print(f"y: {y.shape}")
+        print(f"Base treino/teste: {dataframe_teste_treino.shape}")
+        print(f"\nArquivo salvo em: {ARQUIVO_CSV_LIMPO_TESTE_TREINO}")
 
         print("\n" + "=" * 80)
-        print("FIM DA PREPARAÇÃO DOS DADOS PARA MODELAGEM")
+        print("FIM DA PREPARAÇÃO DA BASE DE TREINO E TESTE")
         print("=" * 80)
 
         print(f"\nOutput da preparação salvo em: {ARQUIVO_OUTPUT_PREPARACAO_DADOS}")

@@ -9,11 +9,14 @@
 # - Identificar colunas categóricas
 # - Validar estrutura final antes de encoding/normalização
 # ======================================================================================
-
+from Pesquisa_principal.constants import ESPECIES_REMOVER_BASE_TREINO_TESTE
 import pandas as pd
 from Pesquisa_principal.bronze.analise_dados.definir_metodologia import validar_dataframe
 from Pesquisa_principal.bronze.analise_dados.analise_completude import imprimir_secao
-from Pesquisa_principal.constants import COLUNAS_REMOVER_BASE_TREINO, MARCADORES_NULOS_MODELAGEM
+from Pesquisa_principal.constants import COLUNAS_MANTER_BASE_TREINO_TESTE
+from Pesquisa_principal.constants import COLUNAS_EXIGIR_PREENCHIMENTO_TREINO
+from Pesquisa_principal.constants import MARCADORES_NULOS_MODELAGEM
+from Pesquisa_principal.constants import COLUNAS_REMOVER_BASE_TREINO
 
 def validar_coluna_alvo(
     dataframe: pd.DataFrame,
@@ -103,6 +106,48 @@ def preencher_nulos_com_marcadores(
     print(f"\nTotal de nulos após preenchimento: {dataframe.isna().sum().sum()}")
 
     return dataframe
+def remover_registros_com_nulos_em_colunas_obrigatorias(
+    dataframe: pd.DataFrame,
+    colunas_obrigatorias: list[str],
+) -> pd.DataFrame:
+    """
+    Remove registros que possuem valores nulos nas colunas obrigatórias
+    para a base de treino e teste.
+    """
+
+    dataframe = dataframe.copy()
+
+    imprimir_secao("REMOÇÃO DE REGISTROS COM NULOS EM COLUNAS OBRIGATÓRIAS")
+
+    colunas_existentes = [
+        coluna for coluna in colunas_obrigatorias
+        if coluna in dataframe.columns
+    ]
+
+    colunas_ausentes = [
+        coluna for coluna in colunas_obrigatorias
+        if coluna not in dataframe.columns
+    ]
+
+    for coluna in colunas_ausentes:
+        print(f"[AVISO] Coluna deletada: {coluna}")
+
+    linhas_antes = len(dataframe)
+
+    dataframe = dataframe.dropna(subset=colunas_existentes)
+
+    linhas_depois = len(dataframe)
+    linhas_removidas = linhas_antes - linhas_depois
+
+    print(f"Linhas antes: {linhas_antes}")
+    print(f"Linhas depois: {linhas_depois}")
+    print(f"Linhas removidas: {linhas_removidas}")
+
+    print("\nColunas exigidas com preenchimento:")
+    for coluna in colunas_existentes:
+        print(f"- {coluna}")
+
+    return dataframe
 
 def identificar_colunas_categoricas(
     dataframe: pd.DataFrame,
@@ -144,6 +189,80 @@ def separar_variavel_alvo(
 
     return X, y
 
+def selecionar_colunas_base_treino_teste(
+    dataframe: pd.DataFrame,
+    colunas_manter: list[str],
+) -> pd.DataFrame:
+    """
+    Seleciona somente as colunas definidas para a base de treino e teste.
+    """
+
+    dataframe = dataframe.copy()
+
+    imprimir_secao("SELEÇÃO DE COLUNAS DA BASE DE TREINO E TESTE")
+
+    colunas_existentes = [
+        coluna
+        for coluna in colunas_manter
+        if coluna in dataframe.columns
+    ]
+
+    colunas_ausentes = [
+        coluna
+        for coluna in colunas_manter
+        if coluna not in dataframe.columns
+    ]
+
+    for coluna in colunas_ausentes:
+        print(f"[AVISO] Coluna deletada: {coluna}")
+
+    dataframe = dataframe[colunas_existentes]
+
+    print("Colunas mantidas no df_limpo_teste_treino.csv:")
+    for coluna in colunas_existentes:
+        print(f"- {coluna}")
+
+    print(f"\nQuantidade de colunas mantidas: {dataframe.shape[1]}")
+
+    return dataframe
+
+def remover_especies_indesejadas_base_treino_teste(
+    dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Remove da base de treino e teste espécies de violação que foram
+    descartadas por decisão metodológica.
+    """
+
+    dataframe = dataframe.copy()
+
+    imprimir_secao("REMOÇÃO DE ESPÉCIES INDESEJADAS DA BASE DE TREINO E TESTE")
+
+    coluna_especie = "especie_violacao"
+
+    if coluna_especie not in dataframe.columns:
+        print(f"[AVISO] Coluna deletada: {coluna_especie}")
+        return dataframe
+
+    linhas_antes = len(dataframe)
+
+    dataframe = dataframe[
+        ~dataframe[coluna_especie].isin(ESPECIES_REMOVER_BASE_TREINO_TESTE)
+    ].copy()
+
+    linhas_depois = len(dataframe)
+    linhas_removidas = linhas_antes - linhas_depois
+
+    print(f"Linhas antes: {linhas_antes}")
+    print(f"Linhas depois: {linhas_depois}")
+    print(f"Linhas removidas: {linhas_removidas}")
+
+    print("\nEspécies removidas:")
+    for especie in ESPECIES_REMOVER_BASE_TREINO_TESTE:
+        print(f"- {especie}")
+
+    return dataframe
+
 def preparar_dados_modelagem(
     dataframe: pd.DataFrame,
     coluna_alvo: str,
@@ -164,8 +283,24 @@ def preparar_dados_modelagem(
 
     validar_base_pre_modelagem(dataframe)
 
+    dataframe_modelagem = dataframe.copy()
+
+    dataframe_modelagem = selecionar_colunas_base_treino_teste(
+        dataframe=dataframe_modelagem,
+        colunas_manter=COLUNAS_MANTER_BASE_TREINO_TESTE,
+    )
+
+    dataframe_modelagem = remover_especies_indesejadas_base_treino_teste(
+        dataframe=dataframe_modelagem,
+    )
+
+    dataframe_modelagem = remover_registros_com_nulos_em_colunas_obrigatorias(
+        dataframe=dataframe_modelagem,
+        colunas_obrigatorias=COLUNAS_EXIGIR_PREENCHIMENTO_TREINO,
+    )
+
     dataframe_modelagem = remover_colunas_base_treino(
-        dataframe=dataframe,
+        dataframe=dataframe_modelagem,
         coluna_alvo=coluna_alvo,
     )
 

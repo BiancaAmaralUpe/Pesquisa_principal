@@ -54,6 +54,15 @@ Linhas finais: 334794
 Colunas finais: 24
 
 ================================================================================
+CORREÇÃO TEXTUAL DA ESPÉCIE DE VIOLAÇÃO
+================================================================================
+Correções aplicadas em especie_violacao:
+- TORTURA PSÍ QUICA -> TORTURA PSÍQUICA
+- CRIMES CONTRA A SEGURANÇA PSÍ QUICA -> CRIMES CONTRA A SEGURANÇA PSÍQUICA
+- LIBERDADE SEXUAL PSÍ QUICA - ASSÉDIO SEXUAL -> LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL
+- LIBERDADE SEXUAL PSÍ QUICA - ABUSO SEXUAL PSÍQUICO -> LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO
+
+================================================================================
 UNIFICAÇÃO DE AGRAVANTES
 ================================================================================
 Coluna criada: agravantes_unificados
@@ -188,386 +197,6 @@ risco_baixo               176138
 sem_sinal_identificado     96578
 risco_moderado             57159
 risco_elevado               4919
-
-================================================================================
-INÍCIO DA ANÁLISE EXPLORATÓRIA
-================================================================================
-
---------------------------------------------------------------------------------
-Cruzamento: tipo_violacao x denuncia_emergencial
---------------------------------------------------------------------------------
-denuncia_emergencial                                    NÃO  RISCO IMINENTE DE MORTE DA VÍTIMA  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  VÍTIMA EM SANGRAMENTO
-tipo_violacao                                                                                                                                                    
-1. VIOLÊNCIA FÍSICA                                   53.83                               4.78                                       40.79                   0.60
-2. VIOLÊNCIA PSICOLÓGICA                              53.18                               3.91                                       42.56                   0.35
-3. CRIMES CONTRA A VIDA                               49.91                               8.26                                       40.77                   1.06
-4. AGRESSÕES QUE VIOLAM A HONRA                       51.92                               4.92                                       42.79                   0.37
-5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE         52.69                               5.30                                       41.68                   0.33
-6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  41.59                               4.12                                       54.03                   0.25
-7. VIOLAÇÕES GERAIS                                   51.28                               3.81                                       44.62                   0.29
-
---------------------------------------------------------------------------------
-Cruzamento: tipo_violacao x relacao_vitima_suspeito
---------------------------------------------------------------------------------
-relacao_vitima_suspeito                               AGENTE PENITENCIÁRIO  AVÔ(Ó)  BISAVÔ(Ó)  COMPANHEIRO(A)  CUIDADOR(A)  CUNHADO(A)  DESCONHECIDO(A)  DIREITOR(A) DA UNIDADE PRISIONAL  DIRETOR(A)  ENTEADO(A)  EX- NAMORADO(A)  EX-COMPANHEIRO(A)  EX-ESPOSA  EX-MARIDO  FILHO(A)  FUNCIONÁRIO(A)  HIERARQUICAMENTE INFERIOR  HIERARQUICAMENTE SUPERIOR  INTERNO(A)  IRMÃO(Ã)  LÍDER RELIGIOSO  MARIDO/ ESPOSA  MEMBRO  MESMO NÍVEL HIERÁRQUICO  NAMORADO(A)  NETO(A)  PADRASTO/ MADRASTA  PADRINHO/ MADRINHA  PAI/ MÃE  PRIMO(A)  PROFESSOR(A)  SEM RELAÇÃO  SOBRINHO(A)  SOGRO(A)  TIO(A)  TRISAVÔ(Ó)  VIZINHO(A)
-tipo_violacao                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-1. VIOLÊNCIA FÍSICA                                                      8     101         19           19889           80         740              482                                 5          53         127             2978               7657         71       6251      3728              56                          6                        281           8      3236               24           19402     303                       27         1985      114                 540                  30      2697       272            18         2320          382       358     601           0        2299
-2. VIOLÊNCIA PSICOLÓGICA                                                31     179         35           26625          103        1753             1594                                11          92         302             6764              14362        145      13927      5937             198                         44                        862          19      5764              120           29333     585                      122         2621      182                1043                  47      4625       744            80         7460          713       914    1347           3        8040
-3. CRIMES CONTRA A VIDA                                                  0       6          0            2141            4          46               45                                 0           6          11              363               1044          8        865       196               3                          0                         21           0       288                4            2014      19                        3          191        3                  33                   2       192        31             2          194           27        21      36           0         221
-4. AGRESSÕES QUE VIOLAM A HONRA                                         11      74         11           11119           43         954              620                                 2          44         130             3199               6777         71       6604      2079              67                         21                        357          12      2615               40           12275     252                       65         1046       62                 394                  17      1724       341            27         3292          315       460     497           1        4009
-5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE                            3      17          4            2839           21         110              148                                 0          13          13              536               1093         22       1154       509              20                          1                        107           5       422                8            3162      62                        6          245       13                  88                   3       490        47             3          534           46        74     138           0         461
-6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA                     1       2          1             501            3          30               18                                 0           4           2              106                275          8        517       193               3                          2                         14           4       140                3             780      19                        0           33        3                  24                   1        82        17             0          108           14        22      22           0         200
-7. VIOLAÇÕES GERAIS                                                     12      71         10            6459           38         465              543                                 1          37          66             1767               3527         33       3853      1581              44                         19                        310          13      1714               39            8171     165                       55          700       46                 498                  16      1285       219            39         2545          222       245     567           0        2309
-
---------------------------------------------------------------------------------
-Cruzamento: tipo_violacao x cenario_violacao
---------------------------------------------------------------------------------
-cenario_violacao                                      AMBIENTE DE LAZER  AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)  BAR, LANCHONETE, RESTAURANTE  CASA DE FAMILIAR  CASA DE TERCEIRO  CASA DO SUSPEITO  CASA NOTURNA  CASA ONDE RESIDE A VÍTIMA E O SUSPEITO  CASA VÍTIMA  CENTRO DE REFERÊNCIA  DELEGACIA DE POLÍCIA  DELEGACIA DE POLÍCIA COMO UNIDADE PRISIONAL  ESTABELECIMENTO DE ENSINO  ESTABELECIMENTO DE SAÚDE  EVENTO PÚBLICO  LOCAL DE TRABALHO DA VÍTIMA  LOCAL DE TRABALHO DO AGRESSOR  LOJA  MANICÔMIO/HOSPITAL PSIQUIÁTRICO/CASA DE SAÚDE MENTAL  METRÔ OU TREM  OUTROS  SERVIÇO DE ABRIGAMENTO  SHOPPING  TAXI  TRANSPORTE AÉREO  TRANSPORTE MARÍTIMO  TRANSPORTE MONITORADO POR APLICATIVO  UNIDADE PRISIONAL  VIA PÚBLICA  ÓRGÃO PÚBLICO  ÔNIBUS
-tipo_violacao                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-1. VIOLÊNCIA FÍSICA                                                 178                                                 1354                           297              1055               566              4727           105                                   43872        20412                     5                    33                                            0                         49                       220              38                          453                            156    72                                                    71             10     584                      50         5     3                 0                    1                                     5                 14         2690             99      24
-2. VIOLÊNCIA PSICOLÓGICA                                            272                                                 6950                           455              1827               949              7426           132                                   64993        44034                    12                    75                                            8                        167                       376              56                         1492                            455   214                                                    93             22    1233                      89        19    10                 1                    1                                    17                 54         4902            283     109
-3. CRIMES CONTRA A VIDA                                              11                                                  181                            21               142                53               511            26                                    4058         2501                     0                     0                                            0                          4                        16               2                           44                             14    10                                                     6              1      96                       3         0     0                 0                    0                                     1                  1          326             10       2
-4. AGRESSÕES QUE VIOLAM A HONRA                                     107                                                 3616                           219               857               425              3519            64                                   27164        19535                     8                    28                                            8                         41                       111              28                          674                            200   102                                                    20              7     492                      34         7     1                 0                    1                                     9                 17         2168            130      35
-5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE                        26                                                  379                            42               156                61               645            52                                    7002         3430                     1                     1                                            4                          6                        31               0                          114                             38     9                                                    27              3     102                      10         0     1                 0                    0                                     2                  1          252             17       5
-6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA                 12                                                   64                             8                45                20               164             2                                    1328         1366                     1                     0                                            0                          5                         7               0                           19                              5     3                                                     4              0      29                       1         0     0                 0                    0                                     0                  0           61              7       1
-7. VIOLAÇÕES GERAIS                                                  64                                                 1606                           135               593               333              2250            74                                   17190        12399                     3                    14                                            5                         58                       127              16                          452                            164    46                                                    35              9     442                      18         9     4                 1                    1                                    10                 11         1461            115      39
-
---------------------------------------------------------------------------------
-Cruzamento: tipo_violencia_normalizado x denuncia_emergencial
---------------------------------------------------------------------------------
-denuncia_emergencial          NÃO  RISCO IMINENTE DE MORTE DA VÍTIMA  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  VÍTIMA EM SANGRAMENTO
-tipo_violencia_normalizado                                                                                                             
-outras_violencias           51.16                               4.19                                       44.43                   0.23
-violencia_fisica            52.85                               5.06                                       41.45                   0.64
-violencia_moral             51.88                               4.33                                       43.44                   0.35
-violencia_patrimonial       49.23                               4.62                                       45.92                   0.24
-violencia_psicologica       53.50                               4.06                                       42.10                   0.34
-violencia_sexual            55.50                               4.91                                       39.08                   0.51
-
---------------------------------------------------------------------------------
-Cruzamento: tipo_violencia_normalizado x cenario_violacao
---------------------------------------------------------------------------------
-cenario_violacao            AMBIENTE DE LAZER  AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)  BAR, LANCHONETE, RESTAURANTE  CASA DE FAMILIAR  CASA DE TERCEIRO  CASA DO SUSPEITO  CASA NOTURNA  CASA ONDE RESIDE A VÍTIMA E O SUSPEITO  CASA VÍTIMA  CENTRO DE REFERÊNCIA  DELEGACIA DE POLÍCIA  DELEGACIA DE POLÍCIA COMO UNIDADE PRISIONAL  ESTABELECIMENTO DE ENSINO  ESTABELECIMENTO DE SAÚDE  EVENTO PÚBLICO  LOCAL DE TRABALHO DA VÍTIMA  LOCAL DE TRABALHO DO AGRESSOR  LOJA  MANICÔMIO/HOSPITAL PSIQUIÁTRICO/CASA DE SAÚDE MENTAL  METRÔ OU TREM  OUTROS  SERVIÇO DE ABRIGAMENTO  SHOPPING  TAXI  TRANSPORTE AÉREO  TRANSPORTE MARÍTIMO  TRANSPORTE MONITORADO POR APLICATIVO  UNIDADE PRISIONAL  VIA PÚBLICA  ÓRGÃO PÚBLICO  ÔNIBUS
-tipo_violencia_normalizado                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-outras_violencias                        0.25                                                 4.24                          0.40              1.24              0.60              4.98          0.23                                   44.72        36.25                  0.03                  0.03                                         0.05                       0.24                      0.34            0.03                         1.36                           0.39  0.19                                                  0.08           0.01    1.06                    0.05      0.01  0.00              0.00                  0.0                                  0.02               0.01         2.77           0.36    0.10
-violencia_fisica                         0.21                                                 1.81                          0.38              1.43              0.75              6.14          0.15                                   56.25        26.75                  0.01                  0.04                                         0.00                       0.05                      0.25            0.05                         0.62                           0.20  0.10                                                  0.08           0.01    0.78                    0.06      0.01  0.00              0.00                  0.0                                  0.01               0.02         3.69           0.11    0.03
-violencia_moral                          0.20                                                 5.65                          0.38              1.37              0.72              5.69          0.11                                   45.57        32.89                  0.01                  0.06                                         0.01                       0.11                      0.25            0.05                         1.26                           0.37  0.18                                                  0.05           0.02    0.84                    0.07      0.01  0.00              0.00                  0.0                                  0.01               0.03         3.73           0.24    0.08
-violencia_patrimonial                    0.09                                                 2.62                          0.19              1.19              0.61              5.11          0.10                                   50.21        35.54                  0.01                  0.02                                         0.00                       0.05                      0.13            0.02                         0.50                           0.16  0.12                                                  0.16           0.00    0.93                    0.05      0.02  0.00              0.00                  0.0                                  0.00               0.01         1.92           0.24    0.00
-violencia_psicologica                    0.18                                                 5.00                          0.31              1.36              0.69              5.41          0.11                                   48.80        31.54                  0.01                  0.05                                         0.01                       0.10                      0.24            0.03                         0.95                           0.31  0.13                                                  0.08           0.01    0.89                    0.06      0.01  0.01              0.00                  0.0                                  0.01               0.04         3.39           0.19    0.06
-violencia_sexual                         0.48                                                 4.44                          0.40              2.62              1.19             10.15          0.68                                   33.13        32.01                  0.00                  0.02                                         0.02                       0.37                      1.22            0.08                         2.13                           1.11  0.06                                                  0.08           0.09    2.59                    0.08      0.05  0.05              0.02                  0.0                                  0.06               0.06         5.96           0.54    0.35
-
-================================================================================
-ESPÉCIES CLASSIFICADAS COMO OUTRAS VIOLÊNCIAS
-================================================================================
-                                                          quantidade  percentual (%)
-especie_violacao                                                                    
-AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL               2742           24.98
-VIOLÊNCIA CONTRA A LIBERDADE DE EXPRESSÃO                       2469           22.49
-FALTA DE ACESSIBILIDADE                                         2201           20.05
-LIVRE EXERCÍCIO DO PODER FAMILIAR                                896            8.16
-AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL              746             6.8
-CIDADANIA                                                        622            5.67
-OUTROS                                                           548            4.99
-RACISMO                                                          249            2.27
-TENTATIVA DE SUICÍDIO                                            145            1.32
-VIOLÊNCIA CONTRA A LIBERDADE RELIGIOSA DE CRENÇA E CULTO         116            1.06
-APOLOGIA E INCITAÇÃO AO SUICÍDIO                                  81            0.74
-TRABALHO ESCRAVO                                                  67            0.61
-MEMÓRIA E VERDADE                                                 35            0.32
-AUTOMUTILAÇÃO                                                     15            0.14
-CRIMES CONTRA O MEIO AMBIENTE                                     15            0.14
-NACIONALIDADE                                                     13            0.12
-PROPRIEDADE - PATRIMÔNIO GENÉTICO                                 12            0.11
-GENOCÍDIO                                                          4            0.04
-EXPLORAÇÃO DO TRABALHO IDOSO                                       1            0.01
-EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA                   1            0.01
-
---------------------------------------------------------------------------------
-Cruzamento: faixa_etaria_vitima x denuncia_emergencial
---------------------------------------------------------------------------------
-denuncia_emergencial         NÃO  RISCO IMINENTE DE MORTE DA VÍTIMA  SITUAÇÃO FLAGRANTE - ATÉ 24H DA OCORRÊNCIA  VÍTIMA EM SANGRAMENTO
-faixa_etaria_vitima                                                                                                                   
-18 a 19 anos               56.17                               3.57                                       39.76                   0.50
-20 a 24 anos               52.73                               4.16                                       42.71                   0.40
-25 a 29 anos               51.78                               4.61                                       43.11                   0.51
-30 a 34 anos               51.75                               4.25                                       43.44                   0.56
-35 a 39 anos               53.13                               4.70                                       41.73                   0.44
-40 a 44 anos               52.91                               4.57                                       42.14                   0.39
-45 a 49 anos               53.56                               4.09                                       41.91                   0.44
-50 a 54 anos               52.31                               4.68                                       42.70                   0.31
-55 a 59 anos               53.53                               4.62                                       41.79                   0.07
-info_vitima_nao_informada  48.87                               5.13                                       45.65                   0.35
-
---------------------------------------------------------------------------------
-Cruzamento: faixa_etaria_suspeito x tipo_violacao
---------------------------------------------------------------------------------
-tipo_violacao                1. VIOLÊNCIA FÍSICA  2. VIOLÊNCIA PSICOLÓGICA  3. CRIMES CONTRA A VIDA  4. AGRESSÕES QUE VIOLAM A HONRA  5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE  6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  7. VIOLAÇÕES GERAIS
-faixa_etaria_suspeito                                                                                                                                                                                                                                         
-12 a 14 anos                               30.58                     41.74                     0.00                            15.29                                           2.89                                                  0.83                 8.68
-15 a 17 anos                               23.70                     43.60                     1.07                            15.88                                           3.55                                                  0.59                11.61
-18 a 19 anos                               27.41                     40.48                     2.57                            16.46                                           3.03                                                  0.35                 9.69
-20 a 24 anos                               26.11                     41.46                     2.30                            16.19                                           3.10                                                  0.76                10.08
-25 a 29 anos                               24.95                     41.47                     2.36                            16.29                                           3.61                                                  0.68                10.63
-30 a 34 anos                               24.20                     42.15                     2.12                            17.04                                           3.44                                                  0.73                10.32
-35 a 39 anos                               22.93                     42.35                     2.12                            17.24                                           3.38                                                  0.94                11.04
-40 a 44 anos                               21.83                     42.87                     2.12                            17.71                                           3.15                                                  0.77                11.55
-45 a 49 anos                               21.01                     42.92                     2.10                            18.55                                           3.49                                                  0.80                11.12
-50 a 54 anos                               20.91                     42.91                     1.84                            17.99                                           3.49                                                  0.80                12.06
-55 a 59 anos                               19.44                     43.63                     1.89                            19.65                                           3.24                                                  1.03                11.12
-60 a 64 anos                               19.21                     44.00                     1.63                            19.40                                           3.55                                                  0.84                11.37
-65 a 69 anos                               18.56                     45.60                     1.82                            18.06                                           3.60                                                  0.64                11.72
-70 a 74 anos                               17.68                     45.25                     1.56                            19.16                                           3.27                                                  0.70                12.38
-75 a 79 anos                               18.05                     40.49                     0.65                            20.98                                           4.39                                                  0.98                14.47
-80 anos ou mais                            19.12                     42.12                     2.07                            18.09                                           4.39                                                  1.03                13.18
-info_suspeito_nao_informada                23.25                     39.79                     2.60                            18.01                                           3.91                                                  1.04                11.41
-
-================================================================================
-ANÁLISE DA INFORMAÇÃO DO SUSPEITO NÃO INFORMADA
-================================================================================
-Total de registros com info_suspeito_nao_informada: 204608 (61.11%)
-
-Distribuição por tipo de violação:
-tipo_violacao
-2. VIOLÊNCIA PSICOLÓGICA                                81404
-1. VIOLÊNCIA FÍSICA                                     47562
-4. AGRESSÕES QUE VIOLAM A HONRA                         36845
-7. VIOLAÇÕES GERAIS                                     23348
-5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE            8008
-3. CRIMES CONTRA A VIDA                                  5318
-6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA     2123
-
-Distribuição por tipo de violência normalizado:
-tipo_violencia_normalizado
-violencia_psicologica    73765
-violencia_moral          57803
-violencia_fisica         54707
-violencia_patrimonial     7273
-outras_violencias         6777
-violencia_sexual          4283
-
-Distribuição por relação vítima-suspeito:
-relacao_vitima_suspeito
-MARIDO/ ESPOSA                      45819
-COMPANHEIRO(A)                      41203
-EX-MARIDO                           20788
-EX-COMPANHEIRO(A)                   20047
-SEM RELAÇÃO                         11035
-VIZINHO(A)                          11025
-EX- NAMORADO(A)                      9605
-IRMÃO(Ã)                             8623
-FILHO(A)                             8577
-PAI/ MÃE                             6885
-NAMORADO(A)                          4122
-DESCONHECIDO(A)                      2545
-CUNHADO(A)                           2541
-TIO(A)                               2048
-PADRASTO/ MADRASTA                   1630
-HIERARQUICAMENTE SUPERIOR            1443
-SOGRO(A)                             1200
-SOBRINHO(A)                          1082
-MEMBRO                                989
-PRIMO(A)                              972
-ENTEADO(A)                            368
-FUNCIONÁRIO(A)                        289
-EX-ESPOSA                             260
-AVÔ(Ó)                                246
-MESMO NÍVEL HIERÁRQUICO               209
-NETO(A)                               202
-LÍDER RELIGIOSO                       196
-CUIDADOR(A)                           141
-DIRETOR(A)                            141
-PROFESSOR(A)                          124
-PADRINHO/ MADRINHA                     58
-INTERNO(A)                             54
-AGENTE PENITENCIÁRIO                   50
-HIERARQUICAMENTE INFERIOR              42
-BISAVÔ(Ó)                              29
-DIREITOR(A) DA UNIDADE PRISIONAL       16
-TRISAVÔ(Ó)                              4
-
---------------------------------------------------------------------------------
-Cruzamento: agravantes_unificados x indicador_letalidade
---------------------------------------------------------------------------------
-indicador_letalidade                                                                            letal_consumada  nao_letal  tentativa_letal
-agravantes_unificados                                                                                                                      
-AGRESSOR CONHECIDO                                                                                         0.08      97.53             2.40
-AGRESSOR CONHECIDO | FORÇAS ARMADAS                                                                        0.00      97.78             2.22
-AGRESSOR CONHECIDO | POLICIAL CIVIL                                                                        0.00     100.00             0.00
-AGRESSOR CONHECIDO | POLICIAL FEDERAL                                                                      0.00      87.50            12.50
-AGRESSOR CONHECIDO | POLICIAL MILITAR                                                                      0.00      96.72             3.28
-AGRESSOR CONHECIDO | POLICIAL RODOVIÁRIO FEDERAL                                                           0.00     100.00             0.00
-AGRESSOR CÔNJUGE                                                                                           0.00      96.12             3.88
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE                                           0.05      94.66             5.28
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | FORÇAS ARMADAS                          0.00      95.69             4.31
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL CIVIL                          0.00      92.73             7.27
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL FEDERAL                        0.00     100.00             0.00
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL MILITAR                        0.00      93.86             6.14
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL RODOVIÁRIO FEDERAL             0.00     100.00             0.00
-AGRESSOR DESCONHECIDO                                                                                      0.12      98.49             1.39
-AGRESSOR DESCONHECIDO | POLICIAL CIVIL                                                                     0.00     100.00             0.00
-AGRESSOR DESCONHECIDO | POLICIAL FEDERAL                                                                   0.00     100.00             0.00
-AGRESSOR DESCONHECIDO | POLICIAL MILITAR                                                                   0.00      97.78             2.22
-AGRESSOR POLICIAL/MILITAR                                                                                  0.00      99.84             0.16
-AGRESSOR POLICIAL/MILITAR | FORÇAS ARMADAS                                                                 0.00     100.00             0.00
-AGRESSOR POLICIAL/MILITAR | POLICIAL CIVIL                                                                 0.00     100.00             0.00
-AGRESSOR POLICIAL/MILITAR | POLICIAL MILITAR                                                               0.00      98.68             1.32
-AGRESSOR POSSUI INFLUÊNCIA JUNTO ÀS AUTORIDADES LOCAIS                                                     0.00      99.75             0.25
-ASCENDENTE                                                                                                 0.00      98.07             1.93
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE                                                              0.00      99.69             0.31
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE | POLICIAL CIVIL                                             0.00     100.00             0.00
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE | POLICIAL MILITAR                                           0.00      93.02             6.98
-CONVIVENTE                                                                                                 0.00      95.77             4.23
-CRIANÇA                                                                                                    0.00     100.00             0.00
-CRUEL                                                                                                      0.00     100.00             0.00
-DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL                                                                     0.00     100.00             0.00
-DESCENDENTE OU PARENTE                                                                                     0.00      99.02             0.98
-DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET                                                                           0.00      99.92             0.08
-DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET | POLICIAL CIVIL                                                          0.00      83.33            16.67
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES                                                        0.00      99.82             0.18
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES | POLICIAL CIVIL                                       0.00     100.00             0.00
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES | POLICIAL MILITAR                                     0.00     100.00             0.00
-INSIDIOSO                                                                                                  0.00      95.24             4.76
-MOTIVO VIL                                                                                                 0.00     100.00             0.00
-MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO                                            0.00      99.89             0.11
-MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO | POLICIAL MILITAR                         0.00     100.00             0.00
-OU POR DINHEIRO                                                                                            0.00     100.00             0.00
-RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR                                                            0.19      98.06             1.75
-RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR | POLICIAL MILITAR                                         0.00     100.00             0.00
-RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO                                                     0.02      99.80             0.18
-RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO | POLICIAL CIVIL                                    0.00     100.00             0.00
-RISCO DE MORTE                                                                                             0.05      99.45             0.50
-RISCO DE MORTE | POLICIAL CIVIL                                                                            0.00     100.00             0.00
-RISCO DE MORTE | POLICIAL MILITAR                                                                          0.00     100.00             0.00
-TORPE                                                                                                      0.00     100.00             0.00
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE                                                 0.02      99.79             0.18
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | FORÇAS ARMADAS                                0.00     100.00             0.00
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | POLICIAL CIVIL                                0.00     100.00             0.00
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | POLICIAL MILITAR                              0.00     100.00             0.00
-VÍTIMA EM SANGRAMENTO                                                                                      0.00      98.88             1.12
-VÍTIMA EM SITUAÇÃO DE RUA                                                                                  0.00      99.07             0.93
-VÍTIMA IDOSA                                                                                               0.00     100.00             0.00
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL                                              0.06      96.39             3.55
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | FORÇAS ARMADAS                             0.00     100.00             0.00
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | POLICIAL CIVIL                             0.00     100.00             0.00
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | POLICIAL MILITAR                           0.00     100.00             0.00
-VÍTIMA INTERNADA EM INSTITUIÇÃO DE RESSOCIALIZAÇÃO                                                         0.00     100.00             0.00
-VÍTIMA PRESA EM INSTITUIÇÃO PÚBLICA                                                                        0.00     100.00             0.00
-sem_agravante_informado                                                                                    0.01      99.82             0.17
-À TRAIÇÃO                                                                                                  0.00     100.00             0.00
-
---------------------------------------------------------------------------------
-Cruzamento: agravantes_unificados x subtipo_letalidade
---------------------------------------------------------------------------------
-subtipo_letalidade                                                                              feminicidio  homicidio  nao_aplicavel  tentativa_feminicidio  tentativa_homicidio
-agravantes_unificados                                                                                                                                                            
-AGRESSOR CONHECIDO                                                                                     0.06       0.02          97.53                   2.01                 0.39
-AGRESSOR CONHECIDO | FORÇAS ARMADAS                                                                    0.00       0.00          97.78                   2.22                 0.00
-AGRESSOR CONHECIDO | POLICIAL CIVIL                                                                    0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR CONHECIDO | POLICIAL FEDERAL                                                                  0.00       0.00          87.50                  12.50                 0.00
-AGRESSOR CONHECIDO | POLICIAL MILITAR                                                                  0.00       0.00          96.72                   3.28                 0.00
-AGRESSOR CONHECIDO | POLICIAL RODOVIÁRIO FEDERAL                                                       0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR CÔNJUGE                                                                                       0.00       0.00          96.12                   3.88                 0.00
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE                                       0.04       0.01          94.66                   4.85                 0.43
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | FORÇAS ARMADAS                      0.00       0.00          95.69                   4.31                 0.00
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL CIVIL                      0.00       0.00          92.73                   7.27                 0.00
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL FEDERAL                    0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL MILITAR                    0.00       0.00          93.86                   5.72                 0.42
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL RODOVIÁRIO FEDERAL         0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR DESCONHECIDO                                                                                  0.09       0.03          98.49                   1.15                 0.24
-AGRESSOR DESCONHECIDO | POLICIAL CIVIL                                                                 0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR DESCONHECIDO | POLICIAL FEDERAL                                                               0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR DESCONHECIDO | POLICIAL MILITAR                                                               0.00       0.00          97.78                   1.11                 1.11
-AGRESSOR POLICIAL/MILITAR                                                                              0.00       0.00          99.84                   0.16                 0.00
-AGRESSOR POLICIAL/MILITAR | FORÇAS ARMADAS                                                             0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR POLICIAL/MILITAR | POLICIAL CIVIL                                                             0.00       0.00         100.00                   0.00                 0.00
-AGRESSOR POLICIAL/MILITAR | POLICIAL MILITAR                                                           0.00       0.00          98.68                   1.32                 0.00
-AGRESSOR POSSUI INFLUÊNCIA JUNTO ÀS AUTORIDADES LOCAIS                                                 0.00       0.00          99.75                   0.25                 0.00
-ASCENDENTE                                                                                             0.00       0.00          98.07                   1.93                 0.00
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE                                                          0.00       0.00          99.69                   0.31                 0.00
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE | POLICIAL CIVIL                                         0.00       0.00         100.00                   0.00                 0.00
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE | POLICIAL MILITAR                                       0.00       0.00          93.02                   6.98                 0.00
-CONVIVENTE                                                                                             0.00       0.00          95.77                   4.23                 0.00
-CRIANÇA                                                                                                0.00       0.00         100.00                   0.00                 0.00
-CRUEL                                                                                                  0.00       0.00         100.00                   0.00                 0.00
-DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL                                                                 0.00       0.00         100.00                   0.00                 0.00
-DESCENDENTE OU PARENTE                                                                                 0.00       0.00          99.02                   0.98                 0.00
-DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET                                                                       0.00       0.00          99.92                   0.08                 0.00
-DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET | POLICIAL CIVIL                                                      0.00       0.00          83.33                  16.67                 0.00
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES                                                    0.00       0.00          99.82                   0.17                 0.01
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES | POLICIAL CIVIL                                   0.00       0.00         100.00                   0.00                 0.00
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES | POLICIAL MILITAR                                 0.00       0.00         100.00                   0.00                 0.00
-INSIDIOSO                                                                                              0.00       0.00          95.24                   4.76                 0.00
-MOTIVO VIL                                                                                             0.00       0.00         100.00                   0.00                 0.00
-MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO                                        0.00       0.00          99.89                   0.09                 0.02
-MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO | POLICIAL MILITAR                     0.00       0.00         100.00                   0.00                 0.00
-OU POR DINHEIRO                                                                                        0.00       0.00         100.00                   0.00                 0.00
-RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR                                                        0.10       0.10          98.06                   1.36                 0.39
-RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR | POLICIAL MILITAR                                     0.00       0.00         100.00                   0.00                 0.00
-RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO                                                 0.02       0.00          99.80                   0.14                 0.04
-RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO | POLICIAL CIVIL                                0.00       0.00         100.00                   0.00                 0.00
-RISCO DE MORTE                                                                                         0.05       0.00          99.45                   0.43                 0.08
-RISCO DE MORTE | POLICIAL CIVIL                                                                        0.00       0.00         100.00                   0.00                 0.00
-RISCO DE MORTE | POLICIAL MILITAR                                                                      0.00       0.00         100.00                   0.00                 0.00
-TORPE                                                                                                  0.00       0.00         100.00                   0.00                 0.00
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE                                             0.02       0.00          99.79                   0.15                 0.03
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | FORÇAS ARMADAS                            0.00       0.00         100.00                   0.00                 0.00
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | POLICIAL CIVIL                            0.00       0.00         100.00                   0.00                 0.00
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | POLICIAL MILITAR                          0.00       0.00         100.00                   0.00                 0.00
-VÍTIMA EM SANGRAMENTO                                                                                  0.00       0.00          98.88                   1.12                 0.00
-VÍTIMA EM SITUAÇÃO DE RUA                                                                              0.00       0.00          99.07                   0.00                 0.93
-VÍTIMA IDOSA                                                                                           0.00       0.00         100.00                   0.00                 0.00
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL                                          0.04       0.03          96.39                   3.01                 0.54
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | FORÇAS ARMADAS                         0.00       0.00         100.00                   0.00                 0.00
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | POLICIAL CIVIL                         0.00       0.00         100.00                   0.00                 0.00
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | POLICIAL MILITAR                       0.00       0.00         100.00                   0.00                 0.00
-VÍTIMA INTERNADA EM INSTITUIÇÃO DE RESSOCIALIZAÇÃO                                                     0.00       0.00         100.00                   0.00                 0.00
-VÍTIMA PRESA EM INSTITUIÇÃO PÚBLICA                                                                    0.00       0.00         100.00                   0.00                 0.00
-sem_agravante_informado                                                                                0.01       0.00          99.82                   0.14                 0.03
-À TRAIÇÃO                                                                                              0.00       0.00         100.00                   0.00                 0.00
-
---------------------------------------------------------------------------------
-Cruzamento: grupo_vulneravel x tipo_violencia_normalizado
---------------------------------------------------------------------------------
-tipo_violencia_normalizado                        outras_violencias  violencia_fisica  violencia_moral  violencia_patrimonial  violencia_psicologica  violencia_sexual
-grupo_vulneravel                                                                                                                                                      
-1-Violência Contra a Mulher                                    3.84             20.36            30.33                   3.26                  38.58              3.62
-2-Violência Doméstica e Familiar Contra a Mulher               3.08             28.29            27.09                   3.65                  36.53              1.35
-
---------------------------------------------------------------------------------
-Cruzamento: grupo_vulneravel x relacao_vitima_suspeito
---------------------------------------------------------------------------------
-relacao_vitima_suspeito                           AGENTE PENITENCIÁRIO  AVÔ(Ó)  BISAVÔ(Ó)  COMPANHEIRO(A)  CUIDADOR(A)  CUNHADO(A)  DESCONHECIDO(A)  DIREITOR(A) DA UNIDADE PRISIONAL  DIRETOR(A)  ENTEADO(A)  EX- NAMORADO(A)  EX-COMPANHEIRO(A)  EX-ESPOSA  EX-MARIDO  FILHO(A)  FUNCIONÁRIO(A)  HIERARQUICAMENTE INFERIOR  HIERARQUICAMENTE SUPERIOR  INTERNO(A)  IRMÃO(Ã)  LÍDER RELIGIOSO  MARIDO/ ESPOSA  MEMBRO  MESMO NÍVEL HIERÁRQUICO  NAMORADO(A)  NETO(A)  PADRASTO/ MADRASTA  PADRINHO/ MADRINHA  PAI/ MÃE  PRIMO(A)  PROFESSOR(A)  SEM RELAÇÃO  SOBRINHO(A)  SOGRO(A)  TIO(A)  TRISAVÔ(Ó)  VIZINHO(A)
-grupo_vulneravel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-1-Violência Contra a Mulher                                       0.07    0.29       0.04            4.46         0.21        3.06             3.87                              0.02        0.29        0.38             2.91               3.30       0.05       4.14      6.98            0.42                        0.1                       2.18        0.06      6.96             0.23            5.65    1.12                     0.32         1.16     0.32                1.58                0.08      5.65      1.17          0.19        18.15         1.12      1.63    1.92         0.0       19.93
-2-Violência Doméstica e Familiar Contra a Mulher                  0.00    0.08       0.02           26.49         0.05        0.58             0.04                              0.00        0.00        0.13             5.32              12.85       0.13      11.92      3.29            0.01                        0.0                       0.02        0.00      3.28             0.02           28.31    0.18                     0.00         2.35     0.06                0.50                0.02      2.50      0.26          0.00         0.29         0.30      0.28    0.62         0.0        0.10
-
---------------------------------------------------------------------------------
-Cruzamento: grupo_vulneravel x cenario_violacao
---------------------------------------------------------------------------------
-cenario_violacao                                  AMBIENTE DE LAZER  AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)  BAR, LANCHONETE, RESTAURANTE  CASA DE FAMILIAR  CASA DE TERCEIRO  CASA DO SUSPEITO  CASA NOTURNA  CASA ONDE RESIDE A VÍTIMA E O SUSPEITO  CASA VÍTIMA  CENTRO DE REFERÊNCIA  DELEGACIA DE POLÍCIA  DELEGACIA DE POLÍCIA COMO UNIDADE PRISIONAL  ESTABELECIMENTO DE ENSINO  ESTABELECIMENTO DE SAÚDE  EVENTO PÚBLICO  LOCAL DE TRABALHO DA VÍTIMA  LOCAL DE TRABALHO DO AGRESSOR  LOJA  MANICÔMIO/HOSPITAL PSIQUIÁTRICO/CASA DE SAÚDE MENTAL  METRÔ OU TREM  OUTROS  SERVIÇO DE ABRIGAMENTO  SHOPPING  TAXI  TRANSPORTE AÉREO  TRANSPORTE MARÍTIMO  TRANSPORTE MONITORADO POR APLICATIVO  UNIDADE PRISIONAL  VIA PÚBLICA  ÓRGÃO PÚBLICO  ÔNIBUS
-grupo_vulneravel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-1-Violência Contra a Mulher                                    0.37                                                 5.49                          0.60              1.74              0.94              6.37          0.38                                   27.89        41.47                  0.03                  0.16                                         0.03                       0.36                      0.78            0.10                         2.41                           0.75  0.31                                                  0.22           0.04    1.63                    0.19      0.03  0.01               0.0                  0.0                                  0.04               0.08         6.70           0.65    0.22
-2-Violência Doméstica e Familiar Contra a Mulher               0.14                                                 3.78                          0.27              1.28              0.64              5.53          0.05                                   57.01        27.30                  0.00                  0.01                                         0.00                       0.01                      0.08            0.02                         0.47                           0.15  0.08                                                  0.02           0.01    0.63                    0.02      0.00  0.00               0.0                  0.0                                  0.00               0.01         2.44           0.04    0.01
-
---------------------------------------------------------------------------------
-Cruzamento: grupo_vulneravel x indicador_letalidade
---------------------------------------------------------------------------------
-indicador_letalidade                              letal_consumada  nao_letal  tentativa_letal
-grupo_vulneravel                                                                             
-1-Violência Contra a Mulher                                  0.04      98.79             1.17
-2-Violência Doméstica e Familiar Contra a Mulher             0.04      97.32             2.64
-
---------------------------------------------------------------------------------
-Cruzamento: suspeito_faixa_etaria_informada x tipo_violencia_normalizado
---------------------------------------------------------------------------------
-tipo_violencia_normalizado       outras_violencias  violencia_fisica  violencia_moral  violencia_patrimonial  violencia_psicologica  violencia_sexual
-suspeito_faixa_etaria_informada                                                                                                                      
-nao                                           3.31             26.74            28.25                   3.55                  36.05              2.09
-sim                                           3.23             25.45            27.43                   3.54                  38.65              1.70
-
-================================================================================
-FIM DA ANÁLISE EXPLORATÓRIA
-================================================================================
 DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\2020_primeiro_semestre_analitico.csv
 
 ================================================================================
@@ -874,7 +503,7 @@ Colunas com 30.00% ou mais de nulos:
 [6] QUANTIDADE DE VALORES ÚNICOS POR COLUNA
 --------------------------------------------------------------------------------
 agravantes_unificados                     64
-especie_violacao                          62
+especie_violacao                          58
 nacionalidade_suspeito                    56
 pais_origem_suspeito                      42
 nacionalidade_vitima                      41
@@ -955,12 +584,12 @@ CALÚNIA/INJÚRIA/DIFAMAÇÃO                                      59627        
 AMEAÇA/COAÇÃO                                                  38669           11.55
 CONSTRANGIMENTO                                                33530           10.02
 AGRESSÃO/VIAS DE FATO                                          28496            8.51
-TORTURA PSÍQUICA                                               22427             6.7
+TORTURA PSÍQUICA                                               23556            7.04
 EXPOSIÇÃO                                                      21804            6.51
 LESÃO CORPORAL                                                 20242            6.05
 MAUS TRATOS                                                    13256            3.96
 ASSÉDIO MORAL                                                  12081            3.61
-CRIMES CONTRA A SEGURANÇA PSÍQUICA                             10715             3.2
+CRIMES CONTRA A SEGURANÇA PSÍQUICA                             10719             3.2
 CRIMES CONTRA A SEGURANÇA FÍSICA                                7597            2.27
 AUTONOMIA DE VONTADE                                            7298            2.18
 INSUBSISTÊNCIA AFETIVA                                          7086            2.12
@@ -974,9 +603,8 @@ VIOLÊNCIA CONTRA A LIBERDADE DE EXPRESSÃO                       2469          
 CÁRCERE PRIVADO                                                 2222            0.66
 FALTA DE ACESSIBILIDADE                                         2201            0.66
 LIBERDADE SEXUAL FÍSICA - ESTUPRO                               1918            0.57
-LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL                      1359            0.41
-LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO               1209            0.36
-TORTURA PSÍ QUICA                                               1129            0.34
+LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL                      1360            0.41
+LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO               1210            0.36
 CRIMES CONTRA A SEGURANÇA ECONÔMICA                             1080            0.32
 INSUBSISTÊNCIA INTELECTUAL                                      1000             0.3
 LIBERDADE SEXUAL FÍSICA - ABUSO SEXUAL FÍSICO                    945            0.28
@@ -1006,48 +634,10 @@ NACIONALIDADE                                                     13            
 PROPRIEDADE - PATRIMÔNIO GENÉTICO                                 12             0.0
 TRÁFICO INTERNACIONAL DE PESSOAS                                  10             0.0
 TRÁFICO NACIONAL DE PESSOAS                                       10             0.0
-CRIMES CONTRA A SEGURANÇA PSÍ QUICA                                4             0.0
 GENOCÍDIO                                                          4             0.0
 EXPLORAÇÃO DO TRABALHO IDOSO                                       1             0.0
-LIBERDADE SEXUAL PSÍ QUICA - ASSÉDIO SEXUAL                        1             0.0
 EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA                   1             0.0
 SEQUESTRO                                                          1             0.0
-LIBERDADE SEXUAL PSÍ QUICA - ABUSO SEXUAL PSÍQUICO                 1             0.0
-
-Valores da coluna 'cenario_violacao':
-                                                      quantidade  percentual (%)
-cenario_violacao                                                                
-CASA ONDE RESIDE A VÍTIMA E O SUSPEITO                    165607           49.47
-CASA VÍTIMA                                               103677           30.97
-CASA DO SUSPEITO                                           19242            5.75
-AMBIENTE VIRTUAL (INTERNET/REDE SOCIAL/APLICATIVOS)        14150            4.23
-VIA PÚBLICA                                                11860            3.54
-CASA DE FAMILIAR                                            4675             1.4
-LOCAL DE TRABALHO DA VÍTIMA                                 3248            0.97
-OUTROS                                                      2978            0.89
-CASA DE TERCEIRO                                            2407            0.72
-BAR, LANCHONETE, RESTAURANTE                                1177            0.35
-LOCAL DE TRABALHO DO AGRESSOR                               1032            0.31
-ESTABELECIMENTO DE SAÚDE                                     888            0.27
-AMBIENTE DE LAZER                                            670             0.2
-ÓRGÃO PÚBLICO                                                661             0.2
-LOJA                                                         456            0.14
-CASA NOTURNA                                                 455            0.14
-ESTABELECIMENTO DE ENSINO                                    330             0.1
-MANICÔMIO/HOSPITAL PSIQUIÁTRICO/CASA DE SAÚDE MENTAL         256            0.08
-ÔNIBUS                                                       215            0.06
-SERVIÇO DE ABRIGAMENTO                                       205            0.06
-DELEGACIA DE POLÍCIA                                         151            0.05
-EVENTO PÚBLICO                                               140            0.04
-UNIDADE PRISIONAL                                             98            0.03
-METRÔ OU TREM                                                 52            0.02
-TRANSPORTE MONITORADO POR APLICATIVO                          44            0.01
-SHOPPING                                                      40            0.01
-CENTRO DE REFERÊNCIA                                          30            0.01
-DELEGACIA DE POLÍCIA COMO UNIDADE PRISIONAL                   25            0.01
-TAXI                                                          19            0.01
-TRANSPORTE MARÍTIMO                                            4             0.0
-TRANSPORTE AÉREO                                               2             0.0
 
 Valores da coluna 'denuncia_emergencial':
                                             quantidade  percentual (%)
@@ -1697,12 +1287,12 @@ CALÚNIA/INJÚRIA/DIFAMAÇÃO                                      59627        
 AMEAÇA/COAÇÃO                                                  38669           11.55
 CONSTRANGIMENTO                                                33530           10.02
 AGRESSÃO/VIAS DE FATO                                          28496            8.51
-TORTURA PSÍQUICA                                               22427             6.7
+TORTURA PSÍQUICA                                               23556            7.04
 EXPOSIÇÃO                                                      21804            6.51
 LESÃO CORPORAL                                                 20242            6.05
 MAUS TRATOS                                                    13256            3.96
 ASSÉDIO MORAL                                                  12081            3.61
-CRIMES CONTRA A SEGURANÇA PSÍQUICA                             10715             3.2
+CRIMES CONTRA A SEGURANÇA PSÍQUICA                             10719             3.2
 CRIMES CONTRA A SEGURANÇA FÍSICA                                7597            2.27
 AUTONOMIA DE VONTADE                                            7298            2.18
 INSUBSISTÊNCIA AFETIVA                                          7086            2.12
@@ -1716,9 +1306,8 @@ VIOLÊNCIA CONTRA A LIBERDADE DE EXPRESSÃO                       2469          
 CÁRCERE PRIVADO                                                 2222            0.66
 FALTA DE ACESSIBILIDADE                                         2201            0.66
 LIBERDADE SEXUAL FÍSICA - ESTUPRO                               1918            0.57
-LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL                      1359            0.41
-LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO               1209            0.36
-TORTURA PSÍ QUICA                                               1129            0.34
+LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL                      1360            0.41
+LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO               1210            0.36
 CRIMES CONTRA A SEGURANÇA ECONÔMICA                             1080            0.32
 INSUBSISTÊNCIA INTELECTUAL                                      1000             0.3
 LIBERDADE SEXUAL FÍSICA - ABUSO SEXUAL FÍSICO                    945            0.28
@@ -1748,15 +1337,12 @@ NACIONALIDADE                                                     13            
 PROPRIEDADE - PATRIMÔNIO GENÉTICO                                 12             0.0
 TRÁFICO INTERNACIONAL DE PESSOAS                                  10             0.0
 TRÁFICO NACIONAL DE PESSOAS                                       10             0.0
-CRIMES CONTRA A SEGURANÇA PSÍ QUICA                                4             0.0
 GENOCÍDIO                                                          4             0.0
 EXPLORAÇÃO DO TRABALHO IDOSO                                       1             0.0
-LIBERDADE SEXUAL PSÍ QUICA - ASSÉDIO SEXUAL                        1             0.0
 EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA                   1             0.0
 SEQUESTRO                                                          1             0.0
-LIBERDADE SEXUAL PSÍ QUICA - ABUSO SEXUAL PSÍQUICO                 1             0.0
 
-Quantidade de categorias distintas: 62
+Quantidade de categorias distintas: 58
 
 Categorias raras com menos de 1.00%:
                                                           quantidade  percentual (%)
@@ -1767,9 +1353,8 @@ VIOLÊNCIA CONTRA A LIBERDADE DE EXPRESSÃO                       2469          
 CÁRCERE PRIVADO                                                 2222            0.66
 FALTA DE ACESSIBILIDADE                                         2201            0.66
 LIBERDADE SEXUAL FÍSICA - ESTUPRO                               1918            0.57
-LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL                      1359            0.41
-LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO               1209            0.36
-TORTURA PSÍ QUICA                                               1129            0.34
+LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL                      1360            0.41
+LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO               1210            0.36
 CRIMES CONTRA A SEGURANÇA ECONÔMICA                             1080            0.32
 INSUBSISTÊNCIA INTELECTUAL                                      1000             0.3
 LIBERDADE SEXUAL FÍSICA - ABUSO SEXUAL FÍSICO                    945            0.28
@@ -1799,13 +1384,10 @@ NACIONALIDADE                                                     13            
 PROPRIEDADE - PATRIMÔNIO GENÉTICO                                 12             0.0
 TRÁFICO INTERNACIONAL DE PESSOAS                                  10             0.0
 TRÁFICO NACIONAL DE PESSOAS                                       10             0.0
-CRIMES CONTRA A SEGURANÇA PSÍ QUICA                                4             0.0
 GENOCÍDIO                                                          4             0.0
 EXPLORAÇÃO DO TRABALHO IDOSO                                       1             0.0
-LIBERDADE SEXUAL PSÍ QUICA - ASSÉDIO SEXUAL                        1             0.0
 EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA                   1             0.0
 SEQUESTRO                                                          1             0.0
-LIBERDADE SEXUAL PSÍ QUICA - ABUSO SEXUAL PSÍQUICO                 1             0.0
 
 ================================================================================
 FREQUÊNCIA - CENARIO_VIOLACAO
