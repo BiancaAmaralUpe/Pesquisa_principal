@@ -10,51 +10,38 @@
 # - Executar análises da base tratada
 # - Preparar dados para etapas futuras de modelagem
 # ======================================================================================
-from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import corrigir_especie_violacao
+# imports das libs 
+
+# imports das variaveis constants.
 from Pesquisa_principal.constants import ARQUIVO_CSV_LIMPO_TESTE_TREINO
 from Pesquisa_principal.constants import ARQUIVO_OUTPUT_BRONZE, ARQUIVO_OUTPUT_ANALISE_DADOS, ARQUIVO_CSV_FEMINICIDIO_LIMPO, ARQUIVO_CSV_FEMINICIDIO_ANALITICO, ARQUIVO_OUTPUT_PREPARACAO_DADOS
-# pyrefly: ignore [missing-import]
+from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
 
-# pyrefly: ignore [missing-import]
+# imports dos modulos de transformacao de dados
 from Pesquisa_principal.bronze.ingestao_dados.transformacao_dados_xlsx_csv import transformar_base_feminicidio
-
-# pyrefly: ignore [missing-import]
-from Pesquisa_principal.bronze.analise_dados.informacoes_iniciais import diagnostico_inicial
-
-# pyrefly: ignore [missing-import]
-from Pesquisa_principal.bronze.base.tratamento_dados.limpeza_dados import limpar_dados_bronze, salvar_dataframe_limpo
-
-# pyrefly: ignore [missing-import]
-from Pesquisa_principal.bronze.base.tratamento_dados.preparacao_base_analitica import preparar_base_analitica
-
-# pyrefly: ignore [missing-import]
+# imports dos modulos de relatorios de dados
 from Pesquisa_principal.bronze.relatorios_dados.relatorio_analitico import relatorio_preparacao_analitica
 
-# pyrefly: ignore [missing-import]
+# imports dos modulos de analise de dados
 from Pesquisa_principal.bronze.analise_dados.estatisticas_descritivas import gerar_estatisticas_descritivas
-
-# pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.analise_dados.analise_exploratoria import executar_analise_exploratoria
-
-# pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.analise_dados.frequencia import executar_analise_frequencias
-
-# pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.analise_dados.definir_metodologia import definir_metodologia_analise
-
-# pyrefly: ignore [missing-import]
 from Pesquisa_principal.bronze.analise_dados.analise_completude import executar_analise_completude
+from Pesquisa_principal.bronze.analise_dados.informacoes_iniciais import diagnostico_inicial
 
-# pyrefly: ignore [missing-import]
+# imports dos modulos de tratamento de dados
 from Pesquisa_principal.bronze.base.tratamento_dados.preparacao_dados import preparar_dados_modelagem
-
-# pyrefly: ignore [missing-import]
+from Pesquisa_principal.bronze.base.tratamento_dados.preparacao_base_analitica import preparar_base_analitica
+from Pesquisa_principal.bronze.base.tratamento_dados.limpeza_dados import limpar_dados_bronze, salvar_dataframe_limpo
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import unificar_agravantes, classificar_letalidade
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicador_faixa_etaria_suspeito_informada
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import classificar_tipo_violencia_normalizado
 from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_indicadores_risco_feminicidio
-from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
+from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import corrigir_especie_violacao
+from Pesquisa_principal.bronze.base.tratamento_dados.normalizacao_violencias import criar_componentes_violencia
+
 # ============================================================
 # para executar a bronze, rode o comando:
 # python -m Pesquisa_principal.bronze
@@ -119,6 +106,7 @@ def pipeline_bronze() -> None:
         dataframe_analise = criar_indicador_faixa_etaria_suspeito_informada(dataframe_analise)
         dataframe_analise = classificar_tipo_violencia_normalizado(dataframe_analise)
         dataframe_analise = criar_indicadores_risco_feminicidio(dataframe_analise)
+        dataframe_analise = criar_componentes_violencia(dataframe_analise)
 
         salvar_dataframe_limpo(
             dataframe=dataframe_analise,
@@ -171,23 +159,17 @@ def pipeline_bronze() -> None:
     # ======================================================================================
 
     with OutputTerminalEArquivo(ARQUIVO_OUTPUT_PREPARACAO_DADOS):
-        X, y = preparar_dados_modelagem(
+        X, y, dataframe_treino = preparar_dados_modelagem(
             dataframe=dataframe_analise,
             coluna_alvo=COLUNA_ALVO_MODELAGEM,
-        )
-
-        dataframe_teste_treino = X.copy()
-        dataframe_teste_treino[COLUNA_ALVO_MODELAGEM] = y
-
-        salvar_dataframe_limpo(
-            dataframe=dataframe_teste_treino,
             caminho_saida=ARQUIVO_CSV_LIMPO_TESTE_TREINO,
         )
+
+        print(f"\nOutput da preparação salvo em: {ARQUIVO_OUTPUT_PREPARACAO_DADOS}")
 
         print("\nBase preparada para análise/modelagem.")
         print(f"X: {X.shape}")
         print(f"y: {y.shape}")
-        print(f"Base treino/teste: {dataframe_teste_treino.shape}")
         print(f"\nArquivo salvo em: {ARQUIVO_CSV_LIMPO_TESTE_TREINO}")
 
         print("\n" + "=" * 80)

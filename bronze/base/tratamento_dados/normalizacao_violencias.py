@@ -7,22 +7,22 @@
 # - Classificar ocorrências letais tentadas ou consumadas
 # - Preservar rastreabilidade das colunas originais
 # ======================================================================================
-
-from Pesquisa_principal.constants import MAPEAMENTO_CORRECAO_ESPECIE_VIOLACAO
+# imports das libs 
 import pandas as pd
 
-from Pesquisa_principal.constants import (
-    COLUNA_ESPECIE_VIOLACAO,
-    COLUNA_INDICADOR_LETALIDADE,
-    COLUNA_SUBTIPO_LETALIDADE,
-    MAPEAMENTO_INDICADOR_LETALIDADE,
-    MAPEAMENTO_SUBTIPO_LETALIDADE,
-    COLUNA_TIPO_VIOLENCIA_NORMALIZADO,
-    MAPEAMENTO_TIPO_VIOLENCIA_NORMALIZADO,
-    COLUNA_FAIXA_ETARIA_SUSPEITO,
-    COLUNA_SUSPEITO_FAIXA_ETARIA_INFORMADA,
-    VALOR_INFO_SUSPEITO_NAO_INFORMADA
-)
+# imports das variaveis constants.
+from Pesquisa_principal.constants import COLUNA_ESPECIE_VIOLACAO
+from Pesquisa_principal.constants import COLUNA_INDICADOR_LETALIDADE
+from Pesquisa_principal.constants import COLUNA_SUBTIPO_LETALIDADE
+from Pesquisa_principal.constants import MAPEAMENTO_INDICADOR_LETALIDADE
+from Pesquisa_principal.constants import MAPEAMENTO_SUBTIPO_LETALIDADE
+from Pesquisa_principal.constants import COLUNA_TIPO_VIOLENCIA_NORMALIZADO
+from Pesquisa_principal.constants import MAPEAMENTO_TIPO_VIOLENCIA_NORMALIZADO
+from Pesquisa_principal.constants import COLUNA_FAIXA_ETARIA_SUSPEITO
+from Pesquisa_principal.constants import COLUNA_SUSPEITO_FAIXA_ETARIA_INFORMADA
+from Pesquisa_principal.constants import VALOR_INFO_SUSPEITO_NAO_INFORMADA
+from Pesquisa_principal.constants import MAPEAMENTO_CORRECAO_ESPECIE_VIOLACAO
+from Pesquisa_principal.constants import COMPONENTES_VIOLENCIA
 
 def imprimir_secao(titulo: str) -> None:
     """
@@ -384,3 +384,60 @@ def criar_indicadores_risco_feminicidio(
     )
 
     return dataframe
+
+def criar_componentes_violencia(
+    dataframe: pd.DataFrame,
+) -> pd.DataFrame:
+    """
+    Cria colunas booleanas indicando componentes sobrepostos de violência.
+
+    Exemplo:
+    - TORTURA FÍSICA pode ter componente físico e psicológico.
+    - ASSÉDIO SEXUAL PSÍQUICO pode ter componente sexual e psicológico.
+    - TENTATIVA DE FEMINICÍDIO pode ter componente físico e letal.
+    """
+
+    dataframe = dataframe.copy()
+
+    print("\n" + "=" * 80)
+    print("CRIAÇÃO DE COMPONENTES SOBREPOSTOS DE VIOLÊNCIA")
+    print("=" * 80)
+
+    coluna_especie = "especie_violacao"
+
+    if coluna_especie not in dataframe.columns:
+        print(f"[AVISO] Coluna não encontrada: {coluna_especie}")
+        return dataframe
+
+    colunas_componentes = [
+        "componente_fisico",
+        "componente_psicologico",
+        "componente_sexual",
+        "componente_patrimonial",
+        "componente_moral",
+        "componente_letal",
+    ]
+
+    for coluna in colunas_componentes:
+        dataframe[coluna] = False
+
+    for especie, componentes in COMPONENTES_VIOLENCIA.items():
+        mascara = dataframe[coluna_especie] == especie
+
+        for componente, valor in componentes.items():
+            if componente not in dataframe.columns:
+                dataframe[componente] = False
+
+            dataframe.loc[mascara, componente] = valor
+
+    print("Colunas criadas:")
+    for coluna in colunas_componentes:
+        print(f"- {coluna}")
+
+    print("\nDistribuição dos componentes:")
+    for coluna in colunas_componentes:
+        print(f"\n{coluna}:")
+        print(dataframe[coluna].value_counts(dropna=False))
+
+    return dataframe
+    
