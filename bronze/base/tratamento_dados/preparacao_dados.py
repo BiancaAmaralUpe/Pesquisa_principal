@@ -9,14 +9,21 @@
 # - Identificar colunas categóricas
 # - Validar estrutura final antes de encoding/normalização
 # ======================================================================================
-from Pesquisa_principal.constants import ESPECIES_REMOVER_BASE_TREINO_TESTE
+# Import libs
 import pandas as pd
+
+# Imports tratamento dos dados
+from Pesquisa_principal.bronze.base.tratamento_dados.limpeza_dados import salvar_dataframe_limpo
 from Pesquisa_principal.bronze.analise_dados.definir_metodologia import validar_dataframe
+
+# Imports da analise das analise de dados
 from Pesquisa_principal.bronze.analise_dados.analise_completude import imprimir_secao
+
+# Imports das variaveis das constants
 from Pesquisa_principal.constants import COLUNAS_MANTER_BASE_TREINO_TESTE
-from Pesquisa_principal.constants import COLUNAS_EXIGIR_PREENCHIMENTO_TREINO
 from Pesquisa_principal.constants import MARCADORES_NULOS_MODELAGEM
 from Pesquisa_principal.constants import COLUNAS_REMOVER_BASE_TREINO
+from Pesquisa_principal.constants import ESPECIES_REMOVER_BASE_TREINO_TESTE
 
 def validar_coluna_alvo(
     dataframe: pd.DataFrame,
@@ -266,7 +273,8 @@ def remover_especies_indesejadas_base_treino_teste(
 def preparar_dados_modelagem(
     dataframe: pd.DataFrame,
     coluna_alvo: str,
-) -> tuple[pd.DataFrame, pd.Series]:
+    caminho_saida: str,
+) -> tuple[pd.DataFrame, pd.Series, pd.DataFrame]:
     """
     Executa a preparação inicial dos dados para modelagem.
     """
@@ -274,7 +282,7 @@ def preparar_dados_modelagem(
     imprimir_secao("INÍCIO DA PREPARAÇÃO DOS DADOS PARA MODELAGEM")
 
     if not validar_dataframe(dataframe):
-        return dataframe.copy(), pd.Series(dtype="object")
+        return dataframe.copy(), pd.Series(dtype="object"), dataframe.copy()
 
     validar_coluna_alvo(
         dataframe=dataframe,
@@ -283,36 +291,45 @@ def preparar_dados_modelagem(
 
     validar_base_pre_modelagem(dataframe)
 
-    dataframe_modelagem = dataframe.copy()
-
-    dataframe_modelagem = selecionar_colunas_base_treino_teste(
-        dataframe=dataframe_modelagem,
+    dataframe_treino = selecionar_colunas_base_treino_teste(
+        dataframe=dataframe,
         colunas_manter=COLUNAS_MANTER_BASE_TREINO_TESTE,
     )
 
-    dataframe_modelagem = remover_especies_indesejadas_base_treino_teste(
-        dataframe=dataframe_modelagem,
+    dataframe_treino = remover_especies_indesejadas_base_treino_teste(
+        dataframe=dataframe_treino,
     )
 
-    dataframe_modelagem = remover_registros_com_nulos_em_colunas_obrigatorias(
-        dataframe=dataframe_modelagem,
-        colunas_obrigatorias=COLUNAS_EXIGIR_PREENCHIMENTO_TREINO,
+    dataframe_treino = preencher_nulos_com_marcadores(
+        dataframe=dataframe_treino,
     )
 
-    dataframe_modelagem = remover_colunas_base_treino(
-        dataframe=dataframe_modelagem,
+    dataframe_treino = remover_colunas_base_treino(
+        dataframe=dataframe_treino,
         coluna_alvo=coluna_alvo,
     )
 
-    dataframe_modelagem = preencher_nulos_com_marcadores(dataframe_modelagem)
+    validar_base_pre_modelagem(dataframe_treino)
 
-    identificar_colunas_categoricas(dataframe_modelagem)
+    identificar_colunas_categoricas(dataframe_treino)
 
     X, y = separar_variavel_alvo(
-        dataframe=dataframe_modelagem,
+        dataframe=dataframe_treino,
         coluna_alvo=coluna_alvo,
     )
+
+    salvar_dataframe_limpo(
+        dataframe=dataframe_treino,
+        caminho_saida=caminho_saida,
+    )
+
+    print("\nBase preparada para análise/modelagem.")
+    print(f"X: {X.shape}")
+    print(f"y: {y.shape}")
+    print(f"Base treino/teste: {dataframe_treino.shape}")
+
+    print(f"\nArquivo salvo em: {caminho_saida}")
 
     imprimir_secao("FIM DA PREPARAÇÃO DOS DADOS PARA MODELAGEM")
 
-    return X, y
+    return X, y, dataframe_treino

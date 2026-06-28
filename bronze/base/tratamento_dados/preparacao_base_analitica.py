@@ -7,15 +7,16 @@
 # - Remover registros com ruídos analíticos
 # - Remover variáveis com potencial de enviesamento para modelagem
 # ======================================================================================
+# Imports das libs 
 import pandas as pd
 
-from Pesquisa_principal.constants import (
-    COLUNA_FAIXA_ETARIA_SUSPEITO,
-    COLUNAS_ENVIESAMENTO_REMOVER,
-    COLUNAS_GEOGRAFICAS_TEMPORAIS_REMOVER,
-    COLUNAS_RUIDO_ANALITICO,
-    VALOR_INFO_SUSPEITO_NAO_INFORMADA,
-)
+# Imports das variaveis constants.
+from Pesquisa_principal.constants import COLUNA_FAIXA_ETARIA_SUSPEITO
+from Pesquisa_principal.constants import COLUNAS_ENVIESAMENTO_REMOVER
+from Pesquisa_principal.constants import COLUNAS_GEOGRAFICAS_TEMPORAIS_REMOVER
+from Pesquisa_principal.constants import COLUNAS_RUIDO_ANALITICO
+from Pesquisa_principal.constants import VALOR_INFO_SUSPEITO_NAO_INFORMADA
+
 
 def imprimir_secao(titulo: str) -> None:
     """

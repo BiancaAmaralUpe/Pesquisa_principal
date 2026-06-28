@@ -6,6 +6,7 @@
 # - Preparar X e y em formato numérico para modelagem
 # ======================================================================================
 
+# imports das libs 
 import pandas as pd
 
 def aplicar_encoding_simples(
