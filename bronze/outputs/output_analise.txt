@@ -197,6 +197,53 @@ risco_baixo               176138
 sem_sinal_identificado     96578
 risco_moderado             57159
 risco_elevado               4919
+
+================================================================================
+CRIAÇÃO DE COMPONENTES SOBREPOSTOS DE VIOLÊNCIA
+================================================================================
+Colunas criadas:
+- componente_fisico
+- componente_psicologico
+- componente_sexual
+- componente_patrimonial
+- componente_moral
+- componente_letal
+
+Distribuição dos componentes:
+
+componente_fisico:
+componente_fisico
+False    323099
+True      11695
+Name: count, dtype: int64
+
+componente_psicologico:
+componente_psicologico
+False    328223
+True       6571
+Name: count, dtype: int64
+
+componente_sexual:
+componente_sexual
+False    332224
+True       2570
+Name: count, dtype: int64
+
+componente_patrimonial:
+componente_patrimonial
+False    334794
+Name: count, dtype: int64
+
+componente_moral:
+componente_moral
+False    334794
+Name: count, dtype: int64
+
+componente_letal:
+componente_letal
+False    327100
+True       7694
+Name: count, dtype: int64
 DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\2020_primeiro_semestre_analitico.csv
 
 ================================================================================
@@ -211,14 +258,20 @@ Linhas depois: 334794
 Linhas removidas: 38101
 
 Colunas antes: 32
-Colunas depois: 37
+Colunas depois: 43
 Colunas removidas: 8
-Colunas criadas: 13
-Saldo final de colunas: 5
+Colunas criadas: 19
+Saldo final de colunas: 11
 
 Colunas criadas na preparação analítica:
 - agravantes_unificados
 - classificacao_sinais_risco_feminicidio
+- componente_fisico
+- componente_letal
+- componente_moral
+- componente_patrimonial
+- componente_psicologico
+- componente_sexual
 - indicador_letalidade
 - qtd_sinais_risco_feminicidio
 - risco_ameaca_morte
@@ -307,6 +360,12 @@ COLUNAS MANTIDAS NA BASE ANALÍTICA
 35. risco_violencia_sexual_associada
 36. qtd_sinais_risco_feminicidio
 37. classificacao_sinais_risco_feminicidio
+38. componente_fisico
+39. componente_psicologico
+40. componente_sexual
+41. componente_patrimonial
+42. componente_moral
+43. componente_letal
 
 ================================================================================
 VALORES NULOS RESTANTES NA BASE ANALÍTICA
@@ -366,12 +425,18 @@ risco_separacao_termino                     bool
 risco_violencia_sexual_associada            bool
 qtd_sinais_risco_feminicidio               int64
 classificacao_sinais_risco_feminicidio       str
+componente_fisico                           bool
+componente_psicologico                      bool
+componente_sexual                           bool
+componente_patrimonial                      bool
+componente_moral                            bool
+componente_letal                            bool
 
 ================================================================================
 VALIDAÇÃO FINAL DA BASE ANALÍTICA
 ================================================================================
 Linhas finais: 334794
-Colunas finais: 37
+Colunas finais: 43
 Total de valores nulos: 2454869
 
 Nenhuma coluna duplicada encontrada.
@@ -390,7 +455,7 @@ ESTATÍSTICAS DESCRITIVAS - BASE FEMINICÍDIO
 [1] DIMENSÕES DA BASE LIMPA
 --------------------------------------------------------------------------------
 Quantidade de linhas: 334794
-Quantidade de colunas: 37
+Quantidade de colunas: 43
 
 --------------------------------------------------------------------------------
 [2] COLUNAS DUPLICADAS
@@ -437,6 +502,12 @@ risco_separacao_termino                     bool
 risco_violencia_sexual_associada            bool
 qtd_sinais_risco_feminicidio               int64
 classificacao_sinais_risco_feminicidio       str
+componente_fisico                           bool
+componente_psicologico                      bool
+componente_sexual                           bool
+componente_patrimonial                      bool
+componente_moral                            bool
+componente_letal                            bool
 dtype: object
 
 --------------------------------------------------------------------------------
@@ -456,14 +527,14 @@ motivacao                                  139802             41.76
 pais_origem_suspeito                       138993             41.52
 agravantes                                 101191             30.22
 pais_origem_vitima                           4655              1.39
-cenario_violacao                                0              0.00
-especie_violacao                                0              0.00
-grupo_vulneravel                                0              0.00
-tipo_violacao                                   0              0.00
-sexo_vitima                                     0              0.00
-faixa_etaria_vitima                             0              0.00
-denuncia_emergencial                            0              0.00
 denunciante                                     0              0.00
+denuncia_emergencial                            0              0.00
+cenario_violacao                                0              0.00
+tipo_violacao                                   0              0.00
+grupo_vulneravel                                0              0.00
+especie_violacao                                0              0.00
+faixa_etaria_vitima                             0              0.00
+sexo_vitima                                     0              0.00
 faixa_etaria_suspeito                           0              0.00
 sexo_suspeito                                   0              0.00
 relacao_vitima_suspeito                         0              0.00
@@ -480,6 +551,12 @@ risco_separacao_termino                         0              0.00
 risco_violencia_sexual_associada                0              0.00
 qtd_sinais_risco_feminicidio                    0              0.00
 classificacao_sinais_risco_feminicidio          0              0.00
+componente_fisico                               0              0.00
+componente_psicologico                          0              0.00
+componente_sexual                               0              0.00
+componente_patrimonial                          0              0.00
+componente_moral                                0              0.00
+componente_letal                                0              0.00
 
 --------------------------------------------------------------------------------
 [5] COLUNAS COM ALTO PERCENTUAL DE NULOS
@@ -512,33 +589,39 @@ agravantes                                31
 cenario_violacao                          31
 faixa_etaria_suspeito                     17
 pais_origem_vitima                        15
-grau_instrucao_vitima                     12
 motivacao                                 12
+grau_instrucao_vitima                     12
 grau_instrucao_suspeito                   11
 faixa_etaria_vitima                       10
 tipo_violacao                              7
 tipo_violencia_normalizado                 6
-qtd_sinais_risco_feminicidio               5
 agravantes_policiais                       5
-faixa_renda_suspeito                       5
 faixa_renda_vitima                         5
 subtipo_letalidade                         5
-classificacao_sinais_risco_feminicidio     4
+qtd_sinais_risco_feminicidio               5
+faixa_renda_suspeito                       5
 denuncia_emergencial                       4
 denunciante                                4
-sexo_suspeito                              3
+classificacao_sinais_risco_feminicidio     4
 indicador_letalidade                       3
+sexo_suspeito                              3
 grupo_vulneravel                           2
-deficiencia_vitima                         2
 sexo_vitima                                2
-suspeito_faixa_etaria_informada            2
+deficiencia_vitima                         2
 deficiencia_suspeito                       2
+suspeito_faixa_etaria_informada            2
+risco_escalada_agressoes                   2
+risco_controle_extremo                     2
 risco_ameaca_morte                         2
 risco_violencia_fisica_grave               2
-risco_controle_extremo                     2
-risco_escalada_agressoes                   2
 risco_violencia_sexual_associada           2
 risco_separacao_termino                    2
+componente_fisico                          2
+componente_psicologico                     2
+componente_sexual                          2
+componente_letal                           2
+componente_patrimonial                     1
+componente_moral                           1
 
 --------------------------------------------------------------------------------
 [7] ESTATÍSTICAS DE VARIÁVEIS NUMÉRICAS
@@ -1852,6 +1935,12 @@ Variáveis com baixa ausência (< 5%):
 - risco_separacao_termino: 0.00% de ausência
 - risco_violencia_sexual_associada: 0.00% de ausência
 - qtd_sinais_risco_feminicidio: 0.00% de ausência
+- componente_patrimonial: 0.00% de ausência
+- componente_fisico: 0.00% de ausência
+- componente_psicologico: 0.00% de ausência
+- componente_sexual: 0.00% de ausência
+- componente_letal: 0.00% de ausência
+- componente_moral: 0.00% de ausência
 - pais_origem_vitima: 1.39% de ausência
 
 Variáveis que exigem atenção (5% a 30%):
@@ -1916,14 +2005,6 @@ As variáveis abaixo foram classificadas para exclusão:
   Status: não encontrada na base atual
   Motivo: Variável relacionada ao meio de entrada da denúncia, e não diretamente ao fenômeno analisado.
 
-- nacionalidade_suspeito
-  Status: encontrada na base
-  Motivo: Variável sensível com baixo potencial analítico para a modelagem atual e risco de interpretação enviesada.
-
-- pais_origem_suspeito
-  Status: encontrada na base
-  Motivo: Variável sensível e sujeita a vieses interpretativos.
-
 - raca_cor_suspeito
   Status: não encontrada na base atual
   Motivo: Atributo sensível removido da modelagem para reduzir risco de viés.
@@ -1968,14 +2049,14 @@ motivacao                                        194992     139802              
 pais_origem_suspeito                             195801     138993                  58.48             41.52
 agravantes                                       233603     101191                  69.78             30.22
 pais_origem_vitima                               330139       4655                  98.61              1.39
-cenario_violacao                                 334794          0                 100.00              0.00
-especie_violacao                                 334794          0                 100.00              0.00
-grupo_vulneravel                                 334794          0                 100.00              0.00
-tipo_violacao                                    334794          0                 100.00              0.00
-sexo_vitima                                      334794          0                 100.00              0.00
-faixa_etaria_vitima                              334794          0                 100.00              0.00
-denuncia_emergencial                             334794          0                 100.00              0.00
 denunciante                                      334794          0                 100.00              0.00
+denuncia_emergencial                             334794          0                 100.00              0.00
+cenario_violacao                                 334794          0                 100.00              0.00
+tipo_violacao                                    334794          0                 100.00              0.00
+grupo_vulneravel                                 334794          0                 100.00              0.00
+especie_violacao                                 334794          0                 100.00              0.00
+faixa_etaria_vitima                              334794          0                 100.00              0.00
+sexo_vitima                                      334794          0                 100.00              0.00
 faixa_etaria_suspeito                            334794          0                 100.00              0.00
 sexo_suspeito                                    334794          0                 100.00              0.00
 relacao_vitima_suspeito                          334794          0                 100.00              0.00
@@ -1992,6 +2073,12 @@ risco_separacao_termino                          334794          0              
 risco_violencia_sexual_associada                 334794          0                 100.00              0.00
 qtd_sinais_risco_feminicidio                     334794          0                 100.00              0.00
 classificacao_sinais_risco_feminicidio           334794          0                 100.00              0.00
+componente_fisico                                334794          0                 100.00              0.00
+componente_psicologico                           334794          0                 100.00              0.00
+componente_sexual                                334794          0                 100.00              0.00
+componente_patrimonial                           334794          0                 100.00              0.00
+componente_moral                                 334794          0                 100.00              0.00
+componente_letal                                 334794          0                 100.00              0.00
 
 ================================================================================
 CLASSIFICAÇÃO DAS COLUNAS POR COMPLETUDE
@@ -2007,21 +2094,27 @@ Variáveis com alta completude (>= 95%):
 - sexo_vitima: 100.00% preenchido
 - faixa_etaria_vitima: 100.00% preenchido
 - sexo_suspeito: 100.00% preenchido
-- risco_ameaca_morte: 100.00% preenchido
 - faixa_etaria_suspeito: 100.00% preenchido
 - relacao_vitima_suspeito: 100.00% preenchido
-- agravantes_unificados: 100.00% preenchido
 - indicador_letalidade: 100.00% preenchido
+- agravantes_unificados: 100.00% preenchido
 - subtipo_letalidade: 100.00% preenchido
 - suspeito_faixa_etaria_informada: 100.00% preenchido
+- qtd_sinais_risco_feminicidio: 100.00% preenchido
 - tipo_violencia_normalizado: 100.00% preenchido
-- risco_separacao_termino: 100.00% preenchido
+- risco_ameaca_morte: 100.00% preenchido
 - risco_violencia_fisica_grave: 100.00% preenchido
 - risco_escalada_agressoes: 100.00% preenchido
 - risco_controle_extremo: 100.00% preenchido
-- qtd_sinais_risco_feminicidio: 100.00% preenchido
+- risco_separacao_termino: 100.00% preenchido
 - risco_violencia_sexual_associada: 100.00% preenchido
+- componente_sexual: 100.00% preenchido
 - classificacao_sinais_risco_feminicidio: 100.00% preenchido
+- componente_fisico: 100.00% preenchido
+- componente_psicologico: 100.00% preenchido
+- componente_moral: 100.00% preenchido
+- componente_patrimonial: 100.00% preenchido
+- componente_letal: 100.00% preenchido
 - pais_origem_vitima: 98.61% preenchido
 
 Variáveis com completude intermediária (70% a 95%):

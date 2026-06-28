@@ -12,7 +12,7 @@ Coluna alvo encontrada: tipo_violencia_normalizado
 VALIDAÇÃO DA BASE PRÉ-MODELAGEM
 ================================================================================
 Linhas: 334794
-Colunas: 37
+Colunas: 43
 Total de valores nulos: 2454869
 
 Tipos de dados:
@@ -53,6 +53,12 @@ risco_separacao_termino                     bool
 risco_violencia_sexual_associada            bool
 qtd_sinais_risco_feminicidio               int64
 classificacao_sinais_risco_feminicidio       str
+componente_fisico                           bool
+componente_psicologico                      bool
+componente_sexual                           bool
+componente_patrimonial                      bool
+componente_moral                            bool
+componente_letal                            bool
 dtype: object
 
 ================================================================================
@@ -108,43 +114,21 @@ Espécies removidas:
 - EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA
 
 ================================================================================
-REMOÇÃO DE REGISTROS COM NULOS EM COLUNAS OBRIGATÓRIAS
+PREENCHIMENTO DE NULOS COM MARCADORES
 ================================================================================
-Linhas antes: 334717
-Linhas depois: 8639
-Linhas removidas: 326078
+- motivacao: 139788 nulos preenchidos com 'motivacao_nao_informada'
+- grau_instrucao_vitima: 213509 nulos preenchidos com 'instrucao_vitima_nao_informada'
+- faixa_renda_vitima: 263158 nulos preenchidos com 'renda_vitima_nao_informada'
+- pais_origem_vitima: 4655 nulos preenchidos com 'pais_origem_vitima_nao_informado'
+- nacionalidade_vitima: 176513 nulos preenchidos com 'nacionalidade_vitima_nao_informada'
+- deficiencia_vitima: 173657 nulos preenchidos com 'deficiencia_vitima_nao_informada'
+- grau_instrucao_suspeito: 260063 nulos preenchidos com 'instrucao_suspeito_nao_informada'
+- faixa_renda_suspeito: 282404 nulos preenchidos com 'renda_suspeito_nao_informada'
+- pais_origem_suspeito: 138960 nulos preenchidos com 'pais_origem_suspeito_nao_informado'
+- nacionalidade_suspeito: 186947 nulos preenchidos com 'nacionalidade_suspeito_nao_informada'
+- deficiencia_suspeito: 180450 nulos preenchidos com 'deficiencia_suspeito_nao_informada'
 
-Colunas exigidas com preenchimento:
-- tipo_violacao
-- grupo_vulneravel
-- especie_violacao
-- motivacao
-- denuncia_emergencial
-- agravantes_unificados
-- sexo_vitima
-- grau_instrucao_vitima
-- faixa_renda_vitima
-- pais_origem_vitima
-- nacionalidade_vitima
-- deficiencia_vitima
-- sexo_suspeito
-- grau_instrucao_suspeito
-- faixa_renda_suspeito
-- pais_origem_suspeito
-- nacionalidade_suspeito
-- deficiencia_suspeito
-- relacao_vitima_suspeito
-- indicador_letalidade
-- subtipo_letalidade
-- tipo_violencia_normalizado
-- risco_ameaca_morte
-- risco_violencia_fisica_grave
-- risco_escalada_agressoes
-- risco_controle_extremo
-- risco_separacao_termino
-- risco_violencia_sexual_associada
-- qtd_sinais_risco_feminicidio
-- classificacao_sinais_risco_feminicidio
+Total de nulos após preenchimento: 0
 
 ================================================================================
 REMOÇÃO DE COLUNAS DA BASE DE TREINO
@@ -152,21 +136,44 @@ REMOÇÃO DE COLUNAS DA BASE DE TREINO
 Nenhuma coluna removida da base de treino.
 
 ================================================================================
-PREENCHIMENTO DE NULOS COM MARCADORES
+VALIDAÇÃO DA BASE PRÉ-MODELAGEM
 ================================================================================
-- motivacao: 0 nulos preenchidos com 'motivacao_nao_informada'
-- grau_instrucao_vitima: 0 nulos preenchidos com 'instrucao_vitima_nao_informada'
-- faixa_renda_vitima: 0 nulos preenchidos com 'renda_vitima_nao_informada'
-- pais_origem_vitima: 0 nulos preenchidos com 'pais_origem_vitima_nao_informado'
-- nacionalidade_vitima: 0 nulos preenchidos com 'nacionalidade_vitima_nao_informada'
-- deficiencia_vitima: 0 nulos preenchidos com 'deficiencia_vitima_nao_informada'
-- grau_instrucao_suspeito: 0 nulos preenchidos com 'instrucao_suspeito_nao_informada'
-- faixa_renda_suspeito: 0 nulos preenchidos com 'renda_suspeito_nao_informada'
-- pais_origem_suspeito: 0 nulos preenchidos com 'pais_origem_suspeito_nao_informado'
-- nacionalidade_suspeito: 0 nulos preenchidos com 'nacionalidade_suspeito_nao_informada'
-- deficiencia_suspeito: 0 nulos preenchidos com 'deficiencia_suspeito_nao_informada'
+Linhas: 334717
+Colunas: 30
+Total de valores nulos: 0
 
-Total de nulos após preenchimento: 0
+Tipos de dados:
+tipo_violacao                             string
+grupo_vulneravel                          string
+especie_violacao                          string
+motivacao                                 string
+denuncia_emergencial                      string
+agravantes_unificados                        str
+sexo_vitima                               string
+grau_instrucao_vitima                     string
+faixa_renda_vitima                        string
+pais_origem_vitima                        string
+nacionalidade_vitima                      string
+deficiencia_vitima                        string
+sexo_suspeito                             string
+grau_instrucao_suspeito                   string
+faixa_renda_suspeito                      string
+pais_origem_suspeito                      string
+nacionalidade_suspeito                    string
+deficiencia_suspeito                      string
+relacao_vitima_suspeito                   string
+indicador_letalidade                         str
+subtipo_letalidade                           str
+tipo_violencia_normalizado                   str
+risco_ameaca_morte                          bool
+risco_violencia_fisica_grave                bool
+risco_escalada_agressoes                    bool
+risco_controle_extremo                      bool
+risco_separacao_termino                     bool
+risco_violencia_sexual_associada            bool
+qtd_sinais_risco_feminicidio               int64
+classificacao_sinais_risco_feminicidio       str
+dtype: object
 
 ================================================================================
 COLUNAS CATEGÓRICAS IDENTIFICADAS
@@ -199,18 +206,26 @@ COLUNAS CATEGÓRICAS IDENTIFICADAS
 SEPARAÇÃO DA VARIÁVEL ALVO
 ================================================================================
 Coluna alvo: tipo_violencia_normalizado
-Formato de X: (8639, 29)
-Formato de y: (8639,)
+Formato de X: (334717, 29)
+Formato de y: (334717,)
+DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
+
+Base preparada para análise/modelagem.
+X: (334717, 29)
+y: (334717,)
+Base treino/teste: (334717, 30)
+
+Arquivo salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
 
 ================================================================================
 FIM DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
 ================================================================================
-DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
+
+Output da preparação salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\outputs\output_preparacao_dados.txt
 
 Base preparada para análise/modelagem.
-X: (8639, 29)
-y: (8639,)
-Base treino/teste: (8639, 30)
+X: (334717, 29)
+y: (334717,)
 
 Arquivo salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
 
