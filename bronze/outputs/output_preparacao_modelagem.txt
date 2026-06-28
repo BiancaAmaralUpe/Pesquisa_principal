@@ -1,0 +1,275 @@
+================================================================================
+INÍCIO DA PREPARAÇÃO DA BASE DE MODELAGEM
+================================================================================
+
+================================================================================
+DEFINIÇÃO DO TARGET DA MODELAGEM
+================================================================================
+
+Target definido: classificacao_sinais_risco_feminicidio
+
+Descrição metodológica:
+A variável alvo representa a classificação dos registros conforme a presença e a intensidade de sinais de risco associados ao feminicídio.
+
+Objetivo da modelagem:
+O objetivo é treinar modelos capazes de identificar padrões associados às classes de risco a partir das demais características disponíveis na denúncia.
+
+Distribuição do target:
+classificacao_sinais_risco_feminicidio
+risco_baixo               176138
+sem_sinal_identificado     96578
+risco_moderado             57159
+risco_elevado               4919
+Name: count, dtype: int64
+
+Distribuição percentual do target:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.61
+sem_sinal_identificado    28.85
+risco_moderado            17.07
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+Quantidade de nulos no target: 0
+
+Colunas removidas para evitar vazamento de informação:
+- qtd_sinais_risco_feminicidio
+- risco_ameaca_morte
+- risco_violencia_fisica_grave
+- risco_escalada_agressoes
+- risco_controle_extremo
+- risco_separacao_termino
+- risco_violencia_sexual_associada
+
+Justificativa:
+As colunas removidas por vazamento foram utilizadas direta ou indiretamente na construção do target. Mantê-las no conjunto de treino poderia fazer com que o modelo aprendesse a regra de criação da variável alvo, e não padrões reais dos dados.
+
+================================================================================
+INÍCIO DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
+================================================================================
+
+================================================================================
+VALIDAÇÃO DA COLUNA ALVO
+================================================================================
+Coluna alvo encontrada: classificacao_sinais_risco_feminicidio
+
+================================================================================
+VALIDAÇÃO DA BASE PRÉ-MODELAGEM
+================================================================================
+Linhas: 334794
+Colunas: 43
+Total de valores nulos: 2454869
+
+Tipos de dados:
+tipo_violacao                             string
+grupo_vulneravel                          string
+especie_violacao                          string
+cenario_violacao                          string
+motivacao                                 string
+denuncia_emergencial                      string
+agravantes                                string
+agravantes_policiais                      string
+denunciante                               string
+sexo_vitima                               string
+faixa_etaria_vitima                       string
+grau_instrucao_vitima                     string
+faixa_renda_vitima                        string
+pais_origem_vitima                        string
+nacionalidade_vitima                      string
+deficiencia_vitima                        string
+sexo_suspeito                             string
+faixa_etaria_suspeito                     string
+grau_instrucao_suspeito                   string
+faixa_renda_suspeito                      string
+pais_origem_suspeito                      string
+nacionalidade_suspeito                    string
+deficiencia_suspeito                      string
+relacao_vitima_suspeito                   string
+agravantes_unificados                        str
+indicador_letalidade                         str
+subtipo_letalidade                           str
+suspeito_faixa_etaria_informada              str
+tipo_violencia_normalizado                   str
+risco_ameaca_morte                          bool
+risco_violencia_fisica_grave                bool
+risco_escalada_agressoes                    bool
+risco_controle_extremo                      bool
+risco_separacao_termino                     bool
+risco_violencia_sexual_associada            bool
+qtd_sinais_risco_feminicidio               int64
+classificacao_sinais_risco_feminicidio       str
+componente_fisico                           bool
+componente_psicologico                      bool
+componente_sexual                           bool
+componente_patrimonial                      bool
+componente_moral                            bool
+componente_letal                            bool
+dtype: object
+
+================================================================================
+SELEÇÃO DE COLUNAS DA BASE DE TREINO E TESTE
+================================================================================
+Colunas mantidas no df_limpo_teste_treino.csv:
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes_unificados
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+- risco_ameaca_morte
+- risco_violencia_fisica_grave
+- risco_escalada_agressoes
+- risco_controle_extremo
+- risco_separacao_termino
+- risco_violencia_sexual_associada
+- qtd_sinais_risco_feminicidio
+- classificacao_sinais_risco_feminicidio
+
+Quantidade de colunas mantidas: 30
+
+================================================================================
+REMOÇÃO DE ESPÉCIES INDESEJADAS DA BASE DE TREINO E TESTE
+================================================================================
+Linhas antes: 334794
+Linhas depois: 334717
+Linhas removidas: 77
+
+Espécies removidas:
+- MEMÓRIA E VERDADE
+- CRIMES CONTRA O MEIO AMBIENTE
+- NACIONALIDADE
+- PROPRIEDADE - PATRIMÔNIO GENÉTICO
+- EXPLORAÇÃO DO TRABALHO IDOSO
+- EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA
+
+================================================================================
+PREENCHIMENTO DE NULOS COM MARCADORES
+================================================================================
+- motivacao: 139788 nulos preenchidos com 'motivacao_nao_informada'
+- grau_instrucao_vitima: 213509 nulos preenchidos com 'instrucao_vitima_nao_informada'
+- faixa_renda_vitima: 263158 nulos preenchidos com 'renda_vitima_nao_informada'
+- pais_origem_vitima: 4655 nulos preenchidos com 'pais_origem_vitima_nao_informado'
+- nacionalidade_vitima: 176513 nulos preenchidos com 'nacionalidade_vitima_nao_informada'
+- deficiencia_vitima: 173657 nulos preenchidos com 'deficiencia_vitima_nao_informada'
+- grau_instrucao_suspeito: 260063 nulos preenchidos com 'instrucao_suspeito_nao_informada'
+- faixa_renda_suspeito: 282404 nulos preenchidos com 'renda_suspeito_nao_informada'
+- pais_origem_suspeito: 138960 nulos preenchidos com 'pais_origem_suspeito_nao_informado'
+- nacionalidade_suspeito: 186947 nulos preenchidos com 'nacionalidade_suspeito_nao_informada'
+- deficiencia_suspeito: 180450 nulos preenchidos com 'deficiencia_suspeito_nao_informada'
+
+Total de nulos após preenchimento: 0
+
+================================================================================
+REMOÇÃO DE COLUNAS DA BASE DE TREINO
+================================================================================
+Colunas removidas do X para evitar vazamento ou redundância:
+- qtd_sinais_risco_feminicidio
+- risco_ameaca_morte
+- risco_violencia_fisica_grave
+- risco_escalada_agressoes
+- risco_controle_extremo
+- risco_separacao_termino
+- risco_violencia_sexual_associada
+
+Quantidade de colunas após remoção: 23
+
+================================================================================
+VALIDAÇÃO DA BASE PRÉ-MODELAGEM
+================================================================================
+Linhas: 334717
+Colunas: 23
+Total de valores nulos: 0
+
+Tipos de dados:
+tipo_violacao                             string
+grupo_vulneravel                          string
+especie_violacao                          string
+motivacao                                 string
+denuncia_emergencial                      string
+agravantes_unificados                        str
+sexo_vitima                               string
+grau_instrucao_vitima                     string
+faixa_renda_vitima                        string
+pais_origem_vitima                        string
+nacionalidade_vitima                      string
+deficiencia_vitima                        string
+sexo_suspeito                             string
+grau_instrucao_suspeito                   string
+faixa_renda_suspeito                      string
+pais_origem_suspeito                      string
+nacionalidade_suspeito                    string
+deficiencia_suspeito                      string
+relacao_vitima_suspeito                   string
+indicador_letalidade                         str
+subtipo_letalidade                           str
+tipo_violencia_normalizado                   str
+classificacao_sinais_risco_feminicidio       str
+dtype: object
+
+================================================================================
+COLUNAS CATEGÓRICAS IDENTIFICADAS
+================================================================================
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes_unificados
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+- classificacao_sinais_risco_feminicidio
+
+================================================================================
+SEPARAÇÃO DA VARIÁVEL ALVO
+================================================================================
+Coluna alvo: classificacao_sinais_risco_feminicidio
+Formato de X: (334717, 22)
+Formato de y: (334717,)
+DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
+
+Base preparada para análise/modelagem.
+X: (334717, 22)
+y: (334717,)
+Base treino/teste: (334717, 23)
+
+Arquivo salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
+
+================================================================================
+FIM DA PREPARAÇÃO DOS DADOS PARA MODELAGEM
+================================================================================
+
+================================================================================
+FIM DA PREPARAÇÃO DA BASE DE MODELAGEM
+================================================================================
+
+Output da preparação de modelagem salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\outputs\output_preparacao_modelagem.txt

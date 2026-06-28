@@ -3,447 +3,6 @@ INÍCIO DA ANÁLISE DOS DADOS - CAMADA BRONZE
 ================================================================================
 
 ================================================================================
-INÍCIO DA PREPARAÇÃO DA BASE ANALÍTICA
-================================================================================
-
-================================================================================
-REMOÇÃO DE VARIÁVEIS GEOGRÁFICAS E TEMPORAIS
-================================================================================
-Colunas removidas:
-- uf
-- municipio
-- data_denuncia_ano
-- data_denuncia_mes
-- data_denuncia_dia
-- canal_atendimento
-
-Colunas já deletadas ou ausentes:
-- estado
-- cidade
-- bairro
-
-Quantidade de colunas antes: 32
-Quantidade de colunas depois: 26
-
-================================================================================
-REMOÇÃO DE VARIÁVEIS COM POTENCIAL DE ENVIESAMENTO
-================================================================================
-Colunas removidas:
-- raca_cor_suspeito
-- raca_cor_vitima
-
-Quantidade de colunas antes: 26
-Quantidade de colunas depois: 24
-
-================================================================================
-REMOÇÃO DE REGISTROS COM RUÍDO
-================================================================================
-- cenario_violacao: 2310 registros removidos por <NA>
-- sexo_vitima: 7502 registros removidos por <NA>
-- sexo_suspeito: 10818 registros removidos por <NA>
-- relacao_vitima_suspeito: 17471 registros removidos por <NA>
-
-Registros antes: 372895
-Registros depois: 334794
-Registros removidos: 38101
-
-================================================================================
-FIM DA PREPARAÇÃO DA BASE ANALÍTICA
-================================================================================
-Linhas finais: 334794
-Colunas finais: 24
-
-================================================================================
-CORREÇÃO TEXTUAL DA ESPÉCIE DE VIOLAÇÃO
-================================================================================
-Correções aplicadas em especie_violacao:
-- TORTURA PSÍ QUICA -> TORTURA PSÍQUICA
-- CRIMES CONTRA A SEGURANÇA PSÍ QUICA -> CRIMES CONTRA A SEGURANÇA PSÍQUICA
-- LIBERDADE SEXUAL PSÍ QUICA - ASSÉDIO SEXUAL -> LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL
-- LIBERDADE SEXUAL PSÍ QUICA - ABUSO SEXUAL PSÍQUICO -> LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO
-
-================================================================================
-UNIFICAÇÃO DE AGRAVANTES
-================================================================================
-Coluna criada: agravantes_unificados
-
-Distribuição da coluna criada:
-agravantes_unificados
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE                                  104936
-sem_agravante_informado                                                                           101191
-AGRESSOR CONHECIDO                                                                                 54390
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE                                         20451
-RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO                                             17411
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL                                       7842
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES                                                 7099
-MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO                                     6460
-RISCO DE MORTE                                                                                      3990
-AGRESSOR DESCONHECIDO                                                                               3302
-DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET                                                                    1211
-RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR                                                     1030
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE                                                        964
-AGRESSOR POSSUI INFLUÊNCIA JUNTO ÀS AUTORIDADES LOCAIS                                               802
-AGRESSOR POLICIAL/MILITAR                                                                            628
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL MILITAR                  472
-VÍTIMA EM SANGRAMENTO                                                                                267
-AGRESSOR CONHECIDO | POLICIAL MILITAR                                                                244
-AGRESSOR POLICIAL/MILITAR | POLICIAL MILITAR                                                         228
-CONVIVENTE                                                                                           213
-ASCENDENTE                                                                                           207
-AGRESSOR CÔNJUGE                                                                                     206
-DESCENDENTE OU PARENTE                                                                               205
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | FORÇAS ARMADAS                    116
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL CIVIL                    110
-VÍTIMA EM SITUAÇÃO DE RUA                                                                            108
-AGRESSOR DESCONHECIDO | POLICIAL MILITAR                                                              90
-AGRESSOR POLICIAL/MILITAR | POLICIAL CIVIL                                                            67
-AGRESSOR CONHECIDO | POLICIAL CIVIL                                                                   47
-AGRESSOR CONHECIDO | FORÇAS ARMADAS                                                                   45
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE | POLICIAL MILITAR                                      43
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | POLICIAL MILITAR                      42
-CRUEL                                                                                                 27
-DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL                                                                25
-TORPE                                                                                                 24
-VÍTIMA IDOSA                                                                                          23
-INSIDIOSO                                                                                             21
-AGRESSOR POLICIAL/MILITAR | FORÇAS ARMADAS                                                            20
-MOTIVO VIL                                                                                            20
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL FEDERAL                   20
-AGRESSOR DESCONHECIDO | POLICIAL CIVIL                                                                19
-À TRAIÇÃO                                                                                             17
-AGRESSOR CONHECIDO | POLICIAL FEDERAL                                                                 16
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES | POLICIAL MILITAR                                15
-CRIANÇA                                                                                               14
-VÍTIMA PRESA EM INSTITUIÇÃO PÚBLICA                                                                   13
-RELAÇÃO DE TRABALHO ENTRE A VÍTIMA E O AGRESSOR | POLICIAL MILITAR                                    11
-OU POR DINHEIRO                                                                                       11
-AUTOR EM POSIÇÃO DE ASCENÇÃO OU DE AUTORIDADE | POLICIAL CIVIL                                        10
-VÍTIMA INTERNADA EM INSTITUIÇÃO DE RESSOCIALIZAÇÃO                                                     9
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | POLICIAL MILITAR                          7
-MOTIVO VIL, TORPE, INSIDIOSO, CRUEL, À TRAIÇÃO, OU POR DINHEIRO | POLICIAL MILITAR                     7
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | POLICIAL CIVIL                            7
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | POLICIAL CIVIL                         7
-DIVULGAÇÃO/EXPOSIÇÃO NA INTERNET | POLICIAL CIVIL                                                      6
-VÍTIMA IDOSA, CRIANÇA, DEFICIENTE OU MINORIA ÉTNICA OU SOCIAL | FORÇAS ARMADAS                         5
-AGRESSOR DESCONHECIDO | POLICIAL FEDERAL                                                               4
-RISCO DE MORTE | POLICIAL MILITAR                                                                      4
-AGRESSOR CONHECIDO | POLICIAL RODOVIÁRIO FEDERAL                                                       4
-VIOLÊNCIA NO ÂMBITO DOMÉSTICO - COABITAÇÃO E HOSPITALIDADE | FORÇAS ARMADAS                            3
-AGRESSOR CÔNJUGE, CONVIVENTE, ASCENDENTE, DESCENDENTE OU PARENTE | POLICIAL RODOVIÁRIO FEDERAL         3
-EM PÚBLICO - OUTRAS PESSOAS PRESENCIAM AS AGRESSÕES | POLICIAL CIVIL                                   2
-RESULTADO DAS AGRESSÕES SE PROLONGAM AO LONGO DO TEMPO | POLICIAL CIVIL                                2
-RISCO DE MORTE | POLICIAL CIVIL                                                                        1
-
-================================================================================
-CLASSIFICAÇÃO DE LETALIDADE
-================================================================================
-Coluna criada: indicador_letalidade
-Coluna criada: subtipo_letalidade
-
-Distribuição do indicador de letalidade:
-indicador_letalidade
-nao_letal          327100
-tentativa_letal      7562
-letal_consumada       132
-
-Distribuição do subtipo de letalidade:
-subtipo_letalidade
-nao_aplicavel            327100
-tentativa_feminicidio      6795
-tentativa_homicidio         767
-feminicidio                 107
-homicidio                    25
-
-================================================================================
-CRIAÇÃO DO INDICADOR DE FAIXA ETÁRIA DO SUSPEITO INFORMADA
-================================================================================
-Coluna criada: suspeito_faixa_etaria_informada
-
-Distribuição:
-suspeito_faixa_etaria_informada
-nao    204608
-sim    130186
-
-================================================================================
-CLASSIFICAÇÃO DO TIPO DE VIOLÊNCIA NORMALIZADO
-================================================================================
-Coluna criada: tipo_violencia_normalizado
-
-Distribuição:
-tipo_violencia_normalizado
-violencia_psicologica    124081
-violencia_moral           93512
-violencia_fisica          87843
-violencia_patrimonial     11888
-outras_violencias         10978
-violencia_sexual           6492
-
-================================================================================
-CRIAÇÃO DE INDICADORES DE RISCO DE FEMINICÍDIO
-================================================================================
-Colunas criadas:
-- risco_ameaca_morte
-- risco_violencia_fisica_grave
-- risco_escalada_agressoes
-- risco_controle_extremo
-- risco_separacao_termino
-- risco_violencia_sexual_associada
-- qtd_sinais_risco_feminicidio
-- classificacao_sinais_risco_feminicidio
-
-Distribuição da classificação de sinais de risco:
-classificacao_sinais_risco_feminicidio
-risco_baixo               176138
-sem_sinal_identificado     96578
-risco_moderado             57159
-risco_elevado               4919
-
-================================================================================
-CRIAÇÃO DE COMPONENTES SOBREPOSTOS DE VIOLÊNCIA
-================================================================================
-Colunas criadas:
-- componente_fisico
-- componente_psicologico
-- componente_sexual
-- componente_patrimonial
-- componente_moral
-- componente_letal
-
-Distribuição dos componentes:
-
-componente_fisico:
-componente_fisico
-False    323099
-True      11695
-Name: count, dtype: int64
-
-componente_psicologico:
-componente_psicologico
-False    328223
-True       6571
-Name: count, dtype: int64
-
-componente_sexual:
-componente_sexual
-False    332224
-True       2570
-Name: count, dtype: int64
-
-componente_patrimonial:
-componente_patrimonial
-False    334794
-Name: count, dtype: int64
-
-componente_moral:
-componente_moral
-False    334794
-Name: count, dtype: int64
-
-componente_letal:
-componente_letal
-False    327100
-True       7694
-Name: count, dtype: int64
-DataFrame limpo salvo com sucesso em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\2020_primeiro_semestre_analitico.csv
-
-================================================================================
-RELATÓRIO DA PREPARAÇÃO ANALÍTICA DA BASE
-================================================================================
-
-================================================================================
-COMPARAÇÃO DE DIMENSÕES
-================================================================================
-Linhas antes: 372895
-Linhas depois: 334794
-Linhas removidas: 38101
-
-Colunas antes: 32
-Colunas depois: 43
-Colunas removidas: 8
-Colunas criadas: 19
-Saldo final de colunas: 11
-
-Colunas criadas na preparação analítica:
-- agravantes_unificados
-- classificacao_sinais_risco_feminicidio
-- componente_fisico
-- componente_letal
-- componente_moral
-- componente_patrimonial
-- componente_psicologico
-- componente_sexual
-- indicador_letalidade
-- qtd_sinais_risco_feminicidio
-- risco_ameaca_morte
-- risco_controle_extremo
-- risco_escalada_agressoes
-- risco_separacao_termino
-- risco_violencia_fisica_grave
-- risco_violencia_sexual_associada
-- subtipo_letalidade
-- suspeito_faixa_etaria_informada
-- tipo_violencia_normalizado
-
-================================================================================
-COLUNAS REMOVIDAS DA BASE ANALÍTICA
-================================================================================
-
-- Coluna: canal_atendimento
-  Tipo de decisão: operacional
-  Motivo: Variável relacionada ao meio de entrada da denúncia, sem uso previsto na modelagem.
-
-- Coluna: data_denuncia_ano
-  Tipo de decisão: temporal
-  Motivo: Variável temporal removida por não fazer parte do recorte metodológico atual.
-
-- Coluna: data_denuncia_dia
-  Tipo de decisão: temporal
-  Motivo: Variável temporal removida por não fazer parte do recorte metodológico atual.
-
-- Coluna: data_denuncia_mes
-  Tipo de decisão: temporal
-  Motivo: Variável temporal removida para evitar dependência temporal ou sazonalidade artificial na modelagem.
-
-- Coluna: municipio
-  Tipo de decisão: geográfica
-  Motivo: Variável geográfica com alta cardinalidade e sem aderência direta ao objetivo atual da modelagem.
-
-- Coluna: raca_cor_suspeito
-  Tipo de decisão: sensível
-  Motivo: Atributo sensível removido da modelagem para reduzir risco de enviesamento.
-
-- Coluna: raca_cor_vitima
-  Tipo de decisão: sensível
-  Motivo: Atributo sensível removido da modelagem para reduzir risco de enviesamento. Pode ser preservado em análises descritivas, caso faça parte do recorte social da pesquisa.
-
-- Coluna: uf
-  Tipo de decisão: geográfica
-  Motivo: Variável geográfica removida para reduzir risco de overfitting e enviesamento regional.
-
-================================================================================
-COLUNAS MANTIDAS NA BASE ANALÍTICA
-================================================================================
-01. tipo_violacao
-02. grupo_vulneravel
-03. especie_violacao
-04. cenario_violacao
-05. motivacao
-06. denuncia_emergencial
-07. agravantes
-08. agravantes_policiais
-09. denunciante
-10. sexo_vitima
-11. faixa_etaria_vitima
-12. grau_instrucao_vitima
-13. faixa_renda_vitima
-14. pais_origem_vitima
-15. nacionalidade_vitima
-16. deficiencia_vitima
-17. sexo_suspeito
-18. faixa_etaria_suspeito
-19. grau_instrucao_suspeito
-20. faixa_renda_suspeito
-21. pais_origem_suspeito
-22. nacionalidade_suspeito
-23. deficiencia_suspeito
-24. relacao_vitima_suspeito
-25. agravantes_unificados
-26. indicador_letalidade
-27. subtipo_letalidade
-28. suspeito_faixa_etaria_informada
-29. tipo_violencia_normalizado
-30. risco_ameaca_morte
-31. risco_violencia_fisica_grave
-32. risco_escalada_agressoes
-33. risco_controle_extremo
-34. risco_separacao_termino
-35. risco_violencia_sexual_associada
-36. qtd_sinais_risco_feminicidio
-37. classificacao_sinais_risco_feminicidio
-38. componente_fisico
-39. componente_psicologico
-40. componente_sexual
-41. componente_patrimonial
-42. componente_moral
-43. componente_letal
-
-================================================================================
-VALORES NULOS RESTANTES NA BASE ANALÍTICA
-================================================================================
-                         qtd_nulos  percentual_nulos
-agravantes_policiais        333117             99.50
-faixa_renda_suspeito        282465             84.37
-faixa_renda_vitima          263216             78.62
-grau_instrucao_suspeito     260125             77.70
-grau_instrucao_vitima       213559             63.79
-nacionalidade_suspeito      186991             55.85
-deficiencia_suspeito        180497             53.91
-nacionalidade_vitima        176557             52.74
-deficiencia_vitima          173701             51.88
-motivacao                   139802             41.76
-pais_origem_suspeito        138993             41.52
-agravantes                  101191             30.22
-pais_origem_vitima            4655              1.39
-
-================================================================================
-TIPOS DE DADOS DA BASE ANALÍTICA
-================================================================================
-tipo_violacao                             string
-grupo_vulneravel                          string
-especie_violacao                          string
-cenario_violacao                          string
-motivacao                                 string
-denuncia_emergencial                      string
-agravantes                                string
-agravantes_policiais                      string
-denunciante                               string
-sexo_vitima                               string
-faixa_etaria_vitima                       string
-grau_instrucao_vitima                     string
-faixa_renda_vitima                        string
-pais_origem_vitima                        string
-nacionalidade_vitima                      string
-deficiencia_vitima                        string
-sexo_suspeito                             string
-faixa_etaria_suspeito                     string
-grau_instrucao_suspeito                   string
-faixa_renda_suspeito                      string
-pais_origem_suspeito                      string
-nacionalidade_suspeito                    string
-deficiencia_suspeito                      string
-relacao_vitima_suspeito                   string
-agravantes_unificados                        str
-indicador_letalidade                         str
-subtipo_letalidade                           str
-suspeito_faixa_etaria_informada              str
-tipo_violencia_normalizado                   str
-risco_ameaca_morte                          bool
-risco_violencia_fisica_grave                bool
-risco_escalada_agressoes                    bool
-risco_controle_extremo                      bool
-risco_separacao_termino                     bool
-risco_violencia_sexual_associada            bool
-qtd_sinais_risco_feminicidio               int64
-classificacao_sinais_risco_feminicidio       str
-componente_fisico                           bool
-componente_psicologico                      bool
-componente_sexual                           bool
-componente_patrimonial                      bool
-componente_moral                            bool
-componente_letal                            bool
-
-================================================================================
-VALIDAÇÃO FINAL DA BASE ANALÍTICA
-================================================================================
-Linhas finais: 334794
-Colunas finais: 43
-Total de valores nulos: 2454869
-
-Nenhuma coluna duplicada encontrada.
-
-Base preparada para análise/modelagem.
-
-================================================================================
 ESTATÍSTICAS DESCRITIVAS
 ================================================================================
 
@@ -1903,128 +1462,6 @@ FIM DA ANÁLISE DE FREQUÊNCIAS
 ================================================================================
 
 ================================================================================
-DEFINIÇÃO METODOLÓGICA
-================================================================================
-
-================================================================================
-CLASSIFICAÇÃO METODOLÓGICA DAS VARIÁVEIS POR COMPLETUDE
-================================================================================
-
-Variáveis com baixa ausência (< 5%):
-- tipo_violacao: 0.00% de ausência
-- grupo_vulneravel: 0.00% de ausência
-- especie_violacao: 0.00% de ausência
-- cenario_violacao: 0.00% de ausência
-- denuncia_emergencial: 0.00% de ausência
-- denunciante: 0.00% de ausência
-- sexo_vitima: 0.00% de ausência
-- faixa_etaria_vitima: 0.00% de ausência
-- sexo_suspeito: 0.00% de ausência
-- faixa_etaria_suspeito: 0.00% de ausência
-- relacao_vitima_suspeito: 0.00% de ausência
-- agravantes_unificados: 0.00% de ausência
-- subtipo_letalidade: 0.00% de ausência
-- indicador_letalidade: 0.00% de ausência
-- suspeito_faixa_etaria_informada: 0.00% de ausência
-- tipo_violencia_normalizado: 0.00% de ausência
-- classificacao_sinais_risco_feminicidio: 0.00% de ausência
-- risco_ameaca_morte: 0.00% de ausência
-- risco_violencia_fisica_grave: 0.00% de ausência
-- risco_escalada_agressoes: 0.00% de ausência
-- risco_controle_extremo: 0.00% de ausência
-- risco_separacao_termino: 0.00% de ausência
-- risco_violencia_sexual_associada: 0.00% de ausência
-- qtd_sinais_risco_feminicidio: 0.00% de ausência
-- componente_patrimonial: 0.00% de ausência
-- componente_fisico: 0.00% de ausência
-- componente_psicologico: 0.00% de ausência
-- componente_sexual: 0.00% de ausência
-- componente_letal: 0.00% de ausência
-- componente_moral: 0.00% de ausência
-- pais_origem_vitima: 1.39% de ausência
-
-Variáveis que exigem atenção (5% a 30%):
-- Nenhuma variável nessa faixa.
-
-Variáveis críticas (>= 30%):
-- agravantes_policiais: 99.50% de ausência
-- faixa_renda_suspeito: 84.37% de ausência
-- faixa_renda_vitima: 78.62% de ausência
-- grau_instrucao_suspeito: 77.70% de ausência
-- grau_instrucao_vitima: 63.79% de ausência
-- nacionalidade_suspeito: 55.85% de ausência
-- deficiencia_suspeito: 53.91% de ausência
-- nacionalidade_vitima: 52.74% de ausência
-- deficiencia_vitima: 51.88% de ausência
-- motivacao: 41.76% de ausência
-- pais_origem_suspeito: 41.52% de ausência
-- agravantes: 30.22% de ausência
-
-================================================================================
-OBSERVAÇÕES METODOLÓGICAS PRELIMINARES
-================================================================================
-- Valores como 'N/D', 'NULL', 'NAN', 'None' e campos vazios foram tratados como ausência de informação para padronizar a representação de dados não disponíveis na base.
-- A categoria 'info_suspeito_nao_informada' foi mantida como marcador operacional para registros em que a faixa etária do suspeito não estava disponível.
-- A categoria 'info_suspeito_nao_informada' não deve ser interpretada como característica social, demográfica ou comportamental do suspeito.
-- A categoria 'info_vitima_nao_informada' foi mantida como marcador operacional para registros sem faixa etária informada da vítima.
-- As variáveis geográficas foram removidas da base analítica porque o objetivo atual do estudo não envolve análise espacial.
-- A remoção das variáveis geográficas busca reduzir risco de overfitting, alta cardinalidade e enviesamento regional na etapa de modelagem.
-- As variáveis temporais derivadas da data da denúncia foram removidas por não fazerem parte do recorte metodológico atual.
-- Registros com ausência em 'cenario_violacao', 'sexo_vitima', 'sexo_suspeito' e 'relacao_vitima_suspeito' foram tratados como ruído analítico e removidos da base de análise.
-- Variáveis com alto percentual de ausência foram marcadas para avaliação antes de qualquer uso em score, análise inferencial ou modelagem preditiva.
-- A coluna 'agravantes_policiais' apresentou percentual elevado de ausência, mas foi mantida para análise específica por possuir significado analítico nos registros preenchidos.
-- Variáveis sociodemográficas sensíveis devem ser analisadas com cautela. Elas podem ser relevantes para análise social descritiva, mas podem ser removidas da modelagem para reduzir risco de viés.
-
-================================================================================
-VARIÁVEIS DEFINIDAS PARA EXCLUSÃO DA BASE ANALÍTICA
-================================================================================
-
-As variáveis abaixo foram classificadas para exclusão:
-
-- uf
-  Status: não encontrada na base atual
-  Motivo: Variável geográfica removida para reduzir risco de overfitting, alta cardinalidade e enviesamento regional.
-
-- municipio
-  Status: não encontrada na base atual
-  Motivo: Variável geográfica com alta cardinalidade e sem aderência direta ao objetivo atual da modelagem.
-
-- data_denuncia_ano
-  Status: não encontrada na base atual
-  Motivo: Variável temporal fora do recorte metodológico atual.
-
-- data_denuncia_mes
-  Status: não encontrada na base atual
-  Motivo: Variável temporal fora do recorte metodológico atual.
-
-- data_denuncia_dia
-  Status: não encontrada na base atual
-  Motivo: Variável temporal fora do recorte metodológico atual.
-
-- canal_atendimento
-  Status: não encontrada na base atual
-  Motivo: Variável relacionada ao meio de entrada da denúncia, e não diretamente ao fenômeno analisado.
-
-- raca_cor_suspeito
-  Status: não encontrada na base atual
-  Motivo: Atributo sensível removido da modelagem para reduzir risco de viés.
-
-- raca_cor_vitima
-  Status: não encontrada na base atual
-  Motivo: Atributo sensível removido da modelagem para reduzir risco de viés. Pode ser preservado em análises descritivas, caso faça parte do recorte social da pesquisa.
-
-Observação: a exclusão é aplicada na base analítica/modelagem, preservando a camada bronze como registro rastreável dos dados tratados.
-
-================================================================================
-RECOMENDAÇÕES PARA A PRÓXIMA ETAPA
-================================================================================
-- Preservar a base bronze tratada como camada rastreável, sem aplicar balanceamento ou transformações irreversíveis.
-- Aplicar remoções metodológicas apenas na base analítica usada para estatística, score ou modelagem.
-- Avaliar variáveis críticas de completude antes de incluí-las em modelos preditivos.
-- Documentar separadamente quais variáveis foram removidas por baixa qualidade, por alto percentual de nulos, por alta cardinalidade ou por risco de viés.
-- Manter variáveis sensíveis disponíveis para análise descritiva quando forem relevantes para o fenômeno social estudado, mas evitar seu uso direto na modelagem preditiva sem justificativa metodológica.
-
-================================================================================
 ANÁLISE DE COMPLETUDE
 ================================================================================
 
@@ -2184,6 +1621,151 @@ Name: count, dtype: Int64
 ================================================================================
 FIM DA ANÁLISE DE COMPLETUDE
 ================================================================================
+
+================================================================================
+DEFINIÇÃO METODOLÓGICA
+================================================================================
+
+================================================================================
+CLASSIFICAÇÃO METODOLÓGICA DAS VARIÁVEIS POR COMPLETUDE
+================================================================================
+
+Variáveis com baixa ausência (< 5%):
+- tipo_violacao: 0.00% de ausência
+- grupo_vulneravel: 0.00% de ausência
+- especie_violacao: 0.00% de ausência
+- cenario_violacao: 0.00% de ausência
+- denuncia_emergencial: 0.00% de ausência
+- denunciante: 0.00% de ausência
+- sexo_vitima: 0.00% de ausência
+- faixa_etaria_vitima: 0.00% de ausência
+- sexo_suspeito: 0.00% de ausência
+- faixa_etaria_suspeito: 0.00% de ausência
+- relacao_vitima_suspeito: 0.00% de ausência
+- agravantes_unificados: 0.00% de ausência
+- subtipo_letalidade: 0.00% de ausência
+- indicador_letalidade: 0.00% de ausência
+- suspeito_faixa_etaria_informada: 0.00% de ausência
+- tipo_violencia_normalizado: 0.00% de ausência
+- classificacao_sinais_risco_feminicidio: 0.00% de ausência
+- risco_ameaca_morte: 0.00% de ausência
+- risco_violencia_fisica_grave: 0.00% de ausência
+- risco_escalada_agressoes: 0.00% de ausência
+- risco_controle_extremo: 0.00% de ausência
+- risco_separacao_termino: 0.00% de ausência
+- risco_violencia_sexual_associada: 0.00% de ausência
+- qtd_sinais_risco_feminicidio: 0.00% de ausência
+- componente_patrimonial: 0.00% de ausência
+- componente_fisico: 0.00% de ausência
+- componente_psicologico: 0.00% de ausência
+- componente_sexual: 0.00% de ausência
+- componente_letal: 0.00% de ausência
+- componente_moral: 0.00% de ausência
+- pais_origem_vitima: 1.39% de ausência
+
+Variáveis que exigem atenção (5% a 30%):
+- Nenhuma variável nessa faixa.
+
+Variáveis críticas (>= 30%):
+- agravantes_policiais: 99.50% de ausência
+- faixa_renda_suspeito: 84.37% de ausência
+- faixa_renda_vitima: 78.62% de ausência
+- grau_instrucao_suspeito: 77.70% de ausência
+- grau_instrucao_vitima: 63.79% de ausência
+- nacionalidade_suspeito: 55.85% de ausência
+- deficiencia_suspeito: 53.91% de ausência
+- nacionalidade_vitima: 52.74% de ausência
+- deficiencia_vitima: 51.88% de ausência
+- motivacao: 41.76% de ausência
+- pais_origem_suspeito: 41.52% de ausência
+- agravantes: 30.22% de ausência
+
+================================================================================
+OBSERVAÇÕES METODOLÓGICAS PRELIMINARES
+================================================================================
+- Valores como 'N/D', 'NULL', 'NAN', 'None' e campos vazios foram tratados como ausência de informação para padronizar a representação de dados não disponíveis na base.
+- A categoria 'info_suspeito_nao_informada' foi mantida como marcador operacional para registros em que a faixa etária do suspeito não estava disponível.
+- A categoria 'info_suspeito_nao_informada' não deve ser interpretada como característica social, demográfica ou comportamental do suspeito.
+- A categoria 'info_vitima_nao_informada' foi mantida como marcador operacional para registros sem faixa etária informada da vítima.
+- As variáveis geográficas foram removidas da base analítica porque o objetivo atual do estudo não envolve análise espacial.
+- A remoção das variáveis geográficas busca reduzir risco de overfitting, alta cardinalidade e enviesamento regional na etapa de modelagem.
+- As variáveis temporais derivadas da data da denúncia foram removidas por não fazerem parte do recorte metodológico atual.
+- Registros com ausência em 'cenario_violacao', 'sexo_vitima', 'sexo_suspeito' e 'relacao_vitima_suspeito' foram tratados como ruído analítico e removidos da base de análise.
+- Variáveis com alto percentual de ausência foram marcadas para avaliação antes de qualquer uso em score, análise inferencial ou modelagem preditiva.
+- A coluna 'agravantes_policiais' apresentou percentual elevado de ausência, mas foi mantida para análise específica por possuir significado analítico nos registros preenchidos.
+- Variáveis sociodemográficas sensíveis devem ser analisadas com cautela. Elas podem ser relevantes para análise social descritiva, mas podem ser removidas da modelagem para reduzir risco de viés.
+
+================================================================================
+VARIÁVEIS DEFINIDAS PARA EXCLUSÃO DA BASE ANALÍTICA
+================================================================================
+
+As variáveis abaixo foram classificadas para exclusão:
+
+- uf
+  Status: não encontrada na base atual
+  Motivo: Variável geográfica removida para reduzir risco de overfitting, alta cardinalidade e enviesamento regional.
+
+- municipio
+  Status: não encontrada na base atual
+  Motivo: Variável geográfica com alta cardinalidade e sem aderência direta ao objetivo atual da modelagem.
+
+- data_denuncia_ano
+  Status: não encontrada na base atual
+  Motivo: Variável temporal fora do recorte metodológico atual.
+
+- data_denuncia_mes
+  Status: não encontrada na base atual
+  Motivo: Variável temporal fora do recorte metodológico atual.
+
+- data_denuncia_dia
+  Status: não encontrada na base atual
+  Motivo: Variável temporal fora do recorte metodológico atual.
+
+- canal_atendimento
+  Status: não encontrada na base atual
+  Motivo: Variável relacionada ao meio de entrada da denúncia, e não diretamente ao fenômeno analisado.
+
+- raca_cor_suspeito
+  Status: não encontrada na base atual
+  Motivo: Atributo sensível removido da modelagem para reduzir risco de viés.
+
+- raca_cor_vitima
+  Status: não encontrada na base atual
+  Motivo: Atributo sensível removido da modelagem para reduzir risco de viés. Pode ser preservado em análises descritivas, caso faça parte do recorte social da pesquisa.
+
+Observação: a exclusão é aplicada na base analítica/modelagem, preservando a camada bronze como registro rastreável dos dados tratados.
+
+================================================================================
+RECOMENDAÇÕES PARA A PRÓXIMA ETAPA
+================================================================================
+- Preservar a base bronze tratada como camada rastreável, sem aplicar balanceamento ou transformações irreversíveis.
+- Aplicar remoções metodológicas apenas na base analítica usada para estatística, score ou modelagem.
+- Avaliar variáveis críticas de completude antes de incluí-las em modelos preditivos.
+- Documentar separadamente quais variáveis foram removidas por baixa qualidade, por alto percentual de nulos, por alta cardinalidade ou por risco de viés.
+- Manter variáveis sensíveis disponíveis para análise descritiva quando forem relevantes para o fenômeno social estudado, mas evitar seu uso direto na modelagem preditiva sem justificativa metodológica.
+
+================================================================================
+GRÁFICOS DE DISTRIBUIÇÃO
+================================================================================
+
+================================================================================
+GERAÇÃO DE GRÁFICOS DE DISTRIBUIÇÃO
+================================================================================
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_target_classificacao_sinais_risco_feminicidio.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_tipo_violencia_normalizado.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_qtd_sinais_risco_feminicidio.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_componente_fisico.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_componente_psicologico.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_componente_sexual.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\distribuicao_componente_letal.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\top10_tipo_violacao.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\top10_especie_violacao.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\top10_relacao_vitima_suspeito.png
+Mapa de calor salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\mapa_calor_target_tipo_violencia.png
+Mapa de calor salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\mapa_calor_target_indicador_letalidade.png
+Mapa de calor salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\graficos\analise_dados\mapa_calor_target_componente_letal.png
+
+Gráficos de distribuição gerados com sucesso.
 
 ================================================================================
 FIM DA ANÁLISE DOS DADOS - CAMADA BRONZE
