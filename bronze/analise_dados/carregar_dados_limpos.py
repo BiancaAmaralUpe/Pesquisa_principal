@@ -7,9 +7,11 @@
 # - Padronizar leitura de valores ausentes
 # - Retornar um DataFrame pronto para análise
 # ======================================================================================
-
-from pathlib import Path
+# imports das libs 
 import pandas as pd
+from pathlib import Path
+
+# imports das variaveis constants.
 from Pesquisa_principal.constants import VALORES_NULOS_PADRAO
 
 def validar_caminho_arquivo(caminho_csv: str | Path) -> Path:

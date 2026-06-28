@@ -7,7 +7,7 @@
 # - Identificar variáveis críticas por excesso de valores ausentes
 # - Investigar campos com marcadores de informação não informada
 # ======================================================================================
-
+# imports das libs 
 import pandas as pd
 
 def imprimir_secao(titulo: str) -> None:

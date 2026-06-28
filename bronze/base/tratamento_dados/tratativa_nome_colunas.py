@@ -6,10 +6,9 @@
 # - Converter nomes para snake_case
 # - Remover acentos, espaços, caracteres especiais e conectivos
 # ======================================================================================
-
+# imports das libs 
 import re
 import unicodedata
-
 import pandas as pd
 
 CONECTIVOS_REMOVER = {

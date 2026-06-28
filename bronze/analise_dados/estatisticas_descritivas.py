@@ -8,7 +8,10 @@
 # - Investigar frequência das principais categorias
 # - Apoiar decisões iniciais sobre qualidade dos dados
 # ======================================================================================
+# imports das libs 
 import pandas as pd
+
+# imports das variaveis constants.
 from Pesquisa_principal.constants import CATEGORIAS_NAO_INFORMADAS, COLUNAS_CATEGORICAS_INTERESSE, LIMITE_PERCENTUAL_NULOS_CRITICO
 
 def imprimir_titulo(titulo: str) -> None:

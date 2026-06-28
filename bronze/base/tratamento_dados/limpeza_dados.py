@@ -8,13 +8,16 @@
 # - Tratar valores textuais equivalentes a nulo
 # - Gerar relatório simples da limpeza
 # ======================================================================================
-
+# imports das libs 
 import pandas as pd
 from pathlib import Path
+
+# imports das variaveis constants.
 from Pesquisa_principal.constants import COLUNA_CABECALHO_ESPERADA
 from Pesquisa_principal.constants import MARCADORES_NULOS_CRITICOS_BRONZE
 from Pesquisa_principal.constants import VALORES_NULOS_TEXTUAIS
-# pyrefly: ignore [missing-import]
+
+# imports dos modulos de tratamento de dados.
 from Pesquisa_principal.bronze.base.tratamento_dados.tratativa_nome_colunas import tratar_nomes_colunas
 
 def validar_cabecalho(dataframe: pd.DataFrame) -> None:

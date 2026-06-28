@@ -7,7 +7,10 @@
 # - Identificar categorias raras
 # - Apoiar decisões sobre agrupamento, normalização e modelagem
 # ======================================================================================
+# imports das libs 
 import pandas as pd
+
+# imports das variaveis constants.
 from Pesquisa_principal.constants import COLUNAS_FREQUENCIA, LIMITE_PERCENTUAL_CATEGORIA_RARA
 
 def imprimir_secao(titulo: str) -> None:

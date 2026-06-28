@@ -6,8 +6,10 @@
 # - Organizar o diagnóstico em formato de relatório textual
 # - Identificar problemas básicos antes da limpeza dos dados
 # ======================================================================================
-
+# imports das libs 
 import pandas as pd
+
+# imports das variaveis constants.
 from Pesquisa_principal.constants import VALORES_TEXTUAIS_PROBLEMATICOS
 
 def imprimir_titulo(titulo: str) -> None:

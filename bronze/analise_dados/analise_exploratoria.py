@@ -7,6 +7,7 @@
 # - Investigar relações entre violência, letalidade, agravantes e grupo vulnerável
 # - Apoiar interpretações antes de score/modelagem
 # ======================================================================================
+# imports das libs 
 import pandas as pd
 
 pd.set_option("display.max_columns", None)
