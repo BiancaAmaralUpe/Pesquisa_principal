@@ -86,6 +86,14 @@ ARQUIVO_OUTPUT_ANALISE_DADOS = (
 ARQUIVO_OUTPUT_PREPARACAO_DADOS = (
     BRONZE_OUTPUTS_DIR / "output_preparacao_dados.txt"
 )
+
+ARQUIVO_OUTPUT_BASE_ANALITICA = (
+    BRONZE_OUTPUTS_DIR / "output_base_analitica.txt"
+)
+
+ARQUIVO_OUTPUT_PREPARACAO_MODELAGEM = (
+    BRONZE_OUTPUTS_DIR / "output_preparacao_modelagem.txt"
+)
 # ======================================================================================
 # Parâmetros de qualidade/completude dos dados
 # ======================================================================================
@@ -277,6 +285,14 @@ COLUNAS_MANTER_BASE_TREINO_TESTE = [
     "risco_violencia_sexual_associada",
     "qtd_sinais_risco_feminicidio",
     "classificacao_sinais_risco_feminicidio",
+
+    # Componentes sobrepostos de violência
+    "componente_fisico",
+    "componente_psicologico",
+    "componente_sexual",
+    "componente_patrimonial",
+    "componente_moral",
+    "componente_letal",
 ]
 
 COLUNAS_REMOVER_BASE_TREINO = [
@@ -604,3 +620,71 @@ COMPONENTES_VIOLENCIA = {
         "componente_psicologico": True,
     },
 }
+
+# ======================================================================================
+# Target da modelagem
+# ======================================================================================
+
+COLUNA_ALVO_MODELAGEM = "classificacao_sinais_risco_feminicidio"
+
+# ======================================================================================
+# Colunas removidas da base de treino
+# ======================================================================================
+
+COLUNAS_REMOVER_BASE_TREINO = [
+    "qtd_sinais_risco_feminicidio",
+    "risco_ameaca_morte",
+    "risco_violencia_fisica_grave",
+    "risco_escalada_agressoes",
+    "risco_controle_extremo",
+    "risco_separacao_termino",
+    "risco_violencia_sexual_associada",
+]
+
+# ======================================================================================
+# Pasta de gráficos
+# ======================================================================================
+PASTA_GRAFICOS_ANALISE = ROOT_DIR / "bronze" / "graficos" / "analise_dados"
+
+# ======================================================================================
+# Diretórios da camada Silver
+# ======================================================================================
+
+SILVER_DIR = ROOT_DIR / "silver"
+
+SILVER_OUTPUTS_DIR = SILVER_DIR / "outputs"
+
+SILVER_GRAFICOS_DIR = SILVER_DIR / "graficos"
+
+SILVER_ARTEFATOS_DIR = SILVER_DIR / "artefatos"
+
+SILVER_DADOS_DIR = SILVER_DIR / "dados"
+
+
+# ======================================================================================
+# Arquivos de saída da camada Silver
+# ======================================================================================
+
+ARQUIVO_OUTPUT_SILVER = (
+    SILVER_OUTPUTS_DIR / "output_silver.txt"
+)
+
+ARQUIVO_METRICAS_MODELOS = (
+    SILVER_OUTPUTS_DIR / "metricas_modelos.csv"
+)
+
+ARQUIVO_COMPARACAO_MODELOS = (
+    SILVER_OUTPUTS_DIR / "comparacao_modelos.csv"
+)
+
+ARQUIVO_MELHOR_MODELO = (
+    SILVER_ARTEFATOS_DIR / "melhor_modelo.pkl"
+)
+
+ARQUIVO_ENCODER = (
+    SILVER_ARTEFATOS_DIR / "encoder.pkl"
+)
+
+ARQUIVO_SCALER = (
+    SILVER_ARTEFATOS_DIR / "scaler.pkl"
+)
