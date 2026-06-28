@@ -68,7 +68,7 @@ ARQUIVO_CSV_FEMINICIDIO_NORMALIZADO = (
 )
 
 ARQUIVO_CSV_LIMPO_TESTE_TREINO = (
-    BRONZE_INTERMEDIARIOS_DIR / "df_limpo_teste_treino.csv"
+    ROOT_DIR / "bronze" / "dados" / "intermediarios_dados" / "df_limpo_teste_treino.csv"
 )
 
 # ======================================================================================
@@ -241,6 +241,44 @@ COLUNAS_ENVIESAMENTO_REMOVER = [
 # ======================================================================================
 
 COLUNA_ALVO_MODELAGEM = "tipo_violencia_normalizado"
+
+ARQUIVO_CSV_LIMPO_TESTE_TREINO = (
+    BRONZE_INTERMEDIARIOS_DIR / "df_limpo_teste_treino.csv"
+)
+
+COLUNAS_MANTER_BASE_TREINO_TESTE = [
+    "tipo_violacao",
+    "grupo_vulneravel",
+    "especie_violacao",
+    "motivacao",
+    "denuncia_emergencial",
+    "agravantes_unificados",
+    "sexo_vitima",
+    "grau_instrucao_vitima",
+    "faixa_renda_vitima",
+    "pais_origem_vitima",
+    "nacionalidade_vitima",
+    "deficiencia_vitima",
+    "sexo_suspeito",
+    "grau_instrucao_suspeito",
+    "faixa_renda_suspeito",
+    "pais_origem_suspeito",
+    "nacionalidade_suspeito",
+    "deficiencia_suspeito",
+    "relacao_vitima_suspeito",
+    "indicador_letalidade",
+    "subtipo_letalidade",
+    "tipo_violencia_normalizado",
+    "risco_ameaca_morte",
+    "risco_violencia_fisica_grave",
+    "risco_escalada_agressoes",
+    "risco_controle_extremo",
+    "risco_separacao_termino",
+    "risco_violencia_sexual_associada",
+    "qtd_sinais_risco_feminicidio",
+    "classificacao_sinais_risco_feminicidio",
+]
+
 COLUNAS_REMOVER_BASE_TREINO = [
     # Colunas de faixa etária removidas por decisão metodológica
     "suspeito_faixa_etaria_informada",
@@ -252,9 +290,23 @@ COLUNAS_REMOVER_BASE_TREINO = [
     "agravantes_policiais",
 ]
 
+# Usar somente para validação mínima, se necessário.
+# Não usar esta lista para remover nulos de todas as colunas da base.
+COLUNAS_EXIGIR_PREENCHIMENTO_TREINO = [
+    "tipo_violencia_normalizado",
+    "tipo_violacao",
+    "grupo_vulneravel",
+    "especie_violacao",
+    "denuncia_emergencial",
+    "sexo_vitima",
+    "sexo_suspeito",
+    "relacao_vitima_suspeito",
+]
+
 # ======================================================================================
 # Marcadores para preenchimento de nulos na preparação de modelagem
 # ======================================================================================
+
 MARCADORES_NULOS_MODELAGEM = {
     "motivacao": "motivacao_nao_informada",
     "grau_instrucao_vitima": "instrucao_vitima_nao_informada",
@@ -293,13 +345,6 @@ VARIAVEIS_EXCLUSAO_BASE_ANALITICA = {
     "canal_atendimento": (
         "Variável relacionada ao meio de entrada da denúncia, e não diretamente "
         "ao fenômeno analisado."
-    ),
-    "nacionalidade_suspeito": (
-        "Variável sensível com baixo potencial analítico para a modelagem atual "
-        "e risco de interpretação enviesada."
-    ),
-    "pais_origem_suspeito": (
-        "Variável sensível e sujeita a vieses interpretativos."
     ),
     "raca_cor_suspeito": (
         "Atributo sensível removido da modelagem para reduzir risco de viés."
@@ -524,3 +569,38 @@ ESPECIES_REMOVER_BASE_TREINO_TESTE = [
 "EXPLORAÇÃO DO TRABALHO IDOSO",
 "EXPLORAÇÃO DO TRABALHO DA PESSOA COM DEFICIÊNCIA",
 ]
+
+# ======================================================================================
+# Componentes sobrepostos de violência
+# ======================================================================================
+
+COMPONENTES_VIOLENCIA = {
+    "TORTURA FÍSICA": {
+        "componente_fisico": True,
+        "componente_psicologico": True,
+    },
+    "TENTATIVA DE FEMINICÍDIO": {
+        "componente_fisico": True,
+        "componente_letal": True,
+    },
+    "TENTATIVA DE HOMICÍDIO": {
+        "componente_fisico": True,
+        "componente_letal": True,
+    },
+    "FEMINICÍDIO": {
+        "componente_fisico": True,
+        "componente_letal": True,
+    },
+    "HOMICÍDIO": {
+        "componente_fisico": True,
+        "componente_letal": True,
+    },
+    "LIBERDADE SEXUAL PSÍQUICA - ASSÉDIO SEXUAL": {
+        "componente_sexual": True,
+        "componente_psicologico": True,
+    },
+    "LIBERDADE SEXUAL PSÍQUICA - ABUSO SEXUAL PSÍQUICO": {
+        "componente_sexual": True,
+        "componente_psicologico": True,
+    },
+}
