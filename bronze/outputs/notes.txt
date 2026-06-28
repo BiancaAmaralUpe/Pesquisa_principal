@@ -1,0 +1,33 @@
+output_analise.txt
+------------------
+-> REMOÇÃO DE VARIÁVEIS GEOGRÁFICAS E TEMPORAIS
+	- O escopo da pesquisa é nacional, ou regional, é importante especificar os dados ou o volume é mais importante para o modelo, faz sentido esse tipo de indagação?
+	
+-> REMOÇÃO DE REGISTROS COM RUÍDO
+	- Importante apresentar a exclusão de dados, fazer um grafico para fins de documentação, verificar se faz sentido
+	- Registros antes: 372.895
+	- Registros depois: 334.794
+	- Registros removidos: 38.101
+	- Percentual removido: (38.101 ÷ 372.895) × 100 = 10,22%
+	- Percentual restante: (334.794 ÷ 372.895) × 100 = 89,78%
+------------------
+
+output_bronze.txt
+------------------
+Nada a declarar
+------------------
+
+output_preparacao_dados.txt
+------------------
+-> Descrever textualmente qual o target (alvo) e o que ele deve descrever, identificar dúvidas a serem resolvidas.
+
+-> Seleção de Modelos
+  - Definir Seeds (reprodutibilidade)
+  - Definir Modelos, justificar escolhas
+  - Definir Hiperparametros: parametros a definir, otimização de seleção de hiperparametros
+  - Definir Metodos de Avaliação dos modelos
+  - Definir Metodos de Comparação dos modelos, metodos estátisticos e contínuos
+  - Salvar Modelos. Identificar se é necessário compilar e salvar modelos para reprodutibilidade da pesquisa por outros pesquisadores.
+  
+
+Discutir se faz sentido com o professor orientador
