@@ -1,0 +1,384 @@
+================================================================================
+INÍCIO DA PIPELINE SILVER - MODELAGEM
+================================================================================
+
+================================================================================
+LEITURA DA BASE GERADA PELA CAMADA BRONZE
+================================================================================
+Arquivo de entrada: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\bronze\dados\intermediarios_dados\df_limpo_teste_treino.csv
+
+Base carregada com sucesso.
+Linhas: 334717
+Colunas: 23
+
+Coluna alvo encontrada:
+classificacao_sinais_risco_feminicidio
+
+Total de valores nulos na base:
+0
+
+Tipos de dados carregados:
+tipo_violacao                             str
+grupo_vulneravel                          str
+especie_violacao                          str
+motivacao                                 str
+denuncia_emergencial                      str
+agravantes_unificados                     str
+sexo_vitima                               str
+grau_instrucao_vitima                     str
+faixa_renda_vitima                        str
+pais_origem_vitima                        str
+nacionalidade_vitima                      str
+deficiencia_vitima                        str
+sexo_suspeito                             str
+grau_instrucao_suspeito                   str
+faixa_renda_suspeito                      str
+pais_origem_suspeito                      str
+nacionalidade_suspeito                    str
+deficiencia_suspeito                      str
+relacao_vitima_suspeito                   str
+indicador_letalidade                      str
+subtipo_letalidade                        str
+tipo_violencia_normalizado                str
+classificacao_sinais_risco_feminicidio    str
+dtype: object
+
+Distribuição da coluna alvo:
+classificacao_sinais_risco_feminicidio
+risco_baixo               176116
+sem_sinal_identificado     96523
+risco_moderado             57159
+risco_elevado               4919
+Name: count, dtype: int64
+
+Distribuição percentual da coluna alvo:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+================================================================================
+SEPARAÇÃO ENTRE VARIÁVEIS EXPLICATIVAS E TARGET
+================================================================================
+Coluna alvo: classificacao_sinais_risco_feminicidio
+
+Formato de X:
+(334717, 22)
+
+Formato de y:
+(334717,)
+
+Colunas de X:
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes_unificados
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+
+Distribuição de y:
+classificacao_sinais_risco_feminicidio
+risco_baixo               176116
+sem_sinal_identificado     96523
+risco_moderado             57159
+risco_elevado               4919
+Name: count, dtype: int64
+
+Distribuição percentual de y:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+Separação concluída com sucesso.
+
+================================================================================
+DIVISÃO TREINO/TESTE ESTRATIFICADA
+================================================================================
+Tamanho do teste: 0.2
+Random state: 42
+
+Formato dos dados:
+X_train: (267773, 22)
+X_test: (66944, 22)
+y_train: (267773,)
+y_test: (66944,)
+
+--------------------------------------------------------------------------------
+DISTRIBUIÇÃO DO TARGET - BASE COMPLETA
+--------------------------------------------------------------------------------
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+risco_baixo               176116
+sem_sinal_identificado     96523
+risco_moderado             57159
+risco_elevado               4919
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+--------------------------------------------------------------------------------
+DISTRIBUIÇÃO DO TARGET - TREINO
+--------------------------------------------------------------------------------
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+risco_baixo               140893
+sem_sinal_identificado     77218
+risco_moderado             45727
+risco_elevado               3935
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+--------------------------------------------------------------------------------
+DISTRIBUIÇÃO DO TARGET - TESTE
+--------------------------------------------------------------------------------
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+risco_baixo               35223
+sem_sinal_identificado    19305
+risco_moderado            11432
+risco_elevado               984
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+Divisão treino/teste concluída com sucesso.
+
+================================================================================
+APLICAÇÃO DO ONE-HOT ENCODING
+================================================================================
+
+================================================================================
+IDENTIFICAÇÃO DE COLUNAS CATEGÓRICAS
+================================================================================
+Quantidade de colunas categóricas: 22
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes_unificados
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+
+================================================================================
+IDENTIFICAÇÃO DE COLUNAS NUMÉRICAS/BOOLEANAS
+================================================================================
+Quantidade de colunas numéricas/booleanas: 0
+
+Ajustando encoder no X_train...
+Aplicando encoder no X_test...
+
+Encoding finalizado com sucesso.
+Formato original X_train: (267773, 22)
+Formato original X_test: (66944, 22)
+Formato codificado X_train: (267773, 398)
+Formato codificado X_test: (66944, 398)
+Encoder salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\artefatos\encoder.pkl
+
+Primeiras colunas geradas pelo encoding:
+- tipo_violacao_1. VIOLÊNCIA FÍSICA
+- tipo_violacao_2. VIOLÊNCIA PSICOLÓGICA
+- tipo_violacao_3. CRIMES CONTRA A VIDA
+- tipo_violacao_4. AGRESSÕES QUE VIOLAM A HONRA
+- tipo_violacao_5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE
+- tipo_violacao_6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA
+- tipo_violacao_7. VIOLAÇÕES GERAIS
+- grupo_vulneravel_1-Violência Contra a Mulher
+- grupo_vulneravel_2-Violência Doméstica e Familiar Contra a Mulher
+- especie_violacao_ABORTO
+- especie_violacao_AGRESSÃO/VIAS DE FATO
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL
+- especie_violacao_AMEAÇA/COAÇÃO
+- especie_violacao_APOLOGIA E INCITAÇÃO AO SUICÍDIO
+- especie_violacao_ASSÉDIO MORAL
+- especie_violacao_AUTOMUTILAÇÃO
+- especie_violacao_AUTONOMIA DE VONTADE
+- especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO
+- especie_violacao_CIDADANIA
+
+================================================================================
+TREINAMENTO DO MODELO - ÁRVORE DE DECISÃO
+================================================================================
+Formato de X_train: (267773, 398)
+Formato de y_train: (267773,)
+
+Parâmetros do modelo:
+criterion: gini
+max_depth: 20
+min_samples_leaf: 100
+class_weight: balanced
+random_state: 42
+
+Modelo Árvore de Decisão treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - ÁRVORE DE DECISÃO
+================================================================================
+
+Métricas principais:
+Accuracy treino: 0.9836
+Accuracy teste: 0.9829
+Balanced accuracy teste: 0.9764
+Macro precision teste: 0.8985
+Macro recall teste: 0.9764
+Macro F1-score teste: 0.9289
+Weighted F1-score teste: 0.9837
+
+Classification report - Teste:
+                        precision    recall  f1-score   support
+
+           risco_baixo       1.00      0.98      0.99     35223
+         risco_elevado       0.64      0.97      0.77       984
+        risco_moderado       0.96      0.95      0.96     11432
+sem_sinal_identificado       1.00      1.00      1.00     19305
+
+              accuracy                           0.98     66944
+             macro avg       0.90      0.98      0.93     66944
+          weighted avg       0.99      0.98      0.98     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - ÁRVORE DE DECISÃO
+================================================================================
+max_depth=2 | acc_treino=0.3350 | acc_teste=0.3355 | f1_treino=0.3316 | f1_teste=0.3287
+max_depth=4 | acc_treino=0.7327 | acc_teste=0.7342 | f1_treino=0.6175 | f1_teste=0.6186
+max_depth=6 | acc_treino=0.8297 | acc_teste=0.8299 | f1_treino=0.7703 | f1_teste=0.7687
+max_depth=8 | acc_treino=0.9261 | acc_teste=0.9267 | f1_treino=0.8648 | f1_teste=0.8645
+max_depth=10 | acc_treino=0.9743 | acc_teste=0.9739 | f1_treino=0.9095 | f1_teste=0.9085
+max_depth=12 | acc_treino=0.9810 | acc_teste=0.9802 | f1_treino=0.9203 | f1_teste=0.9180
+max_depth=15 | acc_treino=0.9830 | acc_teste=0.9822 | f1_treino=0.9266 | f1_teste=0.9245
+max_depth=20 | acc_treino=0.9836 | acc_teste=0.9829 | f1_treino=0.9307 | f1_teste=0.9289
+max_depth=25 | acc_treino=0.9836 | acc_teste=0.9829 | f1_treino=0.9307 | f1_teste=0.9289
+max_depth=30 | acc_treino=0.9836 | acc_teste=0.9829 | f1_treino=0.9307 | f1_teste=0.9289
+
+Gráficos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_macro_f1.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Árvore de Decisão
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[19305     0     0     0]
+ [   93 34669   394    67]
+ [    0    89 10870   473]
+ [    0     0    29   955]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\matriz_confusao_arvore_decisao_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Árvore de Decisão
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[1.         0.         0.         0.        ]
+ [0.00264032 0.98427164 0.01118587 0.00190217]
+ [0.         0.00778516 0.95083975 0.04137509]
+ [0.         0.         0.02947154 0.97052846]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\matriz_confusao_arvore_decisao_normalizada.png
+
+================================================================================
+BASE CODIFICADA E MODELO ÁRVORE DE DECISÃO AVALIADO
+================================================================================
+X_train original: (267773, 22)
+X_test original: (66944, 22)
+X_train encoded: (267773, 398)
+X_test encoded: (66944, 398)
+y_train: (267773,)
+y_test: (66944,)
+
+================================================================================
+MÉTRICAS DO MODELO - ÁRVORE DE DECISÃO
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           98.36%
+Accuracy teste                            98.29%
+Balanced accuracy teste                   97.64%
+Macro precision teste                     89.85%
+Macro recall teste                        97.64%
+Macro F1-score teste                      92.89%
+Weighted F1-score teste                   98.37%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste            0.07 p.p.
+
+Interpretação rápida:
+- Não há sinal forte de overfitting pela diferença entre treino e teste.
+
+================================================================================
+FIM DA PIPELINE SILVER - MODELAGEM
+================================================================================
+
+Output Silver salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\outputs\output_silver.txt
