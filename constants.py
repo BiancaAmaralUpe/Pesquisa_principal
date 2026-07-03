@@ -660,6 +660,29 @@ SILVER_ARTEFATOS_DIR = SILVER_DIR / "artefatos"
 
 SILVER_DADOS_DIR = SILVER_DIR / "dados"
 
+# ======================================================================================
+# Logs de experimentos dos modelos - Silver
+# ======================================================================================
+
+ARQUIVO_LOG_ARVORE_DECISAO = (
+    SILVER_DIR / "modelos" / "arvore_decisao.txt"
+)
+
+ARQUIVO_LOG_RANDOM_FOREST = (
+    SILVER_DIR / "modelos" / "random_forest.txt"
+)
+
+ARQUIVO_LOG_REGRESSAO_LOGISTICA = (
+    SILVER_DIR / "modelos" / "regressao_logistica.txt"
+)
+
+ARQUIVO_LOG_XGBOOST = (
+    SILVER_DIR / "modelos" / "xgboost_modelo.txt"
+)
+
+ARQUIVO_LOG_LIGHTGBM = (
+    SILVER_DIR / "modelos" / "lightgbm_modelo.txt"
+)
 
 # ======================================================================================
 # Arquivos de saída da camada Silver
@@ -687,4 +710,111 @@ ARQUIVO_ENCODER = (
 
 ARQUIVO_SCALER = (
     SILVER_ARTEFATOS_DIR / "scaler.pkl"
+)
+
+# ======================================================================================
+# Parâmetros da modelagem - Silver
+# ======================================================================================
+
+RANDOM_STATE = 42
+TEST_SIZE = 0.20
+
+# ======================================================================================
+# Parâmetros da Árvore de Decisão - Silver
+# ======================================================================================
+
+MAX_DEPTH_ARVORE_DECISAO = 20
+MIN_SAMPLES_LEAF_ARVORE_DECISAO = 100
+
+# ======================================================================================
+# Parâmetros da Random Forest - Silver
+# ======================================================================================
+
+N_ESTIMATORS_RANDOM_FOREST = 100
+
+MAX_DEPTH_RANDOM_FOREST = 20
+
+MIN_SAMPLES_LEAF_RANDOM_FOREST = 100
+
+MAX_FEATURES_RANDOM_FOREST = "sqrt"
+
+N_JOBS_RANDOM_FOREST = -1
+
+# ======================================================================================
+# Parâmetros da Regressão Logística - Silver
+# ======================================================================================
+
+MAX_ITER_REGRESSAO_LOGISTICA = 1000
+
+C_REGRESSAO_LOGISTICA = 1.0
+
+SOLVER_REGRESSAO_LOGISTICA = "saga"
+
+PENALTY_REGRESSAO_LOGISTICA = "l2"
+
+N_JOBS_REGRESSAO_LOGISTICA = -1
+
+# ======================================================================================
+# Parâmetros do XGBoost - Silver
+# ======================================================================================
+
+N_ESTIMATORS_XGBOOST = 100
+
+MAX_DEPTH_XGBOOST = 6
+
+LEARNING_RATE_XGBOOST = 0.1
+
+SUBSAMPLE_XGBOOST = 0.8
+
+COLSAMPLE_BYTREE_XGBOOST = 0.8
+
+TREE_METHOD_XGBOOST = "hist"
+
+N_JOBS_XGBOOST = -1
+
+# ======================================================================================
+# Parâmetros do LightGBM - Silver
+# ======================================================================================
+
+N_ESTIMATORS_LIGHTGBM = 100
+
+MAX_DEPTH_LIGHTGBM = 6
+
+LEARNING_RATE_LIGHTGBM = 0.1
+
+NUM_LEAVES_LIGHTGBM = 31
+
+SUBSAMPLE_LIGHTGBM = 0.8
+
+COLSAMPLE_BYTREE_LIGHTGBM = 0.8
+
+N_JOBS_LIGHTGBM = -1
+
+
+# ======================================================================================
+# Diretórios e logs de : - Silver
+# ARVORE DE DECISAO
+# RANDOM FOREST
+# REGRESSAO LOGISTICA
+# XGBOOST
+# LIGHTGBM
+# ======================================================================================
+PASTA_GRAFICOS_ARVORE_DECISAO = (
+    SILVER_GRAFICOS_DIR / "arvore_decisao"
+)
+
+PASTA_GRAFICOS_RANDOM_FOREST = (
+    SILVER_GRAFICOS_DIR / "random_forest"
+)
+
+PASTA_GRAFICOS_REGRESSAO_LOGISTICA = (
+    SILVER_GRAFICOS_DIR / "regressao_logistica"
+)
+
+PASTA_GRAFICOS_XGBOOST = (
+    SILVER_GRAFICOS_DIR / "xgboost_modelo"
+)
+
+PASTA_GRAFICOS_LIGHTGBM = (
+    SILVER_GRAFICOS_DIR / "lightgbm_modelo"
 )
