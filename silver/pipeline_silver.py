@@ -86,6 +86,7 @@ from Pesquisa_principal.silver.modelos.xgboost_modelo import treinar_xgboost
 from Pesquisa_principal.silver.modelos.xgboost_modelo import avaliar_xgboost
 from Pesquisa_principal.silver.modelos.xgboost_modelo import registrar_treinamento_xgboost
 from Pesquisa_principal.silver.modelos.grafico_xgboost_modelo import gerar_grafico_overfitting_xgboost
+from Pesquisa_principal.silver.modelos.matriz_confusao_xgboost_modelo import gerar_matrizes_confusao_xgboost
 
 from Pesquisa_principal.silver.modelos.lightgbm_modelo import treinar_lightgbm
 from Pesquisa_principal.silver.modelos.lightgbm_modelo import avaliar_lightgbm  
