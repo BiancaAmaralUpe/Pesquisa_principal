@@ -254,67 +254,72 @@ Primeiras colunas geradas pelo encoding:
 - especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO
 - especie_violacao_CIDADANIA
 
+Árvore de Decisão desativada na orquestração da Silver.
+
+Random Forest desativada na orquestração da Silver.
+
 ================================================================================
-TREINAMENTO DO MODELO - ÁRVORE DE DECISÃO
+ORQUESTRAÇÃO DO MODELO: REGRESSÃO LOGÍSTICA
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - REGRESSÃO LOGÍSTICA
 ================================================================================
 Formato de X_train: (267773, 398)
 Formato de y_train: (267773,)
 
 Parâmetros do modelo:
-criterion: gini
-max_depth: 20
-min_samples_leaf: 100
+max_iter: 1000
+C: 1.0
+solver: saga
+l1_ratio: 0.0
 class_weight: balanced
 random_state: 42
 
-Modelo Árvore de Decisão treinado com sucesso.
+Modelo Regressão Logística treinado com sucesso.
 
 ================================================================================
-AVALIAÇÃO DO MODELO - ÁRVORE DE DECISÃO
+AVALIAÇÃO DO MODELO - REGRESSÃO LOGÍSTICA
 ================================================================================
 
 Métricas principais:
-Accuracy treino: 0.9836
-Accuracy teste: 0.9829
-Balanced accuracy teste: 0.9764
-Macro precision teste: 0.8985
-Macro recall teste: 0.9764
-Macro F1-score teste: 0.9289
-Weighted F1-score teste: 0.9837
+Accuracy treino: 0.9963
+Accuracy teste: 0.9960
+Balanced accuracy teste: 0.9949
+Macro precision teste: 0.9825
+Macro recall teste: 0.9949
+Macro F1-score teste: 0.9885
+Weighted F1-score teste: 0.9960
 
 Classification report - Teste:
                         precision    recall  f1-score   support
 
-           risco_baixo       1.00      0.98      0.99     35223
-         risco_elevado       0.64      0.97      0.77       984
-        risco_moderado       0.96      0.95      0.96     11432
+           risco_baixo       1.00      1.00      1.00     35223
+         risco_elevado       0.95      0.99      0.97       984
+        risco_moderado       0.98      0.99      0.99     11432
 sem_sinal_identificado       1.00      1.00      1.00     19305
 
-              accuracy                           0.98     66944
-             macro avg       0.90      0.98      0.93     66944
-          weighted avg       0.99      0.98      0.98     66944
+              accuracy                           1.00     66944
+             macro avg       0.98      0.99      0.99     66944
+          weighted avg       1.00      1.00      1.00     66944
 
 
 ================================================================================
-ANÁLISE DE OVERFITTING - ÁRVORE DE DECISÃO
+ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA
 ================================================================================
-max_depth=2 | acc_treino=0.3350 | acc_teste=0.3355 | f1_treino=0.3316 | f1_teste=0.3287
-max_depth=4 | acc_treino=0.7327 | acc_teste=0.7342 | f1_treino=0.6175 | f1_teste=0.6186
-max_depth=6 | acc_treino=0.8297 | acc_teste=0.8299 | f1_treino=0.7703 | f1_teste=0.7687
-max_depth=8 | acc_treino=0.9261 | acc_teste=0.9267 | f1_treino=0.8648 | f1_teste=0.8645
-max_depth=10 | acc_treino=0.9743 | acc_teste=0.9739 | f1_treino=0.9095 | f1_teste=0.9085
-max_depth=12 | acc_treino=0.9810 | acc_teste=0.9802 | f1_treino=0.9203 | f1_teste=0.9180
-max_depth=15 | acc_treino=0.9830 | acc_teste=0.9822 | f1_treino=0.9266 | f1_teste=0.9245
-max_depth=20 | acc_treino=0.9836 | acc_teste=0.9829 | f1_treino=0.9307 | f1_teste=0.9289
-max_depth=25 | acc_treino=0.9836 | acc_teste=0.9829 | f1_treino=0.9307 | f1_teste=0.9289
-max_depth=30 | acc_treino=0.9836 | acc_teste=0.9829 | f1_treino=0.9307 | f1_teste=0.9289
+C=0.001 | acc_treino=0.7411 | acc_teste=0.7405 | f1_treino=0.5623 | f1_teste=0.5612
+C=0.01 | acc_treino=0.9224 | acc_teste=0.9218 | f1_treino=0.8313 | f1_teste=0.8286
+C=0.1 | acc_treino=0.9710 | acc_teste=0.9698 | f1_treino=0.9358 | f1_teste=0.9318
+C=1.0 | acc_treino=0.9963 | acc_teste=0.9960 | f1_treino=0.9897 | f1_teste=0.9885
+C=10.0 | acc_treino=0.9961 | acc_teste=0.9961 | f1_treino=0.9885 | f1_teste=0.9878
+C=100.0 | acc_treino=0.9946 | acc_teste=0.9942 | f1_treino=0.9879 | f1_teste=0.9858
 
 Gráficos salvos com sucesso em:
-- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_accuracy.png
-- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_macro_f1.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_macro_f1.png
 
 ================================================================================
-GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Árvore de Decisão
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Regressão Logística
 ================================================================================
 
 Labels utilizadas:
@@ -325,14 +330,14 @@ Labels utilizadas:
 
 Matriz calculada:
 [[19305     0     0     0]
- [   93 34669   394    67]
- [    0    89 10870   473]
- [    0     0    29   955]]
+ [    2 35048   173     0]
+ [    0    30 11347    55]
+ [    0     0     8   976]]
 
-Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\matriz_confusao_arvore_decisao_absoluta.png
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_absoluta.png
 
 ================================================================================
-GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Árvore de Decisão
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Regressão Logística
 ================================================================================
 
 Labels utilizadas:
@@ -342,15 +347,19 @@ Labels utilizadas:
 - risco_elevado
 
 Matriz calculada:
-[[1.         0.         0.         0.        ]
- [0.00264032 0.98427164 0.01118587 0.00190217]
- [0.         0.00778516 0.95083975 0.04137509]
- [0.         0.         0.02947154 0.97052846]]
+[[1.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00]
+ [5.67810805e-05 9.95031655e-01 4.91156347e-03 0.00000000e+00]
+ [0.00000000e+00 2.62421274e-03 9.92564731e-01 4.81105668e-03]
+ [0.00000000e+00 0.00000000e+00 8.13008130e-03 9.91869919e-01]]
 
-Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\matriz_confusao_arvore_decisao_normalizada.png
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_normalizada.png
+
+XGBoost desativado na orquestração da Silver.
+
+LightGBM desativado na orquestração da Silver.
 
 ================================================================================
-BASE CODIFICADA E MODELO ÁRVORE DE DECISÃO AVALIADO
+BASE CODIFICADA E MODELOS SILVER AVALIADOS
 ================================================================================
 X_train original: (267773, 22)
 X_test original: (66944, 22)
@@ -360,19 +369,19 @@ y_train: (267773,)
 y_test: (66944,)
 
 ================================================================================
-MÉTRICAS DO MODELO - ÁRVORE DE DECISÃO
+MÉTRICAS DO MODELO - REGRESSÃO LOGÍSTICA
 ================================================================================
 Métrica                                    Valor
 --------------------------------------------------------------------------------
-Accuracy treino                           98.36%
-Accuracy teste                            98.29%
-Balanced accuracy teste                   97.64%
-Macro precision teste                     89.85%
-Macro recall teste                        97.64%
-Macro F1-score teste                      92.89%
-Weighted F1-score teste                   98.37%
+Accuracy treino                           99.63%
+Accuracy teste                            99.60%
+Balanced accuracy teste                   99.49%
+Macro precision teste                     98.25%
+Macro recall teste                        99.49%
+Macro F1-score teste                      98.85%
+Weighted F1-score teste                   99.60%
 --------------------------------------------------------------------------------
-Diferença accuracy treino-teste            0.07 p.p.
+Diferença accuracy treino-teste            0.03 p.p.
 
 Interpretação rápida:
 - Não há sinal forte de overfitting pela diferença entre treino e teste.
