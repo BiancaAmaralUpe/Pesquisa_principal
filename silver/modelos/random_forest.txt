@@ -1,0 +1,224 @@
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - RANDOM FOREST
+================================================================================
+Data/hora da execução: 2026-07-03 17:08:59
+
+Parâmetros utilizados:
+- N_ESTIMATORS_RANDOM_FOREST: 100
+- MAX_DEPTH_RANDOM_FOREST: 20
+- MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+- MAX_FEATURES_RANDOM_FOREST: sqrt
+- RANDOM_STATE: 42
+- N_JOBS_RANDOM_FOREST: -1
+- criterion: gini
+- class_weight: balanced_subsample
+
+Formato dos dados:
+- X_train: (267773, 398)
+- X_test: (66944, 398)
+- y_train: (267773,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.8561
+- Accuracy teste: 0.8538
+- Balanced accuracy teste: 0.8728
+- Macro precision teste: 0.7202
+- Macro recall teste: 0.8728
+- Macro F1-score teste: 0.7399
+- Weighted F1-score teste: 0.8625
+
+Observação:
+Experimento com Random Forest usando One-Hot Encoding, class_weight='balanced_subsample' e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - RANDOM FOREST
+================================================================================
+Data/hora da execução: 2026-07-03 17:10:06
+
+Parâmetros fixos utilizados:
+- N_ESTIMATORS_RANDOM_FOREST: 100
+- MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+- MAX_FEATURES_RANDOM_FOREST: sqrt
+- RANDOM_STATE: 42
+- N_JOBS_RANDOM_FOREST: -1
+- criterion: gini
+- class_weight: balanced_subsample
+
+Resultados por profundidade testada:
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 5
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.7473
+- Accuracy teste: 0.7458
+- Macro F1-score treino: 0.6214
+- Macro F1-score teste: 0.6192
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 10
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8079
+- Accuracy teste: 0.8075
+- Macro F1-score treino: 0.6887
+- Macro F1-score teste: 0.6867
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 15
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8503
+- Accuracy teste: 0.8483
+- Macro F1-score treino: 0.7407
+- Macro F1-score teste: 0.7372
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 20
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8561
+- Accuracy teste: 0.8538
+- Macro F1-score treino: 0.7441
+- Macro F1-score teste: 0.7399
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 25
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8699
+- Accuracy teste: 0.8694
+- Macro F1-score treino: 0.7551
+- Macro F1-score teste: 0.7531
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 30
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8635
+- Accuracy teste: 0.8617
+- Macro F1-score treino: 0.7492
+- Macro F1-score teste: 0.7465
+
+================================================================================
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - RANDOM FOREST
+================================================================================
+Data/hora da execução: 2026-07-03 17:14:01
+
+Parâmetros utilizados:
+- N_ESTIMATORS_RANDOM_FOREST: 100
+- MAX_DEPTH_RANDOM_FOREST: 20
+- MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+- MAX_FEATURES_RANDOM_FOREST: sqrt
+- RANDOM_STATE: 42
+- N_JOBS_RANDOM_FOREST: -1
+- criterion: gini
+- class_weight: balanced_subsample
+
+Formato dos dados:
+- X_train: (267773, 398)
+- X_test: (66944, 398)
+- y_train: (267773,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.8561
+- Accuracy teste: 0.8538
+- Balanced accuracy teste: 0.8728
+- Macro precision teste: 0.7202
+- Macro recall teste: 0.8728
+- Macro F1-score teste: 0.7399
+- Weighted F1-score teste: 0.8625
+
+Observação:
+Experimento com Random Forest usando One-Hot Encoding, class_weight='balanced_subsample' e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - RANDOM FOREST
+================================================================================
+Data/hora da execução: 2026-07-03 17:15:11
+
+Parâmetros fixos utilizados:
+- N_ESTIMATORS_RANDOM_FOREST: 100
+- MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+- MAX_FEATURES_RANDOM_FOREST: sqrt
+- RANDOM_STATE: 42
+- N_JOBS_RANDOM_FOREST: -1
+- criterion: gini
+- class_weight: balanced_subsample
+
+Resultados por profundidade testada:
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 5
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.7473
+- Accuracy teste: 0.7458
+- Macro F1-score treino: 0.6214
+- Macro F1-score teste: 0.6192
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 10
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8079
+- Accuracy teste: 0.8075
+- Macro F1-score treino: 0.6887
+- Macro F1-score teste: 0.6867
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 15
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8503
+- Accuracy teste: 0.8483
+- Macro F1-score treino: 0.7407
+- Macro F1-score teste: 0.7372
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 20
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8561
+- Accuracy teste: 0.8538
+- Macro F1-score treino: 0.7441
+- Macro F1-score teste: 0.7399
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 25
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8699
+- Accuracy teste: 0.8694
+- Macro F1-score treino: 0.7551
+- Macro F1-score teste: 0.7531
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_RANDOM_FOREST: 30
+MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8635
+- Accuracy teste: 0.8617
+- Macro F1-score treino: 0.7492
+- Macro F1-score teste: 0.7465
+
+================================================================================

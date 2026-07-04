@@ -31,10 +31,10 @@ from Pesquisa_principal.constants import ARQUIVO_LOG_RANDOM_FOREST
 from Pesquisa_principal.constants import MAX_ITER_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import C_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import SOLVER_REGRESSAO_LOGISTICA
-from Pesquisa_principal.constants import PENALTY_REGRESSAO_LOGISTICA
-from Pesquisa_principal.constants import N_JOBS_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import L1_RATIO_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import PASTA_GRAFICOS_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import ARQUIVO_LOG_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import L1_RATIO_REGRESSAO_LOGISTICA
 # constants xgboost
 from Pesquisa_principal.constants import N_ESTIMATORS_XGBOOST
 from Pesquisa_principal.constants import MAX_DEPTH_XGBOOST
@@ -100,8 +100,8 @@ from Pesquisa_principal.silver.modelos.grafico_lightgbm_modelo import gerar_graf
 
 MODELOS_TREINAMENTO_SILVER = [
     #"arvore_decisao",
-    "random_forest",
-    #"regressao_logistica",
+    #"random_forest",
+    "regressao_logistica", # só rodar uma vez. O pc pede arrego. vai para 72% de uso da memoria
     #"xgboost_modelo",
     #"lightgbm_modelo",
 ]
@@ -115,26 +115,26 @@ GRAFICOS_POR_MODELO_SILVER = {
     #    "overfitting",
     #    "matriz_confusao",
     #],
+#
+    #"random_forest": [
+    #    "overfitting",
+    #    "matriz_confusao",
+    #],
 
-    "random_forest": [
+    "regressao_logistica": [
         "overfitting",
         "matriz_confusao",
     ],
 
-    # "regressao_logistica": [
-    #     "overfitting",
-    #     "matriz_confusao",
-    # ],
-
-    # "xgboost_modelo": [
-    #     "overfitting",
-    #     "matriz_confusao",
-    # ],
-
-    # "lightgbm_modelo": [
-    #     "overfitting",
-    #     "matriz_confusao",
-    # ],
+    #"xgboost_modelo": [
+    #    "overfitting",
+    #    "matriz_confusao",
+    #],
+#
+    #"lightgbm_modelo": [
+    #    "overfitting",
+    #    "matriz_confusao",
+    #],
 }
 # ==============================================================
 # Fluxos dos modelos - Silver
@@ -377,8 +377,7 @@ def executar_fluxo_regressao_logistica(
         max_iter=MAX_ITER_REGRESSAO_LOGISTICA,
         C=C_REGRESSAO_LOGISTICA,
         solver=SOLVER_REGRESSAO_LOGISTICA,
-        penalty=PENALTY_REGRESSAO_LOGISTICA,
-        n_jobs=N_JOBS_REGRESSAO_LOGISTICA,
+        l1_ratio=L1_RATIO_REGRESSAO_LOGISTICA,
     )
 
     # ============================================================== #
@@ -400,9 +399,8 @@ def executar_fluxo_regressao_logistica(
         max_iter=MAX_ITER_REGRESSAO_LOGISTICA,
         C=C_REGRESSAO_LOGISTICA,
         solver=SOLVER_REGRESSAO_LOGISTICA,
-        penalty=PENALTY_REGRESSAO_LOGISTICA,
+        l1_ratio=L1_RATIO_REGRESSAO_LOGISTICA,
         random_state=RANDOM_STATE,
-        n_jobs=N_JOBS_REGRESSAO_LOGISTICA,
         X_train_shape=X_train_encoded.shape,
         X_test_shape=X_test_encoded.shape,
         y_train_shape=y_train.shape,
@@ -410,7 +408,7 @@ def executar_fluxo_regressao_logistica(
         metricas=metricas_regressao_logistica,
         observacao=(
             "Experimento com Regressão Logística usando One-Hot Encoding, "
-            "class_weight='balanced' e base treino/teste estratificada."
+            "class_weight='balanced', l1_ratio=0.0 e base treino/teste estratificada."
         ),
     )
     # ============================================================== #
@@ -434,9 +432,8 @@ def executar_fluxo_regressao_logistica(
             caminho_log=ARQUIVO_LOG_REGRESSAO_LOGISTICA,
             max_iter=MAX_ITER_REGRESSAO_LOGISTICA,
             solver=SOLVER_REGRESSAO_LOGISTICA,
-            penalty=PENALTY_REGRESSAO_LOGISTICA,
+            l1_ratio=L1_RATIO_REGRESSAO_LOGISTICA,
             random_state=RANDOM_STATE,
-            n_jobs=N_JOBS_REGRESSAO_LOGISTICA,
         )
     # ============================================================== #
     # 

@@ -1,0 +1,102 @@
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - REGRESSÃO LOGÍSTICA
+================================================================================
+Data/hora da execução: 2026-07-03 18:19:51
+
+Parâmetros utilizados:
+- MAX_ITER_REGRESSAO_LOGISTICA: 1000
+- C_REGRESSAO_LOGISTICA: 1.0
+- SOLVER_REGRESSAO_LOGISTICA: saga
+- L1_RATIO_REGRESSAO_LOGISTICA: 0.0
+- RANDOM_STATE: 42
+- class_weight: balanced
+
+Formato dos dados:
+- X_train: (267773, 398)
+- X_test: (66944, 398)
+- y_train: (267773,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.9963
+- Accuracy teste: 0.9960
+- Balanced accuracy teste: 0.9949
+- Macro precision teste: 0.9825
+- Macro recall teste: 0.9949
+- Macro F1-score teste: 0.9885
+- Weighted F1-score teste: 0.9960
+
+Observação:
+Experimento com Regressão Logística usando One-Hot Encoding, class_weight='balanced', l1_ratio=0.0 e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA
+================================================================================
+Data/hora da execução: 2026-07-04 02:12:00
+
+Parâmetros fixos utilizados:
+- MAX_ITER_REGRESSAO_LOGISTICA: 1000
+- SOLVER_REGRESSAO_LOGISTICA: saga
+- L1_RATIO_REGRESSAO_LOGISTICA: 0.0
+- RANDOM_STATE: 42
+- class_weight: balanced
+
+Resultados por valor de C testado:
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 0.001
+
+Métricas obtidas:
+- Accuracy treino: 0.7411
+- Accuracy teste: 0.7405
+- Macro F1-score treino: 0.5623
+- Macro F1-score teste: 0.5612
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 0.01
+
+Métricas obtidas:
+- Accuracy treino: 0.9224
+- Accuracy teste: 0.9218
+- Macro F1-score treino: 0.8313
+- Macro F1-score teste: 0.8286
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 0.1
+
+Métricas obtidas:
+- Accuracy treino: 0.9710
+- Accuracy teste: 0.9698
+- Macro F1-score treino: 0.9358
+- Macro F1-score teste: 0.9318
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 1.0
+
+Métricas obtidas:
+- Accuracy treino: 0.9963
+- Accuracy teste: 0.9960
+- Macro F1-score treino: 0.9897
+- Macro F1-score teste: 0.9885
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 10.0
+
+Métricas obtidas:
+- Accuracy treino: 0.9961
+- Accuracy teste: 0.9961
+- Macro F1-score treino: 0.9885
+- Macro F1-score teste: 0.9878
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 100.0
+
+Métricas obtidas:
+- Accuracy treino: 0.9946
+- Accuracy teste: 0.9942
+- Macro F1-score treino: 0.9879
+- Macro F1-score teste: 0.9858
+
+================================================================================

@@ -23,9 +23,8 @@ def registrar_analise_overfitting_regressao_logistica(
     dataframe_resultados: pd.DataFrame,
     max_iter: int,
     solver: str,
-    penalty: str,
+    l1_ratio: float,
     random_state: int,
-    n_jobs: int,
 ) -> None:
     """
     Registra no arquivo .txt os resultados da análise de overfitting
@@ -49,9 +48,8 @@ def registrar_analise_overfitting_regressao_logistica(
         arquivo.write("Parâmetros fixos utilizados:\n")
         arquivo.write(f"- MAX_ITER_REGRESSAO_LOGISTICA: {max_iter}\n")
         arquivo.write(f"- SOLVER_REGRESSAO_LOGISTICA: {solver}\n")
-        arquivo.write(f"- PENALTY_REGRESSAO_LOGISTICA: {penalty}\n")
+        arquivo.write(f"- L1_RATIO_REGRESSAO_LOGISTICA: {l1_ratio}\n")
         arquivo.write(f"- RANDOM_STATE: {random_state}\n")
-        arquivo.write(f"- N_JOBS_REGRESSAO_LOGISTICA: {n_jobs}\n")
         arquivo.write("- class_weight: balanced\n\n")
 
         arquivo.write("Resultados por valor de C testado:\n\n")
@@ -93,9 +91,8 @@ def gerar_grafico_overfitting_regressao_logistica(
     caminho_log: Path | None = None,
     max_iter: int = 1000,
     solver: str = "saga",
-    penalty: str = "l2",
+    l1_ratio: float = 0.0,
     random_state: int = 42,
-    n_jobs: int = -1,
 ) -> None:
     """
     Gera gráficos para analisar possível overfitting da Regressão Logística
@@ -134,10 +131,9 @@ def gerar_grafico_overfitting_regressao_logistica(
             max_iter=max_iter,
             C=valor_c,
             solver=solver,
-            penalty=penalty,
+            l1_ratio=l1_ratio,
             class_weight="balanced",
             random_state=random_state,
-            n_jobs=n_jobs,
         )
 
         modelo.fit(X_train, y_train)
@@ -255,9 +251,9 @@ def gerar_grafico_overfitting_regressao_logistica(
             dataframe_resultados=dataframe_resultados,
             max_iter=max_iter,
             solver=solver,
-            penalty=penalty,
+            l1_ratio=l1_ratio,
             random_state=random_state,
-            n_jobs=n_jobs,
+
         )
 
     print("\nGráficos salvos com sucesso em:")

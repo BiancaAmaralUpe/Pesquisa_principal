@@ -744,15 +744,13 @@ N_JOBS_RANDOM_FOREST = -1
 # Parâmetros da Regressão Logística - Silver
 # ======================================================================================
 
-MAX_ITER_REGRESSAO_LOGISTICA = 1000
+MAX_ITER_REGRESSAO_LOGISTICA = 100
 
 C_REGRESSAO_LOGISTICA = 1.0
 
-SOLVER_REGRESSAO_LOGISTICA = "saga"
+SOLVER_REGRESSAO_LOGISTICA = "sgd"
 
-PENALTY_REGRESSAO_LOGISTICA = "l2"
-
-N_JOBS_REGRESSAO_LOGISTICA = -1
+L1_RATIO_REGRESSAO_LOGISTICA = 0.0
 
 # ======================================================================================
 # Parâmetros do XGBoost - Silver
