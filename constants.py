@@ -744,9 +744,9 @@ N_JOBS_RANDOM_FOREST = -1
 # Parâmetros da Regressão Logística - Silver
 # ======================================================================================
 
-MAX_ITER_REGRESSAO_LOGISTICA = 100
+MAX_ITER_REGRESSAO_LOGISTICA = 300
 
-C_REGRESSAO_LOGISTICA = 1.0
+C_REGRESSAO_LOGISTICA = 10.0
 
 SOLVER_REGRESSAO_LOGISTICA = "sgd"
 
@@ -816,3 +816,21 @@ PASTA_GRAFICOS_XGBOOST = (
 PASTA_GRAFICOS_LIGHTGBM = (
     SILVER_GRAFICOS_DIR / "lightgbm_modelo"
 )
+
+# ======================================================================================
+# Diagnóstico do target - Silver
+# ======================================================================================
+
+PASTA_GRAFICOS_DIAGNOSTICO_TARGET = (
+    SILVER_GRAFICOS_DIR / "diagnostico_target"
+)
+
+# ======================================================================================
+# Balanceamento da base - Silver
+# ======================================================================================
+
+APLICAR_BALANCEAMENTO_TREINO = True
+
+ESTRATEGIA_BALANCEAMENTO_TREINO = "hibrido"
+
+QUANTIDADE_ALVO_BALANCEAMENTO = None
