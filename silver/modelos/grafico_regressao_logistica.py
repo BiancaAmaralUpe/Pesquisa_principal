@@ -2,8 +2,9 @@
 # grafico_regressao_logistica.py
 # ======================================================================================
 # Responsabilidade:
-# - Avaliar possível overfitting da Regressão Logística
+# - Avaliar possível overfitting da Regressão Logística via SGDClassifier
 # - Testar diferentes valores de C
+# - Converter C em alpha para o SGDClassifier
 # - Gerar gráficos de Accuracy e Macro F1-score
 # - Registrar os resultados em arquivo .txt
 # ======================================================================================
@@ -13,9 +14,28 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
+
+
+def calcular_alpha_sgd(
+    C: float,
+    quantidade_linhas_treino: int,
+) -> float:
+    """
+    Converte o parâmetro C em alpha para o SGDClassifier.
+
+    No LogisticRegression tradicional, C controla a regularização de forma inversa.
+    No SGDClassifier, alpha controla diretamente a regularização.
+    """
+
+    if C <= 0:
+        return 0.0001
+
+    alpha = 1 / (C * quantidade_linhas_treino)
+
+    return alpha
 
 
 def registrar_analise_overfitting_regressao_logistica(
@@ -28,10 +48,13 @@ def registrar_analise_overfitting_regressao_logistica(
 ) -> None:
     """
     Registra no arquivo .txt os resultados da análise de overfitting
-    da Regressão Logística para diferentes valores de C.
+    da Regressão Logística via SGDClassifier.
     """
 
-    caminho_log.parent.mkdir(parents=True, exist_ok=True)
+    caminho_log.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
     data_execucao = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -39,7 +62,7 @@ def registrar_analise_overfitting_regressao_logistica(
         arquivo.write("\n")
         arquivo.write("=" * 80)
         arquivo.write("\n")
-        arquivo.write("ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA\n")
+        arquivo.write("ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA VIA SGD\n")
         arquivo.write("=" * 80)
         arquivo.write("\n")
 
@@ -48,9 +71,12 @@ def registrar_analise_overfitting_regressao_logistica(
         arquivo.write("Parâmetros fixos utilizados:\n")
         arquivo.write(f"- MAX_ITER_REGRESSAO_LOGISTICA: {max_iter}\n")
         arquivo.write(f"- SOLVER_REGRESSAO_LOGISTICA: {solver}\n")
+        arquivo.write("- loss: log_loss\n")
+        arquivo.write("- penalty: elasticnet\n")
         arquivo.write(f"- L1_RATIO_REGRESSAO_LOGISTICA: {l1_ratio}\n")
         arquivo.write(f"- RANDOM_STATE: {random_state}\n")
-        arquivo.write("- class_weight: balanced\n\n")
+        arquivo.write("- class_weight: balanced\n")
+        arquivo.write("- n_jobs: -1\n\n")
 
         arquivo.write("Resultados por valor de C testado:\n\n")
 
@@ -58,9 +84,8 @@ def registrar_analise_overfitting_regressao_logistica(
             arquivo.write("-" * 80)
             arquivo.write("\n")
 
-            arquivo.write(
-                f"C_REGRESSAO_LOGISTICA: {linha['C']}\n"
-            )
+            arquivo.write(f"C_REGRESSAO_LOGISTICA: {linha['C']}\n")
+            arquivo.write(f"ALPHA_CALCULADO_SGD: {linha['alpha']}\n")
 
             arquivo.write("\nMétricas obtidas:\n")
             arquivo.write(
@@ -89,33 +114,33 @@ def gerar_grafico_overfitting_regressao_logistica(
     y_test: pd.Series,
     caminho_saida: str,
     caminho_log: Path | None = None,
-    max_iter: int = 1000,
-    solver: str = "saga",
+    max_iter: int = 100,
+    solver: str = "sgd",
     l1_ratio: float = 0.0,
     random_state: int = 42,
 ) -> None:
     """
     Gera gráficos para analisar possível overfitting da Regressão Logística
-    comparando desempenho de treino e teste em diferentes valores de C.
+    usando SGDClassifier.
 
-    O parâmetro C controla a força da regularização:
-    - C menor: regularização mais forte
-    - C maior: regularização mais fraca
+    A análise testa diferentes valores de C e converte cada valor em alpha.
     """
 
-    Path(caminho_saida).mkdir(parents=True, exist_ok=True)
+    Path(caminho_saida).mkdir(
+        parents=True,
+        exist_ok=True,
+    )
 
     valores_c = [
-        0.001,
         0.01,
         0.1,
         1.0,
         10.0,
-        100.0,
     ]
 
     resultados = {
         "C": [],
+        "alpha": [],
         "accuracy_treino": [],
         "accuracy_teste": [],
         "macro_f1_treino": [],
@@ -123,20 +148,31 @@ def gerar_grafico_overfitting_regressao_logistica(
     }
 
     print("\n" + "=" * 80)
-    print("ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA")
+    print("ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA VIA SGD")
     print("=" * 80)
 
     for valor_c in valores_c:
-        modelo = LogisticRegression(
-            max_iter=max_iter,
+        alpha = calcular_alpha_sgd(
             C=valor_c,
-            solver=solver,
-            l1_ratio=l1_ratio,
-            class_weight="balanced",
-            random_state=random_state,
+            quantidade_linhas_treino=X_train.shape[0],
         )
 
-        modelo.fit(X_train, y_train)
+        modelo = SGDClassifier(
+            loss="log_loss",
+            penalty="elasticnet",
+            alpha=alpha,
+            l1_ratio=l1_ratio,
+            max_iter=max_iter,
+            tol=1e-3,
+            class_weight="balanced",
+            random_state=random_state,
+            n_jobs=-1,
+        )
+
+        modelo.fit(
+            X_train,
+            y_train,
+        )
 
         y_pred_train = modelo.predict(X_train)
         y_pred_test = modelo.predict(X_test)
@@ -166,6 +202,7 @@ def gerar_grafico_overfitting_regressao_logistica(
         )
 
         resultados["C"].append(valor_c)
+        resultados["alpha"].append(alpha)
         resultados["accuracy_treino"].append(accuracy_treino)
         resultados["accuracy_teste"].append(accuracy_teste)
         resultados["macro_f1_treino"].append(macro_f1_treino)
@@ -173,6 +210,7 @@ def gerar_grafico_overfitting_regressao_logistica(
 
         print(
             f"C={valor_c} | "
+            f"alpha={alpha:.8f} | "
             f"acc_treino={accuracy_treino:.4f} | "
             f"acc_teste={accuracy_teste:.4f} | "
             f"f1_treino={macro_f1_treino:.4f} | "
@@ -205,7 +243,7 @@ def gerar_grafico_overfitting_regressao_logistica(
         label="Teste",
     )
     plt.xscale("log")
-    plt.title("Overfitting - Regressão Logística (Accuracy)")
+    plt.title("Overfitting - Regressão Logística via SGD (Accuracy)")
     plt.xlabel("C")
     plt.ylabel("Accuracy")
     plt.legend()
@@ -232,7 +270,7 @@ def gerar_grafico_overfitting_regressao_logistica(
         label="Teste",
     )
     plt.xscale("log")
-    plt.title("Overfitting - Regressão Logística (Macro F1)")
+    plt.title("Overfitting - Regressão Logística via SGD (Macro F1)")
     plt.xlabel("C")
     plt.ylabel("Macro F1")
     plt.legend()
@@ -253,7 +291,6 @@ def gerar_grafico_overfitting_regressao_logistica(
             solver=solver,
             l1_ratio=l1_ratio,
             random_state=random_state,
-
         )
 
     print("\nGráficos salvos com sucesso em:")

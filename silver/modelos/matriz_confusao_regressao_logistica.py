@@ -95,7 +95,7 @@ def gerar_matrizes_confusao_regressao_logistica(
     caminho_saida: str,
 ) -> None:
     """
-    Gera as matrizes de confusão da Regressão Logística:
+    Gera as matrizes de confusão da Regressão Logística via SGD:
     - absoluta
     - normalizada
     """
@@ -111,8 +111,8 @@ def gerar_matrizes_confusao_regressao_logistica(
         y_real=y_real,
         y_predito=y_predito,
         caminho_saida=caminho_saida,
-        nome_arquivo="matriz_confusao_regressao_logistica_absoluta.png",
-        titulo="Matriz de Confusão - Regressão Logística",
+        nome_arquivo="matriz_confusao_regressao_logistica_sgd_absoluta.png",
+        titulo="Matriz de Confusão - Regressão Logística via SGD",
         labels=labels,
         normalizar=False,
     )
@@ -121,8 +121,8 @@ def gerar_matrizes_confusao_regressao_logistica(
         y_real=y_real,
         y_predito=y_predito,
         caminho_saida=caminho_saida,
-        nome_arquivo="matriz_confusao_regressao_logistica_normalizada.png",
-        titulo="Matriz de Confusão Normalizada - Regressão Logística",
+        nome_arquivo="matriz_confusao_regressao_logistica_sgd_normalizada.png",
+        titulo="Matriz de Confusão Normalizada - Regressão Logística via SGD",
         labels=labels,
         normalizar=True,
     )
