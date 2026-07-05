@@ -60,6 +60,110 @@ risco_elevado              1.47
 Name: proportion, dtype: float64
 
 ================================================================================
+GERAÇÃO DE GRÁFICOS DE DIAGNÓSTICO DO TARGET
+================================================================================
+
+--------------------------------------------------------------------------------
+Gerando gráficos para: especie_violacao
+--------------------------------------------------------------------------------
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\heatmap_especie_violacao_x_target_percentual_quantidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_elevado_especie_violacao.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_moderado_ou_elevado_especie_violacao.png
+
+--------------------------------------------------------------------------------
+Gerando gráficos para: motivacao
+--------------------------------------------------------------------------------
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\heatmap_motivacao_x_target_percentual_quantidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_elevado_motivacao.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_moderado_ou_elevado_motivacao.png
+
+--------------------------------------------------------------------------------
+Gerando gráficos para: agravantes_unificados
+--------------------------------------------------------------------------------
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\heatmap_agravantes_unificados_x_target_percentual_quantidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_elevado_agravantes_unificados.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_moderado_ou_elevado_agravantes_unificados.png
+
+--------------------------------------------------------------------------------
+Gerando gráficos para: indicador_letalidade
+--------------------------------------------------------------------------------
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\heatmap_indicador_letalidade_x_target_percentual_quantidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_elevado_indicador_letalidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_moderado_ou_elevado_indicador_letalidade.png
+
+--------------------------------------------------------------------------------
+Gerando gráficos para: subtipo_letalidade
+--------------------------------------------------------------------------------
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\heatmap_subtipo_letalidade_x_target_percentual_quantidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_elevado_subtipo_letalidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_moderado_ou_elevado_subtipo_letalidade.png
+
+--------------------------------------------------------------------------------
+Gerando gráficos para: tipo_violencia_normalizado
+--------------------------------------------------------------------------------
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\heatmap_tipo_violencia_normalizado_x_target_percentual_quantidade.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_elevado_tipo_violencia_normalizado.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\ranking_risco_moderado_ou_elevado_tipo_violencia_normalizado.png
+
+Coluna não encontrada na base: risco_ameaca_morte
+
+Coluna não encontrada na base: risco_violencia_fisica_grave
+
+Coluna não encontrada na base: risco_escalada_agressoes
+
+Coluna não encontrada na base: risco_controle_extremo
+
+Coluna não encontrada na base: risco_separacao_termino
+
+Coluna não encontrada na base: risco_violencia_sexual_associada
+
+Coluna não encontrada na base: qtd_sinais_risco_feminicidio
+
+Coluna não encontrada na base: componente_fisico
+
+Coluna não encontrada na base: componente_psicologico
+
+Coluna não encontrada na base: componente_sexual
+
+Coluna não encontrada na base: componente_patrimonial
+
+Coluna não encontrada na base: componente_moral
+
+Coluna não encontrada na base: componente_letal
+
+================================================================================
+GRÁFICOS DE DIAGNÓSTICO DO TARGET FINALIZADOS
+================================================================================
+
+================================================================================
+GERAÇÃO DE GRÁFICOS - VOLUME E RELAÇÃO COM RISCO DE MORTE
+================================================================================
+
+================================================================================
+RESUMO - VOLUME COM RELAÇÃO COM RISCO DE MORTE
+================================================================================
+Coluna analisada: agravantes_unificados
+Termo procurado: RISCO DE MORTE
+
+Volume geral de linhas:
+- Com relação com risco de morte: 3994 registros (1.19%)
+- Sem relação com risco de morte: 330723 registros (98.81%)
+
+Distribuição do target dentro dos registros com risco de morte:
+- sem_sinal_identificado: 0 registros (0.00%)
+- risco_baixo: 1419 registros (35.53%)
+- risco_moderado: 2050 registros (51.33%)
+- risco_elevado: 525 registros (13.14%)
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\pizza_volume_linhas_relacao_risco_morte.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\colunas_volume_linhas_relacao_risco_morte.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\pizza_target_relacao_risco_morte.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\colunas_target_relacao_risco_morte.png
+
+================================================================================
+GRÁFICOS DE VOLUME E RELAÇÃO COM RISCO DE MORTE FINALIZADOS
+================================================================================
+
+================================================================================
 SEPARAÇÃO ENTRE VARIÁVEIS EXPLICATIVAS E TARGET
 ================================================================================
 Coluna alvo: classificacao_sinais_risco_feminicidio
@@ -187,6 +291,54 @@ Name: proportion, dtype: float64
 Divisão treino/teste concluída com sucesso.
 
 ================================================================================
+GERAÇÃO DE GRÁFICOS DE BALANCEAMENTO DA BASE
+================================================================================
+Target analisado: classificacao_sinais_risco_feminicidio
+
+================================================================================
+RESUMO DE BALANCEAMENTO - BASE COMPLETA
+================================================================================
+Total de registros: 334717
+- sem_sinal_identificado: 96523 registros (28.84%)
+- risco_baixo: 176116 registros (52.62%)
+- risco_moderado: 57159 registros (17.08%)
+- risco_elevado: 4919 registros (1.47%)
+
+Razão de desbalanceamento maior classe / menor classe: 35.80
+Interpretação: base fortemente desbalanceada.
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\balanceamento_target_colunas_base_completa.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\balanceamento_target_pizza_base_completa.png
+
+================================================================================
+RESUMO DE BALANCEAMENTO - TREINO
+================================================================================
+Total de registros: 267773
+- sem_sinal_identificado: 77218 registros (28.84%)
+- risco_baixo: 140893 registros (52.62%)
+- risco_moderado: 45727 registros (17.08%)
+- risco_elevado: 3935 registros (1.47%)
+
+Razão de desbalanceamento maior classe / menor classe: 35.81
+Interpretação: base fortemente desbalanceada.
+
+================================================================================
+RESUMO DE BALANCEAMENTO - TESTE
+================================================================================
+Total de registros: 66944
+- sem_sinal_identificado: 19305 registros (28.84%)
+- risco_baixo: 35223 registros (52.62%)
+- risco_moderado: 11432 registros (17.08%)
+- risco_elevado: 984 registros (1.47%)
+
+Razão de desbalanceamento maior classe / menor classe: 35.80
+Interpretação: base fortemente desbalanceada.
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\balanceamento_target_comparativo_base_treino_teste.png
+
+================================================================================
+GRÁFICOS DE BALANCEAMENTO FINALIZADOS
+================================================================================
+
+================================================================================
 APLICAÇÃO DO ONE-HOT ENCODING
 ================================================================================
 
@@ -254,72 +406,158 @@ Primeiras colunas geradas pelo encoding:
 - especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO
 - especie_violacao_CIDADANIA
 
-Árvore de Decisão desativada na orquestração da Silver.
+================================================================================
+NORMALIZAÇÃO DOS NOMES DAS COLUNAS PARA OS MODELOS
+================================================================================
+Quantidade de colunas: 398
+Quantidade de nomes alterados: 372
 
-Random Forest desativada na orquestração da Silver.
+Exemplos de nomes normalizados:
+- tipo_violacao_1. VIOLÊNCIA FÍSICA  ->  tipo_violacao_1_violencia_fisica
+- tipo_violacao_2. VIOLÊNCIA PSICOLÓGICA  ->  tipo_violacao_2_violencia_psicologica
+- tipo_violacao_3. CRIMES CONTRA A VIDA  ->  tipo_violacao_3_crimes_contra_a_vida
+- tipo_violacao_4. AGRESSÕES QUE VIOLAM A HONRA  ->  tipo_violacao_4_agressoes_que_violam_a_honra
+- tipo_violacao_5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE  ->  tipo_violacao_5_agressoes_que_violam_o_direito_a_liberdade
+- tipo_violacao_6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  ->  tipo_violacao_6_agressoes_que_violam_a_liberdade_civil_e_politica
+- tipo_violacao_7. VIOLAÇÕES GERAIS  ->  tipo_violacao_7_violacoes_gerais
+- grupo_vulneravel_1-Violência Contra a Mulher  ->  grupo_vulneravel_1_violencia_contra_a_mulher
+- grupo_vulneravel_2-Violência Doméstica e Familiar Contra a Mulher  ->  grupo_vulneravel_2_violencia_domestica_e_familiar_contra_a_mulher
+- especie_violacao_ABORTO  ->  especie_violacao_aborto
+- especie_violacao_AGRESSÃO/VIAS DE FATO  ->  especie_violacao_agressao_vias_de_fato
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL  ->  especie_violacao_agressoes_que_violam_o_direito_a_igualdade_formal
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL  ->  especie_violacao_agressoes_que_violam_o_direito_a_igualdade_material
+- especie_violacao_AMEAÇA/COAÇÃO  ->  especie_violacao_ameaca_coacao
+- especie_violacao_APOLOGIA E INCITAÇÃO AO SUICÍDIO  ->  especie_violacao_apologia_e_incitacao_ao_suicidio
+- especie_violacao_ASSÉDIO MORAL  ->  especie_violacao_assedio_moral
+- especie_violacao_AUTOMUTILAÇÃO  ->  especie_violacao_automutilacao
+- especie_violacao_AUTONOMIA DE VONTADE  ->  especie_violacao_autonomia_de_vontade
+- especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO  ->  especie_violacao_calunia_injuria_difamacao
+- especie_violacao_CIDADANIA  ->  especie_violacao_cidadania
+
+Normalização dos nomes das colunas concluída com sucesso.
 
 ================================================================================
-ORQUESTRAÇÃO DO MODELO: REGRESSÃO LOGÍSTICA
+BALANCEAMENTO DA BASE DE TREINO
+================================================================================
+Estratégia utilizada: hibrido
+
+================================================================================
+DISTRIBUIÇÃO DO TARGET ANTES DO BALANCEAMENTO
+================================================================================
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+risco_baixo               140893
+sem_sinal_identificado     77218
+risco_moderado             45727
+risco_elevado               3935
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+Quantidade alvo por classe após balanceamento: 61472
+
+================================================================================
+DISTRIBUIÇÃO DO TARGET APÓS O BALANCEAMENTO
+================================================================================
+
+Distribuição absoluta:
+__target_balanceamento__
+sem_sinal_identificado    61472
+risco_baixo               61472
+risco_elevado             61472
+risco_moderado            61472
+Name: count, dtype: int64
+
+Distribuição percentual:
+__target_balanceamento__
+sem_sinal_identificado    25.0
+risco_baixo               25.0
+risco_elevado             25.0
+risco_moderado            25.0
+Name: proportion, dtype: float64
+
+Formato antes do balanceamento:
+X_train: (267773, 398)
+y_train: (267773,)
+
+Formato após o balanceamento:
+X_train_balanceado: (245888, 398)
+y_train_balanceado: (245888,)
+
+Balanceamento da base de treino concluído com sucesso.
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: ÁRVORE DE DECISÃO
 ================================================================================
 
 ================================================================================
-TREINAMENTO DO MODELO - REGRESSÃO LOGÍSTICA
+TREINAMENTO DO MODELO - ÁRVORE DE DECISÃO
 ================================================================================
-Formato de X_train: (267773, 398)
-Formato de y_train: (267773,)
+Formato de X_train: (245888, 398)
+Formato de y_train: (245888,)
 
 Parâmetros do modelo:
-max_iter: 1000
-C: 1.0
-solver: saga
-l1_ratio: 0.0
+criterion: gini
+max_depth: 20
+min_samples_leaf: 100
 class_weight: balanced
 random_state: 42
 
-Modelo Regressão Logística treinado com sucesso.
+Modelo Árvore de Decisão treinado com sucesso.
 
 ================================================================================
-AVALIAÇÃO DO MODELO - REGRESSÃO LOGÍSTICA
+AVALIAÇÃO DO MODELO - ÁRVORE DE DECISÃO
 ================================================================================
 
 Métricas principais:
-Accuracy treino: 0.9963
-Accuracy teste: 0.9960
-Balanced accuracy teste: 0.9949
-Macro precision teste: 0.9825
-Macro recall teste: 0.9949
-Macro F1-score teste: 0.9885
-Weighted F1-score teste: 0.9960
+Accuracy treino: 0.9885
+Accuracy teste: 0.9873
+Balanced accuracy teste: 0.9875
+Macro precision teste: 0.9550
+Macro recall teste: 0.9875
+Macro F1-score teste: 0.9703
+Weighted F1-score teste: 0.9874
 
 Classification report - Teste:
                         precision    recall  f1-score   support
 
-           risco_baixo       1.00      1.00      1.00     35223
-         risco_elevado       0.95      0.99      0.97       984
-        risco_moderado       0.98      0.99      0.99     11432
-sem_sinal_identificado       1.00      1.00      1.00     19305
+           risco_baixo       1.00      0.98      0.99     35223
+         risco_elevado       0.87      0.99      0.93       984
+        risco_moderado       0.96      0.98      0.97     11432
+sem_sinal_identificado       0.99      1.00      1.00     19305
 
-              accuracy                           1.00     66944
-             macro avg       0.98      0.99      0.99     66944
-          weighted avg       1.00      1.00      1.00     66944
+              accuracy                           0.99     66944
+             macro avg       0.95      0.99      0.97     66944
+          weighted avg       0.99      0.99      0.99     66944
 
 
 ================================================================================
-ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA
+ANÁLISE DE OVERFITTING - ÁRVORE DE DECISÃO
 ================================================================================
-C=0.001 | acc_treino=0.7411 | acc_teste=0.7405 | f1_treino=0.5623 | f1_teste=0.5612
-C=0.01 | acc_treino=0.9224 | acc_teste=0.9218 | f1_treino=0.8313 | f1_teste=0.8286
-C=0.1 | acc_treino=0.9710 | acc_teste=0.9698 | f1_treino=0.9358 | f1_teste=0.9318
-C=1.0 | acc_treino=0.9963 | acc_teste=0.9960 | f1_treino=0.9897 | f1_teste=0.9885
-C=10.0 | acc_treino=0.9961 | acc_teste=0.9961 | f1_treino=0.9885 | f1_teste=0.9878
-C=100.0 | acc_treino=0.9946 | acc_teste=0.9942 | f1_treino=0.9879 | f1_teste=0.9858
+max_depth=2 | acc_treino=0.5011 | acc_teste=0.3355 | f1_treino=0.4526 | f1_teste=0.3287
+max_depth=4 | acc_treino=0.7000 | acc_teste=0.7360 | f1_treino=0.6965 | f1_teste=0.6264
+max_depth=6 | acc_treino=0.8473 | acc_teste=0.8292 | f1_treino=0.8453 | f1_teste=0.7715
+max_depth=8 | acc_treino=0.9287 | acc_teste=0.9230 | f1_treino=0.9289 | f1_teste=0.8637
+max_depth=10 | acc_treino=0.9745 | acc_teste=0.9754 | f1_treino=0.9744 | f1_teste=0.9312
+max_depth=12 | acc_treino=0.9833 | acc_teste=0.9827 | f1_treino=0.9833 | f1_teste=0.9460
+max_depth=15 | acc_treino=0.9876 | acc_teste=0.9863 | f1_treino=0.9876 | f1_teste=0.9622
+max_depth=20 | acc_treino=0.9885 | acc_teste=0.9873 | f1_treino=0.9885 | f1_teste=0.9703
+max_depth=25 | acc_treino=0.9885 | acc_teste=0.9873 | f1_treino=0.9885 | f1_teste=0.9703
+max_depth=30 | acc_treino=0.9885 | acc_teste=0.9873 | f1_treino=0.9885 | f1_teste=0.9703
 
 Gráficos salvos com sucesso em:
-- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_accuracy.png
-- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_macro_f1.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_macro_f1.png
 
 ================================================================================
-GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Regressão Logística
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Árvore de Decisão
 ================================================================================
 
 Labels utilizadas:
@@ -330,14 +568,410 @@ Labels utilizadas:
 
 Matriz calculada:
 [[19305     0     0     0]
- [    2 35048   173     0]
- [    0    30 11347    55]
- [    0     0     8   976]]
+ [  141 34609   473     0]
+ [    0    76 11212   144]
+ [    0     0    13   971]]
 
-Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_absoluta.png
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\matriz_confusao_arvore_decisao_absoluta.png
 
 ================================================================================
-GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Regressão Logística
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Árvore de Decisão
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[1.         0.         0.         0.        ]
+ [0.00400307 0.98256821 0.01342873 0.        ]
+ [0.         0.00664801 0.98075577 0.01259622]
+ [0.         0.         0.01321138 0.98678862]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\matriz_confusao_arvore_decisao_normalizada.png
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: RANDOM FOREST
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - RANDOM FOREST
+================================================================================
+Formato de X_train: (245888, 398)
+Formato de y_train: (245888,)
+
+Parâmetros do modelo:
+n_estimators: 100
+criterion: gini
+max_depth: 20
+min_samples_leaf: 100
+max_features: sqrt
+class_weight: balanced_subsample
+random_state: 42
+n_jobs: -1
+
+Modelo Random Forest treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - RANDOM FOREST
+================================================================================
+
+Métricas principais:
+Accuracy treino: 0.8851
+Accuracy teste: 0.8502
+Balanced accuracy teste: 0.8811
+Macro precision teste: 0.7260
+Macro recall teste: 0.8811
+Macro F1-score teste: 0.7507
+Weighted F1-score teste: 0.8572
+
+Classification report - Teste:
+                        precision    recall  f1-score   support
+
+           risco_baixo       0.98      0.80      0.88     35223
+         risco_elevado       0.29      0.98      0.45       984
+        risco_moderado       0.86      0.76      0.81     11432
+sem_sinal_identificado       0.77      0.99      0.87     19305
+
+              accuracy                           0.85     66944
+             macro avg       0.73      0.88      0.75     66944
+          weighted avg       0.89      0.85      0.86     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - RANDOM FOREST
+================================================================================
+max_depth=5 | acc_treino=0.7933 | acc_teste=0.7524 | f1_treino=0.7842 | f1_teste=0.6227
+max_depth=10 | acc_treino=0.8401 | acc_teste=0.7972 | f1_treino=0.8349 | f1_teste=0.6843
+max_depth=15 | acc_treino=0.8784 | acc_teste=0.8417 | f1_treino=0.8756 | f1_teste=0.7431
+max_depth=20 | acc_treino=0.8851 | acc_teste=0.8502 | f1_treino=0.8825 | f1_teste=0.7507
+max_depth=25 | acc_treino=0.8842 | acc_teste=0.8480 | f1_treino=0.8817 | f1_teste=0.7518
+max_depth=30 | acc_treino=0.8821 | acc_teste=0.8444 | f1_treino=0.8795 | f1_teste=0.7479
+
+Gráficos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\random_forest\grafico_overfitting_random_forest_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\random_forest\grafico_overfitting_random_forest_macro_f1.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Random Forest
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[19201   104     0     0]
+ [ 5588 28112  1335   188]
+ [   48   592  8642  2150]
+ [    0     1    23   960]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\random_forest\matriz_confusao_random_forest_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Random Forest
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[0.99461279 0.00538721 0.         0.        ]
+ [0.15864634 0.79811487 0.03790137 0.00533742]
+ [0.00419874 0.05178446 0.75594822 0.18806858]
+ [0.         0.00101626 0.02337398 0.97560976]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\random_forest\matriz_confusao_random_forest_normalizada.png
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: REGRESSÃO LOGÍSTICA
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - REGRESSÃO LOGÍSTICA VIA SGD
+================================================================================
+Formato de X_train: (245888, 398)
+Formato de y_train: (245888,)
+
+Parâmetros do modelo:
+max_iter: 300
+C recebido: 10.0
+alpha calculado para SGDClassifier: 4.066892243623113e-07
+solver recebido: sgd
+loss: log_loss
+penalty: elasticnet
+l1_ratio: 0.0
+class_weight: balanced
+random_state: 42
+
+Modelo Regressão Logística via SGD treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - REGRESSÃO LOGÍSTICA VIA SGD
+================================================================================
+
+Métricas principais:
+Accuracy treino: 0.8917
+Accuracy teste: 0.7995
+Balanced accuracy teste: 0.8886
+Macro precision teste: 0.8430
+Macro recall teste: 0.8886
+Macro F1-score teste: 0.8398
+Weighted F1-score teste: 0.8135
+
+Classification report - Teste:
+                        precision    recall  f1-score   support
+
+           risco_baixo       0.96      0.65      0.77     35223
+         risco_elevado       0.96      1.00      0.98       984
+        risco_moderado       0.46      0.91      0.61     11432
+sem_sinal_identificado       1.00      1.00      1.00     19305
+
+              accuracy                           0.80     66944
+             macro avg       0.84      0.89      0.84     66944
+          weighted avg       0.88      0.80      0.81     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA VIA SGD
+================================================================================
+C=0.01 | alpha=0.00040669 | acc_treino=0.8764 | acc_teste=0.8240 | f1_treino=0.8734 | f1_teste=0.7852
+C=0.1 | alpha=0.00004067 | acc_treino=0.8975 | acc_teste=0.8564 | f1_treino=0.8969 | f1_teste=0.8569
+C=1.0 | alpha=0.00000407 | acc_treino=0.9009 | acc_teste=0.8556 | f1_treino=0.9007 | f1_teste=0.8636
+C=10.0 | alpha=0.00000041 | acc_treino=0.8917 | acc_teste=0.7995 | f1_treino=0.8898 | f1_teste=0.8398
+
+Gráficos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_macro_f1.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - Regressão Logística via SGD
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[19305     0     0     0]
+ [    0 22878 12345     0]
+ [    0  1034 10356    42]
+ [    0     0     1   983]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_sgd_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - Regressão Logística via SGD
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[1.         0.         0.         0.        ]
+ [0.         0.64951878 0.35048122 0.        ]
+ [0.         0.09044787 0.90587824 0.0036739 ]
+ [0.         0.         0.00101626 0.99898374]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_sgd_normalizada.png
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: XGBOOST
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - XGBOOST
+================================================================================
+Formato de X_train: (245888, 398)
+Formato de y_train: (245888,)
+
+Parâmetros do modelo:
+n_estimators: 100
+max_depth: 6
+learning_rate: 0.1
+subsample: 0.8
+colsample_bytree: 0.8
+tree_method: hist
+objective: multi:softprob
+eval_metric: mlogloss
+sample_weight: balanced
+num_class: 4
+random_state: 42
+n_jobs: -1
+
+Modelo XGBoost treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - XGBOOST
+================================================================================
+
+Métricas principais:
+Accuracy treino: 0.9977
+Accuracy teste: 0.9960
+Balanced accuracy teste: 0.9958
+Macro precision teste: 0.9895
+Macro recall teste: 0.9958
+Macro F1-score teste: 0.9926
+Weighted F1-score teste: 0.9960
+
+Classification report - Teste:
+                        precision    recall  f1-score   support
+
+           risco_baixo       1.00      0.99      1.00     35223
+         risco_elevado       0.97      1.00      0.98       984
+        risco_moderado       0.99      0.99      0.99     11432
+sem_sinal_identificado       1.00      1.00      1.00     19305
+
+              accuracy                           1.00     66944
+             macro avg       0.99      1.00      0.99     66944
+          weighted avg       1.00      1.00      1.00     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - XGBOOST
+================================================================================
+max_depth=2 | acc_treino=0.8902 | acc_teste=0.8698 | f1_treino=0.8875 | f1_teste=0.7563
+max_depth=4 | acc_treino=0.9856 | acc_teste=0.9810 | f1_treino=0.9856 | f1_teste=0.9640
+max_depth=6 | acc_treino=0.9977 | acc_teste=0.9960 | f1_treino=0.9977 | f1_teste=0.9926
+max_depth=8 | acc_treino=0.9998 | acc_teste=0.9991 | f1_treino=0.9998 | f1_teste=0.9974
+max_depth=10 | acc_treino=0.9999 | acc_teste=0.9994 | f1_treino=0.9999 | f1_teste=0.9979
+
+Gráficos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\grafico_overfitting_xgboost_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\grafico_overfitting_xgboost_macro_f1.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - XGBoost
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[19305     0     0     0]
+ [   69 35042   112     0]
+ [    0    59 11346    27]
+ [    0     0     4   980]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\matriz_confusao_xgboost_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - XGBoost
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[1.         0.         0.         0.        ]
+ [0.00195895 0.99486131 0.00317974 0.        ]
+ [0.         0.00516095 0.99247726 0.00236179]
+ [0.         0.         0.00406504 0.99593496]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\matriz_confusao_xgboost_normalizada.png
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: LIGHTGBM
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - LIGHTGBM
+================================================================================
+Formato de X_train: (245888, 398)
+Formato de y_train: (245888,)
+
+Parâmetros do modelo:
+n_estimators: 100
+max_depth: 6
+learning_rate: 0.1
+num_leaves: 31
+subsample: 0.8
+colsample_bytree: 0.8
+objective: multiclass
+sample_weight: balanced
+num_class: 4
+random_state: 42
+n_jobs: -1
+
+Modelo LightGBM treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - LIGHTGBM
+================================================================================
+
+Métricas principais:
+Accuracy treino: 0.9993
+Accuracy teste: 0.9985
+Balanced accuracy teste: 0.9982
+Macro precision teste: 0.9943
+Macro recall teste: 0.9982
+Macro F1-score teste: 0.9962
+Weighted F1-score teste: 0.9985
+
+Classification report - Teste:
+                        precision    recall  f1-score   support
+
+           risco_baixo       1.00      1.00      1.00     35223
+         risco_elevado       0.98      1.00      0.99       984
+        risco_moderado       1.00      1.00      1.00     11432
+sem_sinal_identificado       1.00      1.00      1.00     19305
+
+              accuracy                           1.00     66944
+             macro avg       0.99      1.00      1.00     66944
+          weighted avg       1.00      1.00      1.00     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - LIGHTGBM
+================================================================================
+max_depth=2 | acc_treino=0.9317 | acc_teste=0.9241 | f1_treino=0.9304 | f1_teste=0.8270
+max_depth=4 | acc_treino=0.9930 | acc_teste=0.9905 | f1_treino=0.9930 | f1_teste=0.9825
+max_depth=6 | acc_treino=0.9993 | acc_teste=0.9985 | f1_treino=0.9993 | f1_teste=0.9962
+max_depth=8 | acc_treino=0.9998 | acc_teste=0.9995 | f1_treino=0.9998 | f1_teste=0.9989
+max_depth=10 | acc_treino=0.9999 | acc_teste=0.9998 | f1_treino=0.9999 | f1_teste=0.9996
+
+Gráficos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\lightgbm_modelo\grafico_overfitting_lightgbm_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\lightgbm_modelo\grafico_overfitting_lightgbm_macro_f1.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - LightGBM
+================================================================================
+
+Labels utilizadas:
+- sem_sinal_identificado
+- risco_baixo
+- risco_moderado
+- risco_elevado
+
+Matriz calculada:
+[[19305     0     0     0]
+ [   12 35164    47     0]
+ [    0    25 11390    17]
+ [    0     0     2   982]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\lightgbm_modelo\matriz_confusao_lightgbm_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - LightGBM
 ================================================================================
 
 Labels utilizadas:
@@ -348,15 +982,11 @@ Labels utilizadas:
 
 Matriz calculada:
 [[1.00000000e+00 0.00000000e+00 0.00000000e+00 0.00000000e+00]
- [5.67810805e-05 9.95031655e-01 4.91156347e-03 0.00000000e+00]
- [0.00000000e+00 2.62421274e-03 9.92564731e-01 4.81105668e-03]
- [0.00000000e+00 0.00000000e+00 8.13008130e-03 9.91869919e-01]]
+ [3.40686483e-04 9.98324958e-01 1.33435539e-03 0.00000000e+00]
+ [0.00000000e+00 2.18684395e-03 9.96326102e-01 1.48705388e-03]
+ [0.00000000e+00 0.00000000e+00 2.03252033e-03 9.97967480e-01]]
 
-Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_normalizada.png
-
-XGBoost desativado na orquestração da Silver.
-
-LightGBM desativado na orquestração da Silver.
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\lightgbm_modelo\matriz_confusao_lightgbm_normalizada.png
 
 ================================================================================
 BASE CODIFICADA E MODELOS SILVER AVALIADOS
@@ -364,24 +994,97 @@ BASE CODIFICADA E MODELOS SILVER AVALIADOS
 X_train original: (267773, 22)
 X_test original: (66944, 22)
 X_train encoded: (267773, 398)
-X_test encoded: (66944, 398)
-y_train: (267773,)
+X_train modelo: (245888, 398)
+y_train modelo: (245888,)
+y_train original: (267773,)
 y_test: (66944,)
 
 ================================================================================
-MÉTRICAS DO MODELO - REGRESSÃO LOGÍSTICA
+MÉTRICAS DO MODELO - ÁRVORE DE DECISÃO
 ================================================================================
 Métrica                                    Valor
 --------------------------------------------------------------------------------
-Accuracy treino                           99.63%
+Accuracy treino                           98.85%
+Accuracy teste                            98.73%
+Balanced accuracy teste                   98.75%
+Macro precision teste                     95.50%
+Macro recall teste                        98.75%
+Macro F1-score teste                      97.03%
+Weighted F1-score teste                   98.74%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste            0.11 p.p.
+
+Interpretação rápida:
+- Não há sinal forte de overfitting pela diferença entre treino e teste.
+
+================================================================================
+MÉTRICAS DO MODELO - RANDOM FOREST
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           88.51%
+Accuracy teste                            85.02%
+Balanced accuracy teste                   88.11%
+Macro precision teste                     72.60%
+Macro recall teste                        88.11%
+Macro F1-score teste                      75.07%
+Weighted F1-score teste                   85.72%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste            3.50 p.p.
+
+Interpretação rápida:
+- Há possível sinal de overfitting: treino maior que teste.
+
+================================================================================
+MÉTRICAS DO MODELO - REGRESSÃO LOGÍSTICA VIA SGD
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           89.17%
+Accuracy teste                            79.95%
+Balanced accuracy teste                   88.86%
+Macro precision teste                     84.30%
+Macro recall teste                        88.86%
+Macro F1-score teste                      83.98%
+Weighted F1-score teste                   81.35%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste            9.22 p.p.
+
+Interpretação rápida:
+- Há possível sinal de overfitting: treino maior que teste.
+
+================================================================================
+MÉTRICAS DO MODELO - XGBOOST
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           99.77%
 Accuracy teste                            99.60%
-Balanced accuracy teste                   99.49%
-Macro precision teste                     98.25%
-Macro recall teste                        99.49%
-Macro F1-score teste                      98.85%
+Balanced accuracy teste                   99.58%
+Macro precision teste                     98.95%
+Macro recall teste                        99.58%
+Macro F1-score teste                      99.26%
 Weighted F1-score teste                   99.60%
 --------------------------------------------------------------------------------
-Diferença accuracy treino-teste            0.03 p.p.
+Diferença accuracy treino-teste            0.17 p.p.
+
+Interpretação rápida:
+- Não há sinal forte de overfitting pela diferença entre treino e teste.
+
+================================================================================
+MÉTRICAS DO MODELO - LIGHTGBM
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           99.93%
+Accuracy teste                            99.85%
+Balanced accuracy teste                   99.82%
+Macro precision teste                     99.43%
+Macro recall teste                        99.82%
+Macro F1-score teste                      99.62%
+Weighted F1-score teste                   99.85%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste            0.08 p.p.
 
 Interpretação rápida:
 - Não há sinal forte de overfitting pela diferença entre treino e teste.

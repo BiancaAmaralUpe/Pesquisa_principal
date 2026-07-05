@@ -1,0 +1,206 @@
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - XGBOOST
+================================================================================
+Data/hora da execução: 2026-07-04 20:47:04
+
+Parâmetros utilizados:
+- N_ESTIMATORS_XGBOOST: 100
+- MAX_DEPTH_XGBOOST: 6
+- LEARNING_RATE_XGBOOST: 0.1
+- SUBSAMPLE_XGBOOST: 0.8
+- COLSAMPLE_BYTREE_XGBOOST: 0.8
+- TREE_METHOD_XGBOOST: hist
+- RANDOM_STATE: 42
+- N_JOBS_XGBOOST: -1
+- objective: multi:softprob
+- eval_metric: mlogloss
+- sample_weight: balanced
+
+Formato dos dados:
+- X_train: (245888, 398)
+- X_test: (66944, 398)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.9977
+- Accuracy teste: 0.9960
+- Balanced accuracy teste: 0.9958
+- Macro precision teste: 0.9895
+- Macro recall teste: 0.9958
+- Macro F1-score teste: 0.9926
+- Weighted F1-score teste: 0.9960
+
+Observação:
+Experimento com XGBoost usando One-Hot Encoding, sample_weight balanceado e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - XGBOOST
+================================================================================
+Data/hora da execução: 2026-07-04 20:48:08
+
+Parâmetros fixos utilizados:
+- N_ESTIMATORS_XGBOOST: 100
+- LEARNING_RATE_XGBOOST: 0.1
+- SUBSAMPLE_XGBOOST: 0.8
+- COLSAMPLE_BYTREE_XGBOOST: 0.8
+- TREE_METHOD_XGBOOST: hist
+- RANDOM_STATE: 42
+- N_JOBS_XGBOOST: -1
+- objective: multi:softprob
+- eval_metric: mlogloss
+- sample_weight: balanced
+
+Resultados por profundidade testada:
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 2
+
+Métricas obtidas:
+- Accuracy treino: 0.8902
+- Accuracy teste: 0.8698
+- Macro F1-score treino: 0.8875
+- Macro F1-score teste: 0.7563
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 4
+
+Métricas obtidas:
+- Accuracy treino: 0.9856
+- Accuracy teste: 0.9810
+- Macro F1-score treino: 0.9856
+- Macro F1-score teste: 0.9640
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 6
+
+Métricas obtidas:
+- Accuracy treino: 0.9977
+- Accuracy teste: 0.9960
+- Macro F1-score treino: 0.9977
+- Macro F1-score teste: 0.9926
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 8
+
+Métricas obtidas:
+- Accuracy treino: 0.9998
+- Accuracy teste: 0.9991
+- Macro F1-score treino: 0.9998
+- Macro F1-score teste: 0.9974
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 10
+
+Métricas obtidas:
+- Accuracy treino: 0.9999
+- Accuracy teste: 0.9994
+- Macro F1-score treino: 0.9999
+- Macro F1-score teste: 0.9979
+
+================================================================================
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - XGBOOST
+================================================================================
+Data/hora da execução: 2026-07-05 15:48:11
+
+Parâmetros utilizados:
+- N_ESTIMATORS_XGBOOST: 100
+- MAX_DEPTH_XGBOOST: 6
+- LEARNING_RATE_XGBOOST: 0.1
+- SUBSAMPLE_XGBOOST: 0.8
+- COLSAMPLE_BYTREE_XGBOOST: 0.8
+- TREE_METHOD_XGBOOST: hist
+- RANDOM_STATE: 42
+- N_JOBS_XGBOOST: -1
+- objective: multi:softprob
+- eval_metric: mlogloss
+- sample_weight: balanced
+
+Formato dos dados:
+- X_train: (245888, 398)
+- X_test: (66944, 398)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.9977
+- Accuracy teste: 0.9960
+- Balanced accuracy teste: 0.9958
+- Macro precision teste: 0.9895
+- Macro recall teste: 0.9958
+- Macro F1-score teste: 0.9926
+- Weighted F1-score teste: 0.9960
+
+Observação:
+Experimento com XGBoost usando One-Hot Encoding, sample_weight balanceado e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - XGBOOST
+================================================================================
+Data/hora da execução: 2026-07-05 15:49:22
+
+Parâmetros fixos utilizados:
+- N_ESTIMATORS_XGBOOST: 100
+- LEARNING_RATE_XGBOOST: 0.1
+- SUBSAMPLE_XGBOOST: 0.8
+- COLSAMPLE_BYTREE_XGBOOST: 0.8
+- TREE_METHOD_XGBOOST: hist
+- RANDOM_STATE: 42
+- N_JOBS_XGBOOST: -1
+- objective: multi:softprob
+- eval_metric: mlogloss
+- sample_weight: balanced
+
+Resultados por profundidade testada:
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 2
+
+Métricas obtidas:
+- Accuracy treino: 0.8902
+- Accuracy teste: 0.8698
+- Macro F1-score treino: 0.8875
+- Macro F1-score teste: 0.7563
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 4
+
+Métricas obtidas:
+- Accuracy treino: 0.9856
+- Accuracy teste: 0.9810
+- Macro F1-score treino: 0.9856
+- Macro F1-score teste: 0.9640
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 6
+
+Métricas obtidas:
+- Accuracy treino: 0.9977
+- Accuracy teste: 0.9960
+- Macro F1-score treino: 0.9977
+- Macro F1-score teste: 0.9926
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 8
+
+Métricas obtidas:
+- Accuracy treino: 0.9998
+- Accuracy teste: 0.9991
+- Macro F1-score treino: 0.9998
+- Macro F1-score teste: 0.9974
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_XGBOOST: 10
+
+Métricas obtidas:
+- Accuracy treino: 0.9999
+- Accuracy teste: 0.9994
+- Macro F1-score treino: 0.9999
+- Macro F1-score teste: 0.9979
+
+================================================================================

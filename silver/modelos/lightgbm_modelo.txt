@@ -1,0 +1,101 @@
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - LIGHTGBM
+================================================================================
+Data/hora da execução: 2026-07-05 15:49:29
+
+Parâmetros utilizados:
+- N_ESTIMATORS_LIGHTGBM: 100
+- MAX_DEPTH_LIGHTGBM: 6
+- LEARNING_RATE_LIGHTGBM: 0.1
+- NUM_LEAVES_LIGHTGBM: 31
+- SUBSAMPLE_LIGHTGBM: 0.8
+- COLSAMPLE_BYTREE_LIGHTGBM: 0.8
+- RANDOM_STATE: 42
+- N_JOBS_LIGHTGBM: -1
+- objective: multiclass
+- sample_weight: balanced
+
+Formato dos dados:
+- X_train: (245888, 398)
+- X_test: (66944, 398)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.9993
+- Accuracy teste: 0.9985
+- Balanced accuracy teste: 0.9982
+- Macro precision teste: 0.9943
+- Macro recall teste: 0.9982
+- Macro F1-score teste: 0.9962
+- Weighted F1-score teste: 0.9985
+
+Observação:
+Experimento com LightGBM usando One-Hot Encoding, sample_weight balanceado e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - LIGHTGBM
+================================================================================
+Data/hora da execução: 2026-07-05 15:49:52
+
+Parâmetros fixos utilizados:
+- N_ESTIMATORS_LIGHTGBM: 100
+- LEARNING_RATE_LIGHTGBM: 0.1
+- NUM_LEAVES_LIGHTGBM: 31
+- SUBSAMPLE_LIGHTGBM: 0.8
+- COLSAMPLE_BYTREE_LIGHTGBM: 0.8
+- RANDOM_STATE: 42
+- N_JOBS_LIGHTGBM: -1
+- objective: multiclass
+- sample_weight: balanced
+
+Resultados por profundidade testada:
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_LIGHTGBM: 2
+
+Métricas obtidas:
+- Accuracy treino: 0.9317
+- Accuracy teste: 0.9241
+- Macro F1-score treino: 0.9304
+- Macro F1-score teste: 0.8270
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_LIGHTGBM: 4
+
+Métricas obtidas:
+- Accuracy treino: 0.9930
+- Accuracy teste: 0.9905
+- Macro F1-score treino: 0.9930
+- Macro F1-score teste: 0.9825
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_LIGHTGBM: 6
+
+Métricas obtidas:
+- Accuracy treino: 0.9993
+- Accuracy teste: 0.9985
+- Macro F1-score treino: 0.9993
+- Macro F1-score teste: 0.9962
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_LIGHTGBM: 8
+
+Métricas obtidas:
+- Accuracy treino: 0.9998
+- Accuracy teste: 0.9995
+- Macro F1-score treino: 0.9998
+- Macro F1-score teste: 0.9989
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_LIGHTGBM: 10
+
+Métricas obtidas:
+- Accuracy treino: 0.9999
+- Accuracy teste: 0.9998
+- Macro F1-score treino: 0.9999
+- Macro F1-score teste: 0.9996
+
+================================================================================
