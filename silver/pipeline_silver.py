@@ -34,7 +34,7 @@ from Pesquisa_principal.constants import SOLVER_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import L1_RATIO_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import PASTA_GRAFICOS_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import ARQUIVO_LOG_REGRESSAO_LOGISTICA
-from Pesquisa_principal.constants import L1_RATIO_REGRESSAO_LOGISTICA
+
 # constants xgboost
 from Pesquisa_principal.constants import N_ESTIMATORS_XGBOOST
 from Pesquisa_principal.constants import MAX_DEPTH_XGBOOST
@@ -55,9 +55,20 @@ from Pesquisa_principal.constants import COLSAMPLE_BYTREE_LIGHTGBM
 from Pesquisa_principal.constants import N_JOBS_LIGHTGBM
 from Pesquisa_principal.constants import PASTA_GRAFICOS_LIGHTGBM
 from Pesquisa_principal.constants import ARQUIVO_LOG_LIGHTGBM
+# constants diagnostico target
+from Pesquisa_principal.constants import PASTA_GRAFICOS_DIAGNOSTICO_TARGET
+# constants balanceamento base
+from Pesquisa_principal.constants import APLICAR_BALANCEAMENTO_TREINO
+from Pesquisa_principal.constants import ESTRATEGIA_BALANCEAMENTO_TREINO
+from Pesquisa_principal.constants import QUANTIDADE_ALVO_BALANCEAMENTO
 
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
+from Pesquisa_principal.silver.processamento.normalizacao_colunas_modelo import normalizar_nomes_colunas_modelo
+from Pesquisa_principal.silver.diagnostico_target import gerar_graficos_diagnostico_target
 from Pesquisa_principal.silver.avaliacao.metricas import exibir_metricas_modelo
+from Pesquisa_principal.silver.graficos.volume_relacao_risco import gerar_graficos_volume_relacao_risco
+from Pesquisa_principal.silver.graficos.balanceamento_base import gerar_graficos_balanceamento_base
+from Pesquisa_principal.silver.processamento.balanceamento_base import aplicar_balanceamento_treino
 
 from Pesquisa_principal.silver.processamento.leitura_dados_bronze import ler_base_modelagem_bronze
 from Pesquisa_principal.silver.processamento.separacao_target import separar_variaveis_explicativas_e_target
@@ -99,11 +110,11 @@ from Pesquisa_principal.silver.modelos.grafico_lightgbm_modelo import gerar_graf
 # ======================================================================================
 
 MODELOS_TREINAMENTO_SILVER = [
-    #"arvore_decisao",
-    #"random_forest",
-    "regressao_logistica", # só rodar uma vez. O pc pede arrego. vai para 72% de uso da memoria
-    #"xgboost_modelo",
-    #"lightgbm_modelo",
+    "arvore_decisao",
+    "random_forest",
+    "regressao_logistica",
+    "xgboost_modelo",
+    "lightgbm_modelo",
 ]
 
 # ======================================================================================
@@ -111,30 +122,30 @@ MODELOS_TREINAMENTO_SILVER = [
 # ======================================================================================
 
 GRAFICOS_POR_MODELO_SILVER = {
-    #"arvore_decisao": [
-    #    "overfitting",
-    #    "matriz_confusao",
-    #],
-#
-    #"random_forest": [
-    #    "overfitting",
-    #    "matriz_confusao",
-    #],
+    "arvore_decisao": [
+        "overfitting",
+        "matriz_confusao",
+    ],
+
+    "random_forest": [
+        "overfitting",
+        "matriz_confusao",
+    ],
 
     "regressao_logistica": [
         "overfitting",
         "matriz_confusao",
     ],
 
-    #"xgboost_modelo": [
-    #    "overfitting",
-    #    "matriz_confusao",
-    #],
-#
-    #"lightgbm_modelo": [
-    #    "overfitting",
-    #    "matriz_confusao",
-    #],
+    "xgboost_modelo": [
+        "overfitting",
+        "matriz_confusao",
+    ],
+
+    "lightgbm_modelo": [
+        "overfitting",
+        "matriz_confusao",
+    ],
 }
 # ==============================================================
 # Fluxos dos modelos - Silver
@@ -668,6 +679,25 @@ def pipeline_silver() -> None:
         )
 
         # ==============================================================
+        # diagnóstico visual do target
+        # ==============================================================
+        gerar_graficos_diagnostico_target(
+            dataframe=dataframe_modelagem,
+            caminho_saida=PASTA_GRAFICOS_DIAGNOSTICO_TARGET,
+            coluna_target=COLUNA_ALVO_MODELAGEM,
+        )
+        # ==============================================================
+        # volume de registros com relação com risco de morte
+        # ==============================================================
+        gerar_graficos_volume_relacao_risco(
+            dataframe=dataframe_modelagem,
+            caminho_saida=PASTA_GRAFICOS_DIAGNOSTICO_TARGET,
+            coluna_target=COLUNA_ALVO_MODELAGEM,
+            coluna_relacao_risco="agravantes_unificados",
+            termo_relacao_risco="RISCO DE MORTE",
+        )
+
+        # ==============================================================
         # separação variáveis explicativas e target
         # ==============================================================
         X, y = separar_variaveis_explicativas_e_target(
@@ -684,6 +714,17 @@ def pipeline_silver() -> None:
             test_size=TEST_SIZE,
             random_state=RANDOM_STATE,
         )
+
+        # ==============================================================
+        # diagnóstico de balanceamento da base
+        # ==============================================================
+        gerar_graficos_balanceamento_base(
+            y=y,
+            y_train=y_train,
+            y_test=y_test,
+            caminho_saida=PASTA_GRAFICOS_DIAGNOSTICO_TARGET,
+            nome_coluna_target=COLUNA_ALVO_MODELAGEM,
+        )
         
         # ==============================================================
         # encoding
@@ -693,6 +734,27 @@ def pipeline_silver() -> None:
             X_test=X_test,
             caminho_encoder=ARQUIVO_ENCODER,
         )
+        # ==============================================================
+        # normalização dos nomes das colunas para compatibilidade com modelos
+        # ==============================================================
+        X_train_encoded, X_test_encoded = normalizar_nomes_colunas_modelo(
+            X_train=X_train_encoded,
+            X_test=X_test_encoded,
+        )
+        # ==============================================================
+        # balanceamento da base de treino
+        # ==============================================================
+        if APLICAR_BALANCEAMENTO_TREINO:
+            X_train_modelo, y_train_modelo = aplicar_balanceamento_treino(
+                X_train=X_train_encoded,
+                y_train=y_train,
+                estrategia=ESTRATEGIA_BALANCEAMENTO_TREINO,
+                random_state=RANDOM_STATE,
+                quantidade_alvo=QUANTIDADE_ALVO_BALANCEAMENTO,
+            )
+        else:
+            X_train_modelo = X_train_encoded
+            y_train_modelo = y_train
 
         # ==============================================================
         # lista de métricas dos modelos
@@ -703,9 +765,9 @@ def pipeline_silver() -> None:
         # Árvore de Decisão
         # ==============================================================
         metricas_arvore_decisao = executar_fluxo_arvore_decisao(
-            X_train_encoded=X_train_encoded,
+            X_train_encoded=X_train_modelo,
             X_test_encoded=X_test_encoded,
-            y_train=y_train,
+            y_train=y_train_modelo,
             y_test=y_test,
         )
 
@@ -716,9 +778,9 @@ def pipeline_silver() -> None:
         # Random Forest
         # ==============================================================
         metricas_random_forest = executar_fluxo_random_forest(
-            X_train_encoded=X_train_encoded,
+            X_train_encoded=X_train_modelo,
             X_test_encoded=X_test_encoded,
-            y_train=y_train,
+            y_train=y_train_modelo,
             y_test=y_test,
         )
 
@@ -729,9 +791,9 @@ def pipeline_silver() -> None:
         # Regressão Logística
         # ==============================================================
         metricas_regressao_logistica = executar_fluxo_regressao_logistica(
-            X_train_encoded=X_train_encoded,
+            X_train_encoded=X_train_modelo,
             X_test_encoded=X_test_encoded,
-            y_train=y_train,
+            y_train=y_train_modelo,
             y_test=y_test,
         )
 
@@ -742,9 +804,9 @@ def pipeline_silver() -> None:
         # XGBoost
         # ==============================================================
         metricas_xgboost = executar_fluxo_xgboost(
-            X_train_encoded=X_train_encoded,
+            X_train_encoded=X_train_modelo,
             X_test_encoded=X_test_encoded,
-            y_train=y_train,
+            y_train=y_train_modelo,
             y_test=y_test,
         )
 
@@ -755,9 +817,9 @@ def pipeline_silver() -> None:
         # LightGBM
         # ==============================================================
         metricas_lightgbm = executar_fluxo_lightgbm(
-            X_train_encoded=X_train_encoded,
+            X_train_encoded=X_train_modelo,
             X_test_encoded=X_test_encoded,
-            y_train=y_train,
+            y_train=y_train_modelo,
             y_test=y_test,
         )
 
@@ -771,8 +833,9 @@ def pipeline_silver() -> None:
         print(f"X_train original: {X_train.shape}")
         print(f"X_test original: {X_test.shape}")
         print(f"X_train encoded: {X_train_encoded.shape}")
-        print(f"X_test encoded: {X_test_encoded.shape}")
-        print(f"y_train: {y_train.shape}")
+        print(f"X_train modelo: {X_train_modelo.shape}")
+        print(f"y_train modelo: {y_train_modelo.shape}")
+        print(f"y_train original: {y_train.shape}")
         print(f"y_test: {y_test.shape}")
 
         for metricas_modelo in metricas_modelos:
