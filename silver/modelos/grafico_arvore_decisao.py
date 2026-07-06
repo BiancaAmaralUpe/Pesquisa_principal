@@ -117,7 +117,6 @@ def gerar_grafico_overfitting_arvore_decisao(
         modelo = DecisionTreeClassifier(
             max_depth=profundidade,
             min_samples_leaf=min_samples_leaf,
-            class_weight="balanced",
             random_state=random_state,
         )
 

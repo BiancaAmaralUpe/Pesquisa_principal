@@ -56,12 +56,14 @@ def treinar_random_forest(
     modelo = RandomForestClassifier(
         n_estimators=n_estimators,
         criterion="gini",
-        max_depth=max_depth,
+        max_depth=10,
         min_samples_leaf=min_samples_leaf,
-        max_features=max_features,
-        class_weight="balanced_subsample",
+        max_features="sqrt",
         random_state=random_state,
         n_jobs=n_jobs,
+        max_samples=0.2,
+        warm_start=True,
+        ccp_alpha=0.01
     )
 
     modelo.fit(X_train, y_train)

@@ -137,7 +137,6 @@ def gerar_grafico_overfitting_random_forest(
             max_depth=profundidade,
             min_samples_leaf=min_samples_leaf,
             max_features=max_features,
-            class_weight="balanced_subsample",
             random_state=random_state,
             n_jobs=n_jobs,
         )

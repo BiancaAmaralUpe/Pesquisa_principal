@@ -89,7 +89,7 @@ def treinar_lightgbm(
         n_estimators=n_estimators,
         max_depth=max_depth,
         learning_rate=learning_rate,
-        num_leaves=num_leaves,
+        num_leaves=15,
         subsample=subsample,
         colsample_bytree=colsample_bytree,
         objective="multiclass",
@@ -98,6 +98,7 @@ def treinar_lightgbm(
         n_jobs=n_jobs,
         verbosity=-1,
         force_col_wise=True,
+        feature_fraction=0.8
     )
 
     modelo.fit(

@@ -95,9 +95,10 @@ def treinar_xgboost(
     print(f"n_jobs: {n_jobs}")
 
     modelo = XGBClassifier(
+        booster='dart',
         n_estimators=n_estimators,
-        max_depth=max_depth,
-        learning_rate=learning_rate,
+        max_depth=4,
+        learning_rate=0.01,
         subsample=subsample,
         colsample_bytree=colsample_bytree,
         objective="multi:softprob",
