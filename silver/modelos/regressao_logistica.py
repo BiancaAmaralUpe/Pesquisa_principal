@@ -83,8 +83,8 @@ def treinar_regressao_logistica(
     modelo = SGDClassifier(
         loss=loss,
         penalty=penalty,
-        alpha=alpha,
-        l1_ratio=l1_ratio,
+        alpha=1e-3,
+        l1_ratio=0.3,
         max_iter=max_iter,
         tol=1e-3,
         class_weight="balanced",

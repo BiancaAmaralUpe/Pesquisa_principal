@@ -41,10 +41,11 @@ def treinar_arvore_decisao(
 
     modelo = DecisionTreeClassifier(
         criterion="gini",
-        max_depth=max_depth,
+        max_depth=10,
         min_samples_leaf=min_samples_leaf,
-        class_weight="balanced",
         random_state=random_state,
+        ccp_alpha=0.01
+
     )
 
     print("\nParâmetros do modelo:")
