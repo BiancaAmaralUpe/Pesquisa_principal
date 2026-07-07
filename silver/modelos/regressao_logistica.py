@@ -63,7 +63,12 @@ def treinar_regressao_logistica(
     print(f"Formato de y_train: {y_train.shape}")
 
     loss = "log_loss"
-    penalty = "elasticnet"
+    
+    if l1_ratio <= 0:
+        penalty = "l2"
+    else:
+        penalty = "elasticnet"
+
     alpha = calcular_alpha_sgd(
         C=C,
         quantidade_linhas_treino=X_train.shape[0],
@@ -83,11 +88,14 @@ def treinar_regressao_logistica(
     modelo = SGDClassifier(
         loss=loss,
         penalty=penalty,
-        alpha=1e-3,
-        l1_ratio=0.3,
+        alpha=alpha,
+        l1_ratio=l1_ratio,
         max_iter=max_iter,
         tol=1e-3,
-        class_weight="balanced",
+        early_stopping=True,
+        validation_fraction=0.1,
+        n_iter_no_change=5,
+        class_weight=None,
         random_state=random_state,
         n_jobs=-1,
     )
@@ -279,4 +287,5 @@ def registrar_treinamento_regressao_logistica(
             arquivo.write("\nObservação:\n")
             arquivo.write(f"{observacao}\n")
 
-        arquivo.write("\n")
+        arquivo.write("\n") 
+

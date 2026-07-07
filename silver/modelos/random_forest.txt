@@ -558,3 +558,37 @@ Métricas obtidas:
 - Macro F1-score teste: 0.7499
 
 ================================================================================
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - RANDOM FOREST
+================================================================================
+Data/hora da execução: 2026-07-07 12:43:01
+
+Parâmetros utilizados:
+- N_ESTIMATORS_RANDOM_FOREST: 100
+- MAX_DEPTH_RANDOM_FOREST: 20
+- MIN_SAMPLES_LEAF_RANDOM_FOREST: 100
+- MAX_FEATURES_RANDOM_FOREST: sqrt
+- RANDOM_STATE: 42
+- N_JOBS_RANDOM_FOREST: -1
+- criterion: gini
+- class_weight: balanced_subsample
+
+Formato dos dados:
+- X_train: (245888, 398)
+- X_test: (66944, 398)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.8162
+- Accuracy teste: 0.7750
+- Balanced accuracy teste: 0.8154
+- Macro precision teste: 0.6634
+- Macro recall teste: 0.8154
+- Macro F1-score teste: 0.6580
+- Weighted F1-score teste: 0.7886
+
+Observação:
+Experimento com Random Forest usando One-Hot Encoding, class_weight='balanced_subsample' e base treino/teste estratificada.
+

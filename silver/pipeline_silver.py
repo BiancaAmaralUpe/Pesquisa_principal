@@ -110,11 +110,11 @@ from Pesquisa_principal.silver.modelos.grafico_lightgbm_modelo import gerar_graf
 # ======================================================================================
 
 MODELOS_TREINAMENTO_SILVER = [
-    "arvore_decisao",
-    "random_forest",
+    #"arvore_decisao",
+    #"random_forest",
     "regressao_logistica",
-    "xgboost_modelo",
-    "lightgbm_modelo",
+    #"xgboost_modelo",
+    #"lightgbm_modelo",
 ]
 
 # ======================================================================================
@@ -122,30 +122,30 @@ MODELOS_TREINAMENTO_SILVER = [
 # ======================================================================================
 
 GRAFICOS_POR_MODELO_SILVER = {
-    "arvore_decisao": [
-        "overfitting",
-        "matriz_confusao",
-    ],
+   #"arvore_decisao": [
+   #    "overfitting",
+   #    "matriz_confusao",
+   #],
 
-    "random_forest": [
-        "overfitting",
-        "matriz_confusao",
-    ],
+   #"random_forest": [
+   #    "overfitting",
+   #    "matriz_confusao",
+   #],
 
     "regressao_logistica": [
         "overfitting",
         "matriz_confusao",
     ],
 
-    "xgboost_modelo": [
-        "overfitting",
-        "matriz_confusao",
-    ],
-
-    "lightgbm_modelo": [
-        "overfitting",
-        "matriz_confusao",
-    ],
+   # "xgboost_modelo": [
+   #     "overfitting",
+   #     "matriz_confusao",
+   # ],
+#
+   # "lightgbm_modelo": [
+   #     "overfitting",
+   #     "matriz_confusao",
+   # ],
 }
 # ==============================================================
 # Fluxos dos modelos - Silver
