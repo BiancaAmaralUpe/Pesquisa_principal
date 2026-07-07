@@ -81,7 +81,7 @@ def gerar_matriz_confusao(
     print(f"\nMatriz de confusão salva em: {caminho_arquivo}")
 
 def gerar_matrizes_confusao_arvore_decisao(
-    y_real: pd.Series,
+    y_real,
     y_predito,
     caminho_saida: str,
 ) -> None:
@@ -91,6 +91,11 @@ def gerar_matrizes_confusao_arvore_decisao(
     - normalizada
     """
 
+    Path(caminho_saida).mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
     labels = [
         "sem_sinal_identificado",
         "risco_baixo",
@@ -98,22 +103,132 @@ def gerar_matrizes_confusao_arvore_decisao(
         "risco_elevado",
     ]
 
-    gerar_matriz_confusao(
-        y_real=y_real,
-        y_predito=y_predito,
-        caminho_saida=caminho_saida,
-        nome_arquivo="matriz_confusao_arvore_decisao_absoluta.png",
-        titulo="Matriz de Confusão - Árvore de Decisão",
-        labels=labels,
-        normalizar=False,
+    ordem_classes = [
+        "sem_sinal_identificado",
+        "risco_baixo",
+        "risco_moderado",
+        "risco_elevado",
+    ]
+
+    # ==================================================================================
+    # Matriz de confusão absoluta
+    # ==================================================================================
+    matriz_absoluta = confusion_matrix(
+        y_true=y_real,
+        y_pred=y_predito,
+        labels=ordem_classes,
     )
 
-    gerar_matriz_confusao(
-        y_real=y_real,
-        y_predito=y_predito,
-        caminho_saida=caminho_saida,
-        nome_arquivo="matriz_confusao_arvore_decisao_normalizada.png",
-        titulo="Matriz de Confusão Normalizada - Árvore de Decisão",
-        labels=labels,
-        normalizar=True,
+    display_absoluta = ConfusionMatrixDisplay(
+        confusion_matrix=matriz_absoluta,
+        display_labels=ordem_classes,
     )
+
+    fig, ax = plt.subplots(
+        figsize=(12, 9),
+    )
+
+    display_absoluta.plot(
+        ax=ax,
+        values_format="d",
+        cmap="viridis",
+        colorbar=True,
+    )
+
+    ax.set_title(
+        "Matriz de Confusão - Árvore de Decisão",
+        fontsize=18,
+    )
+
+    ax.set_xlabel(
+        "Classe prevista",
+        fontsize=14,
+    )
+
+    ax.set_ylabel(
+        "Classe real",
+        fontsize=14,
+    )
+
+    plt.xticks(
+        rotation=45,
+        ha="right",
+    )
+
+    plt.tight_layout()
+
+    caminho_matriz_absoluta = (
+        Path(caminho_saida) / "matriz_confusao_arvore_decisao_absoluta.png"
+    )
+
+    plt.savefig(
+        caminho_matriz_absoluta,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    plt.close()
+
+    # ==================================================================================
+    # Matriz de confusão normalizada
+    # ==================================================================================
+    matriz_normalizada = confusion_matrix(
+        y_true=y_real,
+        y_pred=y_predito,
+        labels=ordem_classes,
+        normalize="true",
+    )
+
+    display_normalizada = ConfusionMatrixDisplay(
+        confusion_matrix=matriz_normalizada,
+        display_labels=ordem_classes,
+    )
+
+    fig, ax = plt.subplots(
+        figsize=(12, 9),
+    )
+
+    display_normalizada.plot(
+        ax=ax,
+        values_format=".2f",
+        cmap="viridis",
+        colorbar=True,
+    )
+
+    ax.set_title(
+        "Matriz de Confusão Normalizada - Árvore de Decisão",
+        fontsize=18,
+    )
+
+    ax.set_xlabel(
+        "Classe prevista",
+        fontsize=14,
+    )
+
+    ax.set_ylabel(
+        "Classe real",
+        fontsize=14,
+    )
+
+    plt.xticks(
+        rotation=45,
+        ha="right",
+    )
+
+    plt.tight_layout()
+
+    caminho_matriz_normalizada = (
+        Path(caminho_saida) / "matriz_confusao_arvore_decisao_normalizada.png"
+    )
+
+    plt.savefig(
+        caminho_matriz_normalizada,
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    plt.close()
+
+    print("\nMatrizes de confusão da Árvore de Decisão salvas com sucesso:")
+    print(f"- {caminho_matriz_absoluta}")
+    print(f"- {caminho_matriz_normalizada}")

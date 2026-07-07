@@ -41,11 +41,10 @@ def treinar_arvore_decisao(
 
     modelo = DecisionTreeClassifier(
         criterion="gini",
-        max_depth=10,
+        max_depth=max_depth,
         min_samples_leaf=min_samples_leaf,
         random_state=random_state,
-        ccp_alpha=0.01
-
+        class_weight="balanced",
     )
 
     print("\nParâmetros do modelo:")
@@ -140,6 +139,12 @@ def avaliar_arvore_decisao(
             zero_division=0,
         )
     )
+
+    print("\nDistribuição real do y_test:")
+    print(pd.Series(y_test).value_counts())
+
+    print("\nDistribuição das predições da Árvore de Decisão:")
+    print(pd.Series(y_pred_test).value_counts())
 
     return metricas, y_pred_test
 

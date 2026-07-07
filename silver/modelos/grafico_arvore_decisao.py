@@ -15,6 +15,10 @@ def registrar_analise_overfitting_arvore_decisao(
     dataframe_resultados: pd.DataFrame,
     min_samples_leaf: int,
     random_state: int,
+    parada_antecipada_ativada: bool,
+    melhor_max_depth: int | None,
+    melhor_macro_f1_teste: float,
+    quantidade_sem_melhoria: int,
 ) -> None:
     """
     Registra no arquivo .txt os resultados da análise de overfitting
@@ -39,7 +43,7 @@ def registrar_analise_overfitting_arvore_decisao(
         arquivo.write(f"- MIN_SAMPLES_LEAF_ARVORE_DECISAO: {min_samples_leaf}\n")
         arquivo.write(f"- RANDOM_STATE: {random_state}\n")
         arquivo.write("- criterion: gini\n")
-        arquivo.write("- class_weight: balanced\n\n")
+        arquivo.write("- class_weight: None\n\n")
 
         arquivo.write("Resultados por profundidade testada:\n\n")
 
@@ -71,6 +75,19 @@ def registrar_analise_overfitting_arvore_decisao(
 
             arquivo.write("\n")
 
+        if parada_antecipada_ativada:
+            arquivo.write("\n")
+            arquivo.write("Parada antecipada:\n")
+            arquivo.write("- Status: ativada\n")
+            arquivo.write(f"- Melhor max_depth encontrado: {melhor_max_depth}\n")
+            arquivo.write(
+                f"- Melhor Macro F1-score teste: {melhor_macro_f1_teste:.4f}\n"
+            )
+            arquivo.write(
+                f"- Quantidade final sem melhoria relevante: "
+                f"{quantidade_sem_melhoria}\n"
+            )
+
         arquivo.write("=" * 80)
         arquivo.write("\n")
 
@@ -78,14 +95,17 @@ def registrar_analise_overfitting_arvore_decisao(
 # Geração dos gráficos
 # ======================================================================
 def gerar_grafico_overfitting_arvore_decisao(
-    X_train: pd.DataFrame,
-    X_test: pd.DataFrame,
-    y_train: pd.Series,
-    y_test: pd.Series,
+    X_train,
+    X_test,
+    y_train,
+    y_test,
     caminho_saida: str,
-    caminho_log: Path | None = None,
-    min_samples_leaf: int = 100,
-    random_state: int = 42,
+    caminho_log,
+    min_samples_leaf: int,
+    random_state: int,
+    ativar_parada_antecipada: bool,
+    tolerancia_melhoria: float,
+    paciencia: int,
 ) -> None:
     """
     Gera gráfico para analisar overfitting da Árvore de Decisão
@@ -103,33 +123,54 @@ def gerar_grafico_overfitting_arvore_decisao(
         "macro_f1_treino": [],
         "macro_f1_teste": [],
     }
+    melhor_macro_f1_teste = -1
+    quantidade_sem_melhoria = 0
+    melhor_max_depth = None
 
     print("\n" + "=" * 80)
     print("ANÁLISE DE OVERFITTING - ÁRVORE DE DECISÃO")
     print("=" * 80)
-
+    
     for profundidade in profundidades:
-        # ======================================================================
-        # Treinamento do modelo
-        # Aqui tive que deixar os valores que eram fixos, para valores variaveis, 
-        # pois é para ficar registrando no .txt. Assim tenho controle dos parametros que eu estou usando.
-        # ======================================================================
         modelo = DecisionTreeClassifier(
+            criterion="gini",
             max_depth=profundidade,
             min_samples_leaf=min_samples_leaf,
             random_state=random_state,
+            class_weight="balanced",
         )
 
-        modelo.fit(X_train, y_train)
+        modelo.fit(
+            X_train,
+            y_train,
+        )
 
         pred_train = modelo.predict(X_train)
         pred_test = modelo.predict(X_test)
 
-        acc_train = accuracy_score(y_train, pred_train)
-        acc_test = accuracy_score(y_test, pred_test)
+        acc_train = accuracy_score(
+            y_train,
+            pred_train,
+        )
 
-        f1_train = f1_score(y_train, pred_train, average="macro")
-        f1_test = f1_score(y_test, pred_test, average="macro")
+        acc_test = accuracy_score(
+            y_test,
+            pred_test,
+        )
+
+        f1_train = f1_score(
+            y_train,
+            pred_train,
+            average="macro",
+            zero_division=0,
+        )
+
+        f1_test = f1_score(
+            y_test,
+            pred_test,
+            average="macro",
+            zero_division=0,
+        )
 
         resultados["max_depth"].append(profundidade)
         resultados["accuracy_treino"].append(acc_train)
@@ -139,26 +180,45 @@ def gerar_grafico_overfitting_arvore_decisao(
 
         print(
             f"max_depth={profundidade} | "
-            f"acc_treino={acc_train:.4f} | acc_teste={acc_test:.4f} | "
-            f"f1_treino={f1_train:.4f} | f1_teste={f1_test:.4f}"
+            f"acc_treino={acc_train:.4f} | "
+            f"acc_teste={acc_test:.4f} | "
+            f"f1_treino={f1_train:.4f} | "
+            f"f1_teste={f1_test:.4f}"
         )
+
+        melhoria = f1_test - melhor_macro_f1_teste
+
+        if melhoria > tolerancia_melhoria:
+            melhor_macro_f1_teste = f1_test
+            melhor_max_depth = profundidade
+            quantidade_sem_melhoria = 0
+        else:
+            quantidade_sem_melhoria += 1
+
+        if ativar_parada_antecipada and quantidade_sem_melhoria >= paciencia:
+            print("\nParada antecipada ativada na análise de profundidade.")
+            print(f"Melhor max_depth encontrado: {melhor_max_depth}")
+            print(f"Melhor Macro F1-score teste: {melhor_macro_f1_teste:.4f}")
+            print(
+                f"Sem melhoria relevante nas últimas "
+                f"{quantidade_sem_melhoria} profundidades testadas."
+            )
+            break
 
     df_resultados = pd.DataFrame(resultados)
 
-    # ======================================================================
-    # Registro no arquivo .txt
-    # ======================================================================
     if caminho_log is not None:
         registrar_analise_overfitting_arvore_decisao(
             caminho_log=caminho_log,
             dataframe_resultados=df_resultados,
             min_samples_leaf=min_samples_leaf,
             random_state=random_state,
+            parada_antecipada_ativada=ativar_parada_antecipada,
+            melhor_max_depth=melhor_max_depth,
+            melhor_macro_f1_teste=melhor_macro_f1_teste,
+            quantidade_sem_melhoria=quantidade_sem_melhoria,
         )
 
-    # ======================================================================
-    # Geração dos gráficos
-    # ======================================================================
     plt.figure(figsize=(10, 6))
     plt.plot(
         df_resultados["max_depth"],
@@ -185,9 +245,6 @@ def gerar_grafico_overfitting_arvore_decisao(
     )
     plt.close()
 
-    # ======================================================================
-    # Geração do gráfico Macro F1
-    # ======================================================================
     plt.figure(figsize=(10, 6))
     plt.plot(
         df_resultados["max_depth"],
