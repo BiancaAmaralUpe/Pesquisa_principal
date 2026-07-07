@@ -19,6 +19,9 @@ from Pesquisa_principal.constants import MAX_DEPTH_ARVORE_DECISAO
 from Pesquisa_principal.constants import MIN_SAMPLES_LEAF_ARVORE_DECISAO
 from Pesquisa_principal.constants import PASTA_GRAFICOS_ARVORE_DECISAO
 from Pesquisa_principal.constants import ARQUIVO_LOG_ARVORE_DECISAO
+from Pesquisa_principal.constants import ATIVAR_PARADA_ANTECIPADA_ARVORE_DECISAO
+from Pesquisa_principal.constants import TOLERANCIA_MELHORIA_ARVORE_DECISAO
+from Pesquisa_principal.constants import PACIENCIA_ARVORE_DECISAO
 # constants random forest
 from Pesquisa_principal.constants import N_ESTIMATORS_RANDOM_FOREST
 from Pesquisa_principal.constants import MAX_DEPTH_RANDOM_FOREST
@@ -541,6 +544,9 @@ def executar_fluxo_arvore_decisao(
             caminho_log=ARQUIVO_LOG_ARVORE_DECISAO,
             min_samples_leaf=MIN_SAMPLES_LEAF_ARVORE_DECISAO,
             random_state=RANDOM_STATE,
+            ativar_parada_antecipada=ATIVAR_PARADA_ANTECIPADA_ARVORE_DECISAO,
+            tolerancia_melhoria=TOLERANCIA_MELHORIA_ARVORE_DECISAO,
+            paciencia=PACIENCIA_ARVORE_DECISAO,
         )
     # ============================================================== #
     # 

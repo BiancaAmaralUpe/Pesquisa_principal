@@ -727,6 +727,16 @@ MAX_DEPTH_ARVORE_DECISAO = 20
 MIN_SAMPLES_LEAF_ARVORE_DECISAO = 100
 
 # ======================================================================================
+# Parâmetros de parada antecipada - Árvore de Decisão
+# ======================================================================================
+
+ATIVAR_PARADA_ANTECIPADA_ARVORE_DECISAO = True
+
+TOLERANCIA_MELHORIA_ARVORE_DECISAO = 0.0001
+
+PACIENCIA_ARVORE_DECISAO = 2
+
+# ======================================================================================
 # Parâmetros da Random Forest - Silver
 # ======================================================================================
 
