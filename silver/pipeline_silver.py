@@ -720,6 +720,14 @@ def pipeline_silver() -> None:
             test_size=TEST_SIZE,
             random_state=RANDOM_STATE,
         )
+        print("\nDistribuição do target completo:")
+        print(y.value_counts(normalize=True).sort_index())
+
+        print("\nDistribuição do y_train:")
+        print(y_train.value_counts(normalize=True).sort_index())
+
+        print("\nDistribuição do y_test:")
+        print(y_test.value_counts(normalize=True).sort_index())
 
         # ==============================================================
         # diagnóstico de balanceamento da base
@@ -731,7 +739,6 @@ def pipeline_silver() -> None:
             caminho_saida=PASTA_GRAFICOS_DIAGNOSTICO_TARGET,
             nome_coluna_target=COLUNA_ALVO_MODELAGEM,
         )
-        
         # ==============================================================
         # encoding
         # ==============================================================

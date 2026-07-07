@@ -132,10 +132,19 @@ def avaliar_arvore_decisao(
     print(f"Weighted F1-score teste: {weighted_f1:.4f}")
 
     print("\nClassification report - Teste:")
+
+    ordem_classes = [
+        "sem_sinal_identificado",
+        "risco_baixo",
+        "risco_moderado",
+        "risco_elevado",
+    ]
+
     print(
         classification_report(
             y_test,
             y_pred_test,
+            labels=ordem_classes,
             zero_division=0,
         )
     )

@@ -43,7 +43,7 @@ def registrar_analise_overfitting_arvore_decisao(
         arquivo.write(f"- MIN_SAMPLES_LEAF_ARVORE_DECISAO: {min_samples_leaf}\n")
         arquivo.write(f"- RANDOM_STATE: {random_state}\n")
         arquivo.write("- criterion: gini\n")
-        arquivo.write("- class_weight: None\n\n")
+        arquivo.write("- class_weight: balanced\n\n")
 
         arquivo.write("Resultados por profundidade testada:\n\n")
 

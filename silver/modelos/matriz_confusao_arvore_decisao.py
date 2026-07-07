@@ -11,74 +11,203 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 import pandas as pd
-from sklearn.metrics import ConfusionMatrixDisplay
-from sklearn.metrics import confusion_matrix
 
-def gerar_matriz_confusao(
-    y_real: pd.Series,
+def gerar_matriz_confusao_absoluta(
+    y_real,
     y_predito,
-    caminho_saida: str,
-    nome_arquivo: str,
-    titulo: str,
-    labels: list[str],
-    normalizar: bool = False,
+    caminho_saida: Path,
+    classes_reais: list[str],
+    classes_previstas: list[str],
 ) -> None:
     """
-    Gera e salva matriz de confusão.
+    Gera a matriz de confusão absoluta usando tabela cruzada.
 
-    Quando normalizar=True, a matriz mostra a proporção de acertos e erros
-    por classe real.
+    Eixo Y: classe real
+    Eixo X: classe prevista
     """
 
-    print("\n" + "=" * 80)
-    print(f"GERAÇÃO DA MATRIZ DE CONFUSÃO - {titulo}")
-    print("=" * 80)
-
-    Path(caminho_saida).mkdir(parents=True, exist_ok=True)
-
-    if normalizar:
-        matriz = confusion_matrix(
-            y_real,
-            y_predito,
-            labels=labels,
-            normalize="true",
-        )
-
-        formato_valores = ".2f"
-    else:
-        matriz = confusion_matrix(
-            y_real,
-            y_predito,
-            labels=labels,
-        )
-
-        formato_valores = "d"
-
-    print("\nLabels utilizadas:")
-    for label in labels:
-        print(f"- {label}")
-
-    print("\nMatriz calculada:")
-    print(matriz)
-
-    display = ConfusionMatrixDisplay(
-        confusion_matrix=matriz,
-        display_labels=labels,
+    matriz_confusao = pd.crosstab(
+        pd.Series(y_real, name="Classe real"),
+        pd.Series(y_predito, name="Classe prevista"),
     )
 
-    display.plot(
-        values_format=formato_valores,
-        xticks_rotation=45,
+    matriz_confusao = matriz_confusao.reindex(
+        index=classes_reais,
+        columns=classes_previstas,
+        fill_value=0,
     )
 
-    plt.title(titulo)
+    figura, eixo = plt.subplots(
+        figsize=(12, 8),
+    )
+
+    imagem = eixo.imshow(
+        matriz_confusao.values,
+        aspect="auto",
+    )
+
+    figura.colorbar(
+        imagem,
+        ax=eixo,
+    )
+
+    eixo.set_title(
+        "Matriz de Confusão - Árvore de Decisão",
+        fontsize=16,
+    )
+
+    eixo.set_xlabel(
+        "Classe prevista",
+        fontsize=12,
+    )
+
+    eixo.set_ylabel(
+        "Classe real",
+        fontsize=12,
+    )
+
+    eixo.set_xticks(
+        range(len(classes_previstas)),
+    )
+
+    eixo.set_xticklabels(
+        classes_previstas,
+        rotation=45,
+        ha="right",
+    )
+
+    eixo.set_yticks(
+        range(len(classes_reais)),
+    )
+
+    eixo.set_yticklabels(
+        classes_reais,
+    )
+
+    for linha in range(len(classes_reais)):
+        for coluna in range(len(classes_previstas)):
+            valor = matriz_confusao.iloc[linha, coluna]
+
+            eixo.text(
+                coluna,
+                linha,
+                str(valor),
+                ha="center",
+                va="center",
+                fontsize=10,
+            )
+
     plt.tight_layout()
 
-    caminho_arquivo = Path(caminho_saida) / nome_arquivo
-    plt.savefig(caminho_arquivo, dpi=300, bbox_inches="tight")
+    plt.savefig(
+        caminho_saida / "matriz_confusao_arvore_decisao_absoluta.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+
     plt.close()
 
-    print(f"\nMatriz de confusão salva em: {caminho_arquivo}")
+
+def gerar_matriz_confusao_normalizada(
+    y_real,
+    y_predito,
+    caminho_saida: Path,
+    classes_reais: list[str],
+    classes_previstas: list[str],
+) -> None:
+    """
+    Gera a matriz de confusão normalizada por linha.
+
+    Cada linha soma aproximadamente 1.0.
+    """
+
+    matriz_confusao = pd.crosstab(
+        pd.Series(y_real, name="Classe real"),
+        pd.Series(y_predito, name="Classe prevista"),
+    )
+
+    matriz_confusao = matriz_confusao.reindex(
+        index=classes_reais,
+        columns=classes_previstas,
+        fill_value=0,
+    )
+
+    matriz_normalizada = matriz_confusao.div(
+        matriz_confusao.sum(axis=1),
+        axis=0,
+    ).fillna(0)
+
+    figura, eixo = plt.subplots(
+        figsize=(12, 8),
+    )
+
+    imagem = eixo.imshow(
+        matriz_normalizada.values,
+        aspect="auto",
+    )
+
+    figura.colorbar(
+        imagem,
+        ax=eixo,
+    )
+
+    eixo.set_title(
+        "Matriz de Confusão Normalizada - Árvore de Decisão",
+        fontsize=16,
+    )
+
+    eixo.set_xlabel(
+        "Classe prevista",
+        fontsize=12,
+    )
+
+    eixo.set_ylabel(
+        "Classe real",
+        fontsize=12,
+    )
+
+    eixo.set_xticks(
+        range(len(classes_previstas)),
+    )
+
+    eixo.set_xticklabels(
+        classes_previstas,
+        rotation=45,
+        ha="right",
+    )
+
+    eixo.set_yticks(
+        range(len(classes_reais)),
+    )
+
+    eixo.set_yticklabels(
+        classes_reais,
+    )
+
+    for linha in range(len(classes_reais)):
+        for coluna in range(len(classes_previstas)):
+            percentual = matriz_normalizada.iloc[linha, coluna]
+            quantidade = matriz_confusao.iloc[linha, coluna]
+
+            eixo.text(
+                coluna,
+                linha,
+                f"{percentual:.2f}\n({quantidade})",
+                ha="center",
+                va="center",
+                fontsize=10,
+            )
+
+    plt.tight_layout()
+
+    plt.savefig(
+        caminho_saida / "matriz_confusao_arvore_decisao_normalizada.png",
+        dpi=300,
+        bbox_inches="tight",
+    )
+
+    plt.close()
+
 
 def gerar_matrizes_confusao_arvore_decisao(
     y_real,
@@ -86,149 +215,45 @@ def gerar_matrizes_confusao_arvore_decisao(
     caminho_saida: str,
 ) -> None:
     """
-    Gera as matrizes de confusão da Árvore de Decisão:
-    - absoluta
-    - normalizada
+    Gera as matrizes de confusão absoluta e normalizada
+    para o modelo de Árvore de Decisão.
     """
 
-    Path(caminho_saida).mkdir(
+    caminho_saida = Path(caminho_saida)
+
+    caminho_saida.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    labels = [
+    classes_reais = [
         "sem_sinal_identificado",
         "risco_baixo",
         "risco_moderado",
         "risco_elevado",
     ]
 
-    ordem_classes = [
+    classes_previstas = [
         "sem_sinal_identificado",
         "risco_baixo",
         "risco_moderado",
         "risco_elevado",
     ]
 
-    # ==================================================================================
-    # Matriz de confusão absoluta
-    # ==================================================================================
-    matriz_absoluta = confusion_matrix(
-        y_true=y_real,
-        y_pred=y_predito,
-        labels=ordem_classes,
+    gerar_matriz_confusao_absoluta(
+        y_real=y_real,
+        y_predito=y_predito,
+        caminho_saida=caminho_saida,
+        classes_reais=classes_reais,
+        classes_previstas=classes_previstas,
     )
 
-    display_absoluta = ConfusionMatrixDisplay(
-        confusion_matrix=matriz_absoluta,
-        display_labels=ordem_classes,
+    gerar_matriz_confusao_normalizada(
+        y_real=y_real,
+        y_predito=y_predito,
+        caminho_saida=caminho_saida,
+        classes_reais=classes_reais,
+        classes_previstas=classes_previstas,
     )
 
-    fig, ax = plt.subplots(
-        figsize=(12, 9),
-    )
-
-    display_absoluta.plot(
-        ax=ax,
-        values_format="d",
-        cmap="viridis",
-        colorbar=True,
-    )
-
-    ax.set_title(
-        "Matriz de Confusão - Árvore de Decisão",
-        fontsize=18,
-    )
-
-    ax.set_xlabel(
-        "Classe prevista",
-        fontsize=14,
-    )
-
-    ax.set_ylabel(
-        "Classe real",
-        fontsize=14,
-    )
-
-    plt.xticks(
-        rotation=45,
-        ha="right",
-    )
-
-    plt.tight_layout()
-
-    caminho_matriz_absoluta = (
-        Path(caminho_saida) / "matriz_confusao_arvore_decisao_absoluta.png"
-    )
-
-    plt.savefig(
-        caminho_matriz_absoluta,
-        dpi=300,
-        bbox_inches="tight",
-    )
-
-    plt.close()
-
-    # ==================================================================================
-    # Matriz de confusão normalizada
-    # ==================================================================================
-    matriz_normalizada = confusion_matrix(
-        y_true=y_real,
-        y_pred=y_predito,
-        labels=ordem_classes,
-        normalize="true",
-    )
-
-    display_normalizada = ConfusionMatrixDisplay(
-        confusion_matrix=matriz_normalizada,
-        display_labels=ordem_classes,
-    )
-
-    fig, ax = plt.subplots(
-        figsize=(12, 9),
-    )
-
-    display_normalizada.plot(
-        ax=ax,
-        values_format=".2f",
-        cmap="viridis",
-        colorbar=True,
-    )
-
-    ax.set_title(
-        "Matriz de Confusão Normalizada - Árvore de Decisão",
-        fontsize=18,
-    )
-
-    ax.set_xlabel(
-        "Classe prevista",
-        fontsize=14,
-    )
-
-    ax.set_ylabel(
-        "Classe real",
-        fontsize=14,
-    )
-
-    plt.xticks(
-        rotation=45,
-        ha="right",
-    )
-
-    plt.tight_layout()
-
-    caminho_matriz_normalizada = (
-        Path(caminho_saida) / "matriz_confusao_arvore_decisao_normalizada.png"
-    )
-
-    plt.savefig(
-        caminho_matriz_normalizada,
-        dpi=300,
-        bbox_inches="tight",
-    )
-
-    plt.close()
-
-    print("\nMatrizes de confusão da Árvore de Decisão salvas com sucesso:")
-    print(f"- {caminho_matriz_absoluta}")
-    print(f"- {caminho_matriz_normalizada}")
+    print("\nMatrizes de confusão da Árvore de Decisão salvas com sucesso.")

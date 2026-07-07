@@ -786,7 +786,7 @@ N_JOBS_XGBOOST = -1
 
 N_ESTIMATORS_LIGHTGBM = 100
 
-MAX_DEPTH_LIGHTGBM = 6
+MAX_DEPTH_LIGHTGBM = 4
 
 LEARNING_RATE_LIGHTGBM = 0.1
 
@@ -839,7 +839,7 @@ PASTA_GRAFICOS_DIAGNOSTICO_TARGET = (
 # Balanceamento da base - Silver
 # ======================================================================================
 
-APLICAR_BALANCEAMENTO_TREINO = True
+APLICAR_BALANCEAMENTO_TREINO = False
 
 ESTRATEGIA_BALANCEAMENTO_TREINO = "hibrido"
 
