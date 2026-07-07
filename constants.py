@@ -754,7 +754,7 @@ N_JOBS_RANDOM_FOREST = -1
 # Parâmetros da Regressão Logística - Silver
 # ======================================================================================
 
-MAX_ITER_REGRESSAO_LOGISTICA = 100
+MAX_ITER_REGRESSAO_LOGISTICA = 50
 
 C_REGRESSAO_LOGISTICA = 1.0
 

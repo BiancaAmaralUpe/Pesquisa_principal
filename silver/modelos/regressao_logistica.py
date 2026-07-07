@@ -19,25 +19,31 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 
-
 def calcular_alpha_sgd(
     C: float,
     quantidade_linhas_treino: int,
 ) -> float:
     """
-    Converte o parâmetro C em um valor aproximado de alpha para o SGDClassifier.
+    Converte o parâmetro C em alpha para o SGDClassifier.
 
-    No LogisticRegression tradicional, C controla a força da regularização
-    de forma inversa. No SGDClassifier, quem controla a regularização é alpha.
+    Para bases grandes, evita alpha muito pequeno, pois isso pode deixar
+    o treinamento lento e instável.
     """
 
     if C <= 0:
         return 0.0001
 
-    alpha = 1 / (C * quantidade_linhas_treino)
+    if quantidade_linhas_treino <= 0:
+        return 0.0001
 
-    return alpha
+    alpha_calculado = 1 / (C * quantidade_linhas_treino)
 
+    alpha_minimo = 0.0001
+
+    if alpha_calculado < alpha_minimo:
+        return alpha_minimo
+
+    return alpha_calculado
 
 def treinar_regressao_logistica(
     X_train: pd.DataFrame,
@@ -82,7 +88,9 @@ def treinar_regressao_logistica(
     print(f"loss: {loss}")
     print(f"penalty: {penalty}")
     print(f"l1_ratio: {l1_ratio}")
-    print("class_weight: balanced")
+    print("class_weight: None")
+    print("early_stopping: True")
+    print("n_jobs: 1")
     print(f"random_state: {random_state}")
 
     modelo = SGDClassifier(
@@ -97,18 +105,17 @@ def treinar_regressao_logistica(
         n_iter_no_change=5,
         class_weight=None,
         random_state=random_state,
-        n_jobs=-1,
+        n_jobs=1,
+        verbose=0,
     )
 
     modelo.fit(
         X_train,
         y_train,
     )
-
     print("\nModelo Regressão Logística via SGD treinado com sucesso.")
 
     return modelo
-
 
 def avaliar_regressao_logistica(
     modelo: SGDClassifier,

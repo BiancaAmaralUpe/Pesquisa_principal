@@ -1181,3 +1181,98 @@ Métricas obtidas:
 - Macro F1-score teste: 0.8733
 
 ================================================================================
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - REGRESSÃO LOGÍSTICA VIA SGD
+================================================================================
+Data/hora da execução: 2026-07-07 19:51:15
+
+Parâmetros utilizados:
+- MAX_ITER_REGRESSAO_LOGISTICA: 50
+- C_REGRESSAO_LOGISTICA: 1.0
+- ALPHA_CALCULADO_SGD: 0.0001
+- SOLVER_REGRESSAO_LOGISTICA: sgd
+- loss: log_loss
+- penalty: elasticnet
+- L1_RATIO_REGRESSAO_LOGISTICA: 0.0
+- RANDOM_STATE: 42
+- class_weight: balanced
+- n_jobs: -1
+
+Formato dos dados:
+- X_train: (245888, 320)
+- X_test: (66944, 320)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.7948
+- Accuracy teste: 0.7911
+- Balanced accuracy teste: 0.7911
+- Macro precision teste: 0.6336
+- Macro recall teste: 0.7911
+- Macro F1-score teste: 0.6600
+- Weighted F1-score teste: 0.8050
+
+Observação:
+Experimento com Regressão Logística usando One-Hot Encoding, class_weight='balanced', l1_ratio=0.0 e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA VIA SGD
+================================================================================
+Data/hora da execução: 2026-07-07 19:52:13
+
+Parâmetros fixos utilizados:
+- MAX_ITER_REGRESSAO_LOGISTICA: 50
+- SOLVER_REGRESSAO_LOGISTICA: sgd
+- loss: log_loss
+- penalty: elasticnet
+- L1_RATIO_REGRESSAO_LOGISTICA: 0.0
+- RANDOM_STATE: 42
+- class_weight: balanced
+- n_jobs: -1
+
+Resultados por valor de C testado:
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 0.01
+ALPHA_CALCULADO_SGD: 0.0004066892243623113
+
+Métricas obtidas:
+- Accuracy treino: 0.7948
+- Accuracy teste: 0.7852
+- Macro F1-score treino: 0.7904
+- Macro F1-score teste: 0.6505
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 0.1
+ALPHA_CALCULADO_SGD: 4.066892243623112e-05
+
+Métricas obtidas:
+- Accuracy treino: 0.7967
+- Accuracy teste: 0.8046
+- Macro F1-score treino: 0.7956
+- Macro F1-score teste: 0.6734
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 1.0
+ALPHA_CALCULADO_SGD: 4.066892243623113e-06
+
+Métricas obtidas:
+- Accuracy treino: 0.8022
+- Accuracy teste: 0.7935
+- Macro F1-score treino: 0.7964
+- Macro F1-score teste: 0.6548
+
+--------------------------------------------------------------------------------
+C_REGRESSAO_LOGISTICA: 10.0
+ALPHA_CALCULADO_SGD: 4.066892243623113e-07
+
+Métricas obtidas:
+- Accuracy treino: 0.7076
+- Accuracy teste: 0.8003
+- Macro F1-score treino: 0.6932
+- Macro F1-score teste: 0.6411
+
+================================================================================

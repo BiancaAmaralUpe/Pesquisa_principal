@@ -217,14 +217,26 @@ Name: proportion, dtype: float64
 Separação concluída com sucesso.
 
 ================================================================================
+REMOÇÃO DE COLUNAS COM POSSÍVEL VAZAMENTO
+================================================================================
+
+Colunas removidas:
+- agravantes_unificados
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+
+Formato de X após remoção: (334717, 18)
+
+================================================================================
 DIVISÃO TREINO/TESTE ESTRATIFICADA
 ================================================================================
 Tamanho do teste: 0.2
 Random state: 42
 
 Formato dos dados:
-X_train: (267773, 22)
-X_test: (66944, 22)
+X_train: (267773, 18)
+X_test: (66944, 18)
 y_train: (267773,)
 y_test: (66944,)
 
@@ -345,13 +357,12 @@ APLICAÇÃO DO ONE-HOT ENCODING
 ================================================================================
 IDENTIFICAÇÃO DE COLUNAS CATEGÓRICAS
 ================================================================================
-Quantidade de colunas categóricas: 22
+Quantidade de colunas categóricas: 18
 - tipo_violacao
 - grupo_vulneravel
 - especie_violacao
 - motivacao
 - denuncia_emergencial
-- agravantes_unificados
 - sexo_vitima
 - grau_instrucao_vitima
 - faixa_renda_vitima
@@ -365,9 +376,6 @@ Quantidade de colunas categóricas: 22
 - nacionalidade_suspeito
 - deficiencia_suspeito
 - relacao_vitima_suspeito
-- indicador_letalidade
-- subtipo_letalidade
-- tipo_violencia_normalizado
 
 ================================================================================
 IDENTIFICAÇÃO DE COLUNAS NUMÉRICAS/BOOLEANAS
@@ -378,10 +386,10 @@ Ajustando encoder no X_train...
 Aplicando encoder no X_test...
 
 Encoding finalizado com sucesso.
-Formato original X_train: (267773, 22)
-Formato original X_test: (66944, 22)
-Formato codificado X_train: (267773, 398)
-Formato codificado X_test: (66944, 398)
+Formato original X_train: (267773, 18)
+Formato original X_test: (66944, 18)
+Formato codificado X_train: (267773, 320)
+Formato codificado X_test: (66944, 320)
 Encoder salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\artefatos\encoder.pkl
 
 Primeiras colunas geradas pelo encoding:
@@ -409,8 +417,8 @@ Primeiras colunas geradas pelo encoding:
 ================================================================================
 NORMALIZAÇÃO DOS NOMES DAS COLUNAS PARA OS MODELOS
 ================================================================================
-Quantidade de colunas: 398
-Quantidade de nomes alterados: 372
+Quantidade de colunas: 320
+Quantidade de nomes alterados: 309
 
 Exemplos de nomes normalizados:
 - tipo_violacao_1. VIOLÊNCIA FÍSICA  ->  tipo_violacao_1_violencia_fisica
@@ -484,11 +492,11 @@ risco_moderado            25.0
 Name: proportion, dtype: float64
 
 Formato antes do balanceamento:
-X_train: (267773, 398)
+X_train: (267773, 320)
 y_train: (267773,)
 
 Formato após o balanceamento:
-X_train_balanceado: (245888, 398)
+X_train_balanceado: (245888, 320)
 y_train_balanceado: (245888,)
 
 Balanceamento da base de treino concluído com sucesso.
@@ -500,7 +508,7 @@ ORQUESTRAÇÃO DO MODELO: ÁRVORE DE DECISÃO
 ================================================================================
 TREINAMENTO DO MODELO - ÁRVORE DE DECISÃO
 ================================================================================
-Formato de X_train: (245888, 398)
+Formato de X_train: (245888, 320)
 Formato de y_train: (245888,)
 
 Parâmetros do modelo:
@@ -517,25 +525,25 @@ AVALIAÇÃO DO MODELO - ÁRVORE DE DECISÃO
 ================================================================================
 
 Métricas principais:
-Accuracy treino: 0.9885
-Accuracy teste: 0.9873
-Balanced accuracy teste: 0.9875
-Macro precision teste: 0.9550
-Macro recall teste: 0.9875
-Macro F1-score teste: 0.9703
-Weighted F1-score teste: 0.9874
+Accuracy treino: 0.8454
+Accuracy teste: 0.8762
+Balanced accuracy teste: 0.8285
+Macro precision teste: 0.7238
+Macro recall teste: 0.8285
+Macro F1-score teste: 0.7240
+Weighted F1-score teste: 0.8835
 
 Classification report - Teste:
                         precision    recall  f1-score   support
 
-           risco_baixo       1.00      0.98      0.99     35223
-         risco_elevado       0.87      0.99      0.93       984
-        risco_moderado       0.96      0.98      0.97     11432
-sem_sinal_identificado       0.99      1.00      1.00     19305
+           risco_baixo       0.94      0.91      0.92     35223
+         risco_elevado       0.20      0.82      0.33       984
+        risco_moderado       0.83      0.59      0.69     11432
+sem_sinal_identificado       0.92      0.99      0.95     19305
 
-              accuracy                           0.99     66944
-             macro avg       0.95      0.99      0.97     66944
-          weighted avg       0.99      0.99      0.99     66944
+              accuracy                           0.88     66944
+             macro avg       0.72      0.83      0.72     66944
+          weighted avg       0.90      0.88      0.88     66944
 
 
 Distribuição real do y_test:
@@ -547,30 +555,25 @@ risco_elevado               984
 Name: count, dtype: int64
 
 Distribuição das predições da Árvore de Decisão:
-risco_baixo               34685
-sem_sinal_identificado    19446
-risco_moderado            11698
-risco_elevado              1115
+risco_baixo               34000
+sem_sinal_identificado    20827
+risco_moderado             8143
+risco_elevado              3974
 Name: count, dtype: int64
 
 ================================================================================
 ANÁLISE DE OVERFITTING - ÁRVORE DE DECISÃO
 ================================================================================
-max_depth=2 | acc_treino=0.5011 | acc_teste=0.3355 | f1_treino=0.4526 | f1_teste=0.3287
-max_depth=4 | acc_treino=0.7000 | acc_teste=0.7360 | f1_treino=0.6965 | f1_teste=0.6264
-max_depth=6 | acc_treino=0.8473 | acc_teste=0.8292 | f1_treino=0.8453 | f1_teste=0.7715
-max_depth=8 | acc_treino=0.9287 | acc_teste=0.9230 | f1_treino=0.9289 | f1_teste=0.8637
-max_depth=10 | acc_treino=0.9745 | acc_teste=0.9754 | f1_treino=0.9744 | f1_teste=0.9312
-max_depth=12 | acc_treino=0.9833 | acc_teste=0.9827 | f1_treino=0.9833 | f1_teste=0.9460
-max_depth=15 | acc_treino=0.9876 | acc_teste=0.9863 | f1_treino=0.9876 | f1_teste=0.9622
-max_depth=20 | acc_treino=0.9885 | acc_teste=0.9873 | f1_treino=0.9885 | f1_teste=0.9703
-max_depth=25 | acc_treino=0.9885 | acc_teste=0.9873 | f1_treino=0.9885 | f1_teste=0.9703
-max_depth=30 | acc_treino=0.9885 | acc_teste=0.9873 | f1_treino=0.9885 | f1_teste=0.9703
-
-Parada antecipada ativada na análise de profundidade.
-Melhor max_depth encontrado: 20
-Melhor Macro F1-score teste: 0.9703
-Sem melhoria relevante nas últimas 2 profundidades testadas.
+max_depth=2 | acc_treino=0.4442 | acc_teste=0.5891 | f1_treino=0.4080 | f1_teste=0.3894
+max_depth=4 | acc_treino=0.5969 | acc_teste=0.6839 | f1_treino=0.5938 | f1_teste=0.5700
+max_depth=6 | acc_treino=0.6835 | acc_teste=0.7037 | f1_treino=0.6767 | f1_teste=0.5647
+max_depth=8 | acc_treino=0.7537 | acc_teste=0.7749 | f1_treino=0.7390 | f1_teste=0.6121
+max_depth=10 | acc_treino=0.7946 | acc_teste=0.8184 | f1_treino=0.7832 | f1_teste=0.6543
+max_depth=12 | acc_treino=0.8142 | acc_teste=0.8405 | f1_treino=0.8051 | f1_teste=0.6785
+max_depth=15 | acc_treino=0.8330 | acc_teste=0.8654 | f1_treino=0.8268 | f1_teste=0.7083
+max_depth=20 | acc_treino=0.8454 | acc_teste=0.8762 | f1_treino=0.8405 | f1_teste=0.7240
+max_depth=25 | acc_treino=0.8498 | acc_teste=0.8792 | f1_treino=0.8454 | f1_teste=0.7299
+max_depth=30 | acc_treino=0.8507 | acc_teste=0.8802 | f1_treino=0.8463 | f1_teste=0.7314
 
 Gráficos salvos com sucesso em:
 - C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\arvore_decisao\grafico_overfitting_arvore_accuracy.png
@@ -589,18 +592,20 @@ ORQUESTRAÇÃO DO MODELO: REGRESSÃO LOGÍSTICA
 ================================================================================
 TREINAMENTO DO MODELO - REGRESSÃO LOGÍSTICA VIA SGD
 ================================================================================
-Formato de X_train: (245888, 398)
+Formato de X_train: (245888, 320)
 Formato de y_train: (245888,)
 
 Parâmetros do modelo:
-max_iter: 100
+max_iter: 50
 C recebido: 1.0
-alpha calculado para SGDClassifier: 4.066892243623113e-06
+alpha calculado para SGDClassifier: 0.0001
 solver recebido: sgd
 loss: log_loss
 penalty: l2
 l1_ratio: 0.0
-class_weight: balanced
+class_weight: None
+early_stopping: True
+n_jobs: 1
 random_state: 42
 
 Modelo Regressão Logística via SGD treinado com sucesso.
@@ -610,34 +615,34 @@ AVALIAÇÃO DO MODELO - REGRESSÃO LOGÍSTICA VIA SGD
 ================================================================================
 
 Métricas principais:
-Accuracy treino: 0.8925
-Accuracy teste: 0.8654
-Balanced accuracy teste: 0.8907
-Macro precision teste: 0.8445
-Macro recall teste: 0.8907
-Macro F1-score teste: 0.8642
-Weighted F1-score teste: 0.8699
+Accuracy treino: 0.7948
+Accuracy teste: 0.7911
+Balanced accuracy teste: 0.7911
+Macro precision teste: 0.6336
+Macro recall teste: 0.7911
+Macro F1-score teste: 0.6600
+Weighted F1-score teste: 0.8050
 
 Classification report - Teste:
                         precision    recall  f1-score   support
 
-           risco_baixo       0.91      0.83      0.87     35223
-         risco_elevado       0.88      1.00      0.94       984
-        risco_moderado       0.59      0.73      0.65     11432
-sem_sinal_identificado       1.00      1.00      1.00     19305
+           risco_baixo       0.94      0.74      0.83     35223
+         risco_elevado       0.21      0.83      0.33       984
+        risco_moderado       0.50      0.59      0.54     11432
+sem_sinal_identificado       0.89      1.00      0.94     19305
 
-              accuracy                           0.87     66944
-             macro avg       0.84      0.89      0.86     66944
-          weighted avg       0.88      0.87      0.87     66944
+              accuracy                           0.79     66944
+             macro avg       0.63      0.79      0.66     66944
+          weighted avg       0.84      0.79      0.80     66944
 
 
 ================================================================================
 ANÁLISE DE OVERFITTING - REGRESSÃO LOGÍSTICA VIA SGD
 ================================================================================
-C=0.01 | alpha=0.00040669 | acc_treino=0.8764 | acc_teste=0.8240 | f1_treino=0.8734 | f1_teste=0.7852
-C=0.1 | alpha=0.00004067 | acc_treino=0.8975 | acc_teste=0.8564 | f1_treino=0.8969 | f1_teste=0.8569
-C=1.0 | alpha=0.00000407 | acc_treino=0.9009 | acc_teste=0.8556 | f1_treino=0.9007 | f1_teste=0.8636
-C=10.0 | alpha=0.00000041 | acc_treino=0.8973 | acc_teste=0.8617 | f1_treino=0.8972 | f1_teste=0.8733
+C=0.01 | alpha=0.00040669 | acc_treino=0.7948 | acc_teste=0.7852 | f1_treino=0.7904 | f1_teste=0.6505
+C=0.1 | alpha=0.00004067 | acc_treino=0.7967 | acc_teste=0.8046 | f1_treino=0.7956 | f1_teste=0.6734
+C=1.0 | alpha=0.00000407 | acc_treino=0.8022 | acc_teste=0.7935 | f1_treino=0.7964 | f1_teste=0.6548
+C=10.0 | alpha=0.00000041 | acc_treino=0.7076 | acc_teste=0.8003 | f1_treino=0.6932 | f1_teste=0.6411
 
 Gráficos salvos com sucesso em:
 - C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\grafico_overfitting_regressao_logistica_accuracy.png
@@ -654,10 +659,10 @@ Labels utilizadas:
 - risco_elevado
 
 Matriz calculada:
-[[19305     0     0     0]
- [   61 29256  5906     0]
- [    0  2912  8392   128]
- [    0     0     2   982]]
+[[19293    12     0     0]
+ [ 2379 26103  6687    54]
+ [   56  1525  6741  3110]
+ [    0     1   162   821]]
 
 Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_sgd_absoluta.png
 
@@ -672,10 +677,10 @@ Labels utilizadas:
 - risco_elevado
 
 Matriz calculada:
-[[1.         0.         0.         0.        ]
- [0.00173182 0.83059365 0.16767453 0.        ]
- [0.         0.25472358 0.73407978 0.01119664]
- [0.         0.         0.00203252 0.99796748]]
+[[9.99378399e-01 6.21600622e-04 0.00000000e+00 0.00000000e+00]
+ [6.75410953e-02 7.41078273e-01 1.89847543e-01 1.53308917e-03]
+ [4.89853044e-03 1.33397481e-01 5.89660602e-01 2.72043387e-01]
+ [0.00000000e+00 1.01626016e-03 1.64634146e-01 8.34349593e-01]]
 
 Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\regressao_logistica\matriz_confusao_regressao_logistica_sgd_normalizada.png
 
@@ -686,10 +691,10 @@ LightGBM desativado na orquestração da Silver.
 ================================================================================
 BASE CODIFICADA E MODELOS SILVER AVALIADOS
 ================================================================================
-X_train original: (267773, 22)
-X_test original: (66944, 22)
-X_train encoded: (267773, 398)
-X_train modelo: (245888, 398)
+X_train original: (267773, 18)
+X_test original: (66944, 18)
+X_train encoded: (267773, 320)
+X_train modelo: (245888, 320)
 y_train modelo: (245888,)
 y_train original: (267773,)
 y_test: (66944,)
@@ -699,36 +704,36 @@ MÉTRICAS DO MODELO - ÁRVORE DE DECISÃO
 ================================================================================
 Métrica                                    Valor
 --------------------------------------------------------------------------------
-Accuracy treino                           98.85%
-Accuracy teste                            98.73%
-Balanced accuracy teste                   98.75%
-Macro precision teste                     95.50%
-Macro recall teste                        98.75%
-Macro F1-score teste                      97.03%
-Weighted F1-score teste                   98.74%
+Accuracy treino                           84.54%
+Accuracy teste                            87.62%
+Balanced accuracy teste                   82.85%
+Macro precision teste                     72.38%
+Macro recall teste                        82.85%
+Macro F1-score teste                      72.40%
+Weighted F1-score teste                   88.35%
 --------------------------------------------------------------------------------
-Diferença accuracy treino-teste            0.11 p.p.
+Diferença accuracy treino-teste           -3.07 p.p.
 
 Interpretação rápida:
-- Não há sinal forte de overfitting pela diferença entre treino e teste.
+- O teste ficou maior que o treino; verificar estabilidade da divisão ou efeito do balanceamento.
 
 ================================================================================
 MÉTRICAS DO MODELO - REGRESSÃO LOGÍSTICA VIA SGD
 ================================================================================
 Métrica                                    Valor
 --------------------------------------------------------------------------------
-Accuracy treino                           89.25%
-Accuracy teste                            86.54%
-Balanced accuracy teste                   89.07%
-Macro precision teste                     84.45%
-Macro recall teste                        89.07%
-Macro F1-score teste                      86.42%
-Weighted F1-score teste                   86.99%
+Accuracy treino                           79.48%
+Accuracy teste                            79.11%
+Balanced accuracy teste                   79.11%
+Macro precision teste                     63.36%
+Macro recall teste                        79.11%
+Macro F1-score teste                      66.00%
+Weighted F1-score teste                   80.50%
 --------------------------------------------------------------------------------
-Diferença accuracy treino-teste            2.71 p.p.
+Diferença accuracy treino-teste            0.37 p.p.
 
 Interpretação rápida:
-- Há possível sinal de overfitting: treino maior que teste.
+- Não há sinal forte de overfitting pela diferença entre treino e teste.
 
 ================================================================================
 FIM DA PIPELINE SILVER - MODELAGEM

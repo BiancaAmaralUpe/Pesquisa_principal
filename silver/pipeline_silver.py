@@ -712,6 +712,39 @@ def pipeline_silver() -> None:
         )
 
         # ==============================================================
+        # remoção de colunas com possível vazamento de informação
+        # ==============================================================
+        COLUNAS_POSSIVEL_VAZAMENTO = [
+            "agravantes_unificados",
+            "indicador_letalidade",
+            "subtipo_letalidade",
+            "tipo_violencia_normalizado",
+        ]
+
+        colunas_existentes_para_remover = [
+            coluna
+            for coluna in COLUNAS_POSSIVEL_VAZAMENTO
+            if coluna in X.columns
+        ]
+
+        if colunas_existentes_para_remover:
+            print("\n" + "=" * 80)
+            print("REMOÇÃO DE COLUNAS COM POSSÍVEL VAZAMENTO")
+            print("=" * 80)
+
+            print("\nColunas removidas:")
+            for coluna in colunas_existentes_para_remover:
+                print(f"- {coluna}")
+
+            X = X.drop(
+                columns=colunas_existentes_para_remover,
+            )
+
+            print(f"\nFormato de X após remoção: {X.shape}")
+        else:
+            print("\nNenhuma coluna de possível vazamento foi encontrada em X.")
+
+        # ==============================================================
         # divisão treino/teste
         # ==============================================================
         X_train, X_test, y_train, y_test = dividir_treino_teste_estratificado(
