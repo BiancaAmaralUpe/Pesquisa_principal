@@ -1057,3 +1057,155 @@ Parada antecipada:
 - Melhor Macro F1-score teste: 0.9703
 - Quantidade final sem melhoria relevante: 2
 ================================================================================
+
+================================================================================
+EXPERIMENTO - ÁRVORE DE DECISÃO
+================================================================================
+Data/hora da execução: 2026-07-07 19:05:15
+
+Parâmetros utilizados:
+- MAX_DEPTH_ARVORE_DECISAO: 20
+- MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+- RANDOM_STATE: 42
+- criterion: gini
+- class_weight: balanced
+
+Formato dos dados:
+- X_train: (245888, 398)
+- X_test: (66944, 398)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.9885
+- Accuracy teste: 0.9873
+- Balanced accuracy teste: 0.9875
+- Macro precision teste: 0.9550
+- Macro recall teste: 0.9875
+- Macro F1-score teste: 0.9703
+- Weighted F1-score teste: 0.9874
+
+Observação:
+Experimento com Árvore de Decisão usando One-Hot Encoding, class_weight='balanced' e base treino/teste estratificada.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - ÁRVORE DE DECISÃO
+================================================================================
+Data/hora da execução: 2026-07-07 19:06:06
+
+Parâmetros fixos utilizados:
+- MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+- RANDOM_STATE: 42
+- criterion: gini
+- class_weight: None
+
+Resultados por profundidade testada:
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 2
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.5011
+- Accuracy teste: 0.3355
+- Macro F1-score treino: 0.4526
+- Macro F1-score teste: 0.3287
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 4
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.7000
+- Accuracy teste: 0.7360
+- Macro F1-score treino: 0.6965
+- Macro F1-score teste: 0.6264
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 6
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.8473
+- Accuracy teste: 0.8292
+- Macro F1-score treino: 0.8453
+- Macro F1-score teste: 0.7715
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 8
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9287
+- Accuracy teste: 0.9230
+- Macro F1-score treino: 0.9289
+- Macro F1-score teste: 0.8637
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 10
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9745
+- Accuracy teste: 0.9754
+- Macro F1-score treino: 0.9744
+- Macro F1-score teste: 0.9312
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 12
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9833
+- Accuracy teste: 0.9827
+- Macro F1-score treino: 0.9833
+- Macro F1-score teste: 0.9460
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 15
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9876
+- Accuracy teste: 0.9863
+- Macro F1-score treino: 0.9876
+- Macro F1-score teste: 0.9622
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 20
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9885
+- Accuracy teste: 0.9873
+- Macro F1-score treino: 0.9885
+- Macro F1-score teste: 0.9703
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 25
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9885
+- Accuracy teste: 0.9873
+- Macro F1-score treino: 0.9885
+- Macro F1-score teste: 0.9703
+
+--------------------------------------------------------------------------------
+MAX_DEPTH_ARVORE_DECISAO: 30
+MIN_SAMPLES_LEAF_ARVORE_DECISAO: 100
+
+Métricas obtidas:
+- Accuracy treino: 0.9885
+- Accuracy teste: 0.9873
+- Macro F1-score treino: 0.9885
+- Macro F1-score teste: 0.9703
+
+
+Parada antecipada:
+- Status: ativada
+- Melhor max_depth encontrado: 20
+- Melhor Macro F1-score teste: 0.9703
+- Quantidade final sem melhoria relevante: 2
+================================================================================

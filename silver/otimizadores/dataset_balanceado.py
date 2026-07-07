@@ -21,7 +21,6 @@ from Pesquisa_principal.silver.processamento.separacao_target import separar_var
 from Pesquisa_principal.silver.processamento.divisao_treino_teste import dividir_treino_teste_estratificado
 from Pesquisa_principal.silver.processamento.encoding import aplicar_encoding_treino_teste
 
-
 def dataset() -> dict:
 
     # Retorna a base de dados dividida em treino e teste, com encoding 
