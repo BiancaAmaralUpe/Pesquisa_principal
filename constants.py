@@ -744,11 +744,25 @@ N_ESTIMATORS_RANDOM_FOREST = 100
 
 MAX_DEPTH_RANDOM_FOREST = 20
 
-MIN_SAMPLES_LEAF_RANDOM_FOREST = 100
+MIN_SAMPLES_LEAF_RANDOM_FOREST = 50
 
 MAX_FEATURES_RANDOM_FOREST = "sqrt"
 
 N_JOBS_RANDOM_FOREST = -1
+
+# ======================================================================================
+# Otimização de hiperparâmetros - Random Forest
+# ======================================================================================
+
+APLICAR_OTIMIZACAO_RANDOM_FOREST = True
+
+QUANTIDADE_AMOSTRA_OTIMIZACAO_RANDOM_FOREST = 80000
+
+N_ITER_OTIMIZACAO_RANDOM_FOREST = 12
+
+CV_OTIMIZACAO_RANDOM_FOREST = 3
+
+SCORING_OTIMIZACAO_RANDOM_FOREST = "f1_macro"
 
 # ======================================================================================
 # Parâmetros da Regressão Logística - Silver
@@ -761,6 +775,20 @@ C_REGRESSAO_LOGISTICA = 1.0
 SOLVER_REGRESSAO_LOGISTICA = "sgd"
 
 L1_RATIO_REGRESSAO_LOGISTICA = 0.0
+
+# ======================================================================================
+# Otimização de hiperparâmetros - Regressão Logística via SGD
+# ======================================================================================
+
+APLICAR_OTIMIZACAO_REGRESSAO_LOGISTICA = True
+
+QUANTIDADE_AMOSTRA_OTIMIZACAO_REGRESSAO_LOGISTICA = 80000
+
+N_ITER_OTIMIZACAO_REGRESSAO_LOGISTICA = 12
+
+CV_OTIMIZACAO_REGRESSAO_LOGISTICA = 3
+
+SCORING_OTIMIZACAO_REGRESSAO_LOGISTICA = "f1_macro"
 
 # ======================================================================================
 # Parâmetros do XGBoost - Silver

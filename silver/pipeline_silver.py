@@ -30,6 +30,12 @@ from Pesquisa_principal.constants import MAX_FEATURES_RANDOM_FOREST
 from Pesquisa_principal.constants import N_JOBS_RANDOM_FOREST
 from Pesquisa_principal.constants import PASTA_GRAFICOS_RANDOM_FOREST
 from Pesquisa_principal.constants import ARQUIVO_LOG_RANDOM_FOREST
+from Pesquisa_principal.constants import APLICAR_OTIMIZACAO_RANDOM_FOREST
+from Pesquisa_principal.constants import QUANTIDADE_AMOSTRA_OTIMIZACAO_RANDOM_FOREST
+from Pesquisa_principal.constants import N_ITER_OTIMIZACAO_RANDOM_FOREST
+from Pesquisa_principal.constants import CV_OTIMIZACAO_RANDOM_FOREST
+from Pesquisa_principal.constants import SCORING_OTIMIZACAO_RANDOM_FOREST
+
 # constants regressao logistica
 from Pesquisa_principal.constants import MAX_ITER_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import C_REGRESSAO_LOGISTICA
@@ -37,6 +43,11 @@ from Pesquisa_principal.constants import SOLVER_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import L1_RATIO_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import PASTA_GRAFICOS_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import ARQUIVO_LOG_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import APLICAR_OTIMIZACAO_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import QUANTIDADE_AMOSTRA_OTIMIZACAO_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import N_ITER_OTIMIZACAO_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import CV_OTIMIZACAO_REGRESSAO_LOGISTICA
+from Pesquisa_principal.constants import SCORING_OTIMIZACAO_REGRESSAO_LOGISTICA
 
 # constants xgboost
 from Pesquisa_principal.constants import N_ESTIMATORS_XGBOOST
@@ -89,12 +100,14 @@ from Pesquisa_principal.silver.modelos.random_forest import avaliar_random_fores
 from Pesquisa_principal.silver.modelos.random_forest import registrar_treinamento_random_forest
 from Pesquisa_principal.silver.modelos.grafico_random_forest import gerar_grafico_overfitting_random_forest
 from Pesquisa_principal.silver.modelos.matriz_confusao_random_forest import gerar_matrizes_confusao_random_forest
+from Pesquisa_principal.silver.modelos.random_forest import otimizar_hiperparametros_random_forest
 
 from Pesquisa_principal.silver.modelos.regressao_logistica import treinar_regressao_logistica
 from Pesquisa_principal.silver.modelos.regressao_logistica import avaliar_regressao_logistica
 from Pesquisa_principal.silver.modelos.regressao_logistica import registrar_treinamento_regressao_logistica
 from Pesquisa_principal.silver.modelos.grafico_regressao_logistica import gerar_grafico_overfitting_regressao_logistica
 from Pesquisa_principal.silver.modelos.matriz_confusao_regressao_logistica import gerar_matrizes_confusao_regressao_logistica
+from Pesquisa_principal.silver.modelos.regressao_logistica import otimizar_hiperparametros_regressao_logistica
 
 from Pesquisa_principal.silver.modelos.xgboost_modelo import treinar_xgboost
 from Pesquisa_principal.silver.modelos.xgboost_modelo import avaliar_xgboost
@@ -113,10 +126,10 @@ from Pesquisa_principal.silver.modelos.grafico_lightgbm_modelo import gerar_graf
 # ======================================================================================
 
 MODELOS_TREINAMENTO_SILVER = [
-    "arvore_decisao",
+    #"arvore_decisao",
     #"random_forest",
-    "regressao_logistica",
-    #"xgboost_modelo",
+    #"regressao_logistica",
+    "xgboost_modelo",
     #"lightgbm_modelo",
 ]
 
@@ -125,25 +138,25 @@ MODELOS_TREINAMENTO_SILVER = [
 # ======================================================================================
 
 GRAFICOS_POR_MODELO_SILVER = {
-   "arvore_decisao": [
-       "overfitting",
-       "matriz_confusao",
-   ],
-
-   #"random_forest": [
+   #"arvore_decisao": [
    #    "overfitting",
    #    "matriz_confusao",
    #],
 
-    "regressao_logistica": [
+    #"random_forest": [
+    #    "overfitting",
+    #    "matriz_confusao",
+    #],
+
+    #"regressao_logistica": [
+    #    "overfitting",
+    #    "matriz_confusao",
+    #],
+
+    "xgboost_modelo": [
         "overfitting",
         "matriz_confusao",
     ],
-
-   # "xgboost_modelo": [
-   #     "overfitting",
-   #     "matriz_confusao",
-   # ],
 #
    # "lightgbm_modelo": [
    #     "overfitting",
@@ -367,6 +380,7 @@ def executar_fluxo_regressao_logistica(
 ) -> dict | None:
     """
     Executa o fluxo completo da Regressão Logística:
+    - otimização de hiperparâmetros
     - treino
     - avaliação
     - registro do experimento
@@ -381,6 +395,47 @@ def executar_fluxo_regressao_logistica(
     print("ORQUESTRAÇÃO DO MODELO: REGRESSÃO LOGÍSTICA")
     print("=" * 80)
 
+    if APLICAR_OTIMIZACAO_REGRESSAO_LOGISTICA:
+        melhores_parametros_regressao_logistica, melhor_score_regressao_logistica = (
+            otimizar_hiperparametros_regressao_logistica(
+                X_train=X_train_encoded,
+                y_train=y_train,
+                random_state=RANDOM_STATE,
+                quantidade_amostra=QUANTIDADE_AMOSTRA_OTIMIZACAO_REGRESSAO_LOGISTICA,
+                n_iter=N_ITER_OTIMIZACAO_REGRESSAO_LOGISTICA,
+                cv=CV_OTIMIZACAO_REGRESSAO_LOGISTICA,
+                scoring=SCORING_OTIMIZACAO_REGRESSAO_LOGISTICA,
+            )
+        )
+
+        max_iter_regressao_logistica = melhores_parametros_regressao_logistica[
+            "max_iter"
+        ]
+
+        alpha_regressao_logistica = melhores_parametros_regressao_logistica[
+            "alpha"
+        ]
+
+        penalty_regressao_logistica = melhores_parametros_regressao_logistica[
+            "penalty"
+        ]
+
+        l1_ratio_regressao_logistica = melhores_parametros_regressao_logistica[
+            "l1_ratio"
+        ]
+
+        if penalty_regressao_logistica == "l2":
+            l1_ratio_regressao_logistica = 0.0
+
+    else:
+        melhor_score_regressao_logistica = None
+
+        max_iter_regressao_logistica = MAX_ITER_REGRESSAO_LOGISTICA
+
+        alpha_regressao_logistica = None
+
+        l1_ratio_regressao_logistica = L1_RATIO_REGRESSAO_LOGISTICA
+
     # ============================================================== #
     # 
     # ============================================================== #
@@ -388,10 +443,11 @@ def executar_fluxo_regressao_logistica(
         X_train=X_train_encoded,
         y_train=y_train,
         random_state=RANDOM_STATE,
-        max_iter=MAX_ITER_REGRESSAO_LOGISTICA,
+        max_iter=max_iter_regressao_logistica,
         C=C_REGRESSAO_LOGISTICA,
         solver=SOLVER_REGRESSAO_LOGISTICA,
-        l1_ratio=L1_RATIO_REGRESSAO_LOGISTICA,
+        l1_ratio=l1_ratio_regressao_logistica,
+        alpha_manual=alpha_regressao_logistica,
     )
 
     # ============================================================== #
@@ -410,10 +466,10 @@ def executar_fluxo_regressao_logistica(
     # ============================================================== #
     registrar_treinamento_regressao_logistica(
         caminho_log=ARQUIVO_LOG_REGRESSAO_LOGISTICA,
-        max_iter=MAX_ITER_REGRESSAO_LOGISTICA,
+        max_iter=max_iter_regressao_logistica,
         C=C_REGRESSAO_LOGISTICA,
         solver=SOLVER_REGRESSAO_LOGISTICA,
-        l1_ratio=L1_RATIO_REGRESSAO_LOGISTICA,
+        l1_ratio=l1_ratio_regressao_logistica,
         random_state=RANDOM_STATE,
         X_train_shape=X_train_encoded.shape,
         X_test_shape=X_test_encoded.shape,
@@ -421,8 +477,9 @@ def executar_fluxo_regressao_logistica(
         y_test_shape=y_test.shape,
         metricas=metricas_regressao_logistica,
         observacao=(
-            "Experimento com Regressão Logística usando One-Hot Encoding, "
-            "class_weight='balanced', l1_ratio=0.0 e base treino/teste estratificada."
+            "Experimento com Regressão Logística via SGD usando One-Hot Encoding, "
+            "base de treino balanceada, class_weight=None, early_stopping=True "
+            "e hiperparâmetros definidos após otimização."
         ),
     )
     # ============================================================== #
@@ -586,16 +643,59 @@ def executar_fluxo_random_forest(
     print("=" * 80)
     
     # ============================================================== #
+    # 1. OTIMIZAÇÃO DE HIPERPARÂMETROS (OPCIONAL)
+    # ============================================================== #
+    if APLICAR_OTIMIZACAO_RANDOM_FOREST:
+        melhores_parametros_random_forest, melhor_score_random_forest = (
+            otimizar_hiperparametros_random_forest(
+                X_train=X_train_encoded,
+                y_train=y_train,
+                random_state=RANDOM_STATE,
+                quantidade_amostra=QUANTIDADE_AMOSTRA_OTIMIZACAO_RANDOM_FOREST,
+                n_iter=N_ITER_OTIMIZACAO_RANDOM_FOREST,
+                cv=CV_OTIMIZACAO_RANDOM_FOREST,
+                scoring=SCORING_OTIMIZACAO_RANDOM_FOREST,
+                n_jobs=N_JOBS_RANDOM_FOREST,
+            )
+        )
+
+        n_estimators_random_forest = melhores_parametros_random_forest[
+            "n_estimators"
+        ]
+
+        max_depth_random_forest = melhores_parametros_random_forest[
+            "max_depth"
+        ]
+
+        min_samples_leaf_random_forest = melhores_parametros_random_forest[
+            "min_samples_leaf"
+        ]
+
+        max_features_random_forest = melhores_parametros_random_forest[
+            "max_features"
+        ]
+    else:
+        melhor_score_random_forest = None
+
+        n_estimators_random_forest = N_ESTIMATORS_RANDOM_FOREST
+
+        max_depth_random_forest = MAX_DEPTH_RANDOM_FOREST
+
+        min_samples_leaf_random_forest = MIN_SAMPLES_LEAF_RANDOM_FOREST
+
+        max_features_random_forest = MAX_FEATURES_RANDOM_FOREST
+
+    # ============================================================== #
     # Treino da Random Forest
     # ============================================================== #
     modelo_random_forest = treinar_random_forest(
         X_train=X_train_encoded,
         y_train=y_train,
         random_state=RANDOM_STATE,
-        n_estimators=N_ESTIMATORS_RANDOM_FOREST,
-        max_depth=MAX_DEPTH_RANDOM_FOREST,
-        min_samples_leaf=MIN_SAMPLES_LEAF_RANDOM_FOREST,
-        max_features=MAX_FEATURES_RANDOM_FOREST,
+        n_estimators=n_estimators_random_forest,
+        max_depth=max_depth_random_forest,
+        min_samples_leaf=min_samples_leaf_random_forest,
+        max_features=max_features_random_forest,
         n_jobs=N_JOBS_RANDOM_FOREST,
     )
     # ============================================================== #
@@ -613,10 +713,10 @@ def executar_fluxo_random_forest(
     # ============================================================== #
     registrar_treinamento_random_forest(
         caminho_log=ARQUIVO_LOG_RANDOM_FOREST,
-        n_estimators=N_ESTIMATORS_RANDOM_FOREST,
-        max_depth=MAX_DEPTH_RANDOM_FOREST,
-        min_samples_leaf=MIN_SAMPLES_LEAF_RANDOM_FOREST,
-        max_features=MAX_FEATURES_RANDOM_FOREST,
+        n_estimators=n_estimators_random_forest,
+        max_depth=max_depth_random_forest,
+        min_samples_leaf=min_samples_leaf_random_forest,
+        max_features=max_features_random_forest,
         random_state=RANDOM_STATE,
         n_jobs=N_JOBS_RANDOM_FOREST,
         X_train_shape=X_train_encoded.shape,
@@ -626,7 +726,8 @@ def executar_fluxo_random_forest(
         metricas=metricas_random_forest,
         observacao=(
             "Experimento com Random Forest usando One-Hot Encoding, "
-            "class_weight='balanced_subsample' e base treino/teste estratificada."
+            "base de treino balanceada, class_weight=None "
+            "e hiperparâmetros definidos após otimização."
         ),
     )
     # ============================================================== #

@@ -18,7 +18,115 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import train_test_split
 
+# ===================================================================================== #
+# def otimizar_hiperparametros_random_forest
+# ===================================================================================== #
+def otimizar_hiperparametros_random_forest(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    random_state: int,
+    quantidade_amostra: int,
+    n_iter: int,
+    cv: int,
+    scoring: str,
+    n_jobs: int,
+) -> tuple[dict, float]:
+    """
+    Otimiza hiperparâmetros da Random Forest usando RandomizedSearchCV.
+
+    A otimização é feita somente sobre a base de treino balanceada.
+    O conjunto de teste não é usado nessa etapa.
+    """
+
+    print("\n" + "=" * 80)
+    print("OTIMIZAÇÃO DE HIPERPARÂMETROS - RANDOM FOREST")
+    print("=" * 80)
+
+    print(f"Formato original X_train: {X_train.shape}")
+    print(f"Formato original y_train: {y_train.shape}")
+
+    if quantidade_amostra is not None and quantidade_amostra < X_train.shape[0]:
+        print(
+            "\nAmostrando base de treino para otimização: "
+            f"{quantidade_amostra} registros"
+        )
+
+        _, X_train_otimizacao, _, y_train_otimizacao = train_test_split(
+            X_train,
+            y_train,
+            test_size=quantidade_amostra,
+            stratify=y_train,
+            random_state=random_state,
+        )
+    else:
+        print("\nUsando base de treino completa para otimização.")
+        X_train_otimizacao = X_train
+        y_train_otimizacao = y_train
+
+    print(f"Formato X_train otimização: {X_train_otimizacao.shape}")
+    print(f"Formato y_train otimização: {y_train_otimizacao.shape}")
+
+    modelo_base = RandomForestClassifier(
+        criterion="gini",
+        class_weight=None,
+        random_state=random_state,
+        n_jobs=n_jobs,
+    )
+
+    parametros_busca = {
+        "n_estimators": [
+            100,
+            150,
+            200,
+        ],
+        "max_depth": [
+            15,
+            20,
+            25,
+            30,
+        ],
+        "min_samples_leaf": [
+            25,
+            50,
+            75,
+            100,
+        ],
+        "max_features": [
+            "sqrt",
+            "log2",
+        ],
+    }
+
+    busca = RandomizedSearchCV(
+        estimator=modelo_base,
+        param_distributions=parametros_busca,
+        n_iter=n_iter,
+        scoring=scoring,
+        cv=cv,
+        random_state=random_state,
+        n_jobs=n_jobs,
+        verbose=2,
+        refit=True,
+    )
+
+    busca.fit(
+        X_train_otimizacao,
+        y_train_otimizacao,
+    )
+
+    melhores_parametros = busca.best_params_
+    melhor_score = busca.best_score_
+
+    print("\nMelhores hiperparâmetros encontrados:")
+    for parametro, valor in melhores_parametros.items():
+        print(f"- {parametro}: {valor}")
+
+    print(f"\nMelhor score médio de validação cruzada ({scoring}): {melhor_score:.4f}")
+
+    return melhores_parametros, melhor_score
 # ===================================================================================== #
 # def treinar_random_forest
 # ===================================================================================== #
@@ -34,6 +142,7 @@ def treinar_random_forest(
 ) -> RandomForestClassifier:
     """
     Treina o modelo Random Forest.
+    Treina o modelo Random Forest.
     """
 
     print("\n" + "=" * 80)
@@ -45,28 +154,29 @@ def treinar_random_forest(
 
     print("\nParâmetros do modelo:")
     print(f"n_estimators: {n_estimators}")
-    print(f"criterion: gini")
+    print("criterion: gini")
     print(f"max_depth: {max_depth}")
     print(f"min_samples_leaf: {min_samples_leaf}")
     print(f"max_features: {max_features}")
-    print("class_weight: balanced_subsample")
+    print("class_weight: None")
     print(f"random_state: {random_state}")
     print(f"n_jobs: {n_jobs}")
 
     modelo = RandomForestClassifier(
         n_estimators=n_estimators,
         criterion="gini",
-        max_depth=10,
+        max_depth=max_depth,
         min_samples_leaf=min_samples_leaf,
-        max_features="sqrt",
+        max_features=max_features,
+        class_weight=None,
         random_state=random_state,
         n_jobs=n_jobs,
-        max_samples=0.2,
-        warm_start=True,
-        ccp_alpha=0.01
     )
 
-    modelo.fit(X_train, y_train)
+    modelo.fit(
+        X_train,
+        y_train,
+    )
 
     print("\nModelo Random Forest treinado com sucesso.")
 
@@ -210,7 +320,7 @@ def registrar_treinamento_random_forest(
         arquivo.write(f"- RANDOM_STATE: {random_state}\n")
         arquivo.write(f"- N_JOBS_RANDOM_FOREST: {n_jobs}\n")
         arquivo.write("- criterion: gini\n")
-        arquivo.write("- class_weight: balanced_subsample\n\n")
+        arquivo.write("- class_weight: None\n\n")
 
         arquivo.write("Formato dos dados:\n")
         arquivo.write(f"- X_train: {X_train_shape}\n")

@@ -18,6 +18,120 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import train_test_split
+
+def otimizar_hiperparametros_regressao_logistica(
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    random_state: int,
+    quantidade_amostra: int,
+    n_iter: int,
+    cv: int,
+    scoring: str,
+) -> tuple[dict, float]:
+    """
+    Otimiza os hiperparâmetros da Regressão Logística via SGD.
+
+    A otimização é feita somente na base de treino balanceada.
+    A base de teste não é usada nessa etapa.
+    """
+
+    print("\n" + "=" * 80)
+    print("OTIMIZAÇÃO DE HIPERPARÂMETROS - REGRESSÃO LOGÍSTICA VIA SGD")
+    print("=" * 80)
+
+    print(f"Formato original X_train: {X_train.shape}")
+    print(f"Formato original y_train: {y_train.shape}")
+
+    if quantidade_amostra is not None and quantidade_amostra < X_train.shape[0]:
+        print(
+            "\nAmostrando base de treino para otimização: "
+            f"{quantidade_amostra} registros"
+        )
+
+        _, X_train_otimizacao, _, y_train_otimizacao = train_test_split(
+            X_train,
+            y_train,
+            test_size=quantidade_amostra,
+            stratify=y_train,
+            random_state=random_state,
+        )
+    else:
+        print("\nUsando base de treino completa para otimização.")
+        X_train_otimizacao = X_train
+        y_train_otimizacao = y_train
+
+    print(f"Formato X_train otimização: {X_train_otimizacao.shape}")
+    print(f"Formato y_train otimização: {y_train_otimizacao.shape}")
+
+    modelo_base = SGDClassifier(
+        loss="log_loss",
+        class_weight=None,
+        early_stopping=True,
+        validation_fraction=0.1,
+        n_iter_no_change=5,
+        random_state=random_state,
+        n_jobs=1,
+        verbose=0,
+    )
+
+    parametros_busca = {
+        "alpha": [
+            0.001,
+            0.0005,
+            0.0001,
+            0.00005,
+            0.00001,
+        ],
+        "penalty": [
+            "l2",
+            "elasticnet",
+        ],
+        "l1_ratio": [
+            0.0,
+            0.15,
+            0.30,
+        ],
+        "max_iter": [
+            50,
+            100,
+            150,
+        ],
+        "tol": [
+            1e-3,
+            1e-4,
+        ],
+    }
+
+    busca = RandomizedSearchCV(
+        estimator=modelo_base,
+        param_distributions=parametros_busca,
+        n_iter=n_iter,
+        scoring=scoring,
+        cv=cv,
+        random_state=random_state,
+        n_jobs=1,
+        verbose=2,
+        refit=True,
+    )
+
+    busca.fit(
+        X_train_otimizacao,
+        y_train_otimizacao,
+    )
+
+    melhores_parametros = busca.best_params_
+    melhor_score = busca.best_score_
+
+    print("\nMelhores hiperparâmetros encontrados:")
+    for parametro, valor in melhores_parametros.items():
+        print(f"- {parametro}: {valor}")
+
+    print(f"\nMelhor score médio de validação cruzada ({scoring}): {melhor_score:.4f}")
+
+    return melhores_parametros, melhor_score
+
 
 def calcular_alpha_sgd(
     C: float,
@@ -53,6 +167,7 @@ def treinar_regressao_logistica(
     C: float,
     solver: str,
     l1_ratio: float,
+    alpha_manual: float | None = None,
 ) -> SGDClassifier:
     """
     Treina um modelo linear com loss='log_loss'.
@@ -75,10 +190,13 @@ def treinar_regressao_logistica(
     else:
         penalty = "elasticnet"
 
-    alpha = calcular_alpha_sgd(
-        C=C,
-        quantidade_linhas_treino=X_train.shape[0],
-    )
+    if alpha_manual is None:
+        alpha = calcular_alpha_sgd(
+            C=C,
+            quantidade_linhas_treino=X_train.shape[0],
+        )
+    else:
+        alpha = alpha_manual
 
     print("\nParâmetros do modelo:")
     print(f"max_iter: {max_iter}")
@@ -256,12 +374,18 @@ def registrar_treinamento_regressao_logistica(
         arquivo.write(f"- C_REGRESSAO_LOGISTICA: {C}\n")
         arquivo.write(f"- ALPHA_CALCULADO_SGD: {alpha}\n")
         arquivo.write(f"- SOLVER_REGRESSAO_LOGISTICA: {solver}\n")
+        if l1_ratio <= 0:
+            penalty = "l2"
+        else:
+            penalty = "elasticnet"
+
         arquivo.write("- loss: log_loss\n")
-        arquivo.write("- penalty: elasticnet\n")
+        arquivo.write(f"- penalty: {penalty}\n")
         arquivo.write(f"- L1_RATIO_REGRESSAO_LOGISTICA: {l1_ratio}\n")
         arquivo.write(f"- RANDOM_STATE: {random_state}\n")
-        arquivo.write("- class_weight: balanced\n")
-        arquivo.write("- n_jobs: -1\n\n")
+        arquivo.write("- class_weight: None\n")
+        arquivo.write("- early_stopping: True\n")
+        arquivo.write("- n_jobs: 1\n\n")
 
         arquivo.write("Formato dos dados:\n")
         arquivo.write(f"- X_train: {X_train_shape}\n")
