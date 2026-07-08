@@ -1,12 +1,5 @@
 # ======================================================================================
-# pipeline_silver.py
-# ======================================================================================
-# Responsabilidade:
-# - Ler a base de modelagem gerada pela Bronze
-# - Preparar os dados para machine learning
-# - Executar modelos de classificação
-# - Avaliar e comparar os modelos
-# - Salvar métricas, gráficos e melhor modelo
+# dataset_balanceado.py
 # ======================================================================================
 from Pesquisa_principal.constants import ARQUIVO_CSV_LIMPO_TESTE_TREINO
 from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
@@ -80,6 +73,4 @@ def dataset() -> dict:
         'y_train' : y_train,
         'y_test'  : y_test,
     }
-
-    return X_train_encoded, X_test_encoded, y_train, y_test
     
