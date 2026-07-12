@@ -18,6 +18,8 @@ from sklearn.metrics import f1_score
 from sklearn.metrics import precision_score
 from sklearn.metrics import recall_score
 from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import precision_recall_fscore_support
 
 
 def treinar_mlp(
@@ -118,6 +120,7 @@ def avaliar_mlp(
     X_test: pd.DataFrame,
     y_train: pd.Series,
     y_test: pd.Series,
+    classes_target: list[str],
 ) -> tuple[dict, object]:
     """
     Avalia o modelo MLP.
@@ -129,6 +132,100 @@ def avaliar_mlp(
 
     y_pred_train = modelo.predict(X_train)
     y_pred_test = modelo.predict(X_test)
+    
+        # ==========================================================================
+    # Métricas detalhadas por classe
+    # ==========================================================================
+    labels_numericos = list(
+        range(len(classes_target))
+    )
+
+    matriz = confusion_matrix(
+        y_true=y_test,
+        y_pred=y_pred_test,
+        labels=labels_numericos,
+    )
+
+    precisoes, recalls, f1_scores, suportes = (
+        precision_recall_fscore_support(
+            y_true=y_test,
+            y_pred=y_pred_test,
+            labels=labels_numericos,
+            zero_division=0,
+        )
+    )
+
+    total_registros = int(
+        matriz.sum()
+    )
+
+    metricas_por_classe = {}
+
+    print("\n" + "=" * 80)
+    print("MÉTRICAS DETALHADAS POR CLASSE - MLP")
+    print("=" * 80)
+
+    for indice, nome_classe in enumerate(classes_target):
+        verdadeiros_positivos = int(
+            matriz[indice, indice]
+        )
+
+        falsos_negativos = int(
+            matriz[indice, :].sum()
+            - verdadeiros_positivos
+        )
+
+        falsos_positivos = int(
+            matriz[:, indice].sum()
+            - verdadeiros_positivos
+        )
+
+        verdadeiros_negativos = int(
+            total_registros
+            - verdadeiros_positivos
+            - falsos_negativos
+            - falsos_positivos
+        )
+
+        metricas_por_classe[nome_classe] = {
+            "precision": float(precisoes[indice]),
+            "recall": float(recalls[indice]),
+            "f1_score": float(f1_scores[indice]),
+            "support": int(suportes[indice]),
+            "verdadeiros_positivos": verdadeiros_positivos,
+            "falsos_positivos": falsos_positivos,
+            "falsos_negativos": falsos_negativos,
+            "verdadeiros_negativos": verdadeiros_negativos,
+        }
+
+        print("\n" + "-" * 80)
+        print(f"Classe: {nome_classe}")
+        print("-" * 80)
+
+        print(f"Precision: {precisoes[indice]:.4f}")
+        print(f"Recall: {recalls[indice]:.4f}")
+        print(f"F1-score: {f1_scores[indice]:.4f}")
+        print(f"Support: {int(suportes[indice])}")
+
+        print(
+            "Verdadeiros positivos: "
+            f"{verdadeiros_positivos}"
+        )
+
+        print(
+            "Falsos positivos: "
+            f"{falsos_positivos}"
+        )
+
+        print(
+            "Falsos negativos: "
+            f"{falsos_negativos}"
+        )
+
+        print(
+            "Verdadeiros negativos: "
+            f"{verdadeiros_negativos}"
+        )
 
     accuracy_train = accuracy_score(
         y_train,
@@ -182,6 +279,7 @@ def avaliar_mlp(
         "macro_recall_test": macro_recall_test,
         "macro_f1_test": macro_f1_test,
         "weighted_f1_test": weighted_f1_test,
+        "metricas_por_classe": metricas_por_classe,
     }
 
     print("\nMétricas principais:")
@@ -281,10 +379,72 @@ def registrar_treinamento_mlp(
             f"{metricas['macro_recall_test']:.4f}\n"
         )
         arquivo.write(f"- Macro F1-score teste: {metricas['macro_f1_test']:.4f}\n")
+
         arquivo.write(
             f"- Weighted F1-score teste: "
             f"{metricas['weighted_f1_test']:.4f}\n"
         )
+        # ==============================================================
+        # métricas detalhadas por classe
+        # ==============================================================
+        metricas_por_classe = metricas.get(
+            "metricas_por_classe",
+            {},
+        )
+
+        if metricas_por_classe:
+            arquivo.write("\n")
+            arquivo.write("Métricas detalhadas por classe:\n")
+
+            for nome_classe, resultados in metricas_por_classe.items():
+                arquivo.write("\n")
+                arquivo.write("-" * 80)
+                arquivo.write("\n")
+
+                arquivo.write(
+                    f"Classe: {nome_classe}\n"
+                )
+
+                arquivo.write(
+                    f"- Precision: "
+                    f"{resultados['precision']:.4f}\n"
+                )
+
+                arquivo.write(
+                    f"- Recall: "
+                    f"{resultados['recall']:.4f}\n"
+                )
+
+                arquivo.write(
+                    f"- F1-score: "
+                    f"{resultados['f1_score']:.4f}\n"
+                )
+
+                arquivo.write(
+                    f"- Support: "
+                    f"{resultados['support']}\n"
+                )
+
+                arquivo.write(
+                    f"- Verdadeiros positivos: "
+                    f"{resultados['verdadeiros_positivos']}\n"
+                )
+
+                arquivo.write(
+                    f"- Falsos positivos: "
+                    f"{resultados['falsos_positivos']}\n"
+                )
+
+                arquivo.write(
+                    f"- Falsos negativos: "
+                    f"{resultados['falsos_negativos']}\n"
+                )
+
+                arquivo.write(
+                    f"- Verdadeiros negativos: "
+                    f"{resultados['verdadeiros_negativos']}\n"
+                )
+                
         arquivo.write(f"- n_iter_no_change: {n_iter_no_change}\n")
         arquivo.write(f"- tol: {tol}\n")
         arquivo.write(f"- RANDOM_STATE: {random_state}\n\n")

@@ -305,6 +305,7 @@ def executar_fluxo_mlp(
         X_test=X_test_encoded,
         y_train=y_train_avaliacao,
         y_test=y_test,
+        classes_target=classes_target,
     )
 
     # ==============================================================
@@ -346,7 +347,7 @@ def executar_fluxo_mlp(
         "mlp_modelo",
         [],
     )
-
+    
     if "overfitting" in graficos_ativos:
         gerar_grafico_overfitting_mlp(
             # Base balanceada usada no fit
