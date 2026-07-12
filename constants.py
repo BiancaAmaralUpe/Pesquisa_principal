@@ -794,19 +794,19 @@ SCORING_OTIMIZACAO_REGRESSAO_LOGISTICA = "f1_macro"
 # Parâmetros do XGBoost - Silver
 # ======================================================================================
 
-N_ESTIMATORS_XGBOOST = 100
+N_ESTIMATORS_XGBOOST     = 50
 
-MAX_DEPTH_XGBOOST = 6
+LEARNING_RATE_XGBOOST    = 0.3
 
-LEARNING_RATE_XGBOOST = 0.1
+MAX_DEPTH_XGBOOST        = 6
 
-SUBSAMPLE_XGBOOST = 0.8
+SUBSAMPLE_XGBOOST        = 0.5
 
-COLSAMPLE_BYTREE_XGBOOST = 0.8
+COLSAMPLE_BYTREE_XGBOOST = 0.5
 
-TREE_METHOD_XGBOOST = "hist"
+N_JOBS_XGBOOST           = -1
 
-N_JOBS_XGBOOST = -1
+TREE_METHOD_XGBOOST      = "hist"
 
 # ======================================================================================
 # Parâmetros do LightGBM - Silver
