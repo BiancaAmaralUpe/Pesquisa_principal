@@ -140,3 +140,531 @@ GERAÇÃO DE GRÁFICOS - VOLUME E RELAÇÃO COM RISCO DE MORTE
 ================================================================================
 
 ================================================================================
+RESUMO - VOLUME COM RELAÇÃO COM RISCO DE MORTE
+================================================================================
+Coluna analisada: agravantes_unificados
+Termo procurado: RISCO DE MORTE
+
+Volume geral de linhas:
+- Com relação com risco de morte: 3994 registros (1.19%)
+- Sem relação com risco de morte: 330723 registros (98.81%)
+
+Distribuição do target dentro dos registros com risco de morte:
+- sem_sinal_identificado: 0 registros (0.00%)
+- risco_baixo: 1419 registros (35.53%)
+- risco_moderado: 2050 registros (51.33%)
+- risco_elevado: 525 registros (13.14%)
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\pizza_volume_linhas_relacao_risco_morte.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\colunas_volume_linhas_relacao_risco_morte.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\pizza_target_relacao_risco_morte.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\colunas_target_relacao_risco_morte.png
+
+================================================================================
+GRÁFICOS DE VOLUME E RELAÇÃO COM RISCO DE MORTE FINALIZADOS
+================================================================================
+
+================================================================================
+SEPARAÇÃO ENTRE VARIÁVEIS EXPLICATIVAS E TARGET
+================================================================================
+Coluna alvo: classificacao_sinais_risco_feminicidio
+
+Formato de X:
+(334717, 22)
+
+Formato de y:
+(334717,)
+
+Colunas de X:
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- agravantes_unificados
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+
+Distribuição de y:
+classificacao_sinais_risco_feminicidio
+risco_baixo               176116
+sem_sinal_identificado     96523
+risco_moderado             57159
+risco_elevado               4919
+Name: count, dtype: int64
+
+Distribuição percentual de y:
+classificacao_sinais_risco_feminicidio
+risco_baixo               52.62
+sem_sinal_identificado    28.84
+risco_moderado            17.08
+risco_elevado              1.47
+Name: proportion, dtype: float64
+
+Separação concluída com sucesso.
+
+================================================================================
+CODIFICAÇÃO DO TARGET
+================================================================================
+
+Mapeamento das classes:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Tipo original do target: str
+Tipo codificado do target: int64
+Quantidade de classes: 4
+
+Classes do target utilizadas pelos modelos:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+================================================================================
+REMOÇÃO DE COLUNAS COM POSSÍVEL VAZAMENTO
+================================================================================
+
+Colunas removidas:
+- agravantes_unificados
+- indicador_letalidade
+- subtipo_letalidade
+- tipo_violencia_normalizado
+
+Formato de X após remoção: (334717, 18)
+
+================================================================================
+DIVISÃO TREINO/TESTE ESTRATIFICADA
+================================================================================
+Tamanho do teste: 0.2
+Random state: 42
+
+Formato dos dados:
+X_train: (267773, 18)
+X_test: (66944, 18)
+y_train: (267773,)
+y_test: (66944,)
+
+--------------------------------------------------------------------------------
+DISTRIBUIÇÃO DO TARGET - BASE COMPLETA
+--------------------------------------------------------------------------------
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+0    176116
+3     96523
+2     57159
+1      4919
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+0    52.62
+3    28.84
+2    17.08
+1     1.47
+Name: proportion, dtype: float64
+
+--------------------------------------------------------------------------------
+DISTRIBUIÇÃO DO TARGET - TREINO
+--------------------------------------------------------------------------------
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+0    140893
+3     77218
+2     45727
+1      3935
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+0    52.62
+3    28.84
+2    17.08
+1     1.47
+Name: proportion, dtype: float64
+
+--------------------------------------------------------------------------------
+DISTRIBUIÇÃO DO TARGET - TESTE
+--------------------------------------------------------------------------------
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+0    35223
+3    19305
+2    11432
+1      984
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+0    52.62
+3    28.84
+2    17.08
+1     1.47
+Name: proportion, dtype: float64
+
+Divisão treino/teste concluída com sucesso.
+
+================================================================================
+GERAÇÃO DE GRÁFICOS DE BALANCEAMENTO DA BASE
+================================================================================
+Target analisado: classificacao_sinais_risco_feminicidio
+
+================================================================================
+RESUMO DE BALANCEAMENTO - BASE COMPLETA
+================================================================================
+Total de registros: 334717
+- sem_sinal_identificado: 96523 registros (28.84%)
+- risco_baixo: 176116 registros (52.62%)
+- risco_moderado: 57159 registros (17.08%)
+- risco_elevado: 4919 registros (1.47%)
+
+Razão de desbalanceamento maior classe / menor classe: 35.80
+Interpretação: base fortemente desbalanceada.
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\balanceamento_target_colunas_base_completa.png
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\balanceamento_target_pizza_base_completa.png
+
+================================================================================
+RESUMO DE BALANCEAMENTO - TREINO
+================================================================================
+Total de registros: 267773
+- sem_sinal_identificado: 77218 registros (28.84%)
+- risco_baixo: 140893 registros (52.62%)
+- risco_moderado: 45727 registros (17.08%)
+- risco_elevado: 3935 registros (1.47%)
+
+Razão de desbalanceamento maior classe / menor classe: 35.81
+Interpretação: base fortemente desbalanceada.
+
+================================================================================
+RESUMO DE BALANCEAMENTO - TESTE
+================================================================================
+Total de registros: 66944
+- sem_sinal_identificado: 19305 registros (28.84%)
+- risco_baixo: 35223 registros (52.62%)
+- risco_moderado: 11432 registros (17.08%)
+- risco_elevado: 984 registros (1.47%)
+
+Razão de desbalanceamento maior classe / menor classe: 35.80
+Interpretação: base fortemente desbalanceada.
+Gráfico salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\diagnostico_target\balanceamento_target_comparativo_base_treino_teste.png
+
+================================================================================
+GRÁFICOS DE BALANCEAMENTO FINALIZADOS
+================================================================================
+
+================================================================================
+APLICAÇÃO DO ONE-HOT ENCODING
+================================================================================
+
+================================================================================
+IDENTIFICAÇÃO DE COLUNAS CATEGÓRICAS
+================================================================================
+Quantidade de colunas categóricas: 18
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+
+================================================================================
+IDENTIFICAÇÃO DE COLUNAS NUMÉRICAS/BOOLEANAS
+================================================================================
+Quantidade de colunas numéricas/booleanas: 0
+
+Ajustando encoder no X_train...
+Aplicando encoder no X_test...
+
+Encoding finalizado com sucesso.
+Formato original X_train: (267773, 18)
+Formato original X_test: (66944, 18)
+Formato codificado X_train: (267773, 320)
+Formato codificado X_test: (66944, 320)
+Encoder salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\artefatos\encoder.pkl
+
+Primeiras colunas geradas pelo encoding:
+- tipo_violacao_1. VIOLÊNCIA FÍSICA
+- tipo_violacao_2. VIOLÊNCIA PSICOLÓGICA
+- tipo_violacao_3. CRIMES CONTRA A VIDA
+- tipo_violacao_4. AGRESSÕES QUE VIOLAM A HONRA
+- tipo_violacao_5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE
+- tipo_violacao_6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA
+- tipo_violacao_7. VIOLAÇÕES GERAIS
+- grupo_vulneravel_1-Violência Contra a Mulher
+- grupo_vulneravel_2-Violência Doméstica e Familiar Contra a Mulher
+- especie_violacao_ABORTO
+- especie_violacao_AGRESSÃO/VIAS DE FATO
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL
+- especie_violacao_AMEAÇA/COAÇÃO
+- especie_violacao_APOLOGIA E INCITAÇÃO AO SUICÍDIO
+- especie_violacao_ASSÉDIO MORAL
+- especie_violacao_AUTOMUTILAÇÃO
+- especie_violacao_AUTONOMIA DE VONTADE
+- especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO
+- especie_violacao_CIDADANIA
+
+================================================================================
+NORMALIZAÇÃO DOS NOMES DAS COLUNAS PARA OS MODELOS
+================================================================================
+Quantidade de colunas: 320
+Quantidade de nomes alterados: 309
+
+Exemplos de nomes normalizados:
+- tipo_violacao_1. VIOLÊNCIA FÍSICA  ->  tipo_violacao_1_violencia_fisica
+- tipo_violacao_2. VIOLÊNCIA PSICOLÓGICA  ->  tipo_violacao_2_violencia_psicologica
+- tipo_violacao_3. CRIMES CONTRA A VIDA  ->  tipo_violacao_3_crimes_contra_a_vida
+- tipo_violacao_4. AGRESSÕES QUE VIOLAM A HONRA  ->  tipo_violacao_4_agressoes_que_violam_a_honra
+- tipo_violacao_5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE  ->  tipo_violacao_5_agressoes_que_violam_o_direito_a_liberdade
+- tipo_violacao_6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  ->  tipo_violacao_6_agressoes_que_violam_a_liberdade_civil_e_politica
+- tipo_violacao_7. VIOLAÇÕES GERAIS  ->  tipo_violacao_7_violacoes_gerais
+- grupo_vulneravel_1-Violência Contra a Mulher  ->  grupo_vulneravel_1_violencia_contra_a_mulher
+- grupo_vulneravel_2-Violência Doméstica e Familiar Contra a Mulher  ->  grupo_vulneravel_2_violencia_domestica_e_familiar_contra_a_mulher
+- especie_violacao_ABORTO  ->  especie_violacao_aborto
+- especie_violacao_AGRESSÃO/VIAS DE FATO  ->  especie_violacao_agressao_vias_de_fato
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL  ->  especie_violacao_agressoes_que_violam_o_direito_a_igualdade_formal
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL  ->  especie_violacao_agressoes_que_violam_o_direito_a_igualdade_material
+- especie_violacao_AMEAÇA/COAÇÃO  ->  especie_violacao_ameaca_coacao
+- especie_violacao_APOLOGIA E INCITAÇÃO AO SUICÍDIO  ->  especie_violacao_apologia_e_incitacao_ao_suicidio
+- especie_violacao_ASSÉDIO MORAL  ->  especie_violacao_assedio_moral
+- especie_violacao_AUTOMUTILAÇÃO  ->  especie_violacao_automutilacao
+- especie_violacao_AUTONOMIA DE VONTADE  ->  especie_violacao_autonomia_de_vontade
+- especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO  ->  especie_violacao_calunia_injuria_difamacao
+- especie_violacao_CIDADANIA  ->  especie_violacao_cidadania
+
+Normalização dos nomes das colunas concluída com sucesso.
+
+================================================================================
+BALANCEAMENTO DA BASE DE TREINO
+================================================================================
+Estratégia utilizada: hibrido
+
+================================================================================
+DISTRIBUIÇÃO DO TARGET ANTES DO BALANCEAMENTO
+================================================================================
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+0    140893
+3     77218
+2     45727
+1      3935
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+0    52.62
+3    28.84
+2    17.08
+1     1.47
+Name: proportion, dtype: float64
+
+Quantidade alvo por classe após balanceamento: 40000
+
+================================================================================
+DISTRIBUIÇÃO DO TARGET APÓS O BALANCEAMENTO
+================================================================================
+
+Distribuição absoluta:
+__target_balanceamento__
+1    40000
+0    40000
+3    40000
+2    40000
+Name: count, dtype: int64
+
+Distribuição percentual:
+__target_balanceamento__
+1    25.0
+0    25.0
+3    25.0
+2    25.0
+Name: proportion, dtype: float64
+
+Formato antes do balanceamento:
+X_train: (267773, 320)
+y_train: (267773,)
+
+Formato após o balanceamento:
+X_train_balanceado: (160000, 320)
+y_train_balanceado: (160000,)
+
+Balanceamento da base de treino concluído com sucesso.
+
+Árvore de Decisão desativada na orquestração da Silver.
+
+Random Forest desativada na orquestração da Silver.
+
+Regressão Logística desativada na orquestração da Silver.
+
+MLP desativado na orquestração da Silver.
+
+CNN desativada na orquestração da Silver.
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: XGBOOST
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - XGBOOST
+================================================================================
+Formato de X_train: (160000, 320)
+Formato de y_train: (160000,)
+
+Parâmetros do modelo:
+n_estimators: 50
+max_depth: 6
+learning_rate: 0.3
+subsample: 0.5
+colsample_bytree: 0.5
+tree_method: hist
+objective: multi:softprob
+eval_metric: mlogloss
+sample_weight: balanced
+num_class: 4
+random_state: 42
+n_jobs: -1
+
+Modelo XGBoost treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - XGBOOST
+================================================================================
+
+Métricas principais:
+Accuracy treino: 0.8625
+Accuracy teste: 0.8971
+Balanced accuracy teste: 0.8467
+Macro precision teste: 0.7524
+Macro recall teste: 0.8467
+Macro F1-score teste: 0.7510
+Weighted F1-score teste: 0.9017
+
+Classification report - Teste:
+              precision    recall  f1-score   support
+
+           0       0.95      0.93      0.94     35223
+           1       0.24      0.84      0.37       984
+           2       0.90      0.62      0.73     11432
+           3       0.92      1.00      0.96     19305
+
+    accuracy                           0.90     66944
+   macro avg       0.75      0.85      0.75     66944
+weighted avg       0.92      0.90      0.90     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - XGBOOST
+================================================================================
+max_depth=2 | acc_treino=0.8060 | acc_teste=0.8303 | f1_treino=0.8006 | f1_teste=0.6823
+max_depth=4 | acc_treino=0.8428 | acc_teste=0.8806 | f1_treino=0.8375 | f1_teste=0.7307
+max_depth=6 | acc_treino=0.8620 | acc_teste=0.8967 | f1_treino=0.8567 | f1_teste=0.7511
+max_depth=8 | acc_treino=0.8749 | acc_teste=0.8996 | f1_treino=0.8699 | f1_teste=0.7560
+max_depth=10 | acc_treino=0.8853 | acc_teste=0.9032 | f1_treino=0.8811 | f1_teste=0.7637
+
+Gráficos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\grafico_overfitting_xgboost_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\grafico_overfitting_xgboost_macro_f1.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - XGBoost
+================================================================================
+
+Mapeamento utilizado:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Matriz calculada:
+[[32873    49   591  1710]
+ [    1   823   160     0]
+ [ 1804  2562  7060     6]
+ [    7     0     0 19298]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\matriz_confusao_xgboost_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - XGBoost
+================================================================================
+
+Mapeamento utilizado:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Matriz calculada:
+[[9.33282230e-01 1.39113647e-03 1.67788093e-02 4.85478239e-02]
+ [1.01626016e-03 8.36382114e-01 1.62601626e-01 0.00000000e+00]
+ [1.57802659e-01 2.24107768e-01 6.17564731e-01 5.24842547e-04]
+ [3.62600363e-04 0.00000000e+00 0.00000000e+00 9.99637400e-01]]
+
+Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\matriz_confusao_xgboost_normalizada.png
+
+LightGBM desativado na orquestração da Silver.
+
+================================================================================
+BASE CODIFICADA E MODELOS SILVER AVALIADOS
+================================================================================
+X_train original: (267773, 18)
+X_test original: (66944, 18)
+X_train encoded: (267773, 320)
+X_train modelo: (160000, 320)
+y_train modelo: (160000,)
+y_train original: (267773,)
+y_test: (66944,)
+
+================================================================================
+MÉTRICAS DO MODELO - XGBOOST
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           86.25%
+Accuracy teste                            89.71%
+Balanced accuracy teste                   84.67%
+Macro precision teste                     75.24%
+Macro recall teste                        84.67%
+Macro F1-score teste                      75.10%
+Weighted F1-score teste                   90.17%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste           -3.46 p.p.
+
+Interpretação rápida:
+- O teste ficou maior que o treino; verificar estabilidade da divisão ou efeito do balanceamento.
+
+================================================================================
+FIM DA PIPELINE SILVER - MODELAGEM
+================================================================================
+
+Output Silver salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\outputs\output_silver.txt

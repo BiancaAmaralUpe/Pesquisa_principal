@@ -1,5 +1,5 @@
 # ======================================================================================
-# matriz_confusao_xgboost.py
+# matriz_confusao_xgboost_modelo.py
 # ======================================================================================
 # Responsabilidade:
 # - Gerar matriz de confusão absoluta do XGBoost
@@ -10,6 +10,7 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import confusion_matrix
@@ -21,91 +22,120 @@ def gerar_matriz_confusao_xgboost(
     caminho_saida: str,
     nome_arquivo: str,
     titulo: str,
-    labels: list[str],
+    classes_target: list[str],
     normalizar: bool = False,
 ) -> None:
     """
-    Gera e salva matriz de confusão do XGBoost.
+    Gera e salva a matriz de confusão do XGBoost.
 
-    Quando normalizar=True, a matriz mostra a proporção de acertos e erros
-    por classe real.
+    A matriz é calculada com labels numéricos, mas exibe
+    os nomes textuais das classes.
     """
 
     print("\n" + "=" * 80)
     print(f"GERAÇÃO DA MATRIZ DE CONFUSÃO - {titulo}")
     print("=" * 80)
 
-    Path(caminho_saida).mkdir(parents=True, exist_ok=True)
+    caminho_saida_path = Path(caminho_saida)
 
-    if normalizar:
-        matriz = confusion_matrix(
-            y_real,
-            y_predito,
-            labels=labels,
-            normalize="true",
+    caminho_saida_path.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    y_real_numpy = np.asarray(
+        y_real,
+        dtype=np.int64,
+    ).reshape(-1)
+
+    y_predito_numpy = np.asarray(
+        y_predito,
+        dtype=np.int64,
+    ).reshape(-1)
+
+    if len(y_real_numpy) != len(y_predito_numpy):
+        raise ValueError(
+            "y_real e y_predito possuem quantidades "
+            "diferentes de registros."
         )
 
-        formato_valores = ".2f"
+    labels_numericos = list(
+        range(len(classes_target))
+    )
 
-    else:
-        matriz = confusion_matrix(
-            y_real,
-            y_predito,
-            labels=labels,
+    print("\nMapeamento utilizado:")
+
+    for codigo, nome_classe in enumerate(classes_target):
+        print(
+            f"- {codigo}: {nome_classe}"
         )
 
-        formato_valores = "d"
+    matriz = confusion_matrix(
+        y_true=y_real_numpy,
+        y_pred=y_predito_numpy,
+        labels=labels_numericos,
+        normalize="true" if normalizar else None,
+    )
 
-    print("\nLabels utilizadas:")
-    for label in labels:
-        print(f"- {label}")
+    formato_valores = ".2f" if normalizar else "d"
 
     print("\nMatriz calculada:")
     print(matriz)
 
-    display = ConfusionMatrixDisplay(
-        confusion_matrix=matriz,
-        display_labels=labels,
+    figura, eixo = plt.subplots(
+        figsize=(10, 8),
     )
 
-    display.plot(
+    visualizacao = ConfusionMatrixDisplay(
+        confusion_matrix=matriz,
+        display_labels=classes_target,
+    )
+
+    visualizacao.plot(
+        ax=eixo,
         values_format=formato_valores,
         xticks_rotation=45,
+        colorbar=False,
     )
 
-    plt.title(titulo)
-    plt.tight_layout()
+    eixo.set_title(
+        titulo
+    )
 
-    caminho_arquivo = Path(caminho_saida) / nome_arquivo
+    figura.tight_layout()
 
-    plt.savefig(
+    caminho_arquivo = (
+        caminho_saida_path
+        / nome_arquivo
+    )
+
+    figura.savefig(
         caminho_arquivo,
         dpi=300,
         bbox_inches="tight",
     )
 
-    plt.close()
+    plt.close(
+        figura
+    )
 
-    print(f"\nMatriz de confusão salva em: {caminho_arquivo}")
+    print(
+        f"\nMatriz de confusão salva em: "
+        f"{caminho_arquivo}"
+    )
 
 
 def gerar_matrizes_confusao_xgboost(
     y_real: pd.Series,
     y_predito,
+    classes_target: list[str],
     caminho_saida: str,
 ) -> None:
     """
     Gera as matrizes de confusão do XGBoost:
-    - absoluta
-    - normalizada
+    - absoluta;
+    - normalizada.
     """
-
-    labels = [
-        "sem_sinal_identificado",
-        "risco_baixo",
-        "risco_moderado",
-        "risco_elevado",
-    ]
 
     gerar_matriz_confusao_xgboost(
         y_real=y_real,
@@ -113,7 +143,7 @@ def gerar_matrizes_confusao_xgboost(
         caminho_saida=caminho_saida,
         nome_arquivo="matriz_confusao_xgboost_absoluta.png",
         titulo="Matriz de Confusão - XGBoost",
-        labels=labels,
+        classes_target=classes_target,
         normalizar=False,
     )
 
@@ -123,6 +153,6 @@ def gerar_matrizes_confusao_xgboost(
         caminho_saida=caminho_saida,
         nome_arquivo="matriz_confusao_xgboost_normalizada.png",
         titulo="Matriz de Confusão Normalizada - XGBoost",
-        labels=labels,
+        classes_target=classes_target,
         normalizar=True,
     )

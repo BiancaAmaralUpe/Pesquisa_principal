@@ -653,6 +653,7 @@ def executar_fluxo_xgboost(
     X_test_encoded,
     y_train,
     y_test,
+    classes_target: list[str],
 ) -> dict | None:
     """
     Executa o fluxo completo do XGBoost:
@@ -750,6 +751,7 @@ def executar_fluxo_xgboost(
         gerar_matrizes_confusao_xgboost(
             y_real=y_test,
             y_predito=y_pred_xgboost,
+            classes_target=classes_target,
             caminho_saida=str(PASTA_GRAFICOS_XGBOOST),
         )
 
@@ -902,6 +904,7 @@ def executar_fluxo_regressao_logistica(
             y_predito=y_pred_regressao_logistica,
             caminho_saida=str(PASTA_GRAFICOS_REGRESSAO_LOGISTICA),
         )
+
     return metricas_regressao_logistica
 
 # ============================================================== #
@@ -1397,7 +1400,8 @@ def pipeline_silver() -> None:
             X_test_encoded=X_test_encoded,
             y_train=y_train_modelo,
             y_test=y_test,
-        )
+            classes_target=classes_target,
+            )
 
         if metricas_xgboost is not None:
             metricas_modelos.append(metricas_xgboost)
