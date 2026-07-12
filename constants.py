@@ -872,3 +872,58 @@ APLICAR_BALANCEAMENTO_TREINO = True
 ESTRATEGIA_BALANCEAMENTO_TREINO = "hibrido"
 
 QUANTIDADE_ALVO_BALANCEAMENTO = None
+
+# ======================================================================================
+# Parâmetros do MLP - Silver
+# ======================================================================================
+
+ACTIVATION_MLP = "relu"
+
+SOLVER_MLP = "adam"
+
+# Valores disponíveis para experimentos
+ALPHAS_MLP = [
+    # 0.0001,
+    0.001,
+    # 0.01,
+    # 0.1,
+]
+
+# Valor utilizado pelo modelo final
+ALPHA_MLP = ALPHAS_MLP[0]
+
+BATCH_SIZE_MLP = 2048
+
+LEARNING_RATE_INIT_MLP = 0.001
+
+MAX_ITER_MLP = 50
+
+EARLY_STOPPING_MLP = True
+
+VALIDATION_FRACTION_MLP = 0.1
+
+N_ITER_NO_CHANGE_MLP = 3
+
+# Tolerância mínima de melhoria da MLP
+TOL_MLP = 0.001
+
+HIDDEN_LAYER_SIZES_MLP = (64,)
+
+ARQUITETURAS_OVERFITTING_MLP = [
+    (32,),
+    (64,),
+    (64, 32),
+    (128, 64),
+]
+
+QUANTIDADES_BALANCEAMENTO = [
+    20000,
+    #30000,
+    #40000,
+]
+
+QUANTIDADE_ALVO_BALANCEAMENTO = QUANTIDADES_BALANCEAMENTO[0]
+
+PASTA_GRAFICOS_MLP = SILVER_GRAFICOS_DIR / "mlp"
+
+ARQUIVO_LOG_MLP = SILVER_OUTPUTS_DIR / "log_mlp.txt"

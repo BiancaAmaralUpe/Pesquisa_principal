@@ -8,6 +8,10 @@
 # - Avaliar e comparar os modelos
 # - Salvar métricas, gráficos e melhor modelo
 # ======================================================================================
+import pandas as pd
+
+from sklearn.preprocessing import LabelEncoder
+
 from Pesquisa_principal.constants import ARQUIVO_CSV_LIMPO_TESTE_TREINO
 from Pesquisa_principal.constants import ARQUIVO_OUTPUT_SILVER
 from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
@@ -76,6 +80,23 @@ from Pesquisa_principal.constants import APLICAR_BALANCEAMENTO_TREINO
 from Pesquisa_principal.constants import ESTRATEGIA_BALANCEAMENTO_TREINO
 from Pesquisa_principal.constants import QUANTIDADE_ALVO_BALANCEAMENTO
 
+# constants mlp
+from Pesquisa_principal.constants import HIDDEN_LAYER_SIZES_MLP
+from Pesquisa_principal.constants import ACTIVATION_MLP
+from Pesquisa_principal.constants import SOLVER_MLP
+from Pesquisa_principal.constants import ALPHA_MLP
+from Pesquisa_principal.constants import BATCH_SIZE_MLP
+from Pesquisa_principal.constants import LEARNING_RATE_INIT_MLP
+from Pesquisa_principal.constants import MAX_ITER_MLP
+from Pesquisa_principal.constants import EARLY_STOPPING_MLP
+from Pesquisa_principal.constants import VALIDATION_FRACTION_MLP
+from Pesquisa_principal.constants import N_ITER_NO_CHANGE_MLP
+from Pesquisa_principal.constants import PASTA_GRAFICOS_MLP
+from Pesquisa_principal.constants import ARQUIVO_LOG_MLP
+from Pesquisa_principal.constants import ARQUITETURAS_OVERFITTING_MLP
+from Pesquisa_principal.constants import TOL_MLP
+from Pesquisa_principal.constants import QUANTIDADE_ALVO_BALANCEAMENTO
+
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
 from Pesquisa_principal.silver.processamento.normalizacao_colunas_modelo import normalizar_nomes_colunas_modelo
 from Pesquisa_principal.silver.diagnostico_target import gerar_graficos_diagnostico_target
@@ -121,6 +142,12 @@ from Pesquisa_principal.silver.modelos.lightgbm_modelo import registrar_treiname
 from Pesquisa_principal.silver.modelos.matriz_confusao_lightgbm_modelo import gerar_matrizes_confusao_lightgbm
 from Pesquisa_principal.silver.modelos.grafico_lightgbm_modelo import gerar_grafico_overfitting_lightgbm
 
+from Pesquisa_principal.silver.redes_neurais_artificiais.criar_mlp import treinar_mlp
+from Pesquisa_principal.silver.redes_neurais_artificiais.criar_mlp import avaliar_mlp
+from Pesquisa_principal.silver.redes_neurais_artificiais.criar_mlp import registrar_treinamento_mlp
+from Pesquisa_principal.silver.modelos.matriz_confusao_mlp_modelo import gerar_matrizes_confusao_mlp
+from Pesquisa_principal.silver.modelos.grafico_mlp import gerar_grafico_overfitting_mlp
+
 # ======================================================================================
 # Orquestração dos modelos da camada Silver
 # ======================================================================================
@@ -129,7 +156,8 @@ MODELOS_TREINAMENTO_SILVER = [
     #"arvore_decisao",
     #"random_forest",
     #"regressao_logistica",
-    "xgboost_modelo",
+    #"xgboost_modelo",
+    "mlp_modelo",
     #"lightgbm_modelo",
 ]
 
@@ -154,15 +182,211 @@ GRAFICOS_POR_MODELO_SILVER = {
     #],
 
     "xgboost_modelo": [
+    #    "overfitting",
+        "matriz_confusao",
+    ],
+
+    "mlp_modelo": [
         "overfitting",
         "matriz_confusao",
     ],
-#
+
    # "lightgbm_modelo": [
    #     "overfitting",
    #     "matriz_confusao",
    # ],
 }
+def codificar_target(
+    y: pd.Series,
+) -> tuple[pd.Series, LabelEncoder]:
+    """
+    Codifica as classes textuais do target para valores inteiros.
+
+    Exemplo:
+    - BAIXO  -> 0
+    - MEDIO  -> 1
+    - ALTO   -> 2
+    """
+
+    print("\n" + "=" * 80)
+    print("CODIFICAÇÃO DO TARGET")
+    print("=" * 80)
+
+    if y.isna().any():
+        quantidade_nulos = int(y.isna().sum())
+
+        raise ValueError(
+            "O target possui valores nulos. "
+            f"Quantidade encontrada: {quantidade_nulos}"
+        )
+
+    y_texto = (
+        y.astype("string")
+        .str.strip()
+    )
+
+    if y_texto.eq("").any():
+        quantidade_vazios = int(y_texto.eq("").sum())
+
+        raise ValueError(
+            "O target possui valores vazios. "
+            f"Quantidade encontrada: {quantidade_vazios}"
+        )
+
+    encoder_target = LabelEncoder()
+
+    valores_codificados = encoder_target.fit_transform(
+        y_texto,
+    )
+
+    y_codificado = pd.Series(
+        valores_codificados,
+        index=y.index,
+        name=y.name,
+        dtype="int64",
+    )
+
+    print("\nMapeamento das classes:")
+
+    for codigo, classe in enumerate(encoder_target.classes_):
+        print(f"- {codigo}: {classe}")
+
+    print(f"\nTipo original do target: {y.dtype}")
+    print(f"Tipo codificado do target: {y_codificado.dtype}")
+    print(f"Quantidade de classes: {len(encoder_target.classes_)}")
+
+    return y_codificado, encoder_target
+
+def executar_fluxo_mlp(
+    X_train_modelo,
+    X_train_avaliacao,
+    X_test_encoded,
+    y_train_modelo,
+    y_train_avaliacao,
+    y_test,
+    classes_target: list[str],
+) -> dict | None:
+    """
+    Executa o fluxo completo do MLP:
+    - treino
+    - avaliação
+    - registro do experimento
+    - gráficos configurados
+    """
+
+    if "mlp_modelo" not in MODELOS_TREINAMENTO_SILVER:
+        print("\nMLP desativado na orquestração da Silver.")
+        return None
+
+    print("\n" + "=" * 80)
+    print("ORQUESTRAÇÃO DO MODELO: MLP")
+    print("=" * 80)
+
+    modelo_mlp = treinar_mlp(
+        X_train=X_train_modelo,
+        y_train=y_train_modelo,
+        random_state=RANDOM_STATE,
+        hidden_layer_sizes=HIDDEN_LAYER_SIZES_MLP,
+        activation=ACTIVATION_MLP,
+        solver=SOLVER_MLP,
+        alpha=ALPHA_MLP,
+        batch_size=BATCH_SIZE_MLP,
+        learning_rate_init=LEARNING_RATE_INIT_MLP,
+        max_iter=MAX_ITER_MLP,
+        early_stopping=EARLY_STOPPING_MLP,
+        validation_fraction=VALIDATION_FRACTION_MLP,
+        n_iter_no_change=N_ITER_NO_CHANGE_MLP,
+        tol=TOL_MLP,
+    )
+
+    metricas_mlp, y_pred_mlp = avaliar_mlp(
+        modelo=modelo_mlp,
+        X_train=X_train_avaliacao,
+        X_test=X_test_encoded,
+        y_train=y_train_avaliacao,
+        y_test=y_test,
+    )
+
+    # ==============================================================
+    # registro do treinamento do modelo final
+    # ==============================================================
+    registrar_treinamento_mlp(
+        caminho_log=ARQUIVO_LOG_MLP,
+        hidden_layer_sizes=HIDDEN_LAYER_SIZES_MLP,
+        activation=ACTIVATION_MLP,
+        solver=SOLVER_MLP,
+        alpha=ALPHA_MLP,
+        batch_size=BATCH_SIZE_MLP,
+        learning_rate_init=LEARNING_RATE_INIT_MLP,
+        max_iter=MAX_ITER_MLP,
+        early_stopping=EARLY_STOPPING_MLP,
+        validation_fraction=VALIDATION_FRACTION_MLP,
+        n_iter_no_change=N_ITER_NO_CHANGE_MLP,
+        tol=TOL_MLP,
+        random_state=RANDOM_STATE,
+
+        X_train_shape=X_train_modelo.shape,
+        y_train_shape=y_train_modelo.shape,
+        X_test_shape=X_test_encoded.shape,
+        y_test_shape=y_test.shape,
+
+        metricas=metricas_mlp,
+        observacao=(
+            "Experimento com MLP usando One-Hot Encoding. "
+            "O modelo foi treinado com a base de treino balanceada, "
+            "mas as métricas de treino foram calculadas sobre a base "
+            "original não balanceada. Early stopping ativado."
+        ),
+    )
+
+    # ==============================================================
+    # gráficos configurados para o MLP
+    # ==============================================================
+    graficos_ativos = GRAFICOS_POR_MODELO_SILVER.get(
+        "mlp_modelo",
+        [],
+    )
+
+    if "overfitting" in graficos_ativos:
+        gerar_grafico_overfitting_mlp(
+            # Base balanceada usada no fit
+            X_train_modelo=X_train_modelo,
+            y_train_modelo=y_train_modelo,
+
+            # Base original usada para calcular as métricas de treino
+            X_train_avaliacao=X_train_avaliacao,
+            y_train_avaliacao=y_train_avaliacao,
+
+            # Base de teste original
+            X_test=X_test_encoded,
+            y_test=y_test,
+
+            caminho_saida=str(PASTA_GRAFICOS_MLP),
+            caminho_log=ARQUIVO_LOG_MLP,
+            arquiteturas=ARQUITETURAS_OVERFITTING_MLP,
+            activation=ACTIVATION_MLP,
+            solver=SOLVER_MLP,
+            alpha=ALPHA_MLP,
+            batch_size=BATCH_SIZE_MLP,
+            learning_rate_init=LEARNING_RATE_INIT_MLP,
+            max_iter=MAX_ITER_MLP,
+            early_stopping=EARLY_STOPPING_MLP,
+            validation_fraction=VALIDATION_FRACTION_MLP,
+            n_iter_no_change=N_ITER_NO_CHANGE_MLP,
+            tol=TOL_MLP,
+            random_state=RANDOM_STATE,
+        )
+
+    if "matriz_confusao" in graficos_ativos:
+        gerar_matrizes_confusao_mlp(
+            y_real=y_test,
+            y_predito=y_pred_mlp,
+            classes_target=classes_target,
+            caminho_saida=str(PASTA_GRAFICOS_MLP),
+        )
+
+    return metricas_mlp
+
 # ==============================================================
 # Fluxos dos modelos - Silver
 # ==============================================================
@@ -811,6 +1035,17 @@ def pipeline_silver() -> None:
             dataframe=dataframe_modelagem,
             coluna_alvo=COLUNA_ALVO_MODELAGEM,
         )
+        # ==============================================================
+        # preservação do target textual para gráficos e diagnósticos
+        # ==============================================================
+        y_textual = y.copy()
+
+        # ==============================================================
+        # codificação das classes do target para os modelos
+        # ==============================================================
+        y, encoder_target = codificar_target(
+            y=y,
+        )
 
         # ==============================================================
         # remoção de colunas com possível vazamento de informação
@@ -856,16 +1091,28 @@ def pipeline_silver() -> None:
         )
 
         # ==============================================================
+        # recuperação do target textual usando os mesmos índices
+        # ==============================================================
+
+        y_train_textual = y_textual.loc[
+            y_train.index
+        ].copy()
+
+        y_test_textual = y_textual.loc[
+            y_test.index
+        ].copy()
+
+        # ==============================================================
         # diagnóstico de balanceamento da base
         # ==============================================================
         gerar_graficos_balanceamento_base(
-            y=y,
-            y_train=y_train,
-            y_test=y_test,
+            y=y_textual,
+            y_train=y_train_textual,
+            y_test=y_test_textual,
             caminho_saida=PASTA_GRAFICOS_DIAGNOSTICO_TARGET,
             nome_coluna_target=COLUNA_ALVO_MODELAGEM,
         )
-        
+
         # ==============================================================
         # encoding
         # ==============================================================
@@ -939,7 +1186,27 @@ def pipeline_silver() -> None:
 
         if metricas_regressao_logistica is not None:
             metricas_modelos.append(metricas_regressao_logistica)
-        
+        # ==============================================================
+        # MLP
+        # ==============================================================
+        metricas_mlp = executar_fluxo_mlp(
+            # Base balanceada utilizada para treinar
+            X_train_modelo=X_train_modelo,
+            y_train_modelo=y_train_modelo,
+
+            # Base original utilizada para avaliar o treino
+            X_train_avaliacao=X_train_encoded,
+            y_train_avaliacao=y_train,
+
+            # Base de teste original
+            X_test_encoded=X_test_encoded,
+            y_test=y_test,
+
+            classes_target=encoder_target.classes_.tolist(),
+        )
+
+        if metricas_mlp is not None:
+            metricas_modelos.append(metricas_mlp)
         # ==============================================================
         # XGBoost
         # ==============================================================

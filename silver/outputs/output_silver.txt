@@ -217,6 +217,20 @@ Name: proportion, dtype: float64
 Separação concluída com sucesso.
 
 ================================================================================
+CODIFICAÇÃO DO TARGET
+================================================================================
+
+Mapeamento das classes:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Tipo original do target: str
+Tipo codificado do target: int64
+Quantidade de classes: 4
+
+================================================================================
 REMOÇÃO DE COLUNAS COM POSSÍVEL VAZAMENTO
 ================================================================================
 
@@ -246,18 +260,18 @@ DISTRIBUIÇÃO DO TARGET - BASE COMPLETA
 
 Distribuição absoluta:
 classificacao_sinais_risco_feminicidio
-risco_baixo               176116
-sem_sinal_identificado     96523
-risco_moderado             57159
-risco_elevado               4919
+0    176116
+3     96523
+2     57159
+1      4919
 Name: count, dtype: int64
 
 Distribuição percentual:
 classificacao_sinais_risco_feminicidio
-risco_baixo               52.62
-sem_sinal_identificado    28.84
-risco_moderado            17.08
-risco_elevado              1.47
+0    52.62
+3    28.84
+2    17.08
+1     1.47
 Name: proportion, dtype: float64
 
 --------------------------------------------------------------------------------
@@ -266,18 +280,18 @@ DISTRIBUIÇÃO DO TARGET - TREINO
 
 Distribuição absoluta:
 classificacao_sinais_risco_feminicidio
-risco_baixo               140893
-sem_sinal_identificado     77218
-risco_moderado             45727
-risco_elevado               3935
+0    140893
+3     77218
+2     45727
+1      3935
 Name: count, dtype: int64
 
 Distribuição percentual:
 classificacao_sinais_risco_feminicidio
-risco_baixo               52.62
-sem_sinal_identificado    28.84
-risco_moderado            17.08
-risco_elevado              1.47
+0    52.62
+3    28.84
+2    17.08
+1     1.47
 Name: proportion, dtype: float64
 
 --------------------------------------------------------------------------------
@@ -286,18 +300,18 @@ DISTRIBUIÇÃO DO TARGET - TESTE
 
 Distribuição absoluta:
 classificacao_sinais_risco_feminicidio
-risco_baixo               35223
-sem_sinal_identificado    19305
-risco_moderado            11432
-risco_elevado               984
+0    35223
+3    19305
+2    11432
+1      984
 Name: count, dtype: int64
 
 Distribuição percentual:
 classificacao_sinais_risco_feminicidio
-risco_baixo               52.62
-sem_sinal_identificado    28.84
-risco_moderado            17.08
-risco_elevado              1.47
+0    52.62
+3    28.84
+2    17.08
+1     1.47
 Name: proportion, dtype: float64
 
 Divisão treino/teste concluída com sucesso.
@@ -455,21 +469,21 @@ DISTRIBUIÇÃO DO TARGET ANTES DO BALANCEAMENTO
 
 Distribuição absoluta:
 classificacao_sinais_risco_feminicidio
-risco_baixo               140893
-sem_sinal_identificado     77218
-risco_moderado             45727
-risco_elevado               3935
+0    140893
+3     77218
+2     45727
+1      3935
 Name: count, dtype: int64
 
 Distribuição percentual:
 classificacao_sinais_risco_feminicidio
-risco_baixo               52.62
-sem_sinal_identificado    28.84
-risco_moderado            17.08
-risco_elevado              1.47
+0    52.62
+3    28.84
+2    17.08
+1     1.47
 Name: proportion, dtype: float64
 
-Quantidade alvo por classe após balanceamento: 61472
+Quantidade alvo por classe após balanceamento: 20000
 
 ================================================================================
 DISTRIBUIÇÃO DO TARGET APÓS O BALANCEAMENTO
@@ -477,18 +491,18 @@ DISTRIBUIÇÃO DO TARGET APÓS O BALANCEAMENTO
 
 Distribuição absoluta:
 __target_balanceamento__
-sem_sinal_identificado    61472
-risco_baixo               61472
-risco_elevado             61472
-risco_moderado            61472
+2    20000
+1    20000
+0    20000
+3    20000
 Name: count, dtype: int64
 
 Distribuição percentual:
 __target_balanceamento__
-sem_sinal_identificado    25.0
-risco_baixo               25.0
-risco_elevado             25.0
-risco_moderado            25.0
+2    25.0
+1    25.0
+0    25.0
+3    25.0
 Name: proportion, dtype: float64
 
 Formato antes do balanceamento:
@@ -496,8 +510,8 @@ X_train: (267773, 320)
 y_train: (267773,)
 
 Formato após o balanceamento:
-X_train_balanceado: (245888, 320)
-y_train_balanceado: (245888,)
+X_train_balanceado: (80000, 320)
+y_train_balanceado: (80000,)
 
 Balanceamento da base de treino concluído com sucesso.
 
@@ -508,105 +522,126 @@ Random Forest desativada na orquestração da Silver.
 Regressão Logística desativada na orquestração da Silver.
 
 ================================================================================
-ORQUESTRAÇÃO DO MODELO: XGBOOST
+ORQUESTRAÇÃO DO MODELO: MLP
 ================================================================================
 
 ================================================================================
-TREINAMENTO DO MODELO - XGBOOST
+TREINAMENTO DO MODELO - MLP
 ================================================================================
-Formato de X_train: (245888, 320)
-Formato de y_train: (245888,)
+Formato de X_train: (80000, 320)
+Formato de y_train: (80000,)
 
 Parâmetros do modelo:
-n_estimators: 100
-max_depth: 6
-learning_rate: 0.1
-subsample: 0.8
-colsample_bytree: 0.8
-tree_method: hist
-objective: multi:softprob
-eval_metric: mlogloss
-sample_weight: balanced
-num_class: 4
+hidden_layer_sizes: (64,)
+activation: relu
+solver: adam
+alpha: 0.001
+batch_size: 2048
+learning_rate_init: 0.001
+max_iter: 50
+early_stopping: True
+validation_fraction: 0.1
+n_iter_no_change: 3
 random_state: 42
-n_jobs: -1
 
-Modelo XGBoost treinado com sucesso.
+Tipo do target recebido pelo MLP: int64
+Classes numéricas recebidas pelo MLP: [0, 1, 2, 3]
+
+Modelo MLP treinado com sucesso.
 
 ================================================================================
-AVALIAÇÃO DO MODELO - XGBOOST
+AVALIAÇÃO DO MODELO - MLP
 ================================================================================
 
 Métricas principais:
-Accuracy treino: 0.7562
-Accuracy teste: 0.7999
-Balanced accuracy teste: 0.7591
-Macro precision teste: 0.6541
-Macro recall teste: 0.7591
-Macro F1-score teste: 0.6719
-Weighted F1-score teste: 0.8085
+Accuracy treino: 0.9008
+Accuracy teste: 0.8984
+Balanced accuracy teste: 0.8483
+Macro precision teste: 0.7547
+Macro recall teste: 0.8483
+Macro F1-score teste: 0.7524
+Weighted F1-score teste: 0.9026
 
 Classification report - Teste:
-                        precision    recall  f1-score   support
+              precision    recall  f1-score   support
 
-           risco_baixo       0.86      0.83      0.85     35223
-         risco_elevado       0.21      0.72      0.33       984
-        risco_moderado       0.68      0.65      0.67     11432
-sem_sinal_identificado       0.87      0.83      0.85     19305
+           0       0.95      0.94      0.94     35223
+           1       0.24      0.84      0.38       984
+           2       0.91      0.61      0.73     11432
+           3       0.92      1.00      0.96     19305
 
-              accuracy                           0.80     66944
-             macro avg       0.65      0.76      0.67     66944
-          weighted avg       0.82      0.80      0.81     66944
+    accuracy                           0.90     66944
+   macro avg       0.75      0.85      0.75     66944
+weighted avg       0.92      0.90      0.90     66944
 
-
-================================================================================
-ANÁLISE DE OVERFITTING - XGBOOST
-================================================================================
-max_depth=2 | acc_treino=0.7797 | acc_teste=0.7866 | f1_treino=0.7744 | f1_teste=0.6504
-max_depth=4 | acc_treino=0.8370 | acc_teste=0.8688 | f1_treino=0.8300 | f1_teste=0.7129
-max_depth=6 | acc_treino=0.8606 | acc_teste=0.8929 | f1_treino=0.8541 | f1_teste=0.7424
-max_depth=8 | acc_treino=0.8724 | acc_teste=0.8995 | f1_treino=0.8666 | f1_teste=0.7524
-max_depth=10 | acc_treino=0.8832 | acc_teste=0.9016 | f1_treino=0.8781 | f1_teste=0.7554
-
-Gráficos salvos com sucesso em:
-- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\grafico_overfitting_xgboost_accuracy.png
-- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\grafico_overfitting_xgboost_macro_f1.png
 
 ================================================================================
-GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - XGBoost
+ANÁLISE DE OVERFITTING - MLP
 ================================================================================
 
-Labels utilizadas:
-- sem_sinal_identificado
-- risco_baixo
-- risco_moderado
-- risco_elevado
+Arquiteturas que serão testadas:
+- 32
+- 64
+- 64x32
+- 128x64
 
-Matriz calculada:
-[[16116  3189     0     0]
- [ 2372 29259  3289   303]
- [  105  1529  7468  2330]
- [    1     6   271   706]]
+--------------------------------------------------------------------------------
+TESTE 1/4 - ARQUITETURA 32
+--------------------------------------------------------------------------------
+Arquitetura=32 | acc_treino=0.8966 | acc_teste=0.8938 | gap_acc=0.0028 | f1_treino=0.7475 | f1_teste=0.7430 | gap_f1=0.0045 | iterações=16
 
-Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\matriz_confusao_xgboost_absoluta.png
+--------------------------------------------------------------------------------
+TESTE 2/4 - ARQUITETURA 64
+--------------------------------------------------------------------------------
+Arquitetura=64 | acc_treino=0.9008 | acc_teste=0.8984 | gap_acc=0.0024 | f1_treino=0.7561 | f1_teste=0.7524 | gap_f1=0.0038 | iterações=21
+
+--------------------------------------------------------------------------------
+TESTE 3/4 - ARQUITETURA 64x32
+--------------------------------------------------------------------------------
+Arquitetura=64x32 | acc_treino=0.8979 | acc_teste=0.8956 | gap_acc=0.0023 | f1_treino=0.7548 | f1_teste=0.7492 | gap_f1=0.0057 | iterações=25
+
+--------------------------------------------------------------------------------
+TESTE 4/4 - ARQUITETURA 128x64
+--------------------------------------------------------------------------------
+Arquitetura=128x64 | acc_treino=0.9018 | acc_teste=0.8985 | gap_acc=0.0033 | f1_treino=0.7688 | f1_teste=0.7588 | gap_f1=0.0101 | iterações=31
+
+Resultados da análise de overfitting:
+arquitetura  total_neuronios  accuracy_treino  accuracy_teste  gap_accuracy  macro_f1_treino  macro_f1_teste  gap_macro_f1  n_iteracoes  loss_final
+         32               32         0.896569        0.893762      0.002807         0.747526        0.743017      0.004509           16    0.351513
+         64               64         0.900785        0.898408      0.002378         0.756111        0.752355      0.003756           21    0.329099
+      64x32               96         0.897906        0.895644      0.002262         0.754841        0.749161      0.005680           25    0.305098
+     128x64              192         0.901797        0.898512      0.003285         0.768821        0.758768      0.010053           31    0.275632
+
+Arquivos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\grafico_overfitting_mlp_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\grafico_overfitting_mlp_macro_f1.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\resultados_overfitting_mlp.csv
 
 ================================================================================
-GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - XGBoost
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - MLP
 ================================================================================
 
-Labels utilizadas:
-- sem_sinal_identificado
-- risco_baixo
-- risco_moderado
-- risco_elevado
+Mapeamento utilizado:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
 
-Matriz calculada:
-[[0.83480963 0.16519037 0.         0.        ]
- [0.06734236 0.83067882 0.09337649 0.00860233]
- [0.00918474 0.13374738 0.65325402 0.20381386]
- [0.00101626 0.00609756 0.2754065  0.71747967]]
+Matriz salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\matriz_confusao_mlp_absoluta.png
 
-Matriz de confusão salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\xgboost_modelo\matriz_confusao_xgboost_normalizada.png
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - MLP
+================================================================================
+
+Mapeamento utilizado:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Matriz salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\matriz_confusao_mlp_normalizada.png
+
+XGBoost desativado na orquestração da Silver.
 
 LightGBM desativado na orquestração da Silver.
 
@@ -616,28 +651,28 @@ BASE CODIFICADA E MODELOS SILVER AVALIADOS
 X_train original: (267773, 18)
 X_test original: (66944, 18)
 X_train encoded: (267773, 320)
-X_train modelo: (245888, 320)
-y_train modelo: (245888,)
+X_train modelo: (80000, 320)
+y_train modelo: (80000,)
 y_train original: (267773,)
 y_test: (66944,)
 
 ================================================================================
-MÉTRICAS DO MODELO - XGBOOST
+MÉTRICAS DO MODELO - MLP
 ================================================================================
 Métrica                                    Valor
 --------------------------------------------------------------------------------
-Accuracy treino                           75.62%
-Accuracy teste                            79.99%
-Balanced accuracy teste                   75.91%
-Macro precision teste                     65.41%
-Macro recall teste                        75.91%
-Macro F1-score teste                      67.19%
-Weighted F1-score teste                   80.85%
+Accuracy treino                           90.08%
+Accuracy teste                            89.84%
+Balanced accuracy teste                   84.83%
+Macro precision teste                     75.47%
+Macro recall teste                        84.83%
+Macro F1-score teste                      75.24%
+Weighted F1-score teste                   90.26%
 --------------------------------------------------------------------------------
-Diferença accuracy treino-teste           -4.37 p.p.
+Diferença accuracy treino-teste            0.24 p.p.
 
 Interpretação rápida:
-- O teste ficou maior que o treino; verificar estabilidade da divisão ou efeito do balanceamento.
+- Não há sinal forte de overfitting pela diferença entre treino e teste.
 
 ================================================================================
 FIM DA PIPELINE SILVER - MODELAGEM

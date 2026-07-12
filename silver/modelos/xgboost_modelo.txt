@@ -307,3 +307,40 @@ Métricas obtidas:
 - Macro F1-score teste: 0.7554
 
 ================================================================================
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - XGBOOST
+================================================================================
+Data/hora da execução: 2026-07-08 11:37:49
+
+Parâmetros utilizados:
+- N_ESTIMATORS_XGBOOST: 100
+- MAX_DEPTH_XGBOOST: 6
+- LEARNING_RATE_XGBOOST: 0.1
+- SUBSAMPLE_XGBOOST: 0.8
+- COLSAMPLE_BYTREE_XGBOOST: 0.8
+- TREE_METHOD_XGBOOST: hist
+- RANDOM_STATE: 42
+- N_JOBS_XGBOOST: -1
+- objective: multi:softprob
+- eval_metric: mlogloss
+- sample_weight: balanced
+
+Formato dos dados:
+- X_train: (245888, 320)
+- X_test: (66944, 320)
+- y_train: (245888,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.7562
+- Accuracy teste: 0.7999
+- Balanced accuracy teste: 0.7591
+- Macro precision teste: 0.6541
+- Macro recall teste: 0.7591
+- Macro F1-score teste: 0.6719
+- Weighted F1-score teste: 0.8085
+
+Observação:
+Experimento com XGBoost usando One-Hot Encoding, sample_weight balanceado e base treino/teste estratificada.
+
