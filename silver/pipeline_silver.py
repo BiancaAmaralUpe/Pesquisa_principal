@@ -91,6 +91,7 @@ from Pesquisa_principal.constants import ARQUIVO_LOG_MLP
 from Pesquisa_principal.constants import ARQUITETURAS_OVERFITTING_MLP
 from Pesquisa_principal.constants import TOL_MLP
 from Pesquisa_principal.constants import QUANTIDADE_ALVO_BALANCEAMENTO
+
 # ======================================================================================
 # Imports das constantes da CNN
 # ======================================================================================
@@ -108,6 +109,7 @@ from Pesquisa_principal.constants import PASTA_GRAFICOS_CNN
 from Pesquisa_principal.constants import PATIENCE_CNN
 from Pesquisa_principal.constants import VALIDATION_FRACTION_CNN
 from Pesquisa_principal.constants import WEIGHT_DECAY_CNN
+from Pesquisa_principal.constants import NUM_CLASSES_CNN
 
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
 from Pesquisa_principal.silver.processamento.normalizacao_colunas_modelo import normalizar_nomes_colunas_modelo
@@ -162,7 +164,6 @@ from Pesquisa_principal.silver.modelos.grafico_mlp import gerar_grafico_overfitt
 # ======================================================================================
 # Imports da CNN
 # ======================================================================================
-
 from Pesquisa_principal.silver.redes_neurais_artificiais.avaliacao_cnn import avaliar_cnn
 from Pesquisa_principal.silver.redes_neurais_artificiais.criar_cnn import criar_modelo_cnn
 from Pesquisa_principal.silver.redes_neurais_artificiais.dados_cnn import criar_dataloaders_cnn
@@ -177,9 +178,9 @@ MODELOS_TREINAMENTO_SILVER = [
     #"arvore_decisao",
     #"random_forest",
     #"regressao_logistica",
-    #"xgboost_modelo",
-    "mlp_modelo",
-    "cnn_modelo",
+    "xgboost_modelo",
+    #"mlp_modelo",
+    #"cnn_modelo",
     #"lightgbm_modelo",
 ]
 
@@ -204,19 +205,19 @@ GRAFICOS_POR_MODELO_SILVER = {
     #],
 
     "xgboost_modelo": [
-    #    "overfitting",
-        "matriz_confusao",
-    ],
-
-    "mlp_modelo": [
         "overfitting",
         "matriz_confusao",
     ],
 
-    "cnn_modelo": [
-        "historico_treinamento",
-        "matriz_confusao",
-    ],
+    #"mlp_modelo": [
+    #    "overfitting",
+    #    "matriz_confusao",
+    #],
+#
+    #"cnn_modelo": [
+    #    "historico_treinamento",
+    #    "matriz_confusao",
+    #],
 
    # "lightgbm_modelo": [
    #     "overfitting",
@@ -304,34 +305,34 @@ def executar_fluxo_cnn(
         classes_target=classes_target,
     )
 
-    # ==============================================================
-    # registro
-    # ==============================================================
-    registrar_treinamento_cnn(
-        caminho_log=ARQUIVO_LOG_CNN,
-        canais=CANAIS_CNN,
-        kernel_size=KERNEL_SIZE_CNN,
-        dropout=DROPOUT_CNN,
-        batch_size=BATCH_SIZE_CNN,
-        learning_rate=LEARNING_RATE_CNN,
-        weight_decay=WEIGHT_DECAY_CNN,
-        max_epochs=MAX_EPOCHS_CNN,
-        patience=PATIENCE_CNN,
-        min_delta=MIN_DELTA_CNN,
-        validation_fraction=VALIDATION_FRACTION_CNN,
-        random_state=RANDOM_STATE,
-        X_train_shape=X_train_encoded.shape,
-        X_test_shape=X_test_encoded.shape,
-        y_train_shape=y_train.shape,
-        y_test_shape=y_test.shape,
-        metricas=metricas_cnn,
-        historico=historico_cnn,
-        observacao=(
-            "Experimento com CNN 1D usando dados codificados por "
-            "One-Hot Encoding. O balanceamento foi aplicado somente "
-            "ao subconjunto interno de treinamento."
-        ),
-    )
+    ## ==============================================================
+    ## registro
+    ## ==============================================================
+    #registrar_treinamento_cnn(
+    #    caminho_log=ARQUIVO_LOG_CNN,
+    #    canais=CANAIS_CNN,
+    #    kernel_size=KERNEL_SIZE_CNN,
+    #    dropout=DROPOUT_CNN,
+    #    batch_size=BATCH_SIZE_CNN,
+    #    learning_rate=LEARNING_RATE_CNN,
+    #    weight_decay=WEIGHT_DECAY_CNN,
+    #    max_epochs=MAX_EPOCHS_CNN,
+    #    patience=PATIENCE_CNN,
+    #    min_delta=MIN_DELTA_CNN,
+    #    validation_fraction=VALIDATION_FRACTION_CNN,
+    #    random_state=RANDOM_STATE,
+    #    X_train_shape=X_train_encoded.shape,
+    #    X_test_shape=X_test_encoded.shape,
+    #    y_train_shape=y_train.shape,
+    #    y_test_shape=y_test.shape,
+    #    metricas=metricas_cnn,
+    #    historico=historico_cnn,
+    #    observacao=(
+    #        "Experimento com CNN 1D usando dados codificados por "
+    #        "One-Hot Encoding. O balanceamento foi aplicado somente "
+    #        "ao subconjunto interno de treinamento."
+    #    ),
+    #)
 
     # ==============================================================
     # gráficos configurados
@@ -1209,6 +1210,15 @@ def pipeline_silver() -> None:
             y=y,
         )
 
+        classes_target = encoder_target.classes_.tolist()
+
+        print("\nClasses do target utilizadas pelos modelos:")
+
+        for indice, nome_classe in enumerate(classes_target):
+            print(
+                f"- {indice}: {nome_classe}"
+            )
+
         # ==============================================================
         # remoção de colunas com possível vazamento de informação
         # ==============================================================
@@ -1351,35 +1361,33 @@ def pipeline_silver() -> None:
         # ==============================================================
         # MLP
         # ==============================================================
-        metricas_mlp = executar_fluxo_mlp(
-            # Base balanceada utilizada para treinar
-            X_train_modelo=X_train_modelo,
-            y_train_modelo=y_train_modelo,
+        metricas_mlp = None
 
-            # Base original utilizada para avaliar o treino
-            X_train_avaliacao=X_train_encoded,
-            y_train_avaliacao=y_train,
+        if "mlp_modelo" in MODELOS_TREINAMENTO_SILVER:
+            metricas_mlp = executar_fluxo_mlp(
+                X_train_modelo=X_train_modelo,
+                X_train_avaliacao=X_train_encoded,
+                X_test_encoded=X_test_encoded,
+                y_train_modelo=y_train_modelo,
+                y_train_avaliacao=y_train,
+                y_test=y_test,
+                classes_target=classes_target,
+                )
+        else:
+            print("\nMLP desativado na orquestração da Silver.")
 
-            # Base de teste original
-            X_test_encoded=X_test_encoded,
-            y_test=y_test,
+        metricas_cnn = None
 
-            classes_target=encoder_target.classes_.tolist(),
-        )
-
-        if metricas_mlp is not None:
-            metricas_modelos.append(metricas_mlp)
-        
-        metricas_cnn = executar_fluxo_cnn(
-            X_train_encoded=X_train_encoded,
-            X_test_encoded=X_test_encoded,
-            y_train=y_train,
-            y_test=y_test,
-            classes_target=classes_target,
-        )
-        
-        if metricas_cnn is not None:
-            metricas_modelos.append(metricas_cnn)
+        if "cnn_modelo" in MODELOS_TREINAMENTO_SILVER:
+            metricas_cnn = executar_fluxo_cnn(
+                X_train_encoded=X_train_encoded,
+                X_test_encoded=X_test_encoded,
+                y_train=y_train,
+                y_test=y_test,
+                classes_target=classes_target,
+                )
+        else:
+            print("\nCNN desativada na orquestração da Silver.")
             
         # ==============================================================
         # XGBoost

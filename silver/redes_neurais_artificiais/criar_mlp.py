@@ -21,7 +21,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import precision_recall_fscore_support
 
-
 def treinar_mlp(
     X_train: pd.DataFrame,
     y_train: pd.Series,

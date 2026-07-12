@@ -116,3 +116,33 @@ class CNN1DClassificador(nn.Module):
         )
 
         return logits
+
+def criar_modelo_cnn(
+    quantidade_classes: int,
+    canais: tuple[int, int],
+    kernel_size: int,
+    dropout: float,
+) -> CNN1DClassificador:
+    """
+    Cria e retorna uma instância da CNN 1D.
+    """
+
+    print("\n" + "=" * 80)
+    print("CRIAÇÃO DO MODELO - CNN 1D")
+    print("=" * 80)
+
+    print(f"Quantidade de classes: {quantidade_classes}")
+    print(f"Canais convolucionais: {canais}")
+    print(f"Kernel size: {kernel_size}")
+    print(f"Dropout: {dropout}")
+
+    modelo = CNN1DClassificador(
+        quantidade_classes=quantidade_classes,
+        canais=canais,
+        kernel_size=kernel_size,
+        dropout=dropout,
+    )
+
+    print("\nModelo CNN criado com sucesso.")
+
+    return modelo
