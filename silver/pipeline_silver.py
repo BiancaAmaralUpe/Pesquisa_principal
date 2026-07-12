@@ -9,9 +9,7 @@
 # - Salvar métricas, gráficos e melhor modelo
 # ======================================================================================
 import pandas as pd
-
 from sklearn.preprocessing import LabelEncoder
-
 from Pesquisa_principal.constants import ARQUIVO_CSV_LIMPO_TESTE_TREINO
 from Pesquisa_principal.constants import ARQUIVO_OUTPUT_SILVER
 from Pesquisa_principal.constants import COLUNA_ALVO_MODELAGEM
@@ -39,7 +37,6 @@ from Pesquisa_principal.constants import QUANTIDADE_AMOSTRA_OTIMIZACAO_RANDOM_FO
 from Pesquisa_principal.constants import N_ITER_OTIMIZACAO_RANDOM_FOREST
 from Pesquisa_principal.constants import CV_OTIMIZACAO_RANDOM_FOREST
 from Pesquisa_principal.constants import SCORING_OTIMIZACAO_RANDOM_FOREST
-
 # constants regressao logistica
 from Pesquisa_principal.constants import MAX_ITER_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import C_REGRESSAO_LOGISTICA
@@ -52,7 +49,6 @@ from Pesquisa_principal.constants import QUANTIDADE_AMOSTRA_OTIMIZACAO_REGRESSAO
 from Pesquisa_principal.constants import N_ITER_OTIMIZACAO_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import CV_OTIMIZACAO_REGRESSAO_LOGISTICA
 from Pesquisa_principal.constants import SCORING_OTIMIZACAO_REGRESSAO_LOGISTICA
-
 # constants xgboost
 from Pesquisa_principal.constants import N_ESTIMATORS_XGBOOST
 from Pesquisa_principal.constants import MAX_DEPTH_XGBOOST
@@ -79,7 +75,6 @@ from Pesquisa_principal.constants import PASTA_GRAFICOS_DIAGNOSTICO_TARGET
 from Pesquisa_principal.constants import APLICAR_BALANCEAMENTO_TREINO
 from Pesquisa_principal.constants import ESTRATEGIA_BALANCEAMENTO_TREINO
 from Pesquisa_principal.constants import QUANTIDADE_ALVO_BALANCEAMENTO
-
 # constants mlp
 from Pesquisa_principal.constants import HIDDEN_LAYER_SIZES_MLP
 from Pesquisa_principal.constants import ACTIVATION_MLP
@@ -96,6 +91,23 @@ from Pesquisa_principal.constants import ARQUIVO_LOG_MLP
 from Pesquisa_principal.constants import ARQUITETURAS_OVERFITTING_MLP
 from Pesquisa_principal.constants import TOL_MLP
 from Pesquisa_principal.constants import QUANTIDADE_ALVO_BALANCEAMENTO
+# ======================================================================================
+# Imports das constantes da CNN
+# ======================================================================================
+from Pesquisa_principal.constants import ARQUIVO_LOG_CNN
+from Pesquisa_principal.constants import ARQUIVO_MODELO_CNN
+from Pesquisa_principal.constants import BATCH_SIZE_CNN
+from Pesquisa_principal.constants import CANAIS_CNN
+from Pesquisa_principal.constants import DROPOUT_CNN
+from Pesquisa_principal.constants import KERNEL_SIZE_CNN
+from Pesquisa_principal.constants import LEARNING_RATE_CNN
+from Pesquisa_principal.constants import MAX_EPOCHS_CNN
+from Pesquisa_principal.constants import MIN_DELTA_CNN
+from Pesquisa_principal.constants import NUM_WORKERS_CNN
+from Pesquisa_principal.constants import PASTA_GRAFICOS_CNN
+from Pesquisa_principal.constants import PATIENCE_CNN
+from Pesquisa_principal.constants import VALIDATION_FRACTION_CNN
+from Pesquisa_principal.constants import WEIGHT_DECAY_CNN
 
 from Pesquisa_principal.bronze.utils import OutputTerminalEArquivo
 from Pesquisa_principal.silver.processamento.normalizacao_colunas_modelo import normalizar_nomes_colunas_modelo
@@ -147,7 +159,16 @@ from Pesquisa_principal.silver.redes_neurais_artificiais.criar_mlp import avalia
 from Pesquisa_principal.silver.redes_neurais_artificiais.criar_mlp import registrar_treinamento_mlp
 from Pesquisa_principal.silver.modelos.matriz_confusao_mlp_modelo import gerar_matrizes_confusao_mlp
 from Pesquisa_principal.silver.modelos.grafico_mlp import gerar_grafico_overfitting_mlp
+# ======================================================================================
+# Imports da CNN
+# ======================================================================================
 
+from Pesquisa_principal.silver.redes_neurais_artificiais.avaliacao_cnn import avaliar_cnn
+from Pesquisa_principal.silver.redes_neurais_artificiais.criar_cnn import criar_modelo_cnn
+from Pesquisa_principal.silver.redes_neurais_artificiais.dados_cnn import criar_dataloaders_cnn
+from Pesquisa_principal.silver.redes_neurais_artificiais.treinamento_cnn import treinar_cnn
+from Pesquisa_principal.silver.modelos.grafico_cnn import gerar_grafico_historico_cnn
+from Pesquisa_principal.silver.modelos.grafico_cnn import gerar_matrizes_confusao_cnn
 # ======================================================================================
 # Orquestração dos modelos da camada Silver
 # ======================================================================================
@@ -158,6 +179,7 @@ MODELOS_TREINAMENTO_SILVER = [
     #"regressao_logistica",
     #"xgboost_modelo",
     "mlp_modelo",
+    "cnn_modelo",
     #"lightgbm_modelo",
 ]
 
@@ -191,11 +213,150 @@ GRAFICOS_POR_MODELO_SILVER = {
         "matriz_confusao",
     ],
 
+    "cnn_modelo": [
+        "historico_treinamento",
+        "matriz_confusao",
+    ],
+
    # "lightgbm_modelo": [
    #     "overfitting",
    #     "matriz_confusao",
    # ],
 }
+
+def executar_fluxo_cnn(
+    X_train_encoded,
+    X_test_encoded,
+    y_train,
+    y_test,
+    classes_target: list[str],
+) -> dict | None:
+    """
+    Executa o fluxo completo da CNN:
+    - divisão entre treino e validação;
+    - balanceamento somente do treino interno;
+    - criação dos DataLoaders;
+    - criação do modelo;
+    - treinamento;
+    - avaliação;
+    - registro do experimento;
+    - gráficos configurados.
+    """
+
+    if "cnn_modelo" not in MODELOS_TREINAMENTO_SILVER:
+        print("\nCNN desativada na orquestração da Silver.")
+        return None
+
+    print("\n" + "=" * 80)
+    print("ORQUESTRAÇÃO DO MODELO: CNN 1D")
+    print("=" * 80)
+
+    # ==============================================================
+    # preparação dos dados
+    # ==============================================================
+    dados_cnn = criar_dataloaders_cnn(
+        X_train=X_train_encoded,
+        X_test=X_test_encoded,
+        y_train=y_train,
+        y_test=y_test,
+        validation_fraction=VALIDATION_FRACTION_CNN,
+        quantidade_balanceamento=QUANTIDADE_ALVO_BALANCEAMENTO,
+        batch_size=BATCH_SIZE_CNN,
+        num_workers=NUM_WORKERS_CNN,
+        random_state=RANDOM_STATE,
+    )
+
+    # ==============================================================
+    # criação do modelo
+    # ==============================================================
+    modelo_cnn = criar_modelo_cnn(
+        quantidade_classes=len(classes_target),
+        canais=CANAIS_CNN,
+        kernel_size=KERNEL_SIZE_CNN,
+        dropout=DROPOUT_CNN,
+    )
+
+    # ==============================================================
+    # treinamento
+    # ==============================================================
+    modelo_cnn, historico_cnn = treinar_cnn(
+        modelo=modelo_cnn,
+        train_loader=dados_cnn["train_loader"],
+        validation_loader=dados_cnn["validation_loader"],
+        learning_rate=LEARNING_RATE_CNN,
+        weight_decay=WEIGHT_DECAY_CNN,
+        max_epochs=MAX_EPOCHS_CNN,
+        patience=PATIENCE_CNN,
+        min_delta=MIN_DELTA_CNN,
+        caminho_modelo=ARQUIVO_MODELO_CNN,
+        random_state=RANDOM_STATE,
+    )
+
+    # ==============================================================
+    # avaliação
+    # ==============================================================
+    metricas_cnn, y_pred_cnn = avaliar_cnn(
+        modelo=modelo_cnn,
+        train_evaluation_loader=dados_cnn["train_evaluation_loader"],
+        test_loader=dados_cnn["test_loader"],
+        y_train_avaliacao=dados_cnn["y_train_avaliacao"],
+        y_test=y_test,
+        classes_target=classes_target,
+    )
+
+    # ==============================================================
+    # registro
+    # ==============================================================
+    registrar_treinamento_cnn(
+        caminho_log=ARQUIVO_LOG_CNN,
+        canais=CANAIS_CNN,
+        kernel_size=KERNEL_SIZE_CNN,
+        dropout=DROPOUT_CNN,
+        batch_size=BATCH_SIZE_CNN,
+        learning_rate=LEARNING_RATE_CNN,
+        weight_decay=WEIGHT_DECAY_CNN,
+        max_epochs=MAX_EPOCHS_CNN,
+        patience=PATIENCE_CNN,
+        min_delta=MIN_DELTA_CNN,
+        validation_fraction=VALIDATION_FRACTION_CNN,
+        random_state=RANDOM_STATE,
+        X_train_shape=X_train_encoded.shape,
+        X_test_shape=X_test_encoded.shape,
+        y_train_shape=y_train.shape,
+        y_test_shape=y_test.shape,
+        metricas=metricas_cnn,
+        historico=historico_cnn,
+        observacao=(
+            "Experimento com CNN 1D usando dados codificados por "
+            "One-Hot Encoding. O balanceamento foi aplicado somente "
+            "ao subconjunto interno de treinamento."
+        ),
+    )
+
+    # ==============================================================
+    # gráficos configurados
+    # ==============================================================
+    graficos_ativos = GRAFICOS_POR_MODELO_SILVER.get(
+        "cnn_modelo",
+        [],
+    )
+
+    if "historico_treinamento" in graficos_ativos:
+        gerar_grafico_historico_cnn(
+            historico=historico_cnn,
+            caminho_saida=str(PASTA_GRAFICOS_CNN),
+        )
+
+    if "matriz_confusao" in graficos_ativos:
+        gerar_matrizes_confusao_cnn(
+            y_real=y_test,
+            y_predito=y_pred_cnn,
+            classes_target=classes_target,
+            caminho_saida=str(PASTA_GRAFICOS_CNN),
+        )
+
+    return metricas_cnn
+
 def codificar_target(
     y: pd.Series,
 ) -> tuple[pd.Series, LabelEncoder]:
@@ -1208,6 +1369,18 @@ def pipeline_silver() -> None:
 
         if metricas_mlp is not None:
             metricas_modelos.append(metricas_mlp)
+        
+        metricas_cnn = executar_fluxo_cnn(
+            X_train_encoded=X_train_encoded,
+            X_test_encoded=X_test_encoded,
+            y_train=y_train,
+            y_test=y_test,
+            classes_target=classes_target,
+        )
+        
+        if metricas_cnn is not None:
+            metricas_modelos.append(metricas_cnn)
+            
         # ==============================================================
         # XGBoost
         # ==============================================================

@@ -859,3 +859,244 @@ Classe: sem_sinal_identificado
 Observação:
 Experimento com MLP usando One-Hot Encoding. O modelo foi treinado com a base de treino balanceada, mas as métricas de treino foram calculadas sobre a base original não balanceada. Early stopping ativado.
 
+
+================================================================================
+ANÁLISE DE OVERFITTING - MLP
+================================================================================
+Data/hora da execução: 2026-07-12 19:11:45
+
+Parâmetros fixos utilizados:
+- activation: relu
+- solver: adam
+- alpha: 0.001
+- batch_size: 2048
+- learning_rate_init: 0.001
+- max_iter: 50
+- early_stopping: True
+- validation_fraction: 0.1
+- n_iter_no_change: 3
+- random_state: 42
+
+Resultados por arquitetura testada:
+
+--------------------------------------------------------------------------------
+Arquitetura: 32
+Quantidade total de neurônios ocultos: 32
+Quantidade de iterações executadas: 18
+Loss final: 0.326999
+
+Métricas obtidas:
+- Accuracy treino: 0.8960
+- Accuracy teste: 0.8927
+- GAP Accuracy: 0.0033
+- Macro F1-score treino: 0.7450
+- Macro F1-score teste: 0.7380
+- GAP Macro F1-score: 0.0070
+
+--------------------------------------------------------------------------------
+Arquitetura: 64
+Quantidade total de neurônios ocultos: 64
+Quantidade de iterações executadas: 32
+Loss final: 0.299384
+
+Métricas obtidas:
+- Accuracy treino: 0.9020
+- Accuracy teste: 0.8995
+- GAP Accuracy: 0.0025
+- Macro F1-score treino: 0.7613
+- Macro F1-score teste: 0.7544
+- GAP Macro F1-score: 0.0069
+
+--------------------------------------------------------------------------------
+Arquitetura: 64x32
+Quantidade total de neurônios ocultos: 96
+Quantidade de iterações executadas: 27
+Loss final: 0.287400
+
+Métricas obtidas:
+- Accuracy treino: 0.9041
+- Accuracy teste: 0.9006
+- GAP Accuracy: 0.0034
+- Macro F1-score treino: 0.7631
+- Macro F1-score teste: 0.7524
+- GAP Macro F1-score: 0.0107
+
+--------------------------------------------------------------------------------
+Arquitetura: 128x64
+Quantidade total de neurônios ocultos: 192
+Quantidade de iterações executadas: 21
+Loss final: 0.273461
+
+Métricas obtidas:
+- Accuracy treino: 0.9096
+- Accuracy teste: 0.9052
+- GAP Accuracy: 0.0044
+- Macro F1-score treino: 0.7752
+- Macro F1-score teste: 0.7614
+- GAP Macro F1-score: 0.0138
+
+================================================================================
+
+================================================================================
+EXECUÇÃO DO MODELO FINAL - MLP
+================================================================================
+Data/hora da execução: 2026-07-12 19:14:09
+
+Parâmetros utilizados:
+- hidden_layer_sizes: (128, 64)
+- activation: relu
+- solver: adam
+- alpha: 0.001
+- batch_size: 2048
+- learning_rate_init: 0.001
+- max_iter: 50
+- early_stopping: True
+- validation_fraction: 0.1
+- n_iter_no_change: 3
+- RANDOM_STATE: 42
+
+Formato dos dados:
+- X_train: (160000, 320)
+- X_test: (66944, 320)
+- y_train: (160000,)
+- y_test: (66944,)
+
+Métricas obtidas:
+- Accuracy treino: 0.9096
+- Accuracy teste: 0.9052
+- Balanced accuracy teste: 0.8548
+- Macro precision teste: 0.7703
+- Macro recall teste: 0.8548
+- Macro F1-score teste: 0.7614
+- Weighted F1-score teste: 0.9089
+
+Métricas detalhadas por classe:
+
+--------------------------------------------------------------------------------
+Classe: risco_baixo
+- Precision: 0.9460
+- Recall: 0.9492
+- F1-score: 0.9476
+- Support: 35223
+- Verdadeiros positivos: 33432
+- Falsos positivos: 1907
+- Falsos negativos: 1791
+- Verdadeiros negativos: 29814
+
+--------------------------------------------------------------------------------
+Classe: risco_elevado
+- Precision: 0.2516
+- Recall: 0.8557
+- F1-score: 0.3889
+- Support: 984
+- Verdadeiros positivos: 842
+- Falsos positivos: 2504
+- Falsos negativos: 142
+- Verdadeiros negativos: 63456
+
+--------------------------------------------------------------------------------
+Classe: risco_moderado
+- Precision: 0.9627
+- Recall: 0.6149
+- F1-score: 0.7504
+- Support: 11432
+- Verdadeiros positivos: 7029
+- Falsos positivos: 272
+- Falsos negativos: 4403
+- Verdadeiros negativos: 55240
+
+--------------------------------------------------------------------------------
+Classe: sem_sinal_identificado
+- Precision: 0.9207
+- Recall: 0.9996
+- F1-score: 0.9585
+- Support: 19305
+- Verdadeiros positivos: 19297
+- Falsos positivos: 1661
+- Falsos negativos: 8
+- Verdadeiros negativos: 45978
+- n_iter_no_change: 3
+- tol: 0.001
+- RANDOM_STATE: 42
+
+
+Observação:
+Experimento com MLP usando One-Hot Encoding. O modelo foi treinado com a base de treino balanceada, mas as métricas de treino foram calculadas sobre a base original não balanceada. Early stopping ativado.
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - MLP
+================================================================================
+Data/hora da execução: 2026-07-12 19:15:03
+
+Parâmetros fixos utilizados:
+- activation: relu
+- solver: adam
+- alpha: 0.001
+- batch_size: 2048
+- learning_rate_init: 0.001
+- max_iter: 50
+- early_stopping: True
+- validation_fraction: 0.1
+- n_iter_no_change: 3
+- random_state: 42
+
+Resultados por arquitetura testada:
+
+--------------------------------------------------------------------------------
+Arquitetura: 32
+Quantidade total de neurônios ocultos: 32
+Quantidade de iterações executadas: 18
+Loss final: 0.326999
+
+Métricas obtidas:
+- Accuracy treino: 0.8960
+- Accuracy teste: 0.8927
+- GAP Accuracy: 0.0033
+- Macro F1-score treino: 0.7450
+- Macro F1-score teste: 0.7380
+- GAP Macro F1-score: 0.0070
+
+--------------------------------------------------------------------------------
+Arquitetura: 64
+Quantidade total de neurônios ocultos: 64
+Quantidade de iterações executadas: 32
+Loss final: 0.299384
+
+Métricas obtidas:
+- Accuracy treino: 0.9020
+- Accuracy teste: 0.8995
+- GAP Accuracy: 0.0025
+- Macro F1-score treino: 0.7613
+- Macro F1-score teste: 0.7544
+- GAP Macro F1-score: 0.0069
+
+--------------------------------------------------------------------------------
+Arquitetura: 64x32
+Quantidade total de neurônios ocultos: 96
+Quantidade de iterações executadas: 27
+Loss final: 0.287400
+
+Métricas obtidas:
+- Accuracy treino: 0.9041
+- Accuracy teste: 0.9006
+- GAP Accuracy: 0.0034
+- Macro F1-score treino: 0.7631
+- Macro F1-score teste: 0.7524
+- GAP Macro F1-score: 0.0107
+
+--------------------------------------------------------------------------------
+Arquitetura: 128x64
+Quantidade total de neurônios ocultos: 192
+Quantidade de iterações executadas: 21
+Loss final: 0.273461
+
+Métricas obtidas:
+- Accuracy treino: 0.9096
+- Accuracy teste: 0.9052
+- GAP Accuracy: 0.0044
+- Macro F1-score treino: 0.7752
+- Macro F1-score teste: 0.7614
+- GAP Macro F1-score: 0.0138
+
+================================================================================

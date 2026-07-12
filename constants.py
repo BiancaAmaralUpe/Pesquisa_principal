@@ -927,3 +927,40 @@ QUANTIDADE_ALVO_BALANCEAMENTO = QUANTIDADES_BALANCEAMENTO[0]
 PASTA_GRAFICOS_MLP = SILVER_GRAFICOS_DIR / "mlp"
 
 ARQUIVO_LOG_MLP = SILVER_OUTPUTS_DIR / "log_mlp.txt"
+
+# ======================================================================================
+# Parâmetros da CNN 1D - Silver
+# ======================================================================================
+
+CANAIS_CNN = (
+    32,
+    64,
+)
+
+KERNEL_SIZE_CNN = 3
+
+DROPOUT_CNN = 0.30
+
+BATCH_SIZE_CNN = 2048
+
+LEARNING_RATE_CNN = 0.001
+
+WEIGHT_DECAY_CNN = 0.001
+
+MAX_EPOCHS_CNN = 30
+
+PATIENCE_CNN = 5
+
+MIN_DELTA_CNN = 0.001
+
+VALIDATION_FRACTION_CNN = 0.10
+
+NUM_CLASSES_CNN = 4
+
+NUM_WORKERS_CNN = 0
+ 
+PASTA_GRAFICOS_CNN = SILVER_GRAFICOS_DIR / "cnn"
+
+ARQUIVO_LOG_CNN = SILVER_OUTPUTS_DIR / "log_cnn.txt"
+
+ARQUIVO_MODELO_CNN = SILVER_ARTEFATOS_DIR / "melhor_modelo_cnn.pth"

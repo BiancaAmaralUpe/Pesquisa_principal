@@ -366,3 +366,368 @@ GRÁFICOS DE BALANCEAMENTO FINALIZADOS
 
 ================================================================================
 APLICAÇÃO DO ONE-HOT ENCODING
+================================================================================
+
+================================================================================
+IDENTIFICAÇÃO DE COLUNAS CATEGÓRICAS
+================================================================================
+Quantidade de colunas categóricas: 18
+- tipo_violacao
+- grupo_vulneravel
+- especie_violacao
+- motivacao
+- denuncia_emergencial
+- sexo_vitima
+- grau_instrucao_vitima
+- faixa_renda_vitima
+- pais_origem_vitima
+- nacionalidade_vitima
+- deficiencia_vitima
+- sexo_suspeito
+- grau_instrucao_suspeito
+- faixa_renda_suspeito
+- pais_origem_suspeito
+- nacionalidade_suspeito
+- deficiencia_suspeito
+- relacao_vitima_suspeito
+
+================================================================================
+IDENTIFICAÇÃO DE COLUNAS NUMÉRICAS/BOOLEANAS
+================================================================================
+Quantidade de colunas numéricas/booleanas: 0
+
+Ajustando encoder no X_train...
+Aplicando encoder no X_test...
+
+Encoding finalizado com sucesso.
+Formato original X_train: (267773, 18)
+Formato original X_test: (66944, 18)
+Formato codificado X_train: (267773, 320)
+Formato codificado X_test: (66944, 320)
+Encoder salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\artefatos\encoder.pkl
+
+Primeiras colunas geradas pelo encoding:
+- tipo_violacao_1. VIOLÊNCIA FÍSICA
+- tipo_violacao_2. VIOLÊNCIA PSICOLÓGICA
+- tipo_violacao_3. CRIMES CONTRA A VIDA
+- tipo_violacao_4. AGRESSÕES QUE VIOLAM A HONRA
+- tipo_violacao_5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE
+- tipo_violacao_6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA
+- tipo_violacao_7. VIOLAÇÕES GERAIS
+- grupo_vulneravel_1-Violência Contra a Mulher
+- grupo_vulneravel_2-Violência Doméstica e Familiar Contra a Mulher
+- especie_violacao_ABORTO
+- especie_violacao_AGRESSÃO/VIAS DE FATO
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL
+- especie_violacao_AMEAÇA/COAÇÃO
+- especie_violacao_APOLOGIA E INCITAÇÃO AO SUICÍDIO
+- especie_violacao_ASSÉDIO MORAL
+- especie_violacao_AUTOMUTILAÇÃO
+- especie_violacao_AUTONOMIA DE VONTADE
+- especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO
+- especie_violacao_CIDADANIA
+
+================================================================================
+NORMALIZAÇÃO DOS NOMES DAS COLUNAS PARA OS MODELOS
+================================================================================
+Quantidade de colunas: 320
+Quantidade de nomes alterados: 309
+
+Exemplos de nomes normalizados:
+- tipo_violacao_1. VIOLÊNCIA FÍSICA  ->  tipo_violacao_1_violencia_fisica
+- tipo_violacao_2. VIOLÊNCIA PSICOLÓGICA  ->  tipo_violacao_2_violencia_psicologica
+- tipo_violacao_3. CRIMES CONTRA A VIDA  ->  tipo_violacao_3_crimes_contra_a_vida
+- tipo_violacao_4. AGRESSÕES QUE VIOLAM A HONRA  ->  tipo_violacao_4_agressoes_que_violam_a_honra
+- tipo_violacao_5. AGRESSÕES QUE VIOLAM O DIREITO A LIBERDADE  ->  tipo_violacao_5_agressoes_que_violam_o_direito_a_liberdade
+- tipo_violacao_6. AGRESSÕES QUE VIOLAM A LIBERDADE CIVIL E POLÍTICA  ->  tipo_violacao_6_agressoes_que_violam_a_liberdade_civil_e_politica
+- tipo_violacao_7. VIOLAÇÕES GERAIS  ->  tipo_violacao_7_violacoes_gerais
+- grupo_vulneravel_1-Violência Contra a Mulher  ->  grupo_vulneravel_1_violencia_contra_a_mulher
+- grupo_vulneravel_2-Violência Doméstica e Familiar Contra a Mulher  ->  grupo_vulneravel_2_violencia_domestica_e_familiar_contra_a_mulher
+- especie_violacao_ABORTO  ->  especie_violacao_aborto
+- especie_violacao_AGRESSÃO/VIAS DE FATO  ->  especie_violacao_agressao_vias_de_fato
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE FORMAL  ->  especie_violacao_agressoes_que_violam_o_direito_a_igualdade_formal
+- especie_violacao_AGRESSÕES QUE VIOLAM O DIREITO A IGUALDADE MATERIAL  ->  especie_violacao_agressoes_que_violam_o_direito_a_igualdade_material
+- especie_violacao_AMEAÇA/COAÇÃO  ->  especie_violacao_ameaca_coacao
+- especie_violacao_APOLOGIA E INCITAÇÃO AO SUICÍDIO  ->  especie_violacao_apologia_e_incitacao_ao_suicidio
+- especie_violacao_ASSÉDIO MORAL  ->  especie_violacao_assedio_moral
+- especie_violacao_AUTOMUTILAÇÃO  ->  especie_violacao_automutilacao
+- especie_violacao_AUTONOMIA DE VONTADE  ->  especie_violacao_autonomia_de_vontade
+- especie_violacao_CALÚNIA/INJÚRIA/DIFAMAÇÃO  ->  especie_violacao_calunia_injuria_difamacao
+- especie_violacao_CIDADANIA  ->  especie_violacao_cidadania
+
+Normalização dos nomes das colunas concluída com sucesso.
+
+================================================================================
+BALANCEAMENTO DA BASE DE TREINO
+================================================================================
+Estratégia utilizada: hibrido
+
+================================================================================
+DISTRIBUIÇÃO DO TARGET ANTES DO BALANCEAMENTO
+================================================================================
+
+Distribuição absoluta:
+classificacao_sinais_risco_feminicidio
+0    140893
+3     77218
+2     45727
+1      3935
+Name: count, dtype: int64
+
+Distribuição percentual:
+classificacao_sinais_risco_feminicidio
+0    52.62
+3    28.84
+2    17.08
+1     1.47
+Name: proportion, dtype: float64
+
+Quantidade alvo por classe após balanceamento: 40000
+
+================================================================================
+DISTRIBUIÇÃO DO TARGET APÓS O BALANCEAMENTO
+================================================================================
+
+Distribuição absoluta:
+__target_balanceamento__
+1    40000
+0    40000
+3    40000
+2    40000
+Name: count, dtype: int64
+
+Distribuição percentual:
+__target_balanceamento__
+1    25.0
+0    25.0
+3    25.0
+2    25.0
+Name: proportion, dtype: float64
+
+Formato antes do balanceamento:
+X_train: (267773, 320)
+y_train: (267773,)
+
+Formato após o balanceamento:
+X_train_balanceado: (160000, 320)
+y_train_balanceado: (160000,)
+
+Balanceamento da base de treino concluído com sucesso.
+
+Árvore de Decisão desativada na orquestração da Silver.
+
+Random Forest desativada na orquestração da Silver.
+
+Regressão Logística desativada na orquestração da Silver.
+
+================================================================================
+ORQUESTRAÇÃO DO MODELO: MLP
+================================================================================
+
+================================================================================
+TREINAMENTO DO MODELO - MLP
+================================================================================
+Formato de X_train: (160000, 320)
+Formato de y_train: (160000,)
+
+Parâmetros do modelo:
+hidden_layer_sizes: (128, 64)
+activation: relu
+solver: adam
+alpha: 0.001
+batch_size: 2048
+learning_rate_init: 0.001
+max_iter: 50
+early_stopping: True
+validation_fraction: 0.1
+n_iter_no_change: 3
+random_state: 42
+
+Tipo do target recebido pelo MLP: int64
+Classes numéricas recebidas pelo MLP: [0, 1, 2, 3]
+
+Modelo MLP treinado com sucesso.
+
+================================================================================
+AVALIAÇÃO DO MODELO - MLP
+================================================================================
+
+================================================================================
+MÉTRICAS DETALHADAS POR CLASSE - MLP
+================================================================================
+
+--------------------------------------------------------------------------------
+Classe: risco_baixo
+--------------------------------------------------------------------------------
+Precision: 0.9460
+Recall: 0.9492
+F1-score: 0.9476
+Support: 35223
+Verdadeiros positivos: 33432
+Falsos positivos: 1907
+Falsos negativos: 1791
+Verdadeiros negativos: 29814
+
+--------------------------------------------------------------------------------
+Classe: risco_elevado
+--------------------------------------------------------------------------------
+Precision: 0.2516
+Recall: 0.8557
+F1-score: 0.3889
+Support: 984
+Verdadeiros positivos: 842
+Falsos positivos: 2504
+Falsos negativos: 142
+Verdadeiros negativos: 63456
+
+--------------------------------------------------------------------------------
+Classe: risco_moderado
+--------------------------------------------------------------------------------
+Precision: 0.9627
+Recall: 0.6149
+F1-score: 0.7504
+Support: 11432
+Verdadeiros positivos: 7029
+Falsos positivos: 272
+Falsos negativos: 4403
+Verdadeiros negativos: 55240
+
+--------------------------------------------------------------------------------
+Classe: sem_sinal_identificado
+--------------------------------------------------------------------------------
+Precision: 0.9207
+Recall: 0.9996
+F1-score: 0.9585
+Support: 19305
+Verdadeiros positivos: 19297
+Falsos positivos: 1661
+Falsos negativos: 8
+Verdadeiros negativos: 45978
+
+Métricas principais:
+Accuracy treino: 0.9096
+Accuracy teste: 0.9052
+Balanced accuracy teste: 0.8548
+Macro precision teste: 0.7703
+Macro recall teste: 0.8548
+Macro F1-score teste: 0.7614
+Weighted F1-score teste: 0.9089
+
+Classification report - Teste:
+              precision    recall  f1-score   support
+
+           0       0.95      0.95      0.95     35223
+           1       0.25      0.86      0.39       984
+           2       0.96      0.61      0.75     11432
+           3       0.92      1.00      0.96     19305
+
+    accuracy                           0.91     66944
+   macro avg       0.77      0.85      0.76     66944
+weighted avg       0.93      0.91      0.91     66944
+
+
+================================================================================
+ANÁLISE DE OVERFITTING - MLP
+================================================================================
+
+Arquiteturas que serão testadas:
+- 32
+- 64
+- 64x32
+- 128x64
+
+--------------------------------------------------------------------------------
+TESTE 1/4 - ARQUITETURA 32
+--------------------------------------------------------------------------------
+Arquitetura=32 | acc_treino=0.8960 | acc_teste=0.8927 | gap_acc=0.0033 | f1_treino=0.7450 | f1_teste=0.7380 | gap_f1=0.0070 | iterações=18
+
+--------------------------------------------------------------------------------
+TESTE 2/4 - ARQUITETURA 64
+--------------------------------------------------------------------------------
+Arquitetura=64 | acc_treino=0.9020 | acc_teste=0.8995 | gap_acc=0.0025 | f1_treino=0.7613 | f1_teste=0.7544 | gap_f1=0.0069 | iterações=32
+
+--------------------------------------------------------------------------------
+TESTE 3/4 - ARQUITETURA 64x32
+--------------------------------------------------------------------------------
+Arquitetura=64x32 | acc_treino=0.9041 | acc_teste=0.9006 | gap_acc=0.0034 | f1_treino=0.7631 | f1_teste=0.7524 | gap_f1=0.0107 | iterações=27
+
+--------------------------------------------------------------------------------
+TESTE 4/4 - ARQUITETURA 128x64
+--------------------------------------------------------------------------------
+Arquitetura=128x64 | acc_treino=0.9096 | acc_teste=0.9052 | gap_acc=0.0044 | f1_treino=0.7752 | f1_teste=0.7614 | gap_f1=0.0138 | iterações=21
+
+Resultados da análise de overfitting:
+arquitetura  total_neuronios  accuracy_treino  accuracy_teste  gap_accuracy  macro_f1_treino  macro_f1_teste  gap_macro_f1  n_iteracoes  loss_final
+         32               32         0.895975        0.892657      0.003319         0.745031        0.738012      0.007019           18    0.326999
+         64               64         0.902010        0.899483      0.002527         0.761337        0.754416      0.006921           32    0.299384
+      64x32               96         0.904061        0.900618      0.003442         0.763078        0.752366      0.010711           27    0.287400
+     128x64              192         0.909629        0.905234      0.004394         0.775153        0.761374      0.013779           21    0.273461
+
+Arquivos salvos com sucesso em:
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\grafico_overfitting_mlp_accuracy.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\grafico_overfitting_mlp_macro_f1.png
+- C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\resultados_overfitting_mlp.csv
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão - MLP
+================================================================================
+
+Mapeamento utilizado:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Matriz salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\matriz_confusao_mlp_absoluta.png
+
+================================================================================
+GERAÇÃO DA MATRIZ DE CONFUSÃO - Matriz de Confusão Normalizada - MLP
+================================================================================
+
+Mapeamento utilizado:
+- 0: risco_baixo
+- 1: risco_elevado
+- 2: risco_moderado
+- 3: sem_sinal_identificado
+
+Matriz salva em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\graficos\mlp\matriz_confusao_mlp_normalizada.png
+
+XGBoost desativado na orquestração da Silver.
+
+LightGBM desativado na orquestração da Silver.
+
+================================================================================
+BASE CODIFICADA E MODELOS SILVER AVALIADOS
+================================================================================
+X_train original: (267773, 18)
+X_test original: (66944, 18)
+X_train encoded: (267773, 320)
+X_train modelo: (160000, 320)
+y_train modelo: (160000,)
+y_train original: (267773,)
+y_test: (66944,)
+
+================================================================================
+MÉTRICAS DO MODELO - MLP
+================================================================================
+Métrica                                    Valor
+--------------------------------------------------------------------------------
+Accuracy treino                           90.96%
+Accuracy teste                            90.52%
+Balanced accuracy teste                   85.48%
+Macro precision teste                     77.03%
+Macro recall teste                        85.48%
+Macro F1-score teste                      76.14%
+Weighted F1-score teste                   90.89%
+--------------------------------------------------------------------------------
+Diferença accuracy treino-teste            0.44 p.p.
+
+Interpretação rápida:
+- Não há sinal forte de overfitting pela diferença entre treino e teste.
+
+================================================================================
+FIM DA PIPELINE SILVER - MODELAGEM
+================================================================================
+
+Output Silver salvo em: C:\Users\bia_a\OneDrive\Documentos\GitHub\Pesquisa_principal\silver\outputs\output_silver.txt
