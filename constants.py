@@ -812,19 +812,19 @@ TREE_METHOD_XGBOOST      = "hist"
 # Parâmetros do LightGBM - Silver
 # ======================================================================================
 
-N_ESTIMATORS_LIGHTGBM = 100
+N_ESTIMATORS_LIGHTGBM     = 500
 
-MAX_DEPTH_LIGHTGBM = 6
+LEARNING_RATE_LIGHTGBM    = 0.05
 
-LEARNING_RATE_LIGHTGBM = 0.1
+MAX_DEPTH_LIGHTGBM        = 6
 
-NUM_LEAVES_LIGHTGBM = 31
+NUM_LEAVES_LIGHTGBM       = 31
 
-SUBSAMPLE_LIGHTGBM = 0.8
+SUBSAMPLE_LIGHTGBM        = 0.8
 
 COLSAMPLE_BYTREE_LIGHTGBM = 0.8
 
-N_JOBS_LIGHTGBM = -1
+N_JOBS_LIGHTGBM           = -1
 
 
 # ======================================================================================
